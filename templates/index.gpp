@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>BnW</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <!--link rel="stylesheet" type="text/css"
+        href="/css/bootstrap.css?v=<#VERSION>" />
+  <link rel="stylesheet" type="text/css"
+        href="/css/default.css?v=<#VERSION>" /-->
+  <#ifdef PRODUCT>
+    <script src="/js/meow.js?v=<#VERSION>"></script>
+  <#else>
+    <script src="/js/vendor/require.js?v=<#VERSION>"></script>
+    <script src="/js/load.js?v=<#VERSION>"></script>
+  <#endif>
+</head>
+<body>
+
+</body>
+</html>
