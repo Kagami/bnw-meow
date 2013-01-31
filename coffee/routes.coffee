@@ -7,3 +7,4 @@ define [
 
   (match) ->
     match "", "main#show"
+    match "test", "main#test"

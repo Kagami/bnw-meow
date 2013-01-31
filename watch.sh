@@ -1,10 +1,10 @@
 #!/bin/bash
 
 COFFEE_DIR="coffee"
-CCOFFEE_DIR="dist/js"
+CCOFFEE_DIR="dist/static/js"
 
 TEMPLATE_DIR="templates"
-CTEMPLATE_DIR="dist/js/templates"
+CTEMPLATE_DIR="dist/static/js/templates"
 
 inotifywait -q -m -e modify --format="%w%f" -r "$COFFEE_DIR" "$TEMPLATE_DIR" |\
     while read file; do

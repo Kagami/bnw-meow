@@ -1,7 +1,7 @@
 "use strict"
 
 config =
-  baseUrl: "js/"
+  baseUrl: "/static/js/"
   paths:
     jquery: "vendor/jquery"
     underscore: "vendor/underscore"
