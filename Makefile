@@ -1,5 +1,6 @@
 STATIC = dist/static
-STATIC_P = deb_dist/srv/bnw-meow/static
+INDEX_P = deb_dist/srv/bnw-meow
+STATIC_P = "$(INDEX_P)/static"
 REVISION = $(shell git rev-parse --short HEAD)
 .PHONY: coffee
 
@@ -17,7 +18,7 @@ index:
 	gpp -H -DVERSION=dev -o dist/index.html templates/index.gpp
 
 index-product:
-	gpp -H -DVERSION="$(REVISION)" -DPRODUCT -o "$(STATIC_P)/../index.html" \
+	gpp -H -DVERSION="$(REVISION)" -DPRODUCT -o "$(INDEX_P)/index.html" \
 		templates/index.gpp
 
 coffee:
@@ -40,6 +41,7 @@ pre-deb:
 	find deb_dist/ -name '.*.swp' -delete
 	mkdir -p "$(STATIC_P)/css/" "$(STATIC_P)/js/"
 	cp -r "$(STATIC)/img/" "$(STATIC_P)"
+	cp dist/favicon.ico "$(INDEX_P)"
 
 minify:
 	cat $(STATIC)/css/*.css > "$(STATIC_P)/css/default.css"

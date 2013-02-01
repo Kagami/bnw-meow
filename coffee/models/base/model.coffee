@@ -5,4 +5,4 @@ define [
 
   class Model extends Chaplin.Model
 
-    urlRoot: "https://bnw.im/api"
+    urlRoot: "/api"
