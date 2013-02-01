@@ -25,7 +25,7 @@ else
   # Development usage.
   requirejs.config config
   require [
-    "meow"
+    "meow_application"
   ], (MeowApplication) ->
     app = new MeowApplication()
     app.initialize()

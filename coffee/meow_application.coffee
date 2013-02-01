@@ -19,11 +19,6 @@ define [
 
       # Register all routes and start routing
       @initRouter routes
-      # You might pass Router/History options as the second parameter.
-      # Chaplin enables pushState per default and Backbone uses / as
-      # the root per default. You might change that in the options
-      # if necessary:
-      # @initRouter routes, pushState: false, root: "/subdir/"
 
       # Freeze the application instance to prevent further changes
       Object.freeze? this

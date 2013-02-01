@@ -1,4 +1,7 @@
 /dist/index.html
 /dist/static/js/*
 !/dist/static/js/vendor
-/dist2/
+/deb_dist/
+/*.deb
+
+/node_modules/

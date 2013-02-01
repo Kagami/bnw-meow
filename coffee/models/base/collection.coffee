@@ -5,10 +5,7 @@ define [
   "use strict"
 
   class Collection extends Chaplin.Collection
-    # Mixin a synchronization state machine
-    # _(@prototype).extend Chaplin.SyncMachine
 
-    # Use the project base model per default, not Chaplin.Model
-    model: Model
-
-    # Place your application-specific collection features here
+    urlRoot: Model::urlRoot
+    url: ->
+      "#{@urlRoot}/#{@id}"

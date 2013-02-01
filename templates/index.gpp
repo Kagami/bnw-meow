@@ -4,18 +4,22 @@
   <meta charset="utf-8" />
   <title>BnW</title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <!--link rel="stylesheet" type="text/css"
-        href="/static/css/bootstrap.css?v=<#VERSION>" />
-  <link rel="stylesheet" type="text/css"
-        href="/static/css/default.css?v=<#VERSION>" /-->
   <#ifdef PRODUCT>
+    <link rel="stylesheet" type="text/css"
+          href="/static/css/default.css?v=<#VERSION>" />
     <script src="/static/js/meow.js?v=<#VERSION>"></script>
   <#else>
+    <link rel="stylesheet" type="text/css"
+          href="/static/css/bootstrap.css?v=<#VERSION>" />
+    <link rel="stylesheet" type="text/css"
+          href="/static/css/default.css?v=<#VERSION>" />
     <script src="/static/js/vendor/require.js?v=<#VERSION>"></script>
     <script src="/static/js/load.js?v=<#VERSION>"></script>
   <#endif>
 </head>
 <body>
+
+<div id="posts" class="container"></div>
 
 </body>
 </html>
