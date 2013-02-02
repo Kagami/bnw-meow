@@ -11,8 +11,10 @@ define [
       id = params.id
       if params.isClub
         query = club: params.club
+        params.title = "!#{params.club}"
       else if params.isTag
         query = tag: params.tag
+        params.title = "*#{params.tag}"
       else
         query = {}
       @collection = new Posts [], id: id, query: query
