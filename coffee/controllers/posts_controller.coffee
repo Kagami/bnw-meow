@@ -5,8 +5,11 @@ define [
 ], (Chaplin, Posts, PostsView) ->
   "use strict"
 
-  class TopController extends Chaplin.Controller
+  class PostsController extends Chaplin.Controller
 
     show: (params) ->
-      @collection = new Posts [], id: "today"
+      id = params.id
+      id ?= "show"
+      @collection = new Posts [], id: id
       @view = new PostsView collection: @collection
+      @adjustTitle params.title

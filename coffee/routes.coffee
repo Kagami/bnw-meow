@@ -1,11 +1,12 @@
 # XXX: We must define all controllers explicitly here because otherwise
 # require.js optimizer cannot find them then tracing dependencies.
 define [
-  "controllers/main_controller"
-  "controllers/top_controller"
+  "controllers/posts_controller"
 ], ->
   "use strict"
 
   (match) ->
-    match "", "main#show"
-    match "top", "top#show"
+    match "", "posts#show", params:
+      title: "Главная"
+    match "top", "posts#show", params:
+      id: "today", title: "Топ 20 постов за сегодня"

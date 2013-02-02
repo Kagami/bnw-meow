@@ -8,11 +8,11 @@ define [
 
     urlRoot: utils.bnwUrl "/api"
 
-    # XXX: We need to do this crap with request methods because
-    # BnW's API is shit.
     apiCall: (url = @url(), data = undefined) ->
       $.ajax
         url: url
         type: if data? then "POST" else "GET"
-        dataType: "json"
         data: data
+        # This should actually be auto-detectable (backend do return
+        # correct Content-type header) but jQuery sucks.
+        dataType: "json"

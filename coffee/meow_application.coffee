@@ -1,9 +1,9 @@
 define [
+  "underscore"
   "chaplin"
-  "views/layout"
   "controllers/menu_controller"
   "routes"
-], (Chaplin, Layout, MenuController, routes) ->
+], (_, Chaplin, MenuController, routes) ->
   "use strict"
 
   class MeowApplication extends Chaplin.Application
@@ -31,7 +31,9 @@ define [
     initLayout: ->
       # Use an application-specific Layout class. Currently this adds
       # no features to the standard Chaplin Layout, it’s an empty placeholder.
-      @layout = new Layout {@title}
+      @layout = new Chaplin.Layout
+        title: @title
+        titleTemplate: _.template("<%= title %> — <%= subtitle %>")
 
     # Instantiate common controllers
     initControllers: ->
