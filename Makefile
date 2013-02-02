@@ -8,7 +8,7 @@ all: index coffee eco
 
 # Install basic deps what you will need for building (or developing)
 install-deps:
-	sudo apt-get install npm gpp
+	sudo apt-get install npm gpp fakeroot
 	# Also needed for watch script:
 	# sudo apt-get install inotify-tools
 	sudo npm install -g coffee-script
@@ -50,7 +50,7 @@ minify:
 		"$(STATIC)/js/load_product.js" >> "$(STATIC_P)/js/meow.js"
 
 deb: pre-deb index-product coffee eco minify
-	dpkg -b deb_dist/ bnw-meow.deb
+	fakeroot dpkg -b deb_dist/ bnw-meow.deb
 
 clean:
 	rm -rf deb_dist/
