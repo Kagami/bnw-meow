@@ -21,10 +21,10 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container">
-      <a class="brand">BnW</a>
+    <div id="menu" class="container">
+      <a class="brand" href="/">BnW</a>
       <ul class="nav">
-        <li class="active"><a href="/">Главная</a></li>
+        <li><a id="main_item" href="/">Главная</a></li>
         <li><a href="/top">Топ</a></li>
         <li><a href="/c/bnw">!bnw</a></li>
       </ul>

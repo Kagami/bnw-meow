@@ -8,8 +8,8 @@ define [
 
     urlRoot: utils.bnwUrl "/api"
 
-    # XXX: We need to do this crap with request methods
-    # and Content-Type because BnW's API is shit.
+    # XXX: We need to do this crap with request methods because
+    # BnW's API is shit.
     apiCall: (url = @url(), data = undefined) ->
       $.ajax
         url: url
