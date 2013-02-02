@@ -1,6 +1,11 @@
 define [
+  "moment"
   "models/base/model"
-], (Model)  ->
+], (moment, Model)  ->
   "use strict"
 
   class Post extends Model
+
+    getAttributes: ->
+      _({}).extend @attributes,
+        date: moment.unix(@get "date")

@@ -1,9 +1,11 @@
 define [
   "underscore"
+  "moment"
+  "moment_ru"
   "chaplin"
   "controllers/menu_controller"
   "routes"
-], (_, Chaplin, MenuController, routes) ->
+], (_, moment, moment_ru, Chaplin, MenuController, routes) ->
   "use strict"
 
   class MeowApplication extends Chaplin.Application
@@ -12,6 +14,8 @@ define [
 
     initialize: ->
       super
+
+      @initSettings()
 
       # Initialize core components
       @initDispatcher()
@@ -26,6 +30,9 @@ define [
 
       # Freeze the application instance to prevent further changes
       Object.freeze? this
+
+    initSettings: ->
+      moment.lang("ru")
 
     # Override standard layout initializer
     initLayout: ->

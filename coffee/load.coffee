@@ -8,6 +8,8 @@ config =
     backbone: "vendor/backbone"
     chaplin: "vendor/chaplin"
     cookie: "vendor/jquery.cookie"
+    moment: "vendor/moment"
+    moment_ru: "vendor/moment_ru"
   shim:
     underscore:
       exports: "_"
