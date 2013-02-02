@@ -9,10 +9,14 @@ define [
 
     show: (params) ->
       id = params.id
-      if params.isClub
+      if params.user?
+        query = user: params.user
+        query.tag = params.tag if params.tag?
+        params.title = "@#{params.user}"
+      else if params.club?
         query = club: params.club
         params.title = "!#{params.club}"
-      else if params.isTag
+      else if params.tag?
         query = tag: params.tag
         params.title = "*#{params.tag}"
       else

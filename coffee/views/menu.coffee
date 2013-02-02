@@ -16,11 +16,12 @@ define [
     initialize: ->
       super
       mediator.subscribe "!router:changeURL", (url) =>
-        a = @$("a[href='/#{url}']")
-        a = $("#main_item") unless a.length
         @$("li").removeClass("active")
-        a.parent().addClass("active")
+        a = @$("a[href='/#{url}']")
+        if a.length
+          a.parent().addClass("active")
 
+    # Reload controller even if url was not changed
     navigate: (e) ->
       url = $(e.currentTarget).attr("href")
       mediator.publish "!router:route", url, forceStartup: true

@@ -7,7 +7,9 @@ define [
 
   (match) ->
     match "", "posts#show", params: title: "Главная"
-    match "c/:club", "posts#show", params: isClub: true
-    match "t/:tag", "posts#show", params: isTag: true
+    match "c/:club", "posts#show"
+    match "t/:tag", "posts#show"
+    match "u/:user", "posts#show"
+    match "u/:user/t/:tag", "posts#show"
     match "top", "posts#show", params:
       id: "today", title: "Топ 20 постов за сегодня"
