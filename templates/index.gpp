@@ -25,16 +25,14 @@
       <a class="brand">BnW</a>
       <ul class="nav">
         <li class="active"><a href="/">Главная</a></li>
-        <li><a href="#">Топ</a></li>
-        <li><a href="#">!bnw</a></li>
+        <li><a href="/top">Топ</a></li>
+        <li><a href="/c/bnw">!bnw</a></li>
       </ul>
     </div>
   </div>
 </div>
 
-<div id="main" class="container">
-  <div class="centered"><span class="preloader-bar"></span></div>
-</div>
+<div id="main" class="container"></div>
 
 </body>
 </html>

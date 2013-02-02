@@ -10,6 +10,10 @@ define [
     id: "show"
     model: Post
 
+    constructor: (models, options) ->
+      super models, options
+      @id = options.id if options?.id?
+
     fetch: ->
       # XXX: What the fuck is that API format?
       @apiCall().done (data) =>

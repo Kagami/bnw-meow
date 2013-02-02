@@ -1,11 +1,18 @@
 define [
   "views/base/collection_view"
   "views/post"
-], (CollectionView, PostView) ->
+  "templates/posts"
+], (CollectionView, PostView, template) ->
   "use strict"
 
   class PostsView extends CollectionView
 
-    el: "#main"
+    container: "#main"
+    template: template
     itemView: PostView
     animationDuration: 300
+
+    afterInitialize: ->
+      super
+      @collection.fetch().done =>
+        @$(".preloader").remove()
