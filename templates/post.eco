@@ -1,9 +1,18 @@
-<img class="avatar" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
-<div class="post-text"><%= @text %></div>
-<div class="post-info">
-  <a class="post-id" href="/p/<%= @id %>">#<%= @id %></a>
-  /
-  <a href="/u/<%= @user %>">@<%= @user %></a>
-  /
-  <abbr class="post-date" title="<%= @formatDateLong @date %>"></abbr>
+<div class="post container">
+<div class="row">
+
+  <div class="span1">
+    <img class="img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
+    <a class="label label-info" href="/u/<%= @user %>">@<%= @user %></a>
+  </div>
+
+  <div class="span11">
+    <div class="post-text"><%- @formatText @text %></div>
+    <div class="post-info">
+    <a class="label" href="/p/<%= @id %>">#<%= @id %></a>
+    /
+    <abbr class="post-date label" title="<%= @formatDateLong @date %>"></abbr>
+  </div>
+
+</div>
 </div>

@@ -22,9 +22,5 @@ body {
     background-color: #F5F5F5;
     border-radius: 5px;
     margin-bottom: 10px;
-    padding: 15px;
-}
-
-.avatar {
-    float: right;
+    padding: 10px;
 }
