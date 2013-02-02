@@ -8,7 +8,6 @@ define [
   class PostView extends View
 
     template: template
-    className: "post"
 
     afterInitialize: ->
       super
