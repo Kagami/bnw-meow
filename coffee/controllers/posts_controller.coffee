@@ -9,7 +9,12 @@ define [
 
     show: (params) ->
       id = params.id
-      id ?= "show"
-      @collection = new Posts [], id: id
+      if params.isClub
+        query = club: params.club
+      else if params.isTag
+        query = tag: params.tag
+      else
+        query = {}
+      @collection = new Posts [], id: id, query: query
       @view = new PostsView collection: @collection
       @adjustTitle params.title

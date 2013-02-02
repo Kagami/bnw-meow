@@ -6,7 +6,8 @@ define [
   "use strict"
 
   (match) ->
-    match "", "posts#show", params:
-      title: "Главная"
+    match "", "posts#show", params: title: "Главная"
+    match "c/:club", "posts#show", params: isClub: true
+    match "t/:tag", "posts#show", params: isTag: true
     match "top", "posts#show", params:
       id: "today", title: "Топ 20 постов за сегодня"
