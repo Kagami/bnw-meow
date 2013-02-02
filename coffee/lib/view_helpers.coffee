@@ -1,4 +1,7 @@
 define ->
   "use strict"
 
-  view_helpers = {}
+  view_helpers =
+
+    bnwUrl: (path) ->
+      "https://bnw.im#{path}"

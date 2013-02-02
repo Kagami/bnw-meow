@@ -1,0 +1,30 @@
+/* Common */
+
+body {
+    padding-top: 51px;
+}
+
+.preloader-bar {
+    display: inline-block;
+    background: url("../img/preloader-bar.gif") no-repeat center center transparent;
+    height: 9px;
+    width: 60px;
+    vertical-align: middle;
+}
+
+.centered {
+    text-align: center;
+}
+
+/* Application-related */
+
+.post {
+    background-color: #F5F5F5;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+.avatar {
+    float: right;
+}

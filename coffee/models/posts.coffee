@@ -1,11 +1,16 @@
 define [
+  "jquery"
   "models/base/collection"
   "models/post"
-], (Collection, Post)  ->
+], ($, Collection, Post)  ->
   "use strict"
 
   class Posts extends Collection
 
-    model: Post
     id: "show"
-    container: "#posts"
+    model: Post
+
+    fetch: ->
+      # XXX: What the fuck is that API format?
+      @apiCall().done (data) =>
+        @reset data.messages.reverse()

@@ -1,13 +1,14 @@
 define [
   "chaplin"
-  "views/main"
   "models/posts"
-], (Chaplin, MainView, Posts) ->
+  "views/posts"
+], (Chaplin, Posts, PostsView) ->
   "use strict"
 
   class MainController extends Chaplin.Controller
 
     show: (params) ->
-      @model = new Posts()
-      @model.fetch()
-      @view = new MainView model: @model
+      @collection = new Posts()
+      @view = new PostsView collection: @collection
+      @collection.fetch().done =>
+        @view.$(".preloader-bar").remove()

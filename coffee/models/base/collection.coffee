@@ -9,3 +9,5 @@ define [
     urlRoot: Model::urlRoot
     url: ->
       "#{@urlRoot}/#{@id}"
+
+    apiCall: Model::apiCall

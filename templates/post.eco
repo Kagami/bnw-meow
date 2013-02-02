@@ -1,0 +1,6 @@
+<img class="avatar" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
+<div class="post-text"><%= @text %></div>
+<div class="post-info">
+  <a class="post-id" href="/p/<%= @id %>">#<%= @id %></a>
+  @<%= @user %>
+</div>
