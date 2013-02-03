@@ -45,7 +45,7 @@ See [bnw-meow.cfg](https://github.com/Kagami/bnw-meow/blob/master/deb/etc/nginx/
 
 ## License
 
-bnw-meow - kawaii single-page web interface
+bnw-meow - kawaii single-page web interface for bnw.im
 
 Written in 2013 by Kagami Hiiragi <kagami@genshiken.org>
 
