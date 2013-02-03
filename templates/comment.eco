@@ -10,7 +10,7 @@
       <br />
       <%- @formatText @text %>
       <br />
-      <a class="comment-info label" href="/p/<%= @id %>">#<%= @id %></a>
+      <a class="comment-info label" href="#<%= @getCommentId @id %>">#<%= @id %></a>
     </div>
   </div>
 </div>

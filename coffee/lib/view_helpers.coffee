@@ -62,3 +62,6 @@ define [
       _(textFormatters).reduce (tmpText, [regexp, handler]) ->
         tmpText.replace regexp, handler
       , text
+
+    getCommentId: (id) ->
+      id.split("/")[1]
