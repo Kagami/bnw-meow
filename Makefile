@@ -1,6 +1,6 @@
 STATIC = dist/static
-INDEX_P = deb_dist/srv/bnw-meow
-STATIC_P = "$(INDEX_P)/static"
+INDEX_R = deb_dist/srv/bnw-meow
+STATIC_R = "$(INDEX_R)/static"
 REVISION = $(shell git rev-parse --short HEAD)
 .PHONY: coffee
 
@@ -17,8 +17,8 @@ install-deps:
 index:
 	gpp -H -DVERSION=dev -o dist/index.html templates/index.gpp
 
-index-product:
-	gpp -H -DVERSION="$(REVISION)" -DPRODUCT -o "$(INDEX_P)/index.html" \
+index-release:
+	gpp -H -DVERSION="$(REVISION)" -DRELEASE -o "$(INDEX_R)/index.html" \
 		templates/index.gpp
 
 coffee:
@@ -39,21 +39,23 @@ pre-deb:
 	rm -rf deb_dist/ *.deb
 	cp -r deb/ deb_dist/
 	find deb_dist/ -name '.*.swp' -delete
-	mkdir -p "$(STATIC_P)/css/" "$(STATIC_P)/js/"
-	cp -r "$(STATIC)/img/" "$(STATIC_P)"
-	cp dist/favicon.ico "$(INDEX_P)"
+	mkdir -p "$(STATIC_R)/css/" "$(STATIC_R)/js/"
+	cp -r "$(STATIC)/img/" "$(STATIC_R)"
+	cp dist/favicon.ico "$(INDEX_R)"
 
 minify:
-	cat $(STATIC)/css/*.css > "$(STATIC_P)/css/default.css"
+	cat $(STATIC)/css/*.css > "$(STATIC_R)/css/default.css"
 	./minify.js
 	sed "s/^VERSION =.*/VERSION = '$(REVISION)';/" \
-		"$(STATIC)/js/load_product.js" >> "$(STATIC_P)/js/meow.js"
+		"$(STATIC)/js/load_product.js" >> "$(STATIC_R)/js/meow.js"
 
-deb: pre-deb index-product coffee eco minify
+release: pre-deb index-release coffee eco minify
+
+deb: release
 	fakeroot dpkg -b deb_dist/ bnw-meow.deb
 
 clean:
-	rm -rf deb_dist/
+	rm -rf deb_dist/ *.deb
 	# Clean all compiled js files
 	find $(STATIC)/js/ -mindepth 1 -maxdepth 1 ! -path '*/vendor' \
 		-exec rm -r '{}' \;
