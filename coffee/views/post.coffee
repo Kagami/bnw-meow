@@ -1,26 +1,9 @@
 define [
-  "views/base/view"
-  "lib/utils"
+  "views/base/refresh_date"
   "templates/post"
-], (View, utils, template) ->
+], (RefreshDateView, template) ->
   "use strict"
 
-  class PostView extends View
+  class PostView extends RefreshDateView
 
     template: template
-
-    afterInitialize: ->
-      super
-      @intervalId = setInterval @refreshDate, 60000
-
-    dispose: ->
-      clearInterval @intervalId
-      super
-
-    afterRender: ->
-      @refreshDate()
-
-    refreshDate: =>
-      abbr = @$(".post-date")
-      date = @model.getAttributes().date
-      abbr.text(utils.formatDate date)

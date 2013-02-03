@@ -17,7 +17,7 @@ define [
       super
       mediator.subscribe "!router:changeURL", (url) =>
         @$("li").removeClass("active")
-        a = @$("a[href='/#{url}']")
+        a = @$("li a[href='/#{url}']")
         if a.length
           a.parent().addClass("active")
 
@@ -26,4 +26,4 @@ define [
       url = $(e.currentTarget).attr("href")
       mediator.publish "!router:route", url, forceStartup: true
       # For some reason jQuery's event.preventDefault() doesn't work here
-      return false
+      false

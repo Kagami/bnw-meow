@@ -1,0 +1,16 @@
+<div class="comment">
+  <div class="media">
+    <a class="pull-left" href="/u/<%= @user %>">
+      <img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
+    </a>
+    <div class="media-body">
+      <a class="close" href="#">&times;</a>
+      <a class="label label-info" href="/u/<%= @user %>">@<%= @user %></a>
+      <abbr class="comment-date comment-info label" title="<%= @formatDateLong @date %>"></abbr>
+      <br />
+      <%- @formatText @text %>
+      <br />
+      <a class="comment-info label" href="/p/<%= @id %>">#<%= @id %></a>
+    </div>
+  </div>
+</div>

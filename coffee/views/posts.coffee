@@ -10,7 +10,6 @@ define [
     container: "#main"
     template: template
     itemView: PostView
-    animationDuration: 300
 
     afterInitialize: ->
       super

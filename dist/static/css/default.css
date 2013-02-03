@@ -1,9 +1,15 @@
+/* Common */
+
 html {
     overflow-y: scroll;
 }
 
 body {
     padding-top: 51px;
+}
+
+hr {
+    margin: 10px 0;
 }
 
 .preloader-bar {
@@ -18,7 +24,13 @@ body {
     text-align: center;
 }
 
-.post {
+.close {
+    line-height: 10px;
+}
+
+/* Application-related */
+
+.post, .comment {
     background-color: #F5F5F5;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -29,17 +41,13 @@ body {
     width: 48px;
 }
 
-.post-info {
+.post-info, .comment-info {
     background: none;
     color: #9A9A9A;
     text-shadow: none;
     border-radius: 0;
 }
 
-.post-info:hover {
+.post-info:hover, .comment-info:hover {
     color: #9A9A9A !important;
-}
-
-.close {
-    line-height: 10px;
 }

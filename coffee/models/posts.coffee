@@ -1,8 +1,7 @@
 define [
-  "jquery"
   "models/base/collection"
   "models/post"
-], ($, Collection, Post)  ->
+], (Collection, Post)  ->
   "use strict"
 
   class Posts extends Collection

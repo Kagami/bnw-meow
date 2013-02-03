@@ -36,8 +36,6 @@ define [
 
     # Override standard layout initializer
     initLayout: ->
-      # Use an application-specific Layout class. Currently this adds
-      # no features to the standard Chaplin Layout, it’s an empty placeholder.
       @layout = new Chaplin.Layout
         title: @title
         titleTemplate: _.template("<%= title %> — <%= subtitle %>")

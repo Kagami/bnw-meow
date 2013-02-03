@@ -4,4 +4,4 @@ define [
 ], (moment, Model)  ->
   "use strict"
 
-  class Post extends Model
+  class Comment extends Model

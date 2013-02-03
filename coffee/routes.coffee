@@ -2,6 +2,7 @@
 # require.js optimizer cannot find them then tracing dependencies.
 define [
   "controllers/posts_controller"
+  "controllers/single_post_controller"
 ], ->
   "use strict"
 
@@ -13,3 +14,4 @@ define [
     match "u/:user/t/:tag", "posts#show"
     match "top", "posts#show", params:
       id: "today", title: "Топ 20 постов за сегодня"
+    match "p/:post", "single_post#show"

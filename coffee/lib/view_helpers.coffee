@@ -9,10 +9,16 @@ define [
       "https://bnw.im#{path}"
 
     formatDate: (date) ->
-      date.fromNow()
+      moment.unix(date).fromNow()
 
     formatDateLong: (date) ->
-      date.format("YYYY-MM-DD HH:mm:ss")
+      moment.unix(date).format("YYYY-MM-DD HH:mm:ss")
+
+    formatPostTitle: (text) ->
+      if text.length > 50
+        text[...50] + "…"
+      else
+        text
 
     escape: (html) ->
       # We need our NIH function here because underscore do some crappy
