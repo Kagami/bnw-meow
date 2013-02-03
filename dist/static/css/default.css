@@ -22,5 +22,9 @@ body {
     background-color: #F5F5F5;
     border-radius: 5px;
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 5px;
+}
+
+.avatar {
+    width: 48px;
 }
