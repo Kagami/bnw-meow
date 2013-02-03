@@ -5,7 +5,7 @@ var eco = require("eco");
 
 var args = process.argv.slice(2);
 if (args.length != 2) {
-    console.log("Usage: eco <source.eco> <destination.js>");
+    console.log("Usage: eco.js <source.eco> <destination.js>");
     process.exit();
 }
 
