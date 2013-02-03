@@ -36,12 +36,12 @@ If you use Debian-based distro you could also use the following commands:
 % make deb
 ```
 
-See Makefile for the more details.
+See [Makefile](https://github.com/Kagami/bnw-meow/blob/master/Makefile) for the more details.
 
 ## Web server configuration
 
 bnw-meow uses HTML5's [pushState](http://diveintohtml5.info/history.html) techology so you will need some rewrite rules.  
-See `deb/etc/nginx/sites-available/bnw-meow.cfg` for the nginx example.
+See [bnw-meow.cfg](https://github.com/Kagami/bnw-meow/blob/master/deb/etc/nginx/sites-available/bnw-meow.cfg) for the nginx example.
 
 ## License
 
