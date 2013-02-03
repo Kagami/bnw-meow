@@ -1,4 +1,4 @@
-# Bnw meow
+# bnw-meow
 
 Kawaii single-page web interface for https://bnw.im/ built on top of the great Chaplin framework.
 
@@ -6,32 +6,49 @@ Kawaii single-page web interface for https://bnw.im/ built on top of the great C
 
 http://meow.genshiken.org/
 
-## Manual build
+## Use with BnW
 
-Assumed that you have Debian-based distro installed, use the following commands:
+Send the following message to the bot:
+```
+set baseurl http://meow.genshiken.org
+```
+Now all links what you get from bot will have correct prefix.
+
+## Build
+
+You will need node, npm and gpp ([Generic Preprocessor](http://files.nothingisreal.com/software/gpp/gpp.html)) installed.
+Just run:
+```
+% sudo npm install -g coffee-script
+% npm install eco requirejs
+% make release
+```
+It will compile and minify all static to the `deb_dist/srv/bnw-meow/` dir.  
+If you use Debian-based distro you could also use the following commands:
 
 * Install build deps:
-
-    % make install-deps
-
-* Compile and minify all static to the deb\_dist/srv/bnw-meow/ dir:
-
-    % make release
+```
+% make install-deps
+```
 
 * Create deb package:
-
-    % make deb
+```
+% make deb
+```
 
 See Makefile for the more details.
 
+## Web server configuration
+
+bnw-meow uses HTML5's [pushState](http://diveintohtml5.info/history.html) techology so you will need some rewrite rules.  
+See `deb/etc/nginx/sites-available/bnw-meow.cfg` for the nginx example.
+
 ## License
 
-```
-Bnw meow - kawaii single-page web interface
+bnw-meow - kawaii single-page web interface
 
 Written in 2013 by Kagami Hiiragi <kagami@genshiken.org>
 
 To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 
 You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
-```
