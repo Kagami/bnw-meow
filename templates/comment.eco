@@ -1,4 +1,4 @@
-<div class="comment">
+<div id="<%= @getCommentId @id %>" class="comment">
   <div class="media">
     <a class="pull-left" href="/u/<%= @user %>">
       <img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
