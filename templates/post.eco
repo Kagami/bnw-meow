@@ -6,11 +6,11 @@
     <div class="media-body">
       <a class="close" href="#">&times;</a>
       <a class="label label-info" href="/u/<%= @user %>">@<%= @user %></a>
-      <abbr class="post-date label" title="<%= @formatDateLong @date %>"></abbr>
+      <abbr class="post-date post-info label" title="<%= @formatDateLong @date %>"></abbr>
       <br />
       <%- @formatText @text %>
       <br />
-      <a class="label" href="/p/<%= @id %>">#<%= @id %></a>
+      <a class="post-info label" href="/p/<%= @id %>">#<%= @id %></a>
     </div>
   </div>
 </div>

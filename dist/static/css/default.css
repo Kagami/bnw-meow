@@ -22,9 +22,24 @@ body {
     background-color: #F5F5F5;
     border-radius: 5px;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 8px;
 }
 
 .avatar {
     width: 48px;
+}
+
+.post-info {
+    background: none;
+    color: #9A9A9A;
+    text-shadow: none;
+    border-radius: 0;
+}
+
+.post-info:hover {
+    color: #9A9A9A !important;
+}
+
+.close {
+    line-height: 10px;
 }
