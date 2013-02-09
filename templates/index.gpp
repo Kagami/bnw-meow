@@ -1,38 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>BnW</title>
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-
-  <#ifndef RELEASE>
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css?v=<#VERSION>" />
-  <#endif>
-  <link rel="stylesheet" type="text/css" href="/static/css/default.css?v=<#VERSION>" />
-
-  <#ifdef RELEASE>
-    <script src="/static/js/meow.js?v=<#VERSION>"></script>
-  <#else>
-    <script src="/static/js/vendor/require.js?v=<#VERSION>"></script>
-    <script src="/static/js/load.js?v=<#VERSION>"></script>
-  <#endif>
+	<meta charset="utf-8" />
+	<title>BnW</title>
+	<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="/static/css/default.css?v=<#VERSION>" />
+	<#ifdef RELEASE>
+	<script src="/static/js/meow.js?v=<#VERSION>"></script>
+	<#else>
+	<script src="/static/js/vendor/require.js?v=<#VERSION>"></script>
+	<script src="/static/js/load.js?v=<#VERSION>"></script>
+	<#endif>
 </head>
 <body>
-
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div id="menu" class="container">
-      <a class="brand" href="/">BnW</a>
-      <ul class="nav">
-        <li><a id="main_item" href="/">Главная</a></li>
-        <li><a href="/top">Топ</a></li>
-        <li><a href="/c/bnw">!bnw</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
+<header>
+	<nav class="container">
+		<ul class="nav">
+			<li><a href="/">BnW</a></li>
+			<li><a href="/top">Топ</a></li>
+			<li><a href="/c/bnw">!bnw</a></li>
+		</ul>
+	</nav>
+</header>
 <div id="main" class="container"></div>
-
+<footer class="footer">
+	<div class="container">
+		<a class="label" href="https://github.com/Kagami/bnw-meow/">powered by meow</a>
+	</div>
+</footer>
 </body>
 </html>

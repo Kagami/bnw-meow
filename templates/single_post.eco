@@ -1,28 +1,27 @@
 <% unless @fetched: %>
-  <div class="preloader">
-    <span class="preloader-bar"></span>
-  </div>
+	<div class="progress">
+		<div  width="100%" class="bar"></div>
+	</div>
 <% else: %>
 
 <div class="post">
-  <div class="media">
-    <a class="pull-left" href="/u/<%= @user %>">
-      <img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
-    </a>
-    <div class="media-body">
-      <a class="close" href="#">&times;</a>
-      <a class="label label-info" href="/u/<%= @user %>">@<%= @user %></a>
-      <abbr class="post-date post-info label" title="<%= @formatDateLong @date %>"></abbr>
-      <br />
-      <%- @formatText @text %>
-      <br />
-      <a class="post-info label" href="/p/<%= @id %>">#<%= @id %></a>
-    </div>
-  </div>
+	<div class="avatar">
+		<a href="/u/<%= @user %>">
+			<img class="polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
+		</a>
+	</div>
+	<div class="post-body">
+		<div class="post-header">
+			<a class="user" href="/u/<%= @user %>">@<%= @user %></a>
+			<abbr class="post-date" title="<%= @formatDateLong @date %>"></abbr>
+			<a class="close" href="#">&times;</a>
+		</div>
+		<%- @formatText @text %>
+	</div>
+	<div class="post-footer">
+		<a class="post-info label" href="/p/<%= @id %>">#<%= @id %></a>
+	</div>
 </div>
-
-<hr />
-
 <div id="comments"></div>
 
 <% end %>
