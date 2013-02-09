@@ -1,7 +1,7 @@
 STATIC = dist/static
 INDEX_R = deb_dist/srv/bnw-meow
 STATIC_R = "$(INDEX_R)/static"
-REVISION = $(shell git rev-parse --short HEAD)
+VERSION = $(shell git rev-parse --short HEAD)
 .PHONY: coffee
 
 all: index coffee eco
@@ -18,7 +18,7 @@ index:
 	gpp -H -DVERSION=dev -o dist/index.html templates/index.gpp
 
 index-release:
-	gpp -H -DVERSION="$(REVISION)" -DRELEASE -o "$(INDEX_R)/index.html" \
+	gpp -H -DVERSION="$(VERSION)" -DRELEASE -o "$(INDEX_R)/index.html" \
 		templates/index.gpp
 
 coffee:
@@ -46,7 +46,7 @@ pre-deb:
 minify:
 	cat $(STATIC)/css/*.css > "$(STATIC_R)/css/default.css"
 	./minify.js
-	sed "s/^VERSION =.*/VERSION = '$(REVISION)';/" \
+	sed "s/^VERSION =.*/VERSION = '$(VERSION)';/" \
 		"$(STATIC)/js/load_product.js" >> "$(STATIC_R)/js/meow.js"
 
 release: pre-deb index-release coffee eco minify
