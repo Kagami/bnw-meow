@@ -5,8 +5,14 @@ define [
 
   view_helpers =
 
+    BNW_HOST: "bnw.im"
+
     bnwUrl: (path) ->
-      "https://bnw.im#{path}"
+      "https://#{@BNW_HOST}#{path}"
+
+    bnwWsUrl: (path = window.location.pathname) ->
+      path = "" if path == "/"
+      "wss://#{@BNW_HOST}#{path}/ws?v=2"
 
     formatDate: (date) ->
       moment.unix(date).fromNow()
