@@ -8,7 +8,11 @@ define [
     target class and handling messages arrived via websocket.
     ###
 
+    isWsAvailable: ->
+      window.location.pathname[...3] in ["/", "/u/", "/p/"]
+
     initWebSocket: ->
+      return unless @isWsAvailable()
       # FIXME: Auto reconnects!
       @ws = new WebSocket utils.bnwWsUrl()
       # Check arrived message type and try to find appropriate callback
