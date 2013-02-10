@@ -23,4 +23,4 @@ define [
         # new_comment -> onNewComment
         type = "on" + type.replace /(?:^|_)(.)/g, (_m, p1) -> p1.toUpperCase()
         handler = @[type]
-        handler.apply this, [message] if handler?
+        handler.call this, message if handler?
