@@ -26,7 +26,7 @@ define [
       else
         text
 
-    escape: (html) ->
+    escape2: (html) ->
       # We need our NIH function here because underscore do some crappy
       # things with slashes.
       html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -62,7 +62,7 @@ define [
       ]
 
       # Very-very important line, don't ever try to touch it
-      text = @escape raw
+      text = @escape2 raw
 
       # Go throw all defined formatters.
       _(textFormatters).reduce (tmpText, [regexp, handler]) ->
