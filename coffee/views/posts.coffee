@@ -21,7 +21,7 @@ define [
       super
       @collection.fetch().done =>
         @$(".preloader").remove()
-        @initWebSocket()
+        #@initWebSocket()
 
     onNewMessage: (postData) ->
       post = new Post postData

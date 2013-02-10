@@ -13,7 +13,18 @@
 		<%- @formatText @text %>
 	</div>
 	<div class="post-footer">
+    <% for club in @clubs: %>
+      <a class="post-club" href="/c/<%= club %>"><%= club %></a>
+    <% end %>
+    <br />
+    <% for tag in @tags: %>
+      <a class="post-tag" href="/t/<%= tag %>"><%= tag %></a>
+    <% end %>
+    <br />
 		<a class="post-info label" href="/p/<%= @id %>">#<%= @id %></a>
-		<a class="label msg-comments" href="/p/<%= @id %>">4</a>
+		<a class="label post-comments" href="/p/<%= @id %>"><%= @replycount %></a>
+    <% if @recommendations.length: %>
+      ★ <a class="label post-recommendations" href="/p/<%= @id %>"><%= @recommendations.length %></a>
+    <% end %>
 	</div>
 </div>

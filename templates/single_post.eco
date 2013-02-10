@@ -1,7 +1,7 @@
 <% unless @fetched: %>
-	<div class="progress">
-		<div  width="100%" class="bar"></div>
-	</div>
+  <div class="preloader">
+    <span class="preloader-bar"></span>
+  </div>
 <% else: %>
 
 <div class="post">
@@ -20,6 +20,10 @@
 	</div>
 	<div class="post-footer">
 		<a class="post-info label" href="/p/<%= @id %>">#<%= @id %></a>
+		<a class="label post-comments" href="/p/<%= @id %>"><%= @replycount %></a>
+    <% if @recommendations.length: %>
+      ★ <a class="label post-recommendations" href="/p/<%= @id %>"><%= @recommendations.length %></a>
+    <% end %>
 	</div>
 </div>
 <div id="comments"></div>
