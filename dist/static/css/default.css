@@ -13,7 +13,6 @@ body {
 	-webkit-box-sizing: border-box;
 	margin: 0;
 	background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEUAAAAAAAClZ7nPAAAAAnRSTlMAGovxNEIAAAAoSURBVDhPYxBEAgIMSkhAgcEFCTgwdCCBBoZRfaP6RvWN6hvVR5Y+APADQlQnmrINAAAAAElFTkSuQmCC), #eee;
-	overflow-y: scroll;
 	}
 a {
 	color: #0084b4;
@@ -113,7 +112,7 @@ header {
 	box-shadow: 0 0 2px 2px #eee inset;
 }
 .post:hover .post-footer, .post:hover .polaroid, .post:hover .close, .comment:hover .post-footer, .comment:hover .polaroid, .comment:hover .close {
-opacity: 1;
+	opacity: 1;
 }
 #main > div > div:first-child > .post {
 	border-radius: 6px 6px 0 0;
@@ -169,9 +168,18 @@ opacity: 1;
 	width: 100%;
 	opacity: 0;
 	margin-top: -20px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
+.msg-comments {
+	margin-left: 8px;
+	padding-left: 20px;
+	background: url("../img/bubble.png") no-repeat scroll left 4px;
+}
 /* coments */
+
 #main > div > .post{
 	border-radius: 6px;
 }
@@ -186,7 +194,7 @@ opacity: 1;
 }
 .comment {
 	background: #eee;
-	border: 1px solid #CCC;
+	border: 1px solid #ccc;
 	padding: 8px;
 	margin-top: -1px;
 }
@@ -194,6 +202,7 @@ opacity: 1;
 	background: #f5f5f5;
 	box-shadow: 0 0 2px 2px #ececec inset;
 }
+
 /* footer */
 
 footer {
@@ -202,4 +211,17 @@ footer {
 	height: 20px;
 	padding: 10px;
 	text-align: right;
+}
+
+/* for niwebrods */
+
+@media (max-width: 980px) {
+.container {
+	width: 600px;
+}
+.post-body {
+	width: 510px;
+}
+.progress {
+	margin: 20px 100px;
 }

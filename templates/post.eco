@@ -14,5 +14,6 @@
 	</div>
 	<div class="post-footer">
 		<a class="post-info label" href="/p/<%= @id %>">#<%= @id %></a>
+		<a class="label msg-comments" href="/p/<%= @id %>">4</a>
 	</div>
 </div>
