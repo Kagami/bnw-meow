@@ -1,30 +1,52 @@
 <div class="post">
-	<div class="avatar">
-		<a href="/u/<%= @user %>">
-			<img class="polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
-		</a>
-	</div>
-	<div class="post-body">
-		<div class="post-header">
-			<a class="user" href="/u/<%= @user %>">@<%= @user %></a>
-			<abbr class="post-date" title="<%= @formatDateLong @date %>"></abbr>
-			<a class="close" href="#">&times;</a>
-		</div>
-		<%- @formatText @text %>
-	</div>
-	<div class="post-footer">
-    <% for club in @clubs: %>
-      <a class="post-club" href="/c/<%= club %>"><%= club %></a>
-    <% end %>
-    <br />
-    <% for tag in @tags: %>
-      <a class="post-tag" href="/t/<%= tag %>"><%= tag %></a>
-    <% end %>
-    <br />
-		<a class="post-info label" href="/p/<%= @id %>">#<%= @id %></a>
-		<a class="label post-comments" href="/p/<%= @id %>"><%= @replycount %></a>
-    <% if @recommendations.length: %>
-      ★ <a class="label post-recommendations" href="/p/<%= @id %>"><%= @recommendations.length %></a>
-    <% end %>
-	</div>
+
+  <div class="media">
+    <div class="avatar pull-left">
+      <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
+    </div>
+    <div class="media-body">
+      <div class="post-header">
+        <a class="close" href="#">&times;</a>
+        <a class="label label-info" href="/u/<%= @user %>">@<%= @user %></a>
+        <abbr class="post-date label label-reset" title="<%= @formatDateLong @date %>"></abbr>
+      </div>
+      <div class="post-body">
+        <%- @formatText @text %>
+      </div>
+      <div class="post-footer">
+        <div class="post-tags">
+          <% if @tags.length: %>
+            <span class="icon-tags"></span>
+            <%for tag in @tags: %>
+              <a class="post-tag" href="/t/<%= tag %>"><%= tag %></a>
+            <% end %>
+          <% end %>
+          <% if @clubs.length: %>
+            <span class="icon-users"></span>
+            <%for club in @clubs: %>
+              <a class="post-club" href="/c/<%= club %>"><%= club %></a>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="post-info">
+          <div class="post-id">
+            <a class="label label-reset" href="/p/<%= @id %>">#<%= @id %></a>
+          </div>
+          <div class="post-comments-info">
+            <a title="Подписаться" href="#">
+              <span class="icon-bubble"></span>
+              <%= @replycount %>
+            </a>
+          </div>
+          <div class="post-recommendations-info">
+            <a title="Рекомендовать" href="#">
+              <span class="icon-star"></span>
+              <%= @recommendations.length %>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
