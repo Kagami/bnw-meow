@@ -3,7 +3,7 @@ define [
 ], (_) ->
   "use strict"
 
-  view_helpers =
+  viewHelpers =
 
     BNW_HOST: "bnw.im"
 
@@ -13,6 +13,9 @@ define [
     bnwWsUrl: (path = window.location.pathname) ->
       path = "" if path == "/"
       "wss://#{@BNW_HOST}#{path}/ws?v=2"
+
+    renderTemplate: (templateFunc, params={}) =>
+      templateFunc _(params).extend(this)
 
     formatDate: (date) ->
       moment.unix(date).fromNow()

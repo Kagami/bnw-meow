@@ -4,28 +4,8 @@
   </div>
 <% else: %>
 
-<div class="post">
-	<div class="avatar">
-		<a href="/u/<%= @user %>">
-			<img class="polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
-		</a>
-	</div>
-	<div class="post-body">
-		<div class="post-header">
-			<a class="user" href="/u/<%= @user %>">@<%= @user %></a>
-			<abbr class="post-date" title="<%= @formatDateLong @date %>"></abbr>
-			<a class="close" href="#">&times;</a>
-		</div>
-		<%- @formatText @text %>
-	</div>
-	<div class="post-footer">
-		<a class="post-info label" href="/p/<%= @id %>">#<%= @id %></a>
-		<a class="label post-comments" href="/p/<%= @id %>"><%= @replycount %></a>
-    <% if @recommendations.length: %>
-      ★ <a class="label post-recommendations" href="/p/<%= @id %>"><%= @recommendations.length %></a>
-    <% end %>
-	</div>
-</div>
+<%- @renderTemplate @postTemplate, this %>
+
 <div id="comments"></div>
 
 <% end %>

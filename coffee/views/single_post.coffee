@@ -6,7 +6,9 @@ define [
   "views/comments"
   "lib/utils"
   "templates/single_post"
-], ($, Chaplin, View, RefreshDateView, CommentsView, utils, template) ->
+  "templates/post"
+], ($, Chaplin, View, RefreshDateView, CommentsView, utils, template,
+    postTemplate) ->
   "use strict"
 
   class SinglePostView extends RefreshDateView
@@ -14,6 +16,8 @@ define [
     container: "#main"
     template: template
     autoRender: true
+    templateData:
+      postTemplate: postTemplate
 
     afterInitialize: ->
       super
