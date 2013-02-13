@@ -1,18 +1,23 @@
 <div class="post">
-
   <div class="media">
     <div class="avatar pull-left">
       <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
     </div>
     <div class="media-body">
+
+      <!-- Header -->
       <div class="post-header">
-        <a class="close" href="#">&times;</a>
-        <a class="label label-info" href="/u/<%= @user %>">@<%= @user %></a>
+        <a class="post-delete close" href="#">&times;</a>
+        <a class="post-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
         <abbr class="post-date label label-reset" title="<%= @formatDateLong @date %>"></abbr>
       </div>
+
+      <!-- Body -->
       <div class="post-body">
         <%- @formatText @text %>
       </div>
+
+      <!-- Footer -->
       <div class="post-footer">
         <div class="post-tags">
           <% if @tags.length: %>
@@ -29,24 +34,18 @@
           <% end %>
         </div>
         <div class="post-info">
-          <div class="post-id">
-            <a class="label label-reset" href="/p/<%= @id %>">#<%= @id %></a>
-          </div>
-          <div class="post-comments-info">
-            <a title="Подписаться" href="#">
-              <span class="icon-bubble"></span>
-              <%= @replycount %>
-            </a>
-          </div>
-          <div class="post-recommendations-info">
-            <a title="Рекомендовать" href="#">
-              <span class="icon-star"></span>
-              <%= @recommendations.length %>
-            </a>
-          </div>
+          <a class="post-id label label-reset" href="/p/<%= @id %>">#<%= @id %></a>
+          <a class="post-comments-info" title="Подписаться" href="#">
+            <span class="icon-bubble"></span>
+            <%= @replycount %>
+          </a>
+          <a class="post-recommendations-info" title="Рекомендовать" href="#">
+            <span class="icon-star"></span>
+            <%= @recommendations.length %>
+          </a>
         </div>
       </div>
+
     </div>
   </div>
-
 </div>

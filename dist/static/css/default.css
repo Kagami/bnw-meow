@@ -69,14 +69,10 @@ img.avatar {
     width: 48px;
 }
 
-.post-tags > div, .post-info > div {
-    display: inline-block;
-}
-
 .post-footer, .post-footer a, .post-footer a:hover {
     color: #9A9A9A;
 }
 
-.post-comments-info a, .post-recommendations-info a {
+.post-info a {
     text-decoration: none;
 }
