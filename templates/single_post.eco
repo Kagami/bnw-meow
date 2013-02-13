@@ -6,6 +6,8 @@
 
 <%- @renderTemplate @postTemplate, this %>
 
+<hr />
+
 <div id="comments"></div>
 
 <% end %>

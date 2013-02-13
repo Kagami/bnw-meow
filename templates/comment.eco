@@ -1,18 +1,27 @@
 <div id="<%= @getCommentId @id %>" class="comment">
-	<div class="avatar">
-		<a href="/u/<%= @user %>">
-			<img class="polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" />
-		</a>
-	</div>
-	<div class="post-body">
-		<div class="post-header">
-			<a class="user" href="/u/<%= @user %>">@<%= @user %></a>
-			<abbr class="post-date" title="<%= @formatDateLong @date %>"></abbr>
-			<a class="close" href="#">&times;</a>
-		</div>
-		<%- @formatText @text %>
-	</div>
-	<div class="post-footer">
-		<a class="comment-info label" href="#<%= @getCommentId @id %>">#<%= @id %></a>
-	</div>
+  <div class="media">
+    <div class="avatar pull-left">
+      <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
+    </div>
+    <div class="media-body">
+
+      <!-- Header -->
+      <div class="comment-header">
+        <a class="comment-delete close" href="#">&times;</a>
+        <a class="comment-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
+        <abbr class="comment-date label label-reset" title="<%= @formatDateLong @date %>"></abbr>
+      </div>
+
+      <!-- Body -->
+      <div class="comment-body">
+        <%- @formatText @text %>
+      </div>
+
+      <!-- Footer -->
+      <div class="comment-footer">
+        <a class="comment-id label label-reset" href="#<%= @getCommentId @id %>">#<%= @id %></a>
+      </div>
+
+    </div>
+  </div>
 </div>

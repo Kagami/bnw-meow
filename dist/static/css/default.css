@@ -1,4 +1,4 @@
-/* Common */
+/* Common, fixes, resets */
 
 html {
     overflow-y: scroll;
@@ -35,6 +35,8 @@ hr {
     border-radius: 0;
 }
 
+/* Icons, images */
+
 .icon-tags,.icon-bubble,.icon-users,.icon-star {
     display: inline-block;
     width: 14px;
@@ -69,7 +71,8 @@ img.avatar {
     width: 48px;
 }
 
-.post-footer, .post-footer a, .post-footer a:hover {
+.post-footer, .post-footer a, .post-footer a:hover,
+.comment-footer, .comment-footer a, .comment-footer a:hover {
     color: #9A9A9A;
 }
 
