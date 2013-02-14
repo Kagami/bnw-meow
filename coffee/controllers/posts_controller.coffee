@@ -8,6 +8,15 @@ define [
   class PostsController extends Chaplin.Controller
 
     show: (params) ->
+      # Unescape matched parts of url.
+      # Why the hell chaplin doesn't do it by himself?
+      # XXX: Seems like what we should use encodeURIComponent
+      # and then decode it for each url parameter like user or id
+      # but we hope that they will not contain "bad" characters
+      # in future.
+      params.tag = decodeURIComponent params.tag if params.tag?
+      params.club = decodeURIComponent params.club if params.club?
+
       if params.user?
         query = user: params.user
         query.tag = params.tag if params.tag?
