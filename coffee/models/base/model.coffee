@@ -7,20 +7,14 @@ define [
 
   class Model extends Chaplin.Model
 
-    urlRoot: utils.bnwUrl "/api"
-
-    apiCall: (url = @url(), data = undefined) ->
+    apiCall: (func = @id, data = undefined) ->
       deferred = $.Deferred()
       promise = deferred.promise()
+
       reqData = if data? then data else @query
-      jqxhr = $.ajax
-        url: url
-        type: if data? then "POST" else "GET"
-        data: reqData
-        # This should actually be auto-detectable (backend do return
-        # correct Content-type header) but jQuery sucks.
-        dataType: "json"
-      jqxhr.done (data) =>
-        # XXX: Not sure if GC will correctly clean up callbacks on 'done'
-        deferred.resolve data unless @disposed
+      method = if data? then "POST" else "GET"
+      d = utils.apiCall func, reqData, method
+      d.done (resData) =>
+        # FIXME: Not sure if GC will correctly clean up callbacks
+        deferred.resolve resData unless @disposed
       promise

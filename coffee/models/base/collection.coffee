@@ -6,10 +6,6 @@ define [
 
   class Collection extends Chaplin.Collection
 
-    urlRoot: Model::urlRoot
-    url: ->
-      "#{@urlRoot}/#{@id}"
-
     constructor: (models, options) ->
       super models, options
       @id = options.id if options?.id?

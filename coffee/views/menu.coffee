@@ -2,10 +2,9 @@ define [
   "jquery"
   "chaplin"
   "views/base/view"
-], ($, Chaplin, View) ->
+  "lib/utils"
+], ($, Chaplin, View, utils) ->
   "use strict"
-
-  mediator = Chaplin.mediator
 
   class MenuView extends View
 
@@ -15,7 +14,7 @@ define [
 
     initialize: ->
       super
-      mediator.subscribe "!router:changeURL", (url) =>
+      Chaplin.mediator.subscribe "!router:changeURL", (url) =>
         @$("li").removeClass("active")
         a = @$("li a[href='/#{url}']")
         if a.length
@@ -24,6 +23,6 @@ define [
     # Reload controller even if url was not changed
     navigate: (e) ->
       url = $(e.currentTarget).attr("href")
-      mediator.publish "!router:route", url, forceStartup: true
+      utils.gotoUrl url
       # For some reason jQuery's event.preventDefault() doesn't work here
       false

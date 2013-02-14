@@ -3,6 +3,7 @@
 define [
   "controllers/posts_controller"
   "controllers/single_post_controller"
+  "controllers/login_controller"
 ], ->
   "use strict"
 
@@ -15,3 +16,4 @@ define [
     match "top", "posts#show", params:
       id: "today", title: "Топ 20 постов за сегодня"
     match "p/:post", "single_post#show"
+    match "login", "login#login"
