@@ -15,6 +15,5 @@ define [
       method = if data? then "POST" else "GET"
       d = utils.apiCall func, reqData, method
       d.done (resData) =>
-        # FIXME: Not sure if GC will correctly clean up callbacks
         deferred.resolve resData unless @disposed
       promise
