@@ -21,6 +21,7 @@ Just run:
 ```
 % sudo npm install -g coffee-script
 % npm install eco requirejs
+% make config
 % make release
 ```
 It will compile and minify all static to the `deb_dist/srv/bnw-meow/` dir.  

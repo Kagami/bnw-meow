@@ -14,6 +14,9 @@ install-deps:
 	sudo npm install -g coffee-script
 	npm install eco requirejs
 
+config:
+	cp coffee/config.coffee.example coffee/config.coffee
+
 index:
 	gpp -H -DVERSION=dev -o dist/index.html templates/index.gpp
 

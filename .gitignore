@@ -1,3 +1,5 @@
+/coffee/config.coffee
+
 /dist/index.html
 /dist/static/js/*
 !/dist/static/js/vendor
