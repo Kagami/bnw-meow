@@ -22,7 +22,7 @@ define [
         type: method
         data: data
         # This should actually be auto-detectable (backend do return
-        # correct Content-type header) but jQuery sucks.
+        # correct Content-Type header) but jQuery sucks.
         dataType: "json"
       jqxhr.done (data) =>
         deferred[if data.ok then "resolve" else "reject"] data
