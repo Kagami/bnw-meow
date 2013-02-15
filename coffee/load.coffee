@@ -10,14 +10,16 @@ config =
     cookie: "vendor/jquery.cookie"
     moment: "vendor/moment"
     moment_ru: "vendor/moment_ru"
+    bootstrap: "vendor/bootstrap"
   shim:
     underscore:
       exports: "_"
     backbone:
       deps: ["underscore", "jquery"]
       exports: "Backbone"
-    cookie:
+    bootstrap:
       deps: ["jquery"]
+  deps: ["bootstrap"]
   urlArgs: "v=" + (new Date()).getTime()
 
 if exports?

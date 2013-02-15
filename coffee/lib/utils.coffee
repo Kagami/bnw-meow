@@ -34,11 +34,11 @@ define [
     gotoUrl: (url, force = true) ->
       Chaplin.mediator.publish "!router:route", url, forceStartup: force
 
+    # Get and set login info via cookies bakend.
+    # Note that we reread login key from cookies on the each request.
+
     setCookie: (key, value) ->
       $.cookie key, value, expires: 365, path: "/"
-
-    isLogged: ->
-      $.cookie("login")?
 
     getLoginKey: ->
       $.cookie "login"
@@ -46,12 +46,19 @@ define [
     setLoginKey: (loginKey) ->
       @setCookie "login", loginKey
 
-    getUser: ->
-      $.cookie "user"
-
     setUser: (user) ->
       @setCookie "user", user
 
     clearAuth: ->
       $.removeCookie "login"
       $.removeCookie "user"
+
+    # Global vars emulation. Doesn't seems like a perfect solution
+    # but it works.
+
+    getGlobal: (key) ->
+      window.MEOW_GLOBALS?[key]
+
+    setGlobal: (key, value) ->
+      window.MEOW_GLOBALS ?= {}
+      window.MEOW_GLOBALS[key] = value

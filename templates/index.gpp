@@ -18,21 +18,7 @@
   <#endif>
 </head>
 <body>
-
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div id="menu" class="container">
-      <a class="brand" href="/">BnW</a>
-      <ul class="nav">
-        <li><a id="main_item" href="/">Главная</a></li>
-        <li><a href="/top">Топ</a></li>
-        <li><a href="/c/bnw">!bnw</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div id="main" class="container"></div>
-
+  <div id="menu"></div>
+  <div id="main" class="container"></div>
 </body>
 </html>

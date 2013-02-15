@@ -18,4 +18,5 @@ define [
       d.fail ->
         utils.clearAuth()
       d.always ->
+        utils.getGlobal("menuView").render()
         utils.gotoUrl "/"

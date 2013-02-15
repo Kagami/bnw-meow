@@ -1,7 +1,9 @@
 define [
+  "jquery"
+  "cookie"
   "underscore"
   "config"
-], (_, config) ->
+], ($, cookie, _, config) ->
   "use strict"
 
   viewHelpers =
@@ -73,3 +75,9 @@ define [
 
     getCommentId: (id) ->
       id.split("/")[1]
+
+    isLogged: ->
+      $.cookie("login")?
+
+    getUser: ->
+      $.cookie "user"
