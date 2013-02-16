@@ -1,8 +1,9 @@
 define [
+  "jquery"
   "views/base/refresh_date"
   "lib/utils"
   "templates/post"
-], (RefreshDateView, utils, template) ->
+], ($, RefreshDateView, utils, template) ->
   "use strict"
 
   class PostView extends RefreshDateView
@@ -12,18 +13,25 @@ define [
     events:
       "click .post-comments-info": "subscribe"
       "click .post-recommendations-info": "recommend"
+      "click .post-delete": "markForDelete"
 
     initialize: (options) ->
       super options
+      @dialog = options.dialog
       @singlePost = options?.singlePost
 
     templateData: ->
       isRecommended: @isRecommended()
+      canDelete: @canDelete()
       singlePost: @singlePost
 
     isRecommended: ->
       return unless utils.isLogged()
       utils.getUser() in @model.get("recommendations")
+
+    canDelete: ->
+      return unless utils.isLogged()
+      utils.getUser() == @model.get "user"
 
     subscribe: (e) ->
       e.preventDefault()
@@ -39,3 +47,10 @@ define [
       data = message: @model.get "id"
       data.unrecommend = true if @isRecommended()
       utils.post "recommend", data, true
+
+    markForDelete: (e) ->
+      e.preventDefault()
+      return unless utils.isLogged()
+      a = $(e.currentTarget)
+      a.toggleClass("post-delete-marked")
+      @dialog.updateMarked @singlePost

@@ -16,4 +16,4 @@ define [
     fetch: ->
       @apiCall().done (data) =>
         @set data.message
-        @replies.reset data.replies
+        @replies.reset data.replies, postUser: @get "user"

@@ -1,11 +1,10 @@
 define [
   "jquery"
-  "cookie"
   "underscore"
   "chaplin"
   "lib/view_helpers"
   "templates/notification"
-], ($, cookie, _, Chaplin, viewHelpers, notification) ->
+], ($, _, Chaplin, viewHelpers, notification) ->
   "use strict"
 
   utils = Chaplin.utils.beget Chaplin.utils
@@ -39,19 +38,19 @@ define [
       promise
 
     showAlert: (text, type = "error") ->
-      errorDiv = $(@renderTemplate(notification, text: text, type: type))
-      $("#notifications").append(errorDiv)
+      alert = $(@renderTemplate(notification, text: text, type: type))
+      $("#notifications").append(alert)
       setTimeout ->
-        errorDiv.fadeOut("slow", -> errorDiv.remove())
+        alert.fadeOut("slow", -> alert.remove())
       , 5000
 
     # Helpers around apiCall
 
     get: (func, data = {}, verbose = false) ->
-      @apiCall func, data, "GET", verbose: verbose
+      @apiCall func, data, "GET", {verbose}
 
     post: (func, data = {}, verbose = false) ->
-      @apiCall func, data, "POST", verbose: verbose
+      @apiCall func, data, "POST", {verbose}
 
     gotoUrl: (url, force = true) ->
       Chaplin.mediator.publish "!router:route", url, forceStartup: force
@@ -86,3 +85,17 @@ define [
     setGlobal: (key, value) ->
       window.MEOW_GLOBALS ?= {}
       window.MEOW_GLOBALS[key] = value
+
+    pluralForm: (n, [p1, p2, p5]) ->
+      _pluralForm = ->
+        if 10 < n < 15
+          return p5
+        n = n % 10
+        if n == 1
+          p1
+        else if 1 < n < 5
+          p2
+        else
+          p5
+
+      "#{n} #{_pluralForm()}"

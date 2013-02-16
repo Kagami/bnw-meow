@@ -7,7 +7,9 @@
 
       <!-- Header -->
       <div class="comment-header">
-        <a class="comment-delete close" href="#">&times;</a>
+        <% if @canDelete: %>
+          <a class="comment-delete close" title="Отметить для удаления" href="#">&times;</a>
+        <% end %>
         <a class="comment-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
         <abbr class="comment-date label label-reset" title="<%= @formatDateLong @date %>"><%= @formatDate @date %></abbr>
       </div>

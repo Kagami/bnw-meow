@@ -1,0 +1,13 @@
+<div class="modal hide fade" data-backdrop="false">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Удаление</h3>
+  </div>
+  <div class="modal-body">
+    Вы действительно хотите удалить <span class="for-delete"></span>?
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="delete-selected btn btn-danger">Удалить</a>
+    <a href="#" class="cancel-delete btn">Отменить</a>
+  </div>
+</div>

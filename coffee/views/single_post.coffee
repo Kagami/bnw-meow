@@ -4,9 +4,11 @@ define [
   "views/base/view"
   "views/post"
   "views/comments"
+  "views/dialog_delete"
   "lib/utils"
   "templates/single_post"
-], ($, Chaplin, View, PostView, CommentsView, utils, template) ->
+], ($, Chaplin, View, PostView, CommentsView, DialogDeleteView, utils,
+    template) ->
   "use strict"
 
   class SinglePostView extends View
@@ -24,10 +26,17 @@ define [
         text = @model.get "text"
         Chaplin.mediator.publish "!adjustTitle", utils.formatPostTitle text
 
-        post = new PostView model: @model, el: "#single-post", singlePost: true
+        dialog = new DialogDeleteView singlePost: true
+        @subview "dialog", dialog
+
+        post = new PostView
+          model: @model
+          el: "#single-post"
+          singlePost: true
+          dialog: dialog
         @subview "post", post
 
-        comments = new CommentsView collection: @model.replies
+        comments = new CommentsView collection: @model.replies, dialog: dialog
         @subview "comments", comments
 
         # Fix position on the page

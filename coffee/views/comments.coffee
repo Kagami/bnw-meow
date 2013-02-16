@@ -8,3 +8,10 @@ define [
 
     el: "#comments"
     itemView: CommentView
+
+    getView: (model) ->
+      new @itemView model: model, dialog: @dialog
+
+    initialize: (options) ->
+      super options
+      @dialog = options.dialog

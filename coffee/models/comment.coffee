@@ -5,3 +5,7 @@ define [
   "use strict"
 
   class Comment extends Model
+
+    constructor: (models, options) ->
+      super models, options
+      @postUser = options.postUser

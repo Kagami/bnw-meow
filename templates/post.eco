@@ -7,9 +7,8 @@
 
       <!-- Header -->
       <div class="post-header">
-        <!-- TODO: Should actually be more robust check. -->
-        <% if @isLogged: %>
-          <a class="post-delete close" href="#">&times;</a>
+        <% if @canDelete: %>
+          <a class="post-delete close" title="Отметить для удаления" href="#">&times;</a>
         <% end %>
         <a class="post-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
         <abbr class="post-date label label-reset" title="<%= @formatDateLong @date %>"></abbr>

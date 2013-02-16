@@ -91,7 +91,7 @@ img.avatar {
     text-decoration: none;
 }
 
-.post-date {
+.post-date, .comment-date {
     margin-left: 3px;
 }
 
@@ -101,4 +101,15 @@ img.avatar {
 
 .post-comments-info {
     margin-right: 3px;
+}
+
+.post-delete:hover, .comment-delete:hover {
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+}
+
+.post-delete-marked, .post-delete-marked:hover,
+.comment-delete-marked, .comment-delete-marked:hover {
+    color: #FF0000;
+    opacity: 1;
 }

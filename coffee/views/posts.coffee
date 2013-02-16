@@ -3,10 +3,11 @@ define [
   "models/post"
   "views/base/collection_view"
   "views/post"
+  "views/dialog_delete"
   "lib/websocket_handler"
-  "lib/utils"
   "templates/posts"
-], (_, Post, CollectionView, PostView, WebSocketHandler, utils, template) ->
+], (_, Post, CollectionView, PostView, DialogDeleteView, WebSocketHandler,
+    template) ->
   "use strict"
 
   class PostsView extends CollectionView
@@ -17,8 +18,15 @@ define [
     template: template
     itemView: PostView
 
+    getView: (model) ->
+      new @itemView model: model, dialog: @subview "dialog"
+
     afterInitialize: ->
       super
+
+      dialog = new DialogDeleteView()
+      @subview "dialog", dialog
+
       d = @collection.fetch()
       d.always =>
         @$(".preloader").remove()

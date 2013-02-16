@@ -8,5 +8,5 @@ define [
   class MenuController extends Chaplin.Controller
 
     initialize: ->
-      @view = new MenuView()
-      utils.setGlobal "menuView", @view
+      menuView = new MenuView()
+      utils.setGlobal "menuView", menuView

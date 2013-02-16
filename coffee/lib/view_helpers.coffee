@@ -1,9 +1,8 @@
 define [
   "jquery"
-  "cookie"
   "underscore"
   "config"
-], ($, cookie, _, config) ->
+], ($, _, config) ->
   "use strict"
 
   viewHelpers =

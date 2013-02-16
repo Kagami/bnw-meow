@@ -19,7 +19,7 @@ config =
       exports: "Backbone"
     bootstrap:
       deps: ["jquery"]
-  deps: ["bootstrap"]
+  deps: ["bootstrap", "cookie"]
   urlArgs: "v=" + (new Date()).getTime()
 
 if exports?
