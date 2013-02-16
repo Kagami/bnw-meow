@@ -58,7 +58,7 @@ define [
       if marked
         @show() unless @isVisible()
         # Special case: at the single post page allow select either
-        # engire post or comments.
+        # entire post or comments.
         if @singlePost
           if singlePostMarked
             $(".#{@MARKED_COMMENT_CLASS}").removeClass(@MARKED_COMMENT_CLASS)
@@ -76,9 +76,11 @@ define [
     deleteSelected: (e) ->
       e.preventDefault()
       $(@MARKED_SELECTOR).each ->
-        post = $(this).closest(".post")
-        post.remove()
-        # TODO: Actual delete.
+        div = $(this).closest(".post, .comment")
+        id = div.attr("data-full-id")
+        # FIXME: In the better world we will work with objects and
+        # call destory method on them.
+        utils.post "delete", message: id
       @hide()
 
     cancelDelete: (e) ->
