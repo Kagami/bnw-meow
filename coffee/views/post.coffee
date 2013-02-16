@@ -8,11 +8,17 @@ define [
   class PostView extends RefreshDateView
 
     template: template
+    autoRender: true
     events:
       "click .post-recommendations-info": "recommend"
 
+    initialize: (options) ->
+      super options
+      @singlePost = options?.singlePost
+
     templateData: ->
       isRecommended: @isRecommended()
+      singlePost: @singlePost
 
     isRecommended: ->
       return unless utils.isLogged()

@@ -52,10 +52,10 @@ hr {
     background-position: 0 0;
     width: 15px;
 }
-.icon-subscribed {
+.icon-not-subscribed {
     background-position: -28px 0;
 }
-.icon-not-subscribed {
+.icon-subscribed {
     background-position: -56px 0;
 }
 .icon-clubs {

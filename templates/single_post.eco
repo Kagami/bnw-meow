@@ -1,13 +1,9 @@
-<% unless @fetched: %>
-  <div class="preloader">
-    <span class="preloader-bar"></span>
-  </div>
-<% else: %>
+<div class="preloader">
+  <span class="preloader-bar"></span>
+</div>
 
-<%- @renderTemplate @postTemplate, this %>
+<div id="single-post"></div>
 
 <hr />
 
 <div id="comments"></div>
-
-<% end %>

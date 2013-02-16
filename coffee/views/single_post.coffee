@@ -1,40 +1,34 @@
 define [
   "jquery"
   "chaplin"
-  "views/base/refresh_date"
+  "views/base/view"
+  "views/post"
   "views/comments"
   "lib/utils"
   "templates/single_post"
-  "templates/post"
-], ($, Chaplin, RefreshDateView, CommentsView, utils, template,
-    postTemplate) ->
+], ($, Chaplin, View, PostView, CommentsView, utils, template) ->
   "use strict"
 
-  # FIXME: Refresh view will try to find date element through
-  # all and possible gigant DOM tree (it could be many comments).
-  class SinglePostView extends RefreshDateView
+  class SinglePostView extends View
 
     container: "#main"
     template: template
     autoRender: true
-    templateData:
-      postTemplate: postTemplate
-      singlePost: true
 
     afterInitialize: ->
       super
       d = @model.fetch()
-      d.fail =>
+      d.always =>
         @$(".preloader").remove()
       d.done =>
         text = @model.get "text"
         Chaplin.mediator.publish "!adjustTitle", utils.formatPostTitle text
 
-        @render fetched: true
+        post = new PostView model: @model, el: "#single-post", singlePost: true
+        @subview "post", post
 
         comments = new CommentsView collection: @model.replies
         @subview "comments", comments
-        comments.render()
 
         # Fix position on the page
         commentDiv = @$(window.location.hash)
