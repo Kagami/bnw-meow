@@ -3,8 +3,9 @@ define [
   "cookie"
   "underscore"
   "chaplin"
-  'lib/view_helpers'
-], ($, cookie, _, Chaplin, viewHelpers) ->
+  "lib/view_helpers"
+  "templates/notification"
+], ($, cookie, _, Chaplin, viewHelpers, notification) ->
   "use strict"
 
   utils = Chaplin.utils.beget Chaplin.utils
@@ -12,7 +13,6 @@ define [
   _(utils).extend viewHelpers,
 
     apiCall: (func, data = {}, method = "GET") ->
-      # TODO: Notification about unsuccessful request
       deferred = $.Deferred()
       promise = deferred.promise()
 
@@ -25,11 +25,24 @@ define [
         # correct Content-Type header) but jQuery sucks.
         dataType: "json"
       jqxhr.done (data) =>
-        deferred[if data.ok then "resolve" else "reject"] data
-      jqxhr.fail ->
-        # TODO: Error info
+        if data.ok
+          deferred.resolve data
+        # Must be 4xx HTTP code actually, but @stiletto fucked it up.
+        else
+          @errorCall data.desc
+          deferred.reject data
+      jqxhr.fail (err) =>
+        text = "Ошибка AJAX: #{err.status} #{err.statusText}"
+        @errorCall text
         deferred.reject()
       promise
+
+    errorCall: (text) ->
+      errorDiv = $(@renderTemplate(notification, text: text))
+      $("#notifications").append(errorDiv)
+      setTimeout ->
+        errorDiv.fadeOut("slow", -> errorDiv.remove())
+      , 5000
 
     gotoUrl: (url, force = true) ->
       Chaplin.mediator.publish "!router:route", url, forceStartup: force

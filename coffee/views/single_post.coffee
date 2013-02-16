@@ -21,11 +21,13 @@ define [
 
     afterInitialize: ->
       super
-      @model.fetch().done =>
+      d = @model.fetch()
+      d.fail =>
+        @$(".preloader").remove()
+      d.done =>
         text = @model.get "text"
         Chaplin.mediator.publish "!adjustTitle", utils.formatPostTitle text
 
-        @$(".preloader").remove()
         @render fetched: true
 
         comments = new CommentsView collection: @model.replies

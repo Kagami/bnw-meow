@@ -16,4 +16,6 @@ define [
       d = utils.apiCall func, reqData, method
       d.done (resData) =>
         deferred.resolve resData unless @disposed
+      d.fail (err) =>
+        deferred.reject err unless @disposed
       promise

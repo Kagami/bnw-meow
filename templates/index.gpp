@@ -20,5 +20,6 @@
 <body>
   <div id="menu"></div>
   <div id="main" class="container"></div>
+  <div id="notifications"></div>
 </body>
 </html>

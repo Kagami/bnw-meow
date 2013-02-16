@@ -19,10 +19,13 @@ define [
 
     afterInitialize: ->
       super
-      @collection.fetch().done =>
+      d = @collection.fetch()
+      d.always =>
         @$(".preloader").remove()
+      d.done =>
         #@initWebSocket()
 
     onNewMessage: (postData) ->
+      # TODO: Add with special styles.
       post = new Post postData
       @collection.add post, at: 0

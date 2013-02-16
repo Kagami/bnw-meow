@@ -35,6 +35,13 @@ hr {
     border-radius: 0;
 }
 
+#notifications {
+    position: fixed;
+    top: 51px;
+    right: 5px;
+    z-index: 2000;
+}
+
 /* Icons, images */
 
 .icon-tags,.icon-bubble,.icon-users,.icon-star {
