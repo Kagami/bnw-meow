@@ -21,5 +21,6 @@ define [
     recommend: (e) ->
       e.preventDefault()
       return unless utils.isLogged()
-      postId = @model.get "id"
-      utils.post "recommend", message: postId, true
+      data = message: @model.get "id"
+      data.unrecommend = true if @isRecommended()
+      utils.post "recommend", data, true

@@ -30,7 +30,7 @@
             <% end %>
           <% end %>
           <% if @clubs.length: %>
-            <span class="icon-users"></span>
+            <span class="icon-clubs"></span>
             <%for club in @clubs: %>
               <a class="post-club" href="/c/<%= encodeURIComponent club %>"><%= club %></a>
             <% end %>
@@ -42,20 +42,20 @@
           </a>
           <% if @isLogged(): %>
             <a class="post-comments-info" title="Подписаться" href="#">
-              <span class="icon-bubble"></span>
+              <span class="icon-not-subscribed"></span>
               <%= @replycount %>
             </a>
-            <a class="post-recommendations-info" title="Рекомендовать" href="#">
-              <span class="icon-star"></span>
+            <a class="post-recommendations-info" title="<% if @isRecommended: %>Удалить рекомендацию<% else: %>Рекомендовать<% end %>" href="#">
+              <span class="icon-<% unless @isRecommended: %>not-<% end %>recommended"></span>
               <%= @recommendations.length %>
             </a>
           <% else: %>
             <span class="post-comments-info" title="Комментарии">
-              <span class="icon-bubble"></span>
+              <span class="icon-not-subscribed"></span>
               <%= @replycount %>
             <span>
             <span class="post-recommendations-info" title="Рекомендации">
-              <span class="icon-star"></span>
+              <span class="icon-not-recommended"></span>
               <%= @recommendations.length %>
             </span>
           <% end %>

@@ -39,9 +39,9 @@ hr {
     z-index: 2000;
 }
 
-/* Icons, images */
+/* Icons */
 
-.icon-tags,.icon-bubble,.icon-users,.icon-star {
+.icon-tags,.icon-not-subscribed,.icon-subscribed,.icon-clubs,.icon-not-recommended,.icon-recommended {
     display: inline-block;
     width: 14px;
     height: 14px;
@@ -52,14 +52,20 @@ hr {
     background-position: 0 0;
     width: 15px;
 }
-.icon-bubble {
+.icon-subscribed {
     background-position: -28px 0;
 }
-.icon-users {
+.icon-not-subscribed {
     background-position: -56px 0;
 }
-.icon-star {
+.icon-clubs {
     background-position: -84px 0;
+}
+.icon-not-recommended {
+    background-position: -112px 0;
+}
+.icon-recommended {
+    background-position: -140px 0;
 }
 
 /* Application-related */
