@@ -24,10 +24,6 @@ hr {
     text-align: center;
 }
 
-.close {
-    line-height: 10px;
-}
-
 .label-reset, .label-reset:hover {
     background: none;
     color: #9A9A9A;
