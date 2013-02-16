@@ -1,7 +1,6 @@
 define [
-  "moment"
   "models/base/model"
-], (moment, Model)  ->
+], (Model)  ->
   "use strict"
 
   class Comment extends Model
@@ -9,3 +8,6 @@ define [
     constructor: (models, options) ->
       super models, options
       @postUser = options.postUser
+
+    destroy: ->
+      @apiCall "delete", message: @get "id"

@@ -1,7 +1,9 @@
 define [
-  "moment"
   "models/base/model"
-], (moment, Model)  ->
+], (Model)  ->
   "use strict"
 
   class Post extends Model
+
+    destroy: ->
+      @apiCall "delete", message: @get "id"

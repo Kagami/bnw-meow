@@ -9,7 +9,7 @@ define [
 
     template: template
     events:
-      "click .comment-delete": "markForDelete"
+      "click .comment-delete": "toggleMark"
 
     initialize: (options) ->
       super options
@@ -22,9 +22,7 @@ define [
       return unless utils.isLogged()
       utils.getUser() in [@model.get("user"), @model.postUser]
 
-    markForDelete: (e) ->
+    toggleMark: (e) ->
       e.preventDefault()
       return unless utils.isLogged()
-      a = $(e.currentTarget)
-      a.toggleClass("comment-delete-marked")
-      @dialog.updateMarked()
+      @dialog.toggleMark this

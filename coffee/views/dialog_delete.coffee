@@ -15,18 +15,14 @@ define [
       "click .delete-selected": "deleteSelected"
       "click .cancel-delete": "cancelDelete"
 
-    # XXX: We use here Slow selectors and there is some code
-    # duplication in post/comment views.
-    # Hope this will not be slow as shit.
-    MARKED_POST_CLASS: "post-delete-marked"
-    MARKED_COMMENT_CLASS: "comment-delete-marked"
-    MARKED_SELECTOR:
-      ".#{@prototype.MARKED_POST_CLASS}, .#{@prototype.MARKED_COMMENT_CLASS}"
-    MARKED_CLASSES:
-      "#{@prototype.MARKED_POST_CLASS} #{@prototype.MARKED_COMMENT_CLASS}"
+    MARK_OPTIONS:
+      "PostView": [".post-delete", "post-delete-marked"]
+      "CommentView": [".comment-delete", "comment-delete-marked"]
+    POST_CLASS: "PostView"
 
     initialize: (options) ->
       super options
+      @selected = []
       @singlePost = options?.singlePost
       @pluralForms = if @singlePost
         ["комментарий", "комментария", "комментариев"]
@@ -42,7 +38,8 @@ define [
       @modal.on "shown", =>
         @$(".cancel-delete").focus()
       @modal.on "hide", =>
-        $(@MARKED_SELECTOR).removeClass(@MARKED_CLASSES)
+        @selected.forEach @_toggleMark
+        @selected = []
 
     isVisible: ->
       @modal.is(":visible")
@@ -53,34 +50,42 @@ define [
     hide: ->
       @modal.modal "hide"
 
-    updateMarked: (singlePostMarked = false) ->
-      marked = $(@MARKED_SELECTOR).length
-      if marked
-        @show() unless @isVisible()
-        # Special case: at the single post page allow select either
-        # entire post or comments.
+    _toggleMark: (obj) =>
+      [selector, className] = @MARK_OPTIONS[obj.constructor.name]
+      obj.$(selector).toggleClass(className)
+
+    toggleMark: (obj) ->
+      singlePostMarked = @singlePost and obj.constructor.name == @POST_CLASS
+      @_toggleMark obj
+      if obj in @selected
+        @selected = _(@selected).without obj
+      else
         if @singlePost
+          # Special case: at the single post page allow select either
+          # entire post or comments.
           if singlePostMarked
-            $(".#{@MARKED_COMMENT_CLASS}").removeClass(@MARKED_COMMENT_CLASS)
+            @selected.forEach @_toggleMark
+            @selected = []
           else
-            post = $(".#{@MARKED_POST_CLASS}").removeClass(@MARKED_POST_CLASS)
-            marked -= post.length  # Always will be 0 or 1
+            if @selected.length == 1 and
+                @selected[0].constructor.name == @POST_CLASS
+              @_toggleMark @selected[0]
+              @selected = []
+        @selected.push obj
+
+      if @selected.length
         forDelete = if singlePostMarked
           "пост"
         else
-          utils.pluralForm marked, @pluralForms
+          utils.pluralForm @selected.length, @pluralForms
         @$(".for-delete").text(forDelete)
+        @show() unless @isVisible()
       else
         @hide()
 
     deleteSelected: (e) ->
       e.preventDefault()
-      $(@MARKED_SELECTOR).each ->
-        div = $(this).closest(".post, .comment")
-        id = div.attr("data-full-id")
-        # FIXME: In the better world we will work with objects and
-        # call destory method on them.
-        utils.post "delete", message: id
+      @selected.forEach (obj) -> obj.model.destroy()
       @hide()
 
     cancelDelete: (e) ->

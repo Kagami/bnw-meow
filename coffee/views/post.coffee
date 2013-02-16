@@ -13,7 +13,7 @@ define [
     events:
       "click .post-comments-info": "subscribe"
       "click .post-recommendations-info": "recommend"
-      "click .post-delete": "markForDelete"
+      "click .post-delete": "toggleMark"
 
     initialize: (options) ->
       super options
@@ -48,9 +48,7 @@ define [
       data.unrecommend = true if @isRecommended()
       utils.post "recommend", data, true
 
-    markForDelete: (e) ->
+    toggleMark: (e) ->
       e.preventDefault()
       return unless utils.isLogged()
-      a = $(e.currentTarget)
-      a.toggleClass("post-delete-marked")
-      @dialog.updateMarked @singlePost
+      @dialog.toggleMark this

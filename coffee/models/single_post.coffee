@@ -1,7 +1,8 @@
 define [
   "models/base/model"
   "models/comments"
-], (Model, Comments) ->
+  "models/post"
+], (Model, Comments, Post) ->
   "use strict"
 
   class SinglePost extends Model
@@ -17,3 +18,5 @@ define [
       @apiCall().done (data) =>
         @set data.message
         @replies.reset data.replies, postUser: @get "user"
+
+    destroy: Post::destroy
