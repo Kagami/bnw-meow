@@ -1,4 +1,4 @@
-<div class="alert alert-error">
+<div class="alert alert-<%= @type %>">
   <a href="#" class="close" data-dismiss="alert">×</a>
   <%= @text %>
 </div>

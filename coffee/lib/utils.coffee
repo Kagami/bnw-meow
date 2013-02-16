@@ -12,7 +12,7 @@ define [
 
   _(utils).extend viewHelpers,
 
-    apiCall: (func, data = {}, method = "GET") ->
+    apiCall: (func, data = {}, method = "GET", options = {}) ->
       deferred = $.Deferred()
       promise = deferred.promise()
 
@@ -26,29 +26,40 @@ define [
         dataType: "json"
       jqxhr.done (data) =>
         if data.ok
+          @showAlert data.desc, "info" if options.verbose
           deferred.resolve data
         # Must be 4xx HTTP code actually, but @stiletto fucked it up.
         else
-          @errorCall data.desc
+          @showAlert data.desc
           deferred.reject data
       jqxhr.fail (err) =>
         text = "Ошибка AJAX: #{err.status} #{err.statusText}"
-        @errorCall text
+        @showAlert text
         deferred.reject()
       promise
 
-    errorCall: (text) ->
-      errorDiv = $(@renderTemplate(notification, text: text))
+    showAlert: (text, type = "error") ->
+      errorDiv = $(@renderTemplate(notification, text: text, type: type))
       $("#notifications").append(errorDiv)
       setTimeout ->
         errorDiv.fadeOut("slow", -> errorDiv.remove())
       , 5000
 
+    # Helpers around apiCall
+
+    get: (func, data = {}, verbose = false) ->
+      @apiCall func, data, "GET", verbose: verbose
+
+    post: (func, data = {}, verbose = false) ->
+      @apiCall func, data, "POST", verbose: verbose
+
     gotoUrl: (url, force = true) ->
       Chaplin.mediator.publish "!router:route", url, forceStartup: force
 
     # Get and set login info via cookies bakend.
-    # Note that we reread login key from cookies on the each request.
+    # Note that we reread login key and user login info from cookies
+    # on the each action requires auth. It _could_ be inefficient but
+    # I don't think so.
 
     setCookie: (key, value) ->
       $.cookie key, value, expires: 365, path: "/"

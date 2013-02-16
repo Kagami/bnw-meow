@@ -12,7 +12,7 @@ define [
       return if not loginKey? or not loginKey.length
 
       utils.setLoginKey loginKey
-      d = utils.apiCall "whoami"
+      d = utils.get "whoami"
       d.done (data) ->
         utils.setUser data.user
       d.fail ->

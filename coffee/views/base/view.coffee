@@ -18,7 +18,11 @@ define [
 
     getTemplateData: ->
       data = super
-      _(data).extend viewHelpers, @templateData, @_templateData2
+      templateData = if typeof @templateData is "function"
+        @templateData()
+      else
+        @templateData
+      _(data).extend viewHelpers, templateData, @_templateData2
 
     getTemplateFunction: ->
       @template

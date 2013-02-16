@@ -10,6 +10,8 @@ define [
     postTemplate) ->
   "use strict"
 
+  # FIXME: Refresh view will try to find date element through
+  # all and possible gigant DOM tree (it could be many comments).
   class SinglePostView extends RefreshDateView
 
     container: "#main"

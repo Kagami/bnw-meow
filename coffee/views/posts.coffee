@@ -23,6 +23,7 @@ define [
       d.always =>
         @$(".preloader").remove()
       d.done =>
+        # TODO: Move it to the collection?
         #@initWebSocket()
 
     onNewMessage: (postData) ->

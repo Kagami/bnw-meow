@@ -7,7 +7,10 @@
 
       <!-- Header -->
       <div class="post-header">
-        <a class="post-delete close" href="#">&times;</a>
+        <!-- TODO: Should actually be more robust check. -->
+        <% if @isLogged: %>
+          <a class="post-delete close" href="#">&times;</a>
+        <% end %>
         <a class="post-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
         <abbr class="post-date label label-reset" title="<%= @formatDateLong @date %>"></abbr>
       </div>
@@ -37,14 +40,25 @@
           <a class="post-id label label-reset" href="/p/<%= @id %>">
             #<%= @id %>
           </a>
-          <a class="post-comments-info" title="Подписаться" href="#">
-            <span class="icon-bubble"></span>
-            <%= @replycount %>
-          </a>
-          <a class="post-recommendations-info" title="Рекомендовать" href="#">
-            <span class="icon-star"></span>
-            <%= @recommendations.length %>
-          </a>
+          <% if @isLogged(): %>
+            <a class="post-comments-info" title="Подписаться" href="#">
+              <span class="icon-bubble"></span>
+              <%= @replycount %>
+            </a>
+            <a class="post-recommendations-info" title="Рекомендовать" href="#">
+              <span class="icon-star"></span>
+              <%= @recommendations.length %>
+            </a>
+          <% else: %>
+            <span class="post-comments-info" title="Комментарии">
+              <span class="icon-bubble"></span>
+              <%= @replycount %>
+            <span>
+            <span class="post-recommendations-info" title="Рекомендации">
+              <span class="icon-star"></span>
+              <%= @recommendations.length %>
+            </span>
+          <% end %>
         </div>
       </div>
 
