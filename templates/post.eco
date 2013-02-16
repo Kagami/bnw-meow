@@ -34,7 +34,9 @@
           <% end %>
         </div>
         <div class="post-info">
-          <a class="post-id label label-reset" href="/p/<%= @id %>">#<%= @id %></a>
+          <a class="post-id label label-reset" href="/p/<%= @id %>">
+            #<%= @id %>
+          </a>
           <a class="post-comments-info" title="Подписаться" href="#">
             <span class="icon-bubble"></span>
             <%= @replycount %>
@@ -45,6 +47,18 @@
           </a>
         </div>
       </div>
+
+      <!-- Additional footer -->
+      <% if @singlePost: %>
+      <div class="post-footer2">
+        <% if @recommendations.length: %>
+          Рекомендовали:
+          <% for user in @recommendations: %>
+            <a href="/u/<%= user %>">@<%= user %></a>
+          <% end %>
+        <% end %>
+      </div>
+      <% end %>
 
     </div>
   </div>

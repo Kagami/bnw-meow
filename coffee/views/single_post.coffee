@@ -17,6 +17,7 @@ define [
     autoRender: true
     templateData:
       postTemplate: postTemplate
+      singlePost: true
 
     afterInitialize: ->
       super

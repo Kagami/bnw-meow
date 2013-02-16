@@ -29,6 +29,7 @@ hr {
     color: #9A9A9A;
     text-shadow: none;
     border-radius: 0;
+    padding: 0;
 }
 
 #notifications {
@@ -75,10 +76,23 @@ img.avatar {
 }
 
 .post-footer, .post-footer a, .post-footer a:hover,
-.comment-footer, .comment-footer a, .comment-footer a:hover {
+.comment-footer, .comment-footer a, .comment-footer a:hover,
+.post-footer2 {
     color: #9A9A9A;
 }
 
 .post-info a {
     text-decoration: none;
+}
+
+.post-date {
+    margin-left: 3px;
+}
+
+.post-id {
+    margin-right: 3px;
+}
+
+.post-comments-info {
+    margin-right: 3px;
 }
