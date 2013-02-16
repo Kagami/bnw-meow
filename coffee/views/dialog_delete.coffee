@@ -15,6 +15,9 @@ define [
       "click .delete-selected": "deleteSelected"
       "click .cancel-delete": "cancelDelete"
 
+    # XXX: We use here Slow selectors and there is some code
+    # duplication in post/comment views.
+    # Hope this will not be slow as shit.
     MARKED_POST_CLASS: "post-delete-marked"
     MARKED_COMMENT_CLASS: "comment-delete-marked"
     MARKED_SELECTOR:
@@ -24,7 +27,8 @@ define [
 
     initialize: (options) ->
       super options
-      @pluralForms = if options?.singlePost
+      @singlePost = options?.singlePost
+      @pluralForms = if @singlePost
         ["комментарий", "комментария", "комментариев"]
       else
         ["пост", "поста", "постов"]
@@ -49,17 +53,22 @@ define [
     hide: ->
       @modal.modal "hide"
 
-    updateMarked: (singlePost = false) ->
-      marked = $(@MARKED_SELECTOR)
-      if marked.length
+    updateMarked: (singlePostMarked = false) ->
+      marked = $(@MARKED_SELECTOR).length
+      if marked
         @show() unless @isVisible()
-        forDelete = if singlePost
-          # Special case: close button on the entire post at the
-          # single post page.
-          $(".#{@MARKED_COMMENT_CLASS}").removeClass(@MARKED_COMMENT_CLASS)
+        # Special case: at the single post page allow select either
+        # engire post or comments.
+        if @singlePost
+          if singlePostMarked
+            $(".#{@MARKED_COMMENT_CLASS}").removeClass(@MARKED_COMMENT_CLASS)
+          else
+            post = $(".#{@MARKED_POST_CLASS}").removeClass(@MARKED_POST_CLASS)
+            marked -= post.length  # Always will be 0 or 1
+        forDelete = if singlePostMarked
           "пост"
         else
-          utils.pluralForm marked.length, @pluralForms
+          utils.pluralForm marked, @pluralForms
         @$(".for-delete").text(forDelete)
       else
         @hide()
