@@ -15,8 +15,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="/u/<%= @getUser() %>">Блог</a></li>
-            <li><a href="/feed">Лента</a></li>
-            <li><a href="/write">Новый пост</a></li>
+            <!--li><a href="/feed">Лента</a></li>
+            <li><a href="/write">Новый пост</a></li-->
             <li class="divider"></li>
             <li><a id="logout" href="#">Выход</a></li>
           </ul>
