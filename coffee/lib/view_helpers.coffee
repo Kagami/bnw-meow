@@ -33,6 +33,7 @@ define [
       # We need our NIH function here because underscore do some crappy
       # things with slashes.
       html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;").replace(/'/g, "&apos;")
 
     formatText: (raw) ->
       ###Format post/comment text.
