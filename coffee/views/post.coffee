@@ -10,6 +10,7 @@ define [
     template: template
     autoRender: true
     events:
+      "click .post-comments-info": "subscribe"
       "click .post-recommendations-info": "recommend"
 
     initialize: (options) ->
@@ -23,6 +24,14 @@ define [
     isRecommended: ->
       return unless utils.isLogged()
       utils.getUser() in @model.get("recommendations")
+
+    subscribe: (e) ->
+      e.preventDefault()
+      return unless utils.isLogged()
+      # XXX: Currently there is no ability to know if we've
+      # subscribed on the post or not.
+      data = message: @model.get "id"
+      utils.post "subscriptions/add", data, true
 
     recommend: (e) ->
       e.preventDefault()
