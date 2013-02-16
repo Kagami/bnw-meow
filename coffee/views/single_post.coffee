@@ -1,13 +1,12 @@
 define [
   "jquery"
   "chaplin"
-  "views/base/view"
   "views/base/refresh_date"
   "views/comments"
   "lib/utils"
   "templates/single_post"
   "templates/post"
-], ($, Chaplin, View, RefreshDateView, CommentsView, utils, template,
+], ($, Chaplin, RefreshDateView, CommentsView, utils, template,
     postTemplate) ->
   "use strict"
 

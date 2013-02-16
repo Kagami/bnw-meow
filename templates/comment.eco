@@ -9,7 +9,7 @@
       <div class="comment-header">
         <a class="comment-delete close" href="#">&times;</a>
         <a class="comment-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
-        <abbr class="comment-date label label-reset" title="<%= @formatDateLong @date %>"></abbr>
+        <abbr class="comment-date label label-reset" title="<%= @formatDateLong @date %>"><%= @formatDate @date %></abbr>
       </div>
 
       <!-- Body -->
