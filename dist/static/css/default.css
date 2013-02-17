@@ -12,6 +12,7 @@ hr {
     margin: 10px 0;
 }
 
+/* TODO: Should we use icon-spinned instead? */
 .preloader-bar {
     display: inline-block;
     background: url("../img/preloader-bar.gif") no-repeat center center transparent;
@@ -39,33 +40,8 @@ hr {
     z-index: 2000;
 }
 
-/* Icons */
-
-.icon-tags,.icon-not-subscribed,.icon-subscribed,.icon-clubs,.icon-not-recommended,.icon-recommended {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    background-image: url(../img/sprites.png);
-    background-repeat: no-repeat;
-}
-.icon-tags {
-    background-position: 0 0;
-    width: 15px;
-}
-.icon-not-subscribed {
-    background-position: -28px 0;
-}
-.icon-subscribed {
-    background-position: -56px 0;
-}
-.icon-clubs {
-    background-position: -84px 0;
-}
-.icon-not-recommended {
-    background-position: -112px 0;
-}
-.icon-recommended {
-    background-position: -140px 0;
+.icon-marked {
+    color: #2D6987;
 }
 
 /* Application-related */
@@ -91,7 +67,7 @@ img.avatar {
     text-decoration: none;
 }
 
-/* TODO: Should we use sass and variables for 3px, 8px values? */
+/* TODO: Should we use sass and variables for colors, 3px/8px values? */
 .post-date, .comment-date {
     margin-left: 3px;
 }

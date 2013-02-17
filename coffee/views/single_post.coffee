@@ -56,7 +56,15 @@ define [
       replyTo = @$("#comment-form-reply-to")
       messageId = @model.get "id"
       messageId += "/" + replyTo.val() if replyTo.val().length
+      submit = @$("#comment-form-submit").prop("disabled", true)
+      i = submit.children("i").toggleClass("icon-refresh icon-spin")
+      clear = @$("#comment-form-clear").prop("disabled", true)
+
       d = utils.post "comment", message: messageId, text: textarea.val()
+      d.always ->
+        submit.prop("disabled", false)
+        i.toggleClass("icon-refresh icon-spin")
+        clear.prop("disabled", false)
       d.done ->
         textarea.val("")
         replyTo.val("")

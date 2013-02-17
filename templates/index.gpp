@@ -7,6 +7,7 @@
 
   <#ifndef RELEASE>
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css?v=<#VERSION>" />
+    <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.css?v=<#VERSION>" />
   <#endif>
   <link rel="stylesheet" type="text/css" href="/static/css/default.css?v=<#VERSION>" />
 

@@ -23,13 +23,13 @@
       <div class="post-footer">
         <div class="post-tags">
           <% if @tags.length: %>
-            <span class="icon-tags"></span>
+            <i class="icon-tags"></i>
             <%for tag in @tags: %>
               <a class="post-tag" href="/t/<%= encodeURIComponent tag %>"><%= tag %></a>
             <% end %>
           <% end %>
           <% if @clubs.length: %>
-            <span class="icon-clubs"></span>
+            <i class="icon-group"></i>
             <%for club in @clubs: %>
               <a class="post-club" href="/c/<%= encodeURIComponent club %>"><%= club %></a>
             <% end %>
@@ -41,20 +41,20 @@
           </a>
           <% if @isLogged(): %>
             <a class="post-comments-info" title="Подписаться" href="#">
-              <span class="icon-not-subscribed"></span>
+              <i class="icon-comment"></i>
               <%= @replycount %>
             </a>
             <a class="post-recommendations-info" title="<% if @isRecommended: %>Удалить рекомендацию<% else: %>Рекомендовать<% end %>" href="#">
-              <span class="icon-<% unless @isRecommended: %>not-<% end %>recommended"></span>
+              <i class="<% if @isRecommended: %>icon-marked <% end %>icon-star"></i>
               <%= @recommendations.length %>
             </a>
           <% else: %>
             <span class="post-comments-info" title="Комментарии">
-              <span class="icon-not-subscribed"></span>
+              <i class="icon-comment"></i>
               <%= @replycount %>
             </span>
             <span class="post-recommendations-info" title="Рекомендации">
-              <span class="icon-not-recommended"></span>
+              <i class="icon-star"></i>
               <%= @recommendations.length %>
             </span>
           <% end %>

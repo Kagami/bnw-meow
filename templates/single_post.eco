@@ -10,8 +10,10 @@
   <% if @isLogged(): %>
     <form id="comment-form" class="form-inline">
       <textarea id="comment-form-text" class="input-block-level" rows="5"></textarea>
-      <button id="comment-form-submit" type="submit" class="btn btn-primary">Комментировать</button>
-      <button id="comment-form-clear-id" type="button" class="btn pull-right" title="Сбросить id цитируемого комментария">Сбросить</button>
+      <button id="comment-form-submit" type="submit" class="btn btn-primary">
+        <i></i> Комментировать
+      </button>
+      <button id="comment-form-clear" type="button" class="btn pull-right" title="Сбросить id цитируемого комментария">Сбросить</button>
       <input id="comment-form-reply-to" class="pull-right" maxlength="3" type="text" title="id цитируемого комментария" />
       </div>
     </form>
