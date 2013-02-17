@@ -52,7 +52,7 @@
             <span class="post-comments-info" title="Комментарии">
               <span class="icon-not-subscribed"></span>
               <%= @replycount %>
-            <span>
+            </span>
             <span class="post-recommendations-info" title="Рекомендации">
               <span class="icon-not-recommended"></span>
               <%= @recommendations.length %>
