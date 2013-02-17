@@ -44,13 +44,14 @@ pre-deb:
 	find deb_dist/ -name '.*.swp' -delete
 	mkdir -p "$(STATIC_R)/css/" "$(STATIC_R)/js/"
 	cp -r "$(STATIC)/img/" "$(STATIC_R)"
+	cp -r "$(STATIC)/font/" "$(STATIC_R)"
 	cp dist/favicon.ico "$(INDEX_R)"
 
 minify:
 	cat $(STATIC)/css/*.css > "$(STATIC_R)/css/default.css"
 	./minify.js
 	sed "s/^VERSION =.*/VERSION = '$(VERSION)';/" \
-		"$(STATIC)/js/load_product.js" >> "$(STATIC_R)/js/meow.js"
+		"$(STATIC)/js/load_release.js" >> "$(STATIC_R)/js/meow.js"
 
 release: pre-deb index-release coffee eco minify
 
