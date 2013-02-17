@@ -1,9 +1,11 @@
 define [
-  "jquery"
+  "underscore"
   "views/base/view"
+  "views/post"
+  "views/comment"
   "lib/utils"
   "templates/dialog_delete"
-], ($, View, utils, template) ->
+], (_, View, PostView, CommentView, utils, template) ->
   "use strict"
 
   class DialogDeleteView extends View
@@ -15,10 +17,10 @@ define [
       "click .delete-selected": "deleteSelected"
       "click .cancel-delete": "cancelDelete"
 
-    MARK_OPTIONS:
-      "PostView": [".post-delete", "post-delete-marked"]
-      "CommentView": [".comment-delete", "comment-delete-marked"]
-    POST_CLASS: "PostView"
+    MARK_OPTIONS: [
+      [".post-delete", "post-delete-marked"]
+      [".comment-delete", "comment-delete-marked"]
+    ]
 
     initialize: (options) ->
       super options
@@ -51,11 +53,12 @@ define [
       @modal.modal "hide"
 
     _toggleMark: (obj) =>
-      [selector, className] = @MARK_OPTIONS[obj.constructor.name]
+      index = if obj instanceof PostView then 0 else 1
+      [selector, className] = @MARK_OPTIONS[index]
       obj.$(selector).toggleClass(className)
 
     toggleMark: (obj) ->
-      singlePostMarked = @singlePost and obj.constructor.name == @POST_CLASS
+      singlePostMarked = @singlePost and obj instanceof PostView
       @_toggleMark obj
       if obj in @selected
         @selected = _(@selected).without obj
@@ -67,8 +70,7 @@ define [
             @selected.forEach @_toggleMark
             @selected = []
           else
-            if @selected.length == 1 and
-                @selected[0].constructor.name == @POST_CLASS
+            if @selected.length == 1 and @selected[0] instanceof PostView
               @_toggleMark @selected[0]
               @selected = []
         @selected.push obj
