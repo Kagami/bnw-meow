@@ -18,6 +18,7 @@ define [
     autoRender: true
     events:
       "click #comment-form-submit": "comment"
+      "keypress #comment-form-text": "keypress"
 
     afterInitialize: ->
       super
@@ -68,3 +69,8 @@ define [
       d.done ->
         textarea.val("")
         replyTo.val("")
+
+    keypress: (e) ->
+      if e.ctrlKey and (e.keyCode == 13 or e.keyCode == 10)
+        unless @$("#comment-form-submit").prop("disabled")
+          @comment e
