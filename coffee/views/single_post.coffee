@@ -16,13 +16,17 @@ define [
     container: "#main"
     template: template
     autoRender: true
+    events:
+      "click #comment-form-submit": "comment"
 
     afterInitialize: ->
       super
       d = @model.fetch()
-      d.always =>
+      d.fail =>
         @$(".preloader").remove()
       d.done =>
+        @render fetched: true
+
         text = @model.get "text"
         Chaplin.mediator.publish "!adjustTitle", utils.formatPostTitle text
 
@@ -43,3 +47,16 @@ define [
         commentDiv = @$(window.location.hash)
         if commentDiv.length
           $("html, body").scrollTop(commentDiv.offset().top - 41)
+
+    comment: (e) ->
+      e.preventDefault()
+      return unless utils.isLogged()
+
+      textarea = @$("#comment-form-text")
+      replyTo = @$("#comment-form-reply-to")
+      messageId = @model.get "id"
+      messageId += "/" + replyTo.val() if replyTo.val().length
+      d = utils.post "comment", message: messageId, text: textarea.val()
+      d.done ->
+        textarea.val("")
+        replyTo.val("")

@@ -70,7 +70,7 @@ hr {
 
 /* Application-related */
 
-.post, .comment {
+.post, .comment, #comment-form {
     background-color: #F5F5F5;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -91,6 +91,7 @@ img.avatar {
     text-decoration: none;
 }
 
+/* TODO: Should we use sass and variables for 3px, 8px values? */
 .post-date, .comment-date {
     margin-left: 3px;
 }
@@ -112,4 +113,13 @@ img.avatar {
 .comment-delete-marked, .comment-delete-marked:hover {
     color: #FF0000;
     opacity: 1;
+}
+
+#comment-form-text {
+    margin-bottom: 8px;
+}
+
+#comment-form-reply-to {
+    width: 3em;
+    margin-right: 3px;
 }
