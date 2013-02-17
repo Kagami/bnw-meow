@@ -18,7 +18,7 @@ define [
 
     initialize: ->
       super
-      Chaplin.mediator.subscribe "!router:changeURL", (url) =>
+      @subscribeEvent "!router:changeURL", (url) ->
         $("#common_menu>li").removeClass("active")
         a = $("#common_menu a[href='/#{url}']")
         if a.length
