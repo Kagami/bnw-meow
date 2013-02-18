@@ -19,8 +19,24 @@
   <#endif>
 </head>
 <body>
-  <div id="menu"></div>
-  <div id="main" class="container"></div>
+
   <div id="notifications"></div>
+
+  <div id="wrap">
+    <div id="menu"></div>
+    <div id="main" class="container"></div>
+    <div id="push"></div>
+  </div>
+
+  <div id="footer">
+    <div class="container">
+      <p class="muted credit">
+        powered by
+        <i class="icon-github-alt"></i>
+        <a href="https://github.com/Kagami/bnw-meow">meow</a>
+      </p>
+    </div>
+  </div>
+
 </body>
 </html>

@@ -1,11 +1,46 @@
 /* Common, fixes, resets */
 
+html, body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
 html {
+    /* Always show vertical scrollbar because we don't want
+     * jitter pages.
+     */
     overflow-y: scroll;
 }
 
-body {
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height and margin */
+    margin: 0 auto -131px;
+}
+
+#footer {
+    background-color: #F5F5F5;
+    border-top: 1px solid #E5E5E5;
+    margin-top: 70px;
+    height: 60px;
+    text-align: right;
+}
+
+#push {
+    /* Footer's height + margin */
+    height: 131px;
+}
+
+#main {
+    /* Fix navbar offset */
     padding-top: 51px;
+}
+
+.credit {
+    /* Center text inside the footer */
+    margin-top: 20px;
 }
 
 hr {
