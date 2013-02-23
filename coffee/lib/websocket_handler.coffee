@@ -39,9 +39,10 @@ define [
         @_wsTries++
         setTimeout (=> @initWebSocket() unless @disposed), delay
 
-      # Check arrived message type and try to find appropriate callback
-      # to handle it.
       @ws.onmessage = (e) =>
+        ###Check arrived message type and try to find appropriate
+        callback to handle it.
+        ###
         message = JSON.parse e.data
         type = message.type
         # new_comment -> onNewComment

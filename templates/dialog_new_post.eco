@@ -1,0 +1,16 @@
+<div id="post-modal" class="modal hide fade">
+  <div class="modal-header">
+    <a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
+    <h3 style="display: inline;">Новый пост</h3>
+    <a class="help" href="http://hive.blasux.ru/u/Stiletto/BnW#formatting" title="Справка по синтаксису"><i class="icon-question-sign"></i></a>
+  </div>
+  <div class="modal-body">
+    <form id="post-form" class="form-inline">
+      <textarea id="post-form-text" class="input-block-level" rows="9"></textarea>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button id="post-form-submit" type="button" class="btn btn-success"><i></i> Отправить</button>
+    <button id="post-form-cancel" type="button" class="btn" data-dismiss="modal" aria-hidden="true">Отменить</button>
+  </div>
+</div>

@@ -134,3 +134,20 @@ img.avatar {
     width: 3em;
     margin-right: 3px;
 }
+
+#post-modal {
+    width: 70%;
+    margin-left: -35%;
+}
+
+#post-form {
+    margin: 0px;
+}
+
+.help {
+    color: #9A9A9A;
+}
+
+.help, .help:hover {
+    text-decoration: none;
+}

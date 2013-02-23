@@ -1,21 +1,20 @@
 define [
   "underscore"
-  "views/base/view"
+  "views/base/dialog"
   "views/post"
   "views/comment"
   "lib/utils"
   "templates/dialog_delete"
-], (_, View, PostView, CommentView, utils, template) ->
+], (_, DialogView, PostView, CommentView, utils, template) ->
   "use strict"
 
-  class DialogDeleteView extends View
+  class DialogDeleteView extends DialogView
 
     container: "body"
     template: template
     autoRender: true
     events:
       "click .delete-selected": "deleteSelected"
-      "click .cancel-delete": "cancelDelete"
 
     MARK_OPTIONS: [
       [".post-delete", "post-delete-marked"]
@@ -31,26 +30,13 @@ define [
       else
         ["пост", "поста", "постов"]
 
-    _getEl: ->
-      @$el.children(":first")
-
     afterRender: ->
       super
-      @modal = @_getEl()
       @modal.on "shown", =>
         @$(".cancel-delete").focus()
       @modal.on "hide", =>
         @selected.forEach @_toggleMark
         @selected = []
-
-    isVisible: ->
-      @modal.is(":visible")
-
-    show: ->
-      @modal.modal "show"
-
-    hide: ->
-      @modal.modal "hide"
 
     _toggleMark: (obj) =>
       index = if obj instanceof PostView then 0 else 1
@@ -88,8 +74,4 @@ define [
     deleteSelected: (e) ->
       e.preventDefault()
       @selected.forEach (obj) -> obj.model.destroy()
-      @hide()
-
-    cancelDelete: (e) ->
-      e.preventDefault()
       @hide()

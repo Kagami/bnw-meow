@@ -1,9 +1,9 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <ul id="common_menu" class="nav">
+      <ul id="common-menu" class="nav">
         <a class="brand" href="/">BnW</a>
-        <li><a id="main_item" href="/">Главная</a></li>
+        <li><a href="/">Главная</a></li>
         <li><a href="/top">Топ</a></li>
       </ul>
       <% if @isLogged(): %>
@@ -15,8 +15,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="/u/<%= @getUser() %>">Блог</a></li>
-            <!--li><a href="/feed">Лента</a></li>
-            <li><a href="/write">Новый пост</a></li-->
+            <li><a id="show-new-post" href="#">Новый пост</a></li>
             <li class="divider"></li>
             <li><a id="logout" href="#">Выход</a></li>
           </ul>
