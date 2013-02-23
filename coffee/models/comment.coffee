@@ -1,6 +1,7 @@
 define [
+  "underscore"
   "models/base/model"
-], (Model)  ->
+], (_, Model)  ->
   "use strict"
 
   class Comment extends Model
@@ -11,3 +12,7 @@ define [
 
     destroy: ->
       @apiCall "delete", message: @get "id"
+
+    getAttributes: ->
+      commentId = @get("id").split("/")[1]
+      _({commentId}).extend @attributes

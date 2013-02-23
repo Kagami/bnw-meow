@@ -20,8 +20,7 @@ define [
       @modal.on "shown", =>
         @$("#post-form-text").focus()
 
-    post: (e) ->
-      e.preventDefault()
+    post: ->
       return unless utils.isLogged()
 
       textarea = @$("#post-form-text")
@@ -69,4 +68,4 @@ define [
         # FIXME: Should we use some instance variable for check
         # is we already sending message?
         unless @$("#post-form-submit").prop("disabled")
-          @post e
+          @post()

@@ -71,7 +71,6 @@ define [
       else
         @hide()
 
-    deleteSelected: (e) ->
-      e.preventDefault()
+    deleteSelected: ->
       @selected.forEach (obj) -> obj.model.destroy()
       @hide()

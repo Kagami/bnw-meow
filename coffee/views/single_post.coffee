@@ -4,11 +4,12 @@ define [
   "views/base/view"
   "views/post"
   "views/comments"
+  "views/comment"
   "views/dialog_delete"
   "lib/utils"
   "templates/single_post"
-], ($, Chaplin, View, PostView, CommentsView, DialogDeleteView, utils,
-    template) ->
+], ($, Chaplin, View, PostView, CommentsView, CommentView, DialogDeleteView,
+    utils, template) ->
   "use strict"
 
   class SinglePostView extends View
@@ -18,7 +19,9 @@ define [
     autoRender: true
     events:
       "click #comment-form-submit": "comment"
+      "click #comment-form-reset": "resetCommentForm"
       "keypress #comment-form-text": "keypress"
+      "click .post-id": "moveCommentForm"
 
     afterInitialize: ->
       super
@@ -49,8 +52,7 @@ define [
         if commentDiv.length
           $("html, body").scrollTop(commentDiv.offset().top - 41)
 
-    comment: (e) ->
-      e.preventDefault()
+    comment: ->
       return unless utils.isLogged()
 
       textarea = @$("#comment-form-text")
@@ -66,11 +68,20 @@ define [
         submit.prop("disabled", false)
         i.toggleClass("icon-refresh icon-spin")
         clear.prop("disabled", false)
-      d.done ->
+      d.done =>
         textarea.val("")
-        replyTo.val("")
+        @resetCommentForm()
 
     keypress: (e) ->
       if e.ctrlKey and (e.keyCode == 13 or e.keyCode == 10)
         unless @$("#comment-form-submit").prop("disabled")
-          @comment e
+          @comment()
+
+    resetCommentForm: ->
+      form = $("#comment-form").css("margin-left", "0")
+      $("#comments").after(form)
+      @$("#comment-form-reply-to").val("")
+
+    moveCommentForm: (e) ->
+      # Run in the context of post subview (because of $el).
+      CommentView::moveCommentForm.call @subview("post"), e, ""

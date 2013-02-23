@@ -36,7 +36,7 @@
           <% end %>
         </div>
         <div class="post-info">
-          <a class="post-id label label-reset" href="/p/<%= @id %>">
+          <a class="post-id label label-reset" href="/p/<%= @id %>" <% if @isLogged(): %>title="Нажмите чтобы прокомментировать"<% end %>>
             #<%= @id %>
           </a>
           <% if @isLogged(): %>

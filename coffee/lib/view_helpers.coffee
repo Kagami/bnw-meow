@@ -73,9 +73,6 @@ define [
         tmpText.replace regexp, handler
       , text
 
-    getCommentId: (id) ->
-      id.split("/")[1]
-
     isLogged: ->
       $.cookie("login")?
 

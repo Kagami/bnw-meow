@@ -1,4 +1,4 @@
-<div id="<%= @getCommentId @id %>" class="comment" data-full-id="<%= @id %>">
+<div id="<%= @commentId %>" class="comment" data-full-id="<%= @id %>">
   <div class="media">
     <div class="avatar pull-left">
       <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
@@ -21,7 +21,7 @@
 
       <!-- Footer -->
       <div class="comment-footer">
-        <a class="comment-id label label-reset" href="#<%= @getCommentId @id %>">#<%= @id %></a>
+        <a class="comment-id label label-reset" href="#<%= @commentId %>" <% if @isLogged(): %>title="Нажмите чтобы прокомментировать"<% end %>>#<%= @id %></a>
       </div>
 
     </div>
