@@ -4,13 +4,13 @@ Kawaii single-page web interface for https://bnw.im/ built on top of the great C
 
 ## See it in action
 
-http://meow.genshiken.org/
+http://meow.bnw.im/
 
 ## Use with BnW
 
 Send the following message to the bot:
 ```
-set baseurl http://meow.genshiken.org
+set baseurl http://meow.bnw.im
 ```
 Now all links what you get from bot will have correct prefix.
 
