@@ -1,10 +1,11 @@
 define [
   "jquery"
   "underscore"
+  "moment"
   "chaplin"
   "lib/view_helpers"
   "templates/notification"
-], ($, _, Chaplin, viewHelpers, notification) ->
+], ($, _, moment, Chaplin, viewHelpers, notification) ->
   "use strict"
 
   utils = Chaplin.utils.beget Chaplin.utils
@@ -37,12 +38,13 @@ define [
         deferred.reject()
       promise
 
-    showAlert: (text, type = "error") ->
+    showAlert: (text, type = "error", autoHide = true) ->
       alert = $(@renderTemplate(notification, text: text, type: type))
       $("#notifications").append(alert)
-      setTimeout ->
-        alert.fadeOut("slow", -> alert.remove())
-      , 5000
+      if autoHide
+        hide = ->
+          alert.fadeOut("slow", -> alert.remove())
+        setTimeout hide, 5000
 
     # Helpers around apiCall
 
@@ -99,3 +101,7 @@ define [
           p5
 
       "#{n} #{_pluralForm()}"
+
+    now: ->
+      ###Return current formatted time.###
+      moment().format("HH:mm:ss")

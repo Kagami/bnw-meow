@@ -17,6 +17,7 @@ define [
       "click #common-menu a": "navigate"
       "click #show-new-post": "showNewPost"
       "click #logout": "logout"
+      "click #warning": "ignore"
 
     initialize: ->
       super
@@ -49,3 +50,6 @@ define [
     afterRender: ->
       super
       @$(".dropdown-toggle").dropdown()
+
+    ignore: (e) ->
+      e.preventDefault()

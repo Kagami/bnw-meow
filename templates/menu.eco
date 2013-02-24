@@ -6,6 +6,13 @@
         <li><a href="/">Главная</a></li>
         <li><a href="/top">Топ</a></li>
       </ul>
+      <% unless WebSocket?: %>
+      <ul class="nav">
+        <li title="Ваш браузер не поддерживает вебсокеты! Возможности сайта будут ограничены.">
+          <a id="warning" href="#"><i class="icon-warning-sign"></i> WS</a>
+        </li>
+      </ul>
+      <% end %>
       <% if @isLogged(): %>
       <ul class="nav pull-right">
         <li class="dropdown">

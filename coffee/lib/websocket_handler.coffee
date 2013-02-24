@@ -1,6 +1,7 @@
 define [
+  "underscore"
   "lib/utils"
-], (utils) ->
+], (_, utils) ->
   "use strict"
 
   WebSocketHandler =
@@ -13,29 +14,38 @@ define [
     WS_TRIES_FAST_DELAY: 2000
     WS_TRIES_SLOW: 120
     WS_TRIES_SLOW_DELAY: 30000
-    WS_TRIES_LAST_HOPE_DELAY: 600000
     _wsTries: 0
 
     isWsAvailable: ->
-      window.location.pathname[...3] in ["/", "/u/", "/p/"]
+      _.all [
+        WebSocket?
+        window.location.pathname[...3] in ["/", "/u/", "/p/"]
+      ]
 
     initWebSocket: ->
       return unless @isWsAvailable()
-      @ws = new WebSocket utils.bnwWsUrl()
+      @wsUrl = utils.bnwWsUrl()
+      @ws = new WebSocket @wsUrl
 
       @ws.onopen = (e) =>
-        console.info "websocket #{utils.bnwWsUrl()} opened"
+        msg = "[#{utils.now()}] Вебсокет #{@wsUrl} открыт"
+        console.info msg
+        if @_wsTries
+          utils.showAlert msg, "success", false
         @_wsTries = 0
 
       @ws.onclose = (e) =>
-        console.warn "websocket #{utils.bnwWsUrl()} closed"
+        msg = "[#{utils.now()}] Вебсокет #{@wsUrl} закрыт"
+        console.info msg
         return if @disposed
+        if @_wsTries == 1
+          utils.showAlert msg, "error", false
         if @_wsTries < @WS_TRIES_FAST
           delay = @WS_TRIES_FAST_DELAY
         else if @_wsTries < @WS_TRIES_SLOW
           delay = @WS_TRIES_SLOW_DELAY
         else
-          delay = @WS_TRIES_LAST_HOPE_DELAY
+          return
         @_wsTries++
         setTimeout (=> @initWebSocket() unless @disposed), delay
 
@@ -49,3 +59,6 @@ define [
         type = "on" + type.replace /(?:^|_)(.)/g, (_m, p1) -> p1.toUpperCase()
         handler = @[type]
         handler.call this, message if handler?
+
+    closeWebSocket: ->
+      @ws.close() if @ws?

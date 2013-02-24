@@ -35,10 +35,7 @@ define [
       super
       dialog = new DialogDeleteView()
       @subview "dialog", dialog
-      d = @fetch true
-      d.done =>
-        # TODO: Move it to the collection?
-        #@initWebSocket()
+      @fetch(true).done => @initWebSocket()
 
     fetch: (first = false) ->
       return if @$(".preloader").length
@@ -57,12 +54,17 @@ define [
 
     dispose: ->
       $(window).off "scroll", @onScroll
+      @closeWebSocket()
       super
 
     onScroll: =>
       position = $(window).scrollTop() + $(window).height()
       height = $(document).height()
       @fetch() if height - position < @SCROLL_THRESHOLD
+
+    ###
+    # Websocket callbacks.
+    ###
 
     onNewMessage: (postData) ->
       # TODO: Add with special styles.
