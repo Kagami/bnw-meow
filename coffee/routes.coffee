@@ -14,6 +14,6 @@ define [
     match "u/:user", "posts#show"
     match "u/:user/t/:tag", "posts#show"
     match "top", "posts#show", params:
-      id: "today", title: "Топ 20 постов за сегодня"
+      id: "today", title: "Топ 20 постов за сегодня", pageble: false
     match "p/:post", "single_post#show"
     match "login", "login#login"

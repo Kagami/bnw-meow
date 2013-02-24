@@ -12,3 +12,17 @@ define [
       @query = options.query if options?.query?
 
     apiCall: Model::apiCall
+
+    #: Set this var to false when you've reached
+    #: the last page.
+    _hasPages: true
+
+    hasPages: ->
+      ###Do we reach the last page?###
+      @_hasPages
+
+    incPage: ->
+      if @query.page?
+        @query.page++
+      else
+        @query.page = 1

@@ -10,6 +10,8 @@ define [
     model: Post
 
     fetch: ->
-      # XXX: What the fuck is that API format?
       @apiCall().done (data) =>
-        @reset data.messages.reverse()
+        if data.messages.length
+          @add data.messages.reverse()
+        else
+          @_hasPages = false
