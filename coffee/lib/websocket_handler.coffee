@@ -30,7 +30,8 @@ define [
       @ws.onopen = (e) =>
         msg = "[#{utils.now()}] Вебсокет #{@wsUrl} открыт"
         console.info msg
-        if @_wsTries
+        # Let it to fail one time without notice
+        if @_wsTries > 1
           utils.showAlert msg, "success", false
         @_wsTries = 0
 
