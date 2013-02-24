@@ -6,7 +6,7 @@
 
   <div id="single-post"></div>
 
-  <% if @replycount: %><hr /><% end %>
+  <hr />
 
   <div id="comments"></div>
 
