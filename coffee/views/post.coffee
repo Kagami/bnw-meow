@@ -72,7 +72,7 @@ define [
       # Just delete post div from the DOM. It still be stored
       # in the model.
       @firstDiv.removeClass("post-added").addClass("post-deleted")
-      hide = ->
+      hide = =>
         @firstDiv.fadeOut("slow", => @dispose())
       setTimeout hide, 3000
 

@@ -16,6 +16,13 @@ define [
     initialize: (options) ->
       super options
       @dialog = options.dialog
+      # Subscribe to websocket events
+      @subscribeEvent "!ws:new_comment:#{@model.get 'id'}", @onAdd
+      @subscribeEvent "!ws:del_comment:#{@model.get 'id'}", @onDel
+
+    afterRender: ->
+      super
+      @firstDiv = @$el.children(0)
 
     templateData: ->
       canDelete: @canDelete()
@@ -37,3 +44,16 @@ define [
       id ?= @model.getAttributes().commentId
       $("#comment-form-reply-to").val(id)
       $("#comment-form-text").focus()
+
+    onAdd: ->
+      @firstDiv.addClass("comment-added")
+      @firstDiv.mouseover =>
+        @firstDiv.removeClass("comment-added").off("mouseover")
+
+    onDel: ->
+      # Just delete comment div from the DOM. It still be stored
+      # in the model.
+      @firstDiv.removeClass("comment-added").addClass("comment-deleted")
+      hide = =>
+        @firstDiv.fadeOut("slow", => @dispose())
+      setTimeout hide, 3000

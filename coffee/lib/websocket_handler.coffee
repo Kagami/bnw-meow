@@ -4,8 +4,6 @@ define [
 ], (_, utils) ->
   "use strict"
 
-  # TODO: Use it in the base view/collection_view.
-
   WebSocketHandler =
     ###Helper mixin for adding websocket functionality to the
     target class and handling messages arrived via websocket.

@@ -1,6 +1,7 @@
 define [
   "jquery"
   "chaplin"
+  "models/comment"
   "views/base/view"
   "views/post"
   "views/comments"
@@ -8,8 +9,8 @@ define [
   "views/dialog_delete"
   "lib/utils"
   "templates/single_post"
-], ($, Chaplin, View, PostView, CommentsView, CommentView, DialogDeleteView,
-    utils, template) ->
+], ($, Chaplin, Comment, View, PostView, CommentsView, CommentView,
+    DialogDeleteView, utils, template) ->
   "use strict"
 
   class SinglePostView extends View
@@ -17,6 +18,7 @@ define [
     container: "#main"
     template: template
     autoRender: true
+    wsAutoInit: true
     events:
       "click #comment-form-submit": "comment"
       "click #comment-form-reset": "resetCommentForm"
@@ -29,6 +31,9 @@ define [
       d.fail =>
         @$(".preloader").remove()
       d.done =>
+        @subscribeEvent "!ws:new_comment", @onNewComment
+        @initWebSocket()
+
         @render fetched: true
 
         text = @model.get "text"
@@ -85,3 +90,7 @@ define [
     moveCommentForm: (e) ->
       # Run in the context of post subview (because of $el).
       CommentView::moveCommentForm.call @subview("post"), e, ""
+
+    onNewComment: (commentData) ->
+      comment = new Comment commentData, postUser: @model.get "user"
+      @model.replies.add comment

@@ -5,16 +5,12 @@ define [
   "views/base/collection_view"
   "views/post"
   "views/dialog_delete"
-  "lib/websocket_handler"
   "lib/utils"
   "templates/preloader"
-], ($, _, Post, CollectionView, PostView, DialogDeleteView, WebSocketHandler,
-    utils, preloader) ->
+], ($, _, Post, CollectionView, PostView, DialogDeleteView, utils, preloader) ->
   "use strict"
 
   class PostsView extends CollectionView
-
-    _(@prototype).extend WebSocketHandler
 
     container: "#main"
     itemView: PostView
@@ -30,13 +26,11 @@ define [
         @pageble = options.pageble
       else
         @pageble = true
-      @subscribeEvent "!ws:new_message", @onNewPost
-
-    afterInitialize: ->
-      super
       dialog = new DialogDeleteView()
       @subview "dialog", dialog
-      @fetch(true).done => @initWebSocket()
+      @fetch(true).done =>
+        @subscribeEvent "!ws:new_message", @onNewPost
+        @initWebSocket()
 
     fetch: (first = false) ->
       return if @$(".preloader").length
@@ -55,7 +49,6 @@ define [
 
     dispose: ->
       $(window).off "scroll", @onScroll
-      @closeWebSocket()
       super
 
     onScroll: =>
