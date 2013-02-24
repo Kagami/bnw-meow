@@ -151,3 +151,11 @@ img.avatar {
 .help, .help:hover {
     text-decoration: none;
 }
+
+.post-added, .comment-added {
+    background-color: #E5E5E5;
+}
+
+.post-deleted, .comment-deleted {
+    background-color: #FFAAAA;
+}

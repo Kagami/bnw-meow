@@ -19,6 +19,16 @@ define [
       super options
       @dialog = options.dialog
       @singlePost = options?.singlePost
+      # Subscribe to websocket events
+      @subscribeEvent "!ws:new_message:#{@model.get 'id'}", @onAdd
+      @subscribeEvent "!ws:del_message:#{@model.get 'id'}", @onDel
+      @subscribeEvent "!ws:upd_comments_count:#{@model.get 'id'}", @updComments
+      @subscribeEvent "!ws:upd_recommendations_count:#{@model.get 'id'}",
+        @updRecommendations
+
+    afterRender: ->
+      super
+      @firstDiv = @$el.children(0)
 
     templateData: ->
       isRecommended: @isRecommended()
@@ -52,3 +62,22 @@ define [
       e.preventDefault()
       return unless utils.isLogged()
       @dialog.toggleMark this
+
+    onAdd: ->
+      @firstDiv.addClass("post-added")
+      @firstDiv.mouseover =>
+        @firstDiv.removeClass("post-added").off("mouseover")
+
+    onDel: ->
+      # Just delete post div from the DOM. It still be stored
+      # in the model.
+      @firstDiv.removeClass("post-added").addClass("post-deleted")
+      hide = ->
+        @firstDiv.fadeOut("slow", => @dispose())
+      setTimeout hide, 3000
+
+    updComments: (data) ->
+      @$(".post-comments-count").text(data.num)
+
+    updRecommendations: (data) ->
+      @$(".post-recommendations-count").text(data.num)

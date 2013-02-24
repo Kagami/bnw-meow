@@ -4,6 +4,8 @@ define [
 ], (_, utils) ->
   "use strict"
 
+  # TODO: Use it in the base view/collection_view.
+
   WebSocketHandler =
     ###Helper mixin for adding websocket functionality to the
     target class and handling messages arrived via websocket.
@@ -50,15 +52,9 @@ define [
         setTimeout (=> @initWebSocket() unless @disposed), delay
 
       @ws.onmessage = (e) =>
-        ###Check arrived message type and try to find appropriate
-        callback to handle it.
-        ###
-        message = JSON.parse e.data
-        type = message.type
-        # new_comment -> onNewComment
-        type = "on" + type.replace /(?:^|_)(.)/g, (_m, p1) -> p1.toUpperCase()
-        handler = @[type]
-        handler.call this, message if handler?
+        data = JSON.parse e.data
+        @publishEvent "!ws:#{data.type}", data
+        @publishEvent "!ws:#{data.type}:#{data.id}", data
 
     closeWebSocket: ->
       @ws.close() if @ws?

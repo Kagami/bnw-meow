@@ -1,9 +1,10 @@
 define [
+  "jquery"
   "underscore"
   "views/base/dialog"
   "lib/utils"
   "templates/dialog_new_post"
-], (_, DialogView, utils, template) ->
+], ($, _, DialogView, utils, template) ->
   "use strict"
 
   class DialogNewPostView extends DialogView
@@ -18,15 +19,15 @@ define [
     afterRender: ->
       super
       @modal.on "shown", =>
-        @$("#post-form-text").focus()
+        $("#post-form-text").focus()
 
     post: ->
       return unless utils.isLogged()
 
-      textarea = @$("#post-form-text")
+      textarea = $("#post-form-text")
       [tags, clubs, text] = @parsePost textarea.val()
-      submit = @$("#post-form-submit").prop("disabled", true)
-      cancel = @$("#post-form-cancel").prop("disabled", true)
+      submit = $("#post-form-submit").prop("disabled", true)
+      cancel = $("#post-form-cancel").prop("disabled", true)
       i = submit.children("i").toggleClass("icon-refresh icon-spin")
 
       d = utils.post "post", {tags, clubs, text}
@@ -67,5 +68,5 @@ define [
       if e.ctrlKey and (e.keyCode == 13 or e.keyCode == 10)
         # FIXME: Should we use some instance variable for check
         # is we already sending message?
-        unless @$("#post-form-submit").prop("disabled")
+        unless $("#post-form-submit").prop("disabled")
           @post()

@@ -18,5 +18,6 @@ define [
       d.fail ->
         utils.clearAuth()
       d.always ->
+        # FIXME: Use pub-sub.
         utils.getGlobal("menuView").render()
         utils.gotoUrl "/"

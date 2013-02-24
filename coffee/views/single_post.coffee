@@ -55,13 +55,13 @@ define [
     comment: ->
       return unless utils.isLogged()
 
-      textarea = @$("#comment-form-text")
-      replyTo = @$("#comment-form-reply-to")
+      textarea = $("#comment-form-text")
+      replyTo = $("#comment-form-reply-to")
       messageId = @model.get "id"
       messageId += "/" + replyTo.val() if replyTo.val().length
-      submit = @$("#comment-form-submit").prop("disabled", true)
+      submit = $("#comment-form-submit").prop("disabled", true)
       i = submit.children("i").toggleClass("icon-refresh icon-spin")
-      clear = @$("#comment-form-clear").prop("disabled", true)
+      clear = $("#comment-form-clear").prop("disabled", true)
 
       d = utils.post "comment", message: messageId, text: textarea.val()
       d.always ->
@@ -74,13 +74,13 @@ define [
 
     keypress: (e) ->
       if e.ctrlKey and (e.keyCode == 13 or e.keyCode == 10)
-        unless @$("#comment-form-submit").prop("disabled")
+        unless $("#comment-form-submit").prop("disabled")
           @comment()
 
     resetCommentForm: ->
       form = $("#comment-form").css("margin-left", "0")
       $("#comments").after(form)
-      @$("#comment-form-reply-to").val("")
+      $("#comment-form-reply-to").val("")
 
     moveCommentForm: (e) ->
       # Run in the context of post subview (because of $el).

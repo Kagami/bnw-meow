@@ -1,4 +1,4 @@
-<div class="post" data-full-id="<%= @id %>">
+<div id="<%= @id %>" class="post">
   <div class="media">
     <div class="avatar pull-left">
       <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
@@ -42,20 +42,20 @@
           <% if @isLogged(): %>
             <a class="post-comments-info" title="Подписаться" href="#">
               <i class="icon-comment"></i>
-              <%= @replycount %>
+              <span class="post-comments-count"><%= @replycount %></span>
             </a>
             <a class="post-recommendations-info" title="<% if @isRecommended: %>Удалить рекомендацию<% else: %>Рекомендовать<% end %>" href="#">
               <i class="<% if @isRecommended: %>icon-marked <% end %>icon-star"></i>
-              <%= @recommendations.length %>
+              <span class="post-recommendations-count"><%= @recommendations.length %></span>
             </a>
           <% else: %>
             <span class="post-comments-info" title="Комментарии">
               <i class="icon-comment"></i>
-              <%= @replycount %>
+              <span class="post-comments-count"><%= @replycount %></span>
             </span>
             <span class="post-recommendations-info" title="Рекомендации">
               <i class="icon-star"></i>
-              <%= @recommendations.length %>
+              <span class="post-recommendations-count"><%= @recommendations.length %></span>
             </span>
           <% end %>
         </div>

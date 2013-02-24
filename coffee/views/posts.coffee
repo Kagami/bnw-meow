@@ -30,6 +30,7 @@ define [
         @pageble = options.pageble
       else
         @pageble = true
+      @subscribeEvent "!ws:new_message", @onNewPost
 
     afterInitialize: ->
       super
@@ -62,11 +63,6 @@ define [
       height = $(document).height()
       @fetch() if height - position < @SCROLL_THRESHOLD
 
-    ###
-    # Websocket callbacks.
-    ###
-
-    onNewMessage: (postData) ->
-      # TODO: Add with special styles.
+    onNewPost: (postData) ->
       post = new Post postData
       @collection.add post, at: 0
