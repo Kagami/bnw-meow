@@ -36,8 +36,6 @@ define [
     subscribe: (e) ->
       e.preventDefault()
       return unless utils.isLogged()
-      # XXX: Currently there is no ability to know if we've
-      # subscribed on the post or not.
       data = message: @model.get "id"
       func =  if @model.get "subscribed"
         "subscriptions/del"

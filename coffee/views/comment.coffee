@@ -12,6 +12,7 @@ define [
     events:
       "click .comment-delete": "toggleMark"
       "click .comment-id": "moveCommentForm"
+      "click .comment-reply-to": "selectComment"
 
     initialize: (options) ->
       super options
@@ -50,3 +51,8 @@ define [
       hide = =>
         @firstDiv.fadeOut("slow", => @dispose())
       setTimeout hide, 3000
+
+    selectComment: ->
+      id = @model.getAttributes().replyCommentId
+      $(".comment-selected").removeClass("comment-selected")
+      $("##{id}").addClass("comment-selected")

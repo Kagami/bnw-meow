@@ -163,3 +163,11 @@ img.avatar {
 .comment-selected {
     border: 1px solid #D5D5D5;
 }
+
+.comment-id {
+    margin-right: 10px;
+}
+
+.comment-reply-to:hover {
+    text-decoration: none;
+}

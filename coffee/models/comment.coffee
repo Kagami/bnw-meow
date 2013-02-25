@@ -16,5 +16,6 @@ define [
 
     getAttributes: ->
       commentId = @get("id").split("/")[1]
+      replyCommentId = @get("replyto")?.split("/")[1]
       canDelete = utils.getUser() in [@get("user"), @postUser]
-      _({commentId, canDelete}).extend @attributes
+      _({commentId, canDelete, replyCommentId}).extend @attributes
