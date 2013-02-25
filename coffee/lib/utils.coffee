@@ -65,6 +65,9 @@ define [
     setCookie: (key, value) ->
       $.cookie key, value, expires: 365, path: "/"
 
+    removeCookie: (key) ->
+      $.removeCookie key, path: "/"
+
     getLoginKey: ->
       $.cookie "login"
 
@@ -75,8 +78,8 @@ define [
       @setCookie "user", user
 
     clearAuth: ->
-      $.removeCookie "login"
-      $.removeCookie "user"
+      @removeCookie "login"
+      @removeCookie "user"
 
     # Global vars emulation. Doesn't seems like a perfect solution
     # but it works.
