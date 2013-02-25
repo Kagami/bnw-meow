@@ -79,6 +79,10 @@ hr {
     color: #2D6987;
 }
 
+div.selected {
+    border: 1px solid #D5D5D5;
+}
+
 /* Application-related */
 
 .post, .comment, #comment-form {
@@ -158,10 +162,6 @@ img.avatar {
 
 .post-deleted, .comment-deleted {
     background-color: #FFAAAA;
-}
-
-.comment-selected {
-    border: 1px solid #D5D5D5;
 }
 
 .comment-id {

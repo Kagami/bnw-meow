@@ -99,3 +99,11 @@ define [
     now: ->
       ###Return current formatted time.###
       moment().format("HH:mm:ss")
+
+    scrollToAnchor: (id = window.location.hash) ->
+      el = $(id)
+      if el.length
+        # 41px — compensate for navbar
+        $(".selected").removeClass("selected")
+        el.addClass("selected")
+        $("html, body").scrollTop(el.offset().top - 41)

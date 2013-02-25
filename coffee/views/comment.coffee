@@ -52,7 +52,8 @@ define [
         @firstDiv.fadeOut("slow", => @dispose())
       setTimeout hide, 3000
 
-    selectComment: ->
+    selectComment: (e) ->
+      e.preventDefault()
       id = @model.getAttributes().replyCommentId
-      $(".comment-selected").removeClass("comment-selected")
-      $("##{id}").addClass("comment-selected")
+      window.location.hash = id
+      utils.scrollToAnchor "##{id}"
