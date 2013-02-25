@@ -15,7 +15,7 @@ define [
     container: "#main"
     itemView: PostView
 
-    SCROLL_THRESHOLD: 100
+    SCROLL_THRESHOLD: 300
 
     getView: (model) ->
       new @itemView model: model, dialog: @subview "dialog"
