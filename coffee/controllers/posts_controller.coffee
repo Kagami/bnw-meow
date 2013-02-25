@@ -28,6 +28,8 @@ define [
       else if params.tag?
         query.tag = params.tag
         params.title = "*#{params.tag}"
+      else
+        query = {}
 
       @collection = new Posts [], id: params.id, query: query
       @view = new PostsView collection: @collection, pageble: params.pageble
