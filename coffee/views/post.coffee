@@ -74,4 +74,22 @@ define [
       @$(".post-comments-count").text(data.num)
 
     updRecommendations: (data) ->
+      @model.set "recommendations", data.recommendations
+      if @singlePost
+        # It's ok to rerender full post since .post-footer2 must be
+        # completely rerendered.
+        @render()
+        return
+
+      # Actually we could rerender on any small websocket event but
+      # we do some micro-optimizations.
+      # TODO: Or we may fuck it up.
       @$(".post-recommendations-count").text(data.num)
+      attrs = @model.getAttributes()
+      i = @$(".post-recommendations-info")\
+          .attr("title", attrs.recommendationsTitle).children("i")
+      if utils.isLogged()
+        if attrs.recommended
+          i.addClass("icon-marked")
+        else
+          i.removeClass("icon-marked")
