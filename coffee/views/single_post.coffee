@@ -18,7 +18,6 @@ define [
     container: "#main"
     template: template
     autoRender: true
-    wsAutoInit: true
     events:
       "click #comment-form-submit": "comment"
       "click #comment-form-reset": "resetCommentForm"

@@ -11,7 +11,7 @@ define [
 
     constructor: (attributes, options) ->
       super attributes, options
-      @query = message: options.post, replies: true
+      @query = message: options.post, replies: 1, use_bl: 1
       @replies = new Comments()
 
     fetch: ->
