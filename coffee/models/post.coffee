@@ -23,4 +23,9 @@ define [
         "Рекомендовать"
       else
         "Рекомендации"
-      _(@attributes).extend {recommendationsTitle}
+
+      recommended = utils.getUser() in @get "recommendations"
+
+      canDelete = utils.getUser() == @get "user"
+
+      _({recommendationsTitle, recommended, canDelete}).extend @attributes

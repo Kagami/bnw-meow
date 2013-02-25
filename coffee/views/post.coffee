@@ -31,17 +31,7 @@ define [
       @firstDiv = @$el.children(0)
 
     templateData: ->
-      isRecommended: @isRecommended()
-      canDelete: @canDelete()
       singlePost: @singlePost
-
-    isRecommended: ->
-      return unless utils.isLogged()
-      utils.getUser() in @model.get("recommendations")
-
-    canDelete: ->
-      return unless utils.isLogged()
-      utils.getUser() == @model.get "user"
 
     subscribe: (e) ->
       e.preventDefault()
@@ -55,7 +45,7 @@ define [
       e.preventDefault()
       return unless utils.isLogged()
       data = message: @model.get "id"
-      data.unrecommend = true if @isRecommended()
+      data.unrecommend = true if @model.getAttributes().recommended
       utils.post "recommend", data, true
 
     toggleMark: (e) ->

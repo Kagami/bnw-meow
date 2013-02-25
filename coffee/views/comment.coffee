@@ -24,13 +24,6 @@ define [
       super
       @firstDiv = @$el.children(0)
 
-    templateData: ->
-      canDelete: @canDelete()
-
-    canDelete: ->
-      return unless utils.isLogged()
-      utils.getUser() in [@model.get("user"), @model.postUser]
-
     toggleMark: (e) ->
       e.preventDefault()
       return unless utils.isLogged()

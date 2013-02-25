@@ -45,7 +45,7 @@
               <span class="post-comments-count"><%= @replycount %></span>
             </a>
             <a class="post-recommendations-info" title="<%= @recommendationsTitle %>" href="#">
-              <i class="<% if @isRecommended: %>icon-marked <% end %>icon-star"></i>
+              <i class="<% if @recommended: %>icon-marked <% end %>icon-star"></i>
               <span class="post-recommendations-count"><%= @recommendations.length %></span>
             </a>
           <% else: %>

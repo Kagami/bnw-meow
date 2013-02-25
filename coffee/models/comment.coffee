@@ -1,7 +1,8 @@
 define [
   "underscore"
   "models/base/model"
-], (_, Model)  ->
+  "lib/utils"
+], (_, Model, utils)  ->
   "use strict"
 
   class Comment extends Model
@@ -15,4 +16,5 @@ define [
 
     getAttributes: ->
       commentId = @get("id").split("/")[1]
-      _({commentId}).extend @attributes
+      canDelete = utils.getUser() in [@get("user"), @postUser]
+      _({commentId, canDelete}).extend @attributes
