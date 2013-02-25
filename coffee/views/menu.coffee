@@ -21,6 +21,7 @@ define [
 
     initialize: ->
       super
+      @subscribeEvent "!view:menu:render", @render
       @subscribeEvent "!router:changeURL", (url) ->
         $("#common-menu>li").removeClass("active")
         a = $("#common-menu a[href='/#{url}']")

@@ -1,12 +1,10 @@
 define [
   "chaplin"
   "views/menu"
-  "lib/utils"
-], (Chaplin, MenuView, utils) ->
+], (Chaplin, MenuView) ->
   "use strict"
 
   class MenuController extends Chaplin.Controller
 
     initialize: ->
-      menuView = new MenuView()
-      utils.setGlobal "menuView", menuView
+      @view = new MenuView()

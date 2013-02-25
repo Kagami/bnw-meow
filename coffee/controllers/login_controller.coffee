@@ -18,6 +18,5 @@ define [
       d.fail ->
         utils.clearAuth()
       d.always ->
-        # FIXME: Use pub-sub.
-        utils.getGlobal("menuView").render()
+        Chaplin.mediator.publish "!view:menu:render"
         utils.gotoUrl "/"

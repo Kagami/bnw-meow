@@ -81,15 +81,6 @@ define [
       @removeCookie "login"
       @removeCookie "user"
 
-    # Global vars emulation. Doesn't seems like a perfect solution
-    # but it works.
-
-    getGlobal: (key) ->
-      window.MEOW_GLOBALS?[key]
-
-    setGlobal: (key, value) ->
-      window.MEOW_GLOBALS ?= {}
-      window.MEOW_GLOBALS[key] = value
 
     pluralForm: (n, [p1, p2, p5]) ->
       _pluralForm = ->
