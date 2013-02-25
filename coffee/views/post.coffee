@@ -36,12 +36,20 @@ define [
     subscribe: (e) ->
       e.preventDefault()
       return unless utils.isLogged()
+
       data = message: @model.get "id"
-      func =  if @model.get "subscribed"
-        "subscriptions/del"
-      else
-        "subscriptions/add"
+      subscribed = not @model.get "subscribed"
+      @model.set "subscribed", subscribed
+      func = if subscribed then "subscriptions/add" else "subscriptions/del"
       utils.post func, data, true
+
+      if utils.isLogged()
+        title = if subscribed then "Отписаться" else "Подписаться"
+        i = @$(".post-comments-info").attr("title", title).children("i")
+        if subscribed
+          i.addClass("icon-marked")
+        else
+          i.removeClass("icon-marked")
 
     recommend: (e) ->
       e.preventDefault()
