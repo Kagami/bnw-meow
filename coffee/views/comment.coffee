@@ -34,7 +34,7 @@ define [
       return unless utils.isLogged()
       e.preventDefault()
       form = $("#comment-form").css("margin-left", "30px")
-      @$el.after(form)
+      @firstDiv.after(form)
       id ?= @model.getAttributes().commentId
       $("#comment-form-reply-to").val(id)
       $("#comment-form-text").focus()
