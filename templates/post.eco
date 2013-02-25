@@ -40,8 +40,8 @@
             #<%= @id %>
           </a>
           <% if @isLogged(): %>
-            <a class="post-comments-info" title="Подписаться" href="#">
-              <i class="icon-comment"></i>
+            <a class="post-comments-info" title="<% if @subscribed: %>Отписаться<% else: %>Подписаться<% end %>" href="#">
+              <i class="<% if @subscribed: %>icon-marked <% end %>icon-comment"></i>
               <span class="post-comments-count"><%= @replycount %></span>
             </a>
             <a class="post-recommendations-info" title="<%= @recommendationsTitle %>" href="#">

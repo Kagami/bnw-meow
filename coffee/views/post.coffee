@@ -39,7 +39,11 @@ define [
       # XXX: Currently there is no ability to know if we've
       # subscribed on the post or not.
       data = message: @model.get "id"
-      utils.post "subscriptions/add", data, true
+      func =  if @model.get "subscribed"
+        "subscriptions/del"
+      else
+        "subscriptions/add"
+      utils.post func, data, true
 
     recommend: (e) ->
       e.preventDefault()
