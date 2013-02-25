@@ -20,3 +20,5 @@ define [
         @replies.reset data.replies, postUser: @get "user"
 
     destroy: Post::destroy
+
+    getAttributes: Post::getAttributes

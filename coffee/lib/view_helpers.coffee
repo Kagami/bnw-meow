@@ -23,9 +23,9 @@ define [
     formatDateLong: (date) ->
       moment.unix(date).format("YYYY-MM-DD HH:mm:ss")
 
-    formatPostTitle: (text) ->
-      if text.length > 50
-        text[...50] + "…"
+    truncate: (text, maxlength = 50) ->
+      if text.length > maxlength
+        text[...maxlength].concat "…"
       else
         text
 
