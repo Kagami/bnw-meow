@@ -55,7 +55,9 @@ define [
         # Fix position on the page
         commentDiv = @$(window.location.hash)
         if commentDiv.length
+          # 41px — compensate for navbar
           $("html, body").scrollTop(commentDiv.offset().top - 41)
+          commentDiv.addClass("comment-selected")
 
     comment: ->
       return unless utils.isLogged()

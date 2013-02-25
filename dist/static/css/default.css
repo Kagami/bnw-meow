@@ -159,3 +159,7 @@ img.avatar {
 .post-deleted, .comment-deleted {
     background-color: #FFAAAA;
 }
+
+.comment-selected {
+    border: 1px solid #D5D5D5;
+}
