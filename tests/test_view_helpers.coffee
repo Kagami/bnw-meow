@@ -77,8 +77,11 @@ Desu desu"""
 http://example.com/a/b/c
 http://example.com/new-cool-url
 """
-        output = '<a href="http://example.com/a/b/c">http://example.com/a/b/c</a><br />http://example.com/new-cool-url'
+        output = '<a href="http://example.com/a/b/c">http://example.com/a/b/c</a><br /><a href="http://example.com/new-cool-url">http://example.com/new-cool-url</a>'
         format(input).should.equal(output)
 
       it "should clip long urls", ->
         format("http://ru.wikipedia.org/wiki/Гиперинфляция#.D0.A0.D0.B5.D0.BA.D0.BE.D1.80.D0.B4.D0.BD.D1.8B.D0.B5_.D0.BF.D1.80.D0.B8.D0.BC.D0.B5.D1.80.D1.8B_.D0.B3.D0.B8.D0.BF.D0.B5.D1.80.D0.B8.D0.BD.D1.84.D0.BB.D1.8F.D1.86.D0.B8.D0.B8").should.equal('<a href="http://ru.wikipedia.org/wiki/Гиперинфляция#.D0.A0.D0.B5.D0.BA.D0.BE.D1.80.D0.B4.D0.BD.D1.8B.D0.B5_.D0.BF.D1.80.D0.B8.D0.BC.D0.B5.D1.80.D1.8B_.D0.B3.D0.B8.D0.BF.D0.B5.D1.80.D0.B8.D0.BD.D1.84.D0.BB.D1.8F.D1.86.D0.B8.D0.B8">http://ru.wikipedia.org/wiki/Гиперинфляц.....0.B8.D0.B8</a>')
+
+      it "should parse urls inside lines", ->
+        format("url: http://example.com/url <-\nhttp://url/ another url").should.equal('url: <a href="http://example.com/url">http://example.com/url</a> &lt;-<br /><a href="http://url/">http://url/</a> another url')

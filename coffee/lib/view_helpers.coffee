@@ -58,7 +58,7 @@ define [
         [/\[\[\s*(.+?)\s*\|\s*(.+?)\s*\]\]/g
          (_m, url, link_text) -> "<a href=\"#{url}\">#{link_text}</a>"]
         # URL
-        [/(^|&lt;|[\(\[])(https?:\/\/[^\]\)\s]+)/g,
+        [/(^|&lt;|[\s\(\[])(https?:\/\/[^\]\)\s]+)/g,
          (_m, ch, url) =>
             # XXX: Don't know how to write regexp for it.
             # Since we do text escaping before additional
