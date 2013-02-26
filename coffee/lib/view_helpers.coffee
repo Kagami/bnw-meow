@@ -30,8 +30,8 @@ define [
         text
 
     clipUrl: (url) ->
-      if url.length > 55
-          url = url[...40] + "....." + url[-10..]
+      if url.length > 85
+          url = url[...60] + "....." + url[-20..]
       url
 
     escape2: (html) ->
