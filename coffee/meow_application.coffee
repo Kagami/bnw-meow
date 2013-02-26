@@ -4,9 +4,9 @@ define [
   "moment"
   "moment_ru"
   "chaplin"
-  "controllers/menu_controller"
+  "controllers/header_controller"
   "routes"
-], ($, _, moment, moment_ru, Chaplin, MenuController, routes) ->
+], ($, _, moment, moment_ru, Chaplin, HeaderController, routes) ->
   "use strict"
 
   class MeowApplication extends Chaplin.Application
@@ -44,7 +44,7 @@ define [
 
     # Instantiate common controllers
     initControllers: ->
-      new MenuController()
+      new HeaderController()
 
     # Create additional mediator properties
     initMediator: ->

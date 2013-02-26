@@ -18,5 +18,5 @@ define [
       d.fail ->
         utils.clearAuth()
       d.always ->
-        Chaplin.mediator.publish "!view:menu:render"
+        Chaplin.mediator.publish "!view:header:render"
         utils.gotoUrl "/"

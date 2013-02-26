@@ -1,14 +1,15 @@
 define [
   "jquery"
+  "tinycon"
   "chaplin"
   "views/base/view"
   "views/dialog_new_post"
   "lib/utils"
-  "templates/menu"
-], ($, Chaplin, View, DialogNewPostView, utils, template) ->
+  "templates/header"
+], ($, Tinycon, Chaplin, View, DialogNewPostView, utils, template) ->
   "use strict"
 
-  class MenuView extends View
+  class HeaderView extends View
 
     el: "#menu"
     template: template
@@ -21,7 +22,12 @@ define [
 
     initialize: ->
       super
-      @subscribeEvent "!view:menu:render", @render
+      #: How many events wait for the user attention
+      @eventsCounter = 0
+      @subscribeEvent "!ws:new_message", @incCounter
+      @subscribeEvent "!ws:new_comment", @incCounter
+      $(window).focus => @resetCounter()
+      @subscribeEvent "!view:header:render", @render
       @subscribeEvent "!router:changeURL", (url) ->
         $("#common-menu>li").removeClass("active")
         a = $("#common-menu a[href='/#{url}']")
@@ -54,3 +60,21 @@ define [
 
     ignore: (e) ->
       e.preventDefault()
+
+    # Favicon actions
+
+    incCounter: ->
+      @eventsCounter++
+      @updateCounter()
+
+    resetCounter: ->
+      @eventsCounter = 0
+      @updateCounter true
+
+    updateCounter: (force = false) ->
+      # XXX: Focus activity determination may not working in Chrome
+      # and Opera. See browser compatibility section at:
+      # https://developer.mozilla.org/en-US/docs/DOM/document.hasFocus
+      if force or not document.hasFocus()
+        counter = if @eventsCounter > 99 then 99 else @eventsCounter
+        Tinycon.setBubble counter

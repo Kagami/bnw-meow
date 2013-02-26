@@ -11,6 +11,7 @@ config =
     moment: "vendor/moment"
     moment_ru: "vendor/moment_ru"
     bootstrap: "vendor/bootstrap"
+    tinycon: "vendor/tinycon"
   shim:
     underscore:
       exports: "_"
@@ -19,6 +20,8 @@ config =
       exports: "Backbone"
     bootstrap:
       deps: ["jquery"]
+    tinycon:
+      exports: "Tinycon"
   deps: ["bootstrap", "cookie"]
   urlArgs: "v=" + (new Date()).getTime()
 
