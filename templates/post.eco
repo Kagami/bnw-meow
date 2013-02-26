@@ -24,19 +24,23 @@
         <div class="post-tags">
           <% if @tags.length: %>
             <i class="icon-tags"></i>
+            <% i = 1 %>
             <%for tag in @tags: %>
-              <a class="post-tag" href="/t/<%= encodeURIComponent tag %>"><%= tag %></a>
+              <a class="post-tag" href="/t/<%= encodeURIComponent tag %>"><%= tag %></a><% if i < @tags.length: %>,<% end %>
+              <% i++ %>
             <% end %>
           <% end %>
           <% if @clubs.length: %>
             <i class="icon-group"></i>
+            <% i = 1 %>
             <%for club in @clubs: %>
-              <a class="post-club" href="/c/<%= encodeURIComponent club %>"><%= club %></a>
+              <a class="post-club" href="/c/<%= encodeURIComponent club %>"><%= club %></a><% if i < @clubs.length: %>,<% end %>
+              <% i++ %>
             <% end %>
           <% end %>
         </div>
         <div class="post-info">
-          <a class="post-id label label-reset" href="/p/<%= @id %>" <% if @singlePost and @isLogged(): %>title="Нажмите чтобы комментировать"<% end %>>
+          <a class="post-id label label-reset" href="/p/<%= @id %>" <% if @singlePost and @isLogged(): %>title="Нажмите чтобы прокомментировать"<% end %>>
             #<%= @id %>
           </a>
           <% if @isLogged(): %>

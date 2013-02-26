@@ -21,7 +21,7 @@
 
       <!-- Footer -->
       <div class="comment-footer">
-        <a class="comment-id label label-reset" href="#<%= @commentId %>" <% if @isLogged(): %>title="Нажмите чтобы комментировать"<% end %>>#<%= @id %></a>
+        <a class="comment-id label label-reset" href="#<%= @commentId %>" <% if @isLogged(): %>title="Нажмите чтобы прокомментировать"<% end %>>#<%= @id %></a>
         <% if @replyto: %>
         <a class="comment-reply-to label label-reset" href="#<%= @replyCommentId %>" title="В ответ на #<%= @replyto %>">
           <i class="icon-caret-up"></i> <%= @replyCommentId %>
