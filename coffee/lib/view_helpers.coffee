@@ -44,9 +44,9 @@ define [
 
       textFormatters = [
         # Italic
-        [/\/\/(.+?)\/\//g, (_m, content) -> "<i>#{content}</i>"]
+        [/\/\/([^]+?)\/\//g, (_m, content) -> "<i>#{content}</i>"]
         # Bold
-        [/\*\*(.+?)\*\*/g, (_m, content) -> "<b>#{content}</b>"]
+        [/\*\*([^]+?)\*\*/g, (_m, content) -> "<b>#{content}</b>"]
         # Named link
         [/\[\[\s*(.+?)\s*\|\s*(.+?)\s*\]\]/g
          (_m, url, link_text) -> "<a href=\"#{url}\">#{link_text}</a>"]
