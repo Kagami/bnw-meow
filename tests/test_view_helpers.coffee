@@ -85,3 +85,21 @@ http://example.com/new-cool-url
 
       it "should parse urls inside lines", ->
         format("url: http://example.com/url <-\nhttp://url/ another url").should.equal('url: <a href="http://example.com/url">http://example.com/url</a> &lt;-<br /><a href="http://url/">http://url/</a> another url')
+
+    describe "Code", ->
+      it "should parse code block without language specified", ->
+        format("{{{test nyak}}}").should.equal("<pre><code>test nyak</code></pre>")
+
+      it "should parse code block with language specified", ->
+        input = """
+Pretty coffeescript piece of code:
+
+{{{#!coffeescript
+          i = Math.min _(indexes).without(-1)...
+          [url, tail] = [url[...i], url[i..]]
+          urlText = @clipUrl url
+}}}
+
+"""
+        output = ''
+        format(input).should.equal(output)

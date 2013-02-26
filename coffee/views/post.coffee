@@ -1,9 +1,10 @@
 define [
   "jquery"
+  "highlight"
   "views/base/refresh_date"
   "lib/utils"
   "templates/post"
-], ($, RefreshDateView, utils, template) ->
+], ($, hljs, RefreshDateView, utils, template) ->
   "use strict"
 
   class PostView extends RefreshDateView
@@ -29,6 +30,8 @@ define [
     afterRender: ->
       super
       @firstDiv = @$el.children(0)
+      @$("pre code").each (i, e) ->
+        hljs.highlightBlock e
 
     templateData: ->
       singlePost: @singlePost

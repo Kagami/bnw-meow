@@ -48,42 +48,50 @@ define [
       ###
 
       textFormatters = [
+        # Code
+        [/{{{(?:#!(\w+)\s)?([^]+?)}}}/, (_m, lang, code) ->
+          klass = if lang then " class=\"language-#{lang}\"" else ""
+          "<pre><code#{klass}>#{code}</code></pre>"
+        ]
         # Italic
-        [/(^|\s)\/\/([^]+?)\/\/(\s|$)/g,
-         (_m, s1, content, s2) -> "#{s1}<i>#{content}</i>#{s2}"]
+        [/(^|\s)\/\/([^]+?)\/\/(\s|$)/g, (_m, s1, content, s2) ->
+          "#{s1}<i>#{content}</i>#{s2}"
+        ]
         # Bold
-        [/(^|\s)\*\*([^]+?)\*\*(\s|$)/g,
-         (_m, s1, content, s2) -> "#{s1}<b>#{content}</b>#{s2}"]
+        [/(^|\s)\*\*([^]+?)\*\*(\s|$)/g, (_m, s1, content, s2) ->
+          "#{s1}<b>#{content}</b>#{s2}"
+        ]
         # Named link
-        [/\[\[\s*(.+?)\s*\|\s*(.+?)\s*\]\]/g
-         (_m, url, link_text) -> "<a href=\"#{url}\">#{link_text}</a>"]
+        [/\[\[\s*(.+?)\s*\|\s*(.+?)\s*\]\]/g, (_m, url, link_text) ->
+          "<a href=\"#{url}\">#{link_text}</a>"
+        ]
         # URL
-        [/(^|&lt;|[\s\(\[])(https?:\/\/[^\]\)\s]+)/g,
-         (_m, ch, url) =>
-            # XXX: Don't know how to write regexp for it.
-            # Since we do text escaping before additional
-            # formatting.
-            indexes = [
-              url.indexOf "&gt;"
-              url.indexOf "&quot;"
-              url.indexOf "&apos;"
-            ]
-            if indexes == [-1, -1, -1]
-              urlText = @clipUrl url
-              "#{ch}<a href=\"#{url}\">#{urlText}</a>"
-            else
-              i = Math.min _(indexes).without(-1)...
-              [url, tail] = [url[...i], url[i..]]
-              urlText = @clipUrl url
-              "#{ch}<a href=\"#{url}\">#{urlText}</a>#{tail}"
+        [/(^|&lt;|[\s\(\[])(https?:\/\/[^\]\)\s]+)/g, (_m, ch, url) =>
+          # XXX: Don't know how to write regexp for it.
+          # Since we do text escaping before additional
+          # formatting.
+          indexes = [
+            url.indexOf "&gt;"
+            url.indexOf "&quot;"
+            url.indexOf "&apos;"
+          ]
+          if indexes == [-1, -1, -1]
+            urlText = @clipUrl url
+            "#{ch}<a href=\"#{url}\">#{urlText}</a>"
+          else
+            i = Math.min _(indexes).without(-1)...
+            [url, tail] = [url[...i], url[i..]]
+            urlText = @clipUrl url
+            "#{ch}<a href=\"#{url}\">#{urlText}</a>#{tail}"
         ]
         # User
-        [/(^|\s)@([-0-9A-Za-z_]+)/g
-         (_m, space, user) -> "#{space}<a href=\"/u/#{user}\">@#{user}</a>"]
+        [/(^|\s)@([-0-9A-Za-z_]+)/g, (_m, space, user) ->
+          "#{space}<a href=\"/u/#{user}\">@#{user}</a>"
+        ]
         # Post/comment link
-        [/(^|\s)#([0-9A-Za-z]+(?:\/[0-9A-Za-z]+)?)/g
-         (_m, space, link) ->
-           "#{space}<a href=\"/p/#{link.replace '/', '#'}\">##{link}</a>"]
+        [/(^|\s)#([0-9A-Za-z]+(?:\/[0-9A-Za-z]+)?)/g, (_m, space, link) ->
+          "#{space}<a href=\"/p/#{link.replace '/', '#'}\">##{link}</a>"
+        ]
         # Fix newlines
         [/\n/g, -> "<br />"]
       ]

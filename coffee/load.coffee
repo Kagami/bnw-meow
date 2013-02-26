@@ -12,6 +12,7 @@ config =
     moment_ru: "vendor/moment_ru"
     bootstrap: "vendor/bootstrap"
     tinycon: "vendor/tinycon"
+    highlight: "vendor/highlight"
   shim:
     underscore:
       exports: "_"

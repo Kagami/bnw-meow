@@ -47,6 +47,11 @@ hr {
     margin: 10px 0;
 }
 
+pre {
+    margin: 0;
+    padding: 0;
+}
+
 /* TODO: Should we use icon-spinned instead? */
 .preloader-bar {
     display: inline-block;
@@ -94,6 +99,10 @@ div.selected {
 
 img.avatar {
     width: 48px;
+}
+
+.post-body, .comment-body {
+    margin: 5px 0;
 }
 
 .post-footer, .post-footer a, .post-footer a:hover,
