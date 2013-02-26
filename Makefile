@@ -2,6 +2,7 @@ STATIC = dist/static
 INDEX_R = deb_dist/srv/bnw-meow
 STATIC_R = "$(INDEX_R)/static"
 VERSION = $(shell git rev-parse --short HEAD)
+REPORTER ?= spec
 .PHONY: coffee
 
 all: index coffee eco
@@ -13,6 +14,11 @@ install-deps:
 	# sudo apt-get install inotify-tools
 	sudo npm install -g coffee-script
 	npm install eco requirejs
+
+# Deps required only for testing. All deps in 'install-deps' target
+# required as well.
+install-test-deps:
+	sudo npm install -g mocha should
 
 config:
 	cp coffee/config.coffee.example coffee/config.coffee
@@ -63,3 +69,6 @@ clean:
 	# Clean all compiled js files
 	find $(STATIC)/js/ -mindepth 1 -maxdepth 1 ! -path '*/vendor' \
 		-exec rm -r '{}' \;
+
+test:
+	mocha tests/ --compilers coffee:coffee-script -r should -R $(REPORTER)
