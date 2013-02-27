@@ -9,8 +9,9 @@
     <link rel="stylesheet" type="text/css" href="/static/css/010_bootstrap.css?v=<#VERSION>" />
     <link rel="stylesheet" type="text/css" href="/static/css/020_font-awesome.css?v=<#VERSION>" />
     <link rel="stylesheet" type="text/css" href="/static/css/090_highlight-github.css?v=<#VERSION>" />
+    <link rel="stylesheet" type="text/css" href="/static/css/100_default.css?v=<#VERSION>" />
   <#endif>
-  <link rel="stylesheet" type="text/css" href="/static/css/100_default.css?v=<#VERSION>" />
+  <link rel="stylesheet" type="text/css" href="/static/css/default.css?v=<#VERSION>" />
 
   <#ifdef RELEASE>
     <script src="/static/js/meow.js?v=<#VERSION>"></script>
