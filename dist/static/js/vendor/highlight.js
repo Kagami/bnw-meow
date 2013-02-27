@@ -3078,7 +3078,7 @@ hljs.LANGUAGES['axapta'] = function(hljs) {
       'break new catch byte super case short default double public try this switch ' +
       'continue reverse firstfast firstonly forupdate nofetch sum avg minof maxof count ' +
       'order group by asc desc index hint like dispaly edit client server ttsbegin ' +
-      'ttscommit str real date container anytype common div mod',
+      'ttscommit str real date container_ anytype common div mod',
     contains: [
       hljs.C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE,
@@ -3730,7 +3730,7 @@ hljs.LANGUAGES['haskell'] = function(hljs) {
     relevance: 0
   };
   var CONTAINER = {
-    className: 'container',
+    className: 'container_',
     begin: '\\(', end: '\\)',
     illegal: '"',
     contains: [
@@ -3739,7 +3739,7 @@ hljs.LANGUAGES['haskell'] = function(hljs) {
     ]
   };
   var CONTAINER2 = {
-    className: 'container',
+    className: 'container_',
     begin: '{', end: '}',
     contains: CONTAINER.contains
   }
@@ -4764,7 +4764,7 @@ hljs.LANGUAGES['mel'] = function(hljs) {
       'colorSliderGrp columnLayout commandEcho commandLine commandPort compactHairSystem ' +
       'componentEditor compositingInterop computePolysetVolume condition cone confirmDialog ' +
       'connectAttr connectControl connectDynamic connectJoint connectionInfo constrain ' +
-      'constrainValue constructionHistory container containsMultibyte contextInfo control ' +
+      'constrainValue constructionHistory container_ containsMultibyte contextInfo control ' +
       'convertFromOldLayers convertIffToPsd convertLightmap convertSolidTx convertTessellation ' +
       'convertUnit copyArray copyFlexor copyKey copySkinWeights cos cpButton cpCache ' +
       'cpClothSet cpCollision cpConstraint cpConvClothToMesh cpForces cpGetSolverAttr cpPanel ' +
