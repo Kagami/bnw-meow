@@ -14,6 +14,12 @@ define [
       path = "" if path == "/"
       "#{config.BNW_WS_PROTOCOL}://#{config.BNW_WS_HOST}#{path}/ws?v=2"
 
+    isLogged: ->
+      $.cookie("login")?
+
+    getUser: ->
+      $.cookie "user"
+
     renderTemplate: (templateFunc, params = {}) =>
       templateFunc _(params).extend(this)
 
@@ -47,12 +53,13 @@ define [
       <https://github.com/stiletto/bnw/blob/master/bnw_web/linkify.py>
       ###
 
-      textFormatters = [
-        # Code
-        [/{{{(?:#!(\w+)\s)?([^]+?)}}}/, (_m, lang, code) ->
+      codeFormatter =
+        [/{{{(?:#!(\w+)\s|\n)?([^]+?)(?:\n)?}}}/, (_m, lang, code) ->
           klass = if lang then " class=\"language-#{lang}\"" else ""
           "<pre><code#{klass}>#{code}</code></pre>"
         ]
+
+      textFormatters = [
         # Italic
         [/(^|\s)\/\/([^]+?)\/\/(\s|$)/g, (_m, s1, content, s2) ->
           "#{s1}<i>#{content}</i>#{s2}"
@@ -99,13 +106,25 @@ define [
       # Very-very important line, don't ever try to touch it
       text = @escape2 raw
 
-      # Go throw all defined formatters.
-      _(textFormatters).reduce (tmpText, [regexp, handler]) ->
-        tmpText.replace regexp, handler
-      , text
+      # Format block of text with formatters
+      format = (block) ->
+        _(textFormatters).reduce (tmpText, [regexp, handler]) ->
+          tmpText.replace regexp, handler
+        , block
 
-    isLogged: ->
-      $.cookie("login")?
-
-    getUser: ->
-      $.cookie "user"
+      # XXX: Special case for code block. It's better to use normal
+      # parser but this formatting style will be deprecated soon so
+      # we don't waste our time on it.
+      # Go throught text and try to match code blocks. On each code
+      # block do code formatter replace. On others do text formatting.
+      result = []
+      while text.length
+        match = text.match codeFormatter[0]
+        if match
+          result.push format text[...match.index]
+          result.push codeFormatter[1] match...
+          text = text[match.index + match[0].length..]
+        else
+          result.push format text
+          break
+      result.join ""

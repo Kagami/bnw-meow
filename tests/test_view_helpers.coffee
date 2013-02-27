@@ -101,5 +101,8 @@ Pretty coffeescript piece of code:
 }}}
 
 """
-        output = ''
+        output = """
+Pretty coffeescript piece of code:<br /><br /><pre><code class="language-coffeescript">          i = Math.min _(indexes).without(-1)...
+          [url, tail] = [url[...i], url[i..]]
+          urlText = @clipUrl url</code></pre><br />"""
         format(input).should.equal(output)
