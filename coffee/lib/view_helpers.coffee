@@ -54,7 +54,7 @@ define [
       ###
 
       codeFormatter =
-        [/{{{(?:#!(\w+)\s|\n)?([^]+?)(?:\n)?}}}/, (_m, lang, code) ->
+        [/{{{(?:#!(\w+)\s|\n)?([^]+?)(?:\n)?}}}\n?/, (_m, lang, code) ->
           klass = if lang then " class=\"language-#{lang}\"" else ""
           "<pre><code#{klass}>#{code}</code></pre>"
         ]
