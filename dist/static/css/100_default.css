@@ -12,6 +12,10 @@ html {
     overflow-y: scroll;
 }
 
+a {
+    outline: none !important;
+}
+
 #wrap {
     min-height: 100%;
     height: auto !important;
