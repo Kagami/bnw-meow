@@ -53,8 +53,8 @@ describe "Formatters", ->
       f("[nyan](xmpp:jid@jabber.org)").should.equal('<p><a href="xmpp:jid@jabber.org">nyan</a></p>\n')
 
     it "should not allow unknown protocols", ->
-      f("[test](javascript:test)").should.equal('<p>test</p>\n')
-      f("[test][id]\n\n[id]: javascript:test\n\n[test2](javascript:nyak)").should.equal('<p>test</p>\n<p>test2</p>\n')
+      f("[test](javascript:test)").should.equal('<p>javascript:test</p>\n')
+      f("[test][id]\n\n[id]: javascript:test\n\n[test2](javascript:nyak)").should.equal('<p>javascript:test</p>\n<p>javascript:nyak</p>\n')
 
 
   describe "MoinMoin", ->
