@@ -16,7 +16,7 @@
 
       <!-- Body -->
       <div class="comment-body">
-        <%- @formatText @text %>
+        <%- @formattedText %>
       </div>
 
       <!-- Footer -->

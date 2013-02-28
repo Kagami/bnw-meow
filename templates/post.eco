@@ -16,7 +16,7 @@
 
       <!-- Body -->
       <div class="post-body">
-        <%- @formatText @text %>
+        <%- @formattedText %>
       </div>
 
       <!-- Footer -->

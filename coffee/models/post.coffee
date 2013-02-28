@@ -2,7 +2,8 @@ define [
   "underscore"
   "models/base/model"
   "lib/utils"
-], (_, Model, utils)  ->
+  "lib/formatters"
+], (_, Model, utils, formatters)  ->
   "use strict"
 
   class Post extends Model
@@ -28,4 +29,9 @@ define [
 
       canDelete = utils.getUser() == @get "user"
 
-      _({recommendationsTitle, recommended, canDelete}).extend @attributes
+      formattedText = formatters.format @get("text"), @get("format")
+
+      _({recommendationsTitle,
+         recommended,
+         canDelete,
+         formattedText}).extend @attributes

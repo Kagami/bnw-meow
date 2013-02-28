@@ -16,6 +16,29 @@ a {
     outline: none !important;
 }
 
+/* Fix common margins */
+
+p, ul, ol, blockquote, pre, hr {
+    margin: 10px 0;
+}
+
+blockquote p {
+    font-size: 14px;
+}
+
+pre {
+    padding: 0;
+}
+
+/* Fix headers sizes */
+
+h1{font-size: 22px;}
+h2{font-size: 20px;}
+h3{font-size: 18px;}
+h4{font-size: 16px;}
+h5{font-size: 14px;}
+h6{font-size: 12px;}
+
 #wrap {
     min-height: 100%;
     height: auto !important;
@@ -45,15 +68,6 @@ a {
 .credit {
     /* Center text inside the footer */
     margin-top: 20px;
-}
-
-hr {
-    margin: 10px 0;
-}
-
-pre {
-    margin: 0;
-    padding: 0;
 }
 
 /* TODO: Should we use icon-spinned instead? */
@@ -106,7 +120,7 @@ img.avatar {
 }
 
 .post-body, .comment-body {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .post-footer, .post-footer a, .post-footer a:hover,

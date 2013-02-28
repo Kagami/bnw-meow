@@ -13,6 +13,7 @@ config =
     bootstrap: "vendor/bootstrap"
     tinycon: "vendor/tinycon"
     highlight: "vendor/highlight"
+    marked: "vendor/marked"
   shim:
     underscore:
       exports: "_"

@@ -2,7 +2,8 @@ define [
   "underscore"
   "models/base/model"
   "lib/utils"
-], (_, Model, utils)  ->
+  "lib/formatters"
+], (_, Model, utils, formatters)  ->
   "use strict"
 
   class Comment extends Model
@@ -18,4 +19,8 @@ define [
       commentId = @get("id").split("/")[1]
       replyCommentId = @get("replyto")?.split("/")[1]
       canDelete = utils.getUser() in [@get("user"), @postUser]
-      _({commentId, canDelete, replyCommentId}).extend @attributes
+      formattedText = formatters.format @get("text"), @get("format")
+      _({commentId,
+         replyCommentId,
+         canDelete,
+         formattedText}).extend @attributes

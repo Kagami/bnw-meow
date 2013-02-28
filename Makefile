@@ -71,4 +71,5 @@ clean:
 		-exec rm -r '{}' \;
 
 test:
-	mocha tests/ --compilers coffee:coffee-script -r should -R $(REPORTER)
+	mocha tests/ --compilers coffee:coffee-script -r should -R $(REPORTER) \
+		--ignore-leaks
