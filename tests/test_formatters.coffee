@@ -18,25 +18,51 @@ describe "Formatters", ->
     it "should not escape simple strings", ->
       formatters.escape2("kkk").should.equal("kkk")
 
-    it "must escape entities", ->
+    it "should escape entities", ->
       formatters.escape2("<tag1><abcd></tag1>")
                 .should.equal("&lt;tag1&gt;&lt;abcd&gt;&lt;/tag1&gt;")
       formatters.escape2("<http://test'\"&>")
-                .should.equal("&lt;http://test&apos;&quot;&amp;&gt;")
+                .should.equal("&lt;http://test&#39;&quot;&amp;&gt;")
 
   describe "Markdown", ->
     f = (text) ->
       formatters.format text
 
-    it "must escape", ->
+    it "should escape", ->
       f("Test <html><body><&\"'></body></html>").should.equal("<p>Test &lt;html&gt;&lt;body&gt;&lt;&amp;&quot;&#39;&gt;&lt;/body&gt;&lt;/html&gt;</p>\n")
+
+    it "should parse post links", ->
+      f("test: #0XYNTA").should.equal('<p>test: <a href="/p/0XYNTA">#0XYNTA</a></p>\n')
+      f("test: #0XYNTA/123").should.equal('<p>test: <a href="/p/0XYNTA#123">#0XYNTA/123</a></p>\n')
+      f("#0XY>NTA\n\nNyak").should.equal('<p><a href="/p/0XY">#0XY</a>&gt;NTA</p>\n<p>Nyak</p>\n')
+
+    it "should correctly parse urls with anchors", ->
+      f("http://example.com/#anchor").should.equal('<p><a href="http://example.com/#anchor">http://example.com/#anchor</a></p>\n')
+
+    it "should parse user links", ->
+      f("test: @nyashka").should.equal('<p>test: <a href="/u/nyashka">@nyashka</a></p>\n')
+      f("Look at this nyashka:\n\n@nyashka\n\nNyak").should.equal('<p>Look at this nyashka:</p>\n<p><a href="/u/nyashka">@nyashka</a></p>\n<p>Nyak</p>\n')
+      f("How about this:\n@super-&bad-nyashka\nNyak").should.equal('<p>How about this:<br><a href="/u/super-">@super-</a>&amp;bad-nyashka<br>Nyak</p>\n')
+
+    it "should parse images as links", ->
+      f("img: ![test](http://example.com/1.jpg)").should.equal('<p>img: <a href="http://example.com/1.jpg">test</a></p>\n')
+      f("img: ![]()").should.equal('<p>img: <a href=""></a></p>\n')
+      f("img: ![Test][id]\n[id]: http://example.com/1.gif").should.equal('<p>img: <a href="http://example.com/1.gif">Test</a></p>\n')
+
+    it "should allow whitelisted protocols", ->
+      f("[nyan](xmpp:jid@jabber.org)").should.equal('<p><a href="xmpp:jid@jabber.org">nyan</a></p>\n')
+
+    it "should not allow unknown protocols", ->
+      f("[test](javascript:test)").should.equal('<p>test</p>\n')
+      f("[test][id]\n\n[id]: javascript:test\n\n[test2](javascript:nyak)").should.equal('<p>test</p>\n<p>test2</p>\n')
+
 
   describe "MoinMoin", ->
     f = (text) ->
       formatters.format text, "moinmoin"
 
-    it "must escape", ->
-      f("Test <html><body><&\"'></body></html>").should.equal("Test &lt;html&gt;&lt;body&gt;&lt;&amp;&quot;&apos;&gt;&lt;/body&gt;&lt;/html&gt;")
+    it "should escape", ->
+      f("Test <html><body><&\"'></body></html>").should.equal("Test &lt;html&gt;&lt;body&gt;&lt;&amp;&quot;&#39;&gt;&lt;/body&gt;&lt;/html&gt;")
 
     describe "Italic", ->
       it "should f simple italic", ->

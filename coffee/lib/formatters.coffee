@@ -12,6 +12,24 @@ define [
 ], (_, marked) ->
   "use strict"
 
+  # XXX: Fix link renderer via monkey patching because it's the only
+  # way. Through issue with bad protocols should be fixed in upstream
+  # soon: <https://github.com/chjj/marked/issues/65>
+  # But not the images links! (We don't allow images.)
+  marked.InlineLexer::outputLink = (cap, link) ->
+    # Allow only whitelisted protocols
+    i = link.href.indexOf ":"
+    if i != -1
+      proto = link.href[...i]
+      if proto not in ["http", "https", "ftp", "git","gopher",
+                       "magnet", "mailto", "xmpp"]
+        return @output link.href
+    # Always generate links
+    "<a href=\"#{formatters.escape2 link.href}\"" +
+    (if link.title then "title=\"#{formatters.escape2 link.title}\"" else "") +
+    ">" + @output(cap[1]) +
+    "</a>"
+
   formatters =
 
     clipUrl: (url) ->
@@ -23,7 +41,7 @@ define [
       # We need our NIH function here because underscore do some crappy
       # things with slashes.
       html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;").replace(/'/g, "&apos;")
+          .replace(/"/g, "&quot;").replace(/'/g, "&#39;")
 
     format: (raw, format = "markdown") ->
       ###Format text using available formatters.
@@ -37,7 +55,27 @@ define [
       ###
       (if format == "moinmoin" then @moinmoin else @markdown).call this, raw
 
+    USER_LINK_FORMATTER:
+      [/(^|\s)@([-0-9A-Za-z_]+)/g
+      , (_m, space, user) ->
+        "#{space}<a href=\"/u/#{user}\">@#{user}</a>"
+      , (_m, space, user) ->
+        "#{space}[@#{user}](/u/#{user})"
+      ]
+
+    POST_LINK_FORMATTER:
+      [/(^|\s)#([0-9A-Za-z]+(?:\/[0-9A-Za-z]+)?)/g
+      , (_m, space, link) ->
+        "#{space}<a href=\"/p/#{link.replace '/', '#'}\">##{link}</a>"
+      , (_m, space, link) ->
+        "#{space}[##{link}](/p/#{link.replace '/', '#'})"
+      ]
+
     markdown: (raw) ->
+      # Apply some additional BnW formatters.
+      raw = raw.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
+      raw = raw.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
+      # Use marked render and hope it do well
       marked raw,
         pedantic: false,
         gfm: true,
@@ -92,14 +130,8 @@ define [
             urlText = @clipUrl url
             "#{ch}<a href=\"#{url}\">#{urlText}</a>#{tail}"
         ]
-        # User
-        [/(^|\s)@([-0-9A-Za-z_]+)/g, (_m, space, user) ->
-          "#{space}<a href=\"/u/#{user}\">@#{user}</a>"
-        ]
-        # Post/comment link
-        [/(^|\s)#([0-9A-Za-z]+(?:\/[0-9A-Za-z]+)?)/g, (_m, space, link) ->
-          "#{space}<a href=\"/p/#{link.replace '/', '#'}\">##{link}</a>"
-        ]
+        @USER_LINK_FORMATTER
+        @POST_LINK_FORMATTER
         # Fix newlines
         [/\n/g, -> "<br />"]
       ]
