@@ -18,16 +18,26 @@ a {
 
 /* Fix common margins */
 
-p, ul, ol, blockquote, pre, hr {
+p, blockquote, pre, hr {
     margin: 10px 0;
+}
+
+.media-body ul, .media-body ol {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 blockquote p {
     font-size: 14px;
+    line-height: 20px;
 }
 
 pre {
     padding: 0;
+}
+
+blockquote {
+    color: #777777;
 }
 
 /* Fix headers sizes */
