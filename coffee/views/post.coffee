@@ -20,6 +20,7 @@ define [
       super options
       @dialog = options.dialog
       @singlePost = options?.singlePost
+      @templateData = pageUser: options.pageUser
       # Subscribe to websocket events
       @subscribeEvent "!ws:new_message:#{@model.get 'id'}", @onAdd
       @subscribeEvent "!ws:del_message:#{@model.get 'id'}", @onDel

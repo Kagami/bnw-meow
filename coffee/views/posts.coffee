@@ -18,7 +18,10 @@ define [
     SCROLL_THRESHOLD: 300
 
     getView: (model) ->
-      new @itemView model: model, dialog: @subview "dialog"
+      new @itemView
+        model: model
+        dialog: @subview "dialog"
+        pageUser: @pageUser
 
     initialize: (options) ->
       super options
@@ -26,6 +29,7 @@ define [
         @pageble = options.pageble
       else
         @pageble = true
+      @pageUser = options.pageUser
       dialog = new DialogDeleteView()
       @subview "dialog", dialog
       @fetch(true).done =>

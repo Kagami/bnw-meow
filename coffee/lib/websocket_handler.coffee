@@ -1,7 +1,8 @@
 define [
   "underscore"
+  "config"
   "lib/utils"
-], (_, utils) ->
+], (_, config, utils) ->
   "use strict"
 
   WebSocketHandler =
@@ -17,18 +18,33 @@ define [
     _wsTries: 0
 
     isWsAvailable: ->
+      path = window.location.pathname
+      cut = path[...3]
       _.all [
         WebSocket?
-        window.location.pathname[...3] in ["/", "/u/", "/p/"]
+        _.any [
+          cut == "/"  # main
+          # TODO: Allow websockets on urls like /u/user/t/tag
+          # It will require some additional work like determine
+          # does the added post tags meet the criteria of the
+          # current tag, fixing getBnwWsUrl and so on.
+          cut == "/u/" and path.indexOf("/t/") == -1  # user page
+          cut == "/p/"  # post page
+        ]
       ]
+
+    getBnwWsUrl: ->
+      path = window.location.pathname
+      path = "" if path == "/"
+      "#{config.BNW_WS_PROTOCOL}://#{config.BNW_WS_HOST}#{path}/ws?v=2"
 
     initWebSocket: ->
       return unless @isWsAvailable()
-      @wsUrl = utils.bnwWsUrl()
-      @ws = new WebSocket @wsUrl
+      wsUrl = @getBnwWsUrl()
+      @ws = new WebSocket wsUrl
 
       @ws.onopen = (e) =>
-        msg = "[#{utils.now()}] Вебсокет #{@wsUrl} открыт"
+        msg = "[#{utils.now()}] Вебсокет #{wsUrl} открыт"
         console.info msg
         # Let it to fail one time without notice
         if @_wsTries > 1
@@ -36,7 +52,7 @@ define [
         @_wsTries = 0
 
       @ws.onclose = (e) =>
-        msg = "[#{utils.now()}] Вебсокет #{@wsUrl} закрыт"
+        msg = "[#{utils.now()}] Вебсокет #{wsUrl} закрыт"
         console.info msg
         return if @disposed
         if @_wsTries == 1

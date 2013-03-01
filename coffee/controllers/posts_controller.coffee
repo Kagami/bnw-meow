@@ -24,6 +24,9 @@ define [
         query.tag = params.tag if params.tag?
         params.title = "@#{params.user}"
         breadcrumbs = [["/u/#{params.user}", "user", params.user]]
+        if params.tag?
+          breadcrumbs.push ["/u/#{params.user}/t/#{params.tag}", "tag",
+                            params.tag]
       else if params.club?
         query.club = params.club
         params.title = "!#{params.club}"
@@ -36,6 +39,9 @@ define [
         breadcrumbs = []
 
       @collection = new Posts [], id: params.id, query: query
-      @view = new PostsView collection: @collection, pageble: params.pageble
+      @view = new PostsView
+        collection: @collection
+        pageble: params.pageble
+        pageUser: params.user
       @adjustTitle params.title
       HeaderView::updateBreadcrumbs breadcrumbs

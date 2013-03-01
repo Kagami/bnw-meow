@@ -1,7 +1,7 @@
 <div id="<%= @commentId %>" class="comment">
   <div class="media">
     <div class="avatar pull-left">
-      <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
+      <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @getBnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
     </div>
     <div class="media-body">
 

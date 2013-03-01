@@ -7,12 +7,8 @@ define [
 
   viewHelpers =
 
-    bnwUrl: (path) ->
+    getBnwUrl: (path) ->
       "#{config.BNW_API_PROTOCOL}://#{config.BNW_API_HOST}#{path}"
-
-    bnwWsUrl: (path = window.location.pathname) ->
-      path = "" if path == "/"
-      "#{config.BNW_WS_PROTOCOL}://#{config.BNW_WS_HOST}#{path}/ws?v=2"
 
     isLogged: ->
       $.cookie("login")?

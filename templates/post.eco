@@ -1,7 +1,7 @@
 <div id="<%= @id %>" class="post">
   <div class="media">
     <div class="avatar pull-left">
-      <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @bnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
+      <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @getBnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
     </div>
     <div class="media-body">
 
@@ -26,7 +26,7 @@
             <i class="icon-tags"></i>
             <% i = 1 %>
             <%for tag in @tags: %>
-              <a class="post-tag" href="/t/<%= encodeURIComponent tag %>"><%= tag %></a><% if i < @tags.length: %>,<% end %>
+              <a class="post-tag" href="<% if @pageUser?: %>/u/<%= @pageUser %><% end %>/t/<%= encodeURIComponent tag %>"><%= tag %></a><% if i < @tags.length: %>,<% end %>
               <% i++ %>
             <% end %>
           <% end %>

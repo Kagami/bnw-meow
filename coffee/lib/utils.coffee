@@ -18,7 +18,7 @@ define [
 
       data.login = utils.getLoginKey() if utils.isLogged()
       jqxhr = $.ajax
-        url: @bnwUrl "/api/#{func}"
+        url: @getBnwUrl "/api/#{func}"
         type: method
         data: data
         # This should actually be auto-detectable (backend do return
