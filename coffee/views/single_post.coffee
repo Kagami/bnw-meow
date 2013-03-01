@@ -7,10 +7,11 @@ define [
   "views/comments"
   "views/comment"
   "views/dialog_delete"
+  "views/header"
   "lib/utils"
   "templates/single_post"
 ], ($, Chaplin, Comment, View, PostView, CommentsView, CommentView,
-    DialogDeleteView, utils, template) ->
+    DialogDeleteView, HeaderView, utils, template) ->
   "use strict"
 
   class SinglePostView extends View
@@ -50,6 +51,12 @@ define [
 
         comments = new CommentsView collection: @model.replies, dialog: dialog
         @subview "comments", comments
+
+        breadcrumbs = [
+          ["/u/#{@model.get 'user'}", "user", @model.get "user"]
+          ["/p/#{@model.get 'id'}", "comments-alt", @model.get "id"]
+        ]
+        HeaderView::updateBreadcrumbs breadcrumbs, true
 
         utils.scrollToAnchor()
 

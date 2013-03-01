@@ -19,6 +19,8 @@ define [
       "click #show-new-post": "showNewPost"
       "click #logout": "logout"
       "click #warning": "ignore"
+    templateData:
+      breadcrumbs: []
 
     initialize: ->
       super
@@ -27,12 +29,13 @@ define [
       @subscribeEvent "!ws:new_message", @incCounter
       @subscribeEvent "!ws:new_comment", @incCounter
       $(window).focus => @resetCounter()
+
       @subscribeEvent "!view:header:render", @render
-      @subscribeEvent "!router:changeURL", (url) ->
-        $("#common-menu>li").removeClass("active")
-        a = $("#common-menu a[href='/#{url}']")
-        if a.length
-          a.parent().addClass("active")
+      @subscribeEvent "!router:changeURL", @updateActiveItem
+      @subscribeEvent "!breadcrumbs:update", (breadcrumbs) ->
+        @templateData.breadcrumbs = breadcrumbs
+        @render()
+
       dialog = new DialogNewPostView()
       @subview "dialog", dialog
 
@@ -78,3 +81,23 @@ define [
       if force or not document.hasFocus()
         counter = if @eventsCounter > 99 then 99 else @eventsCounter
         Tinycon.setBubble counter
+
+    updateActiveItem: (url = window.location.pathname) ->
+      ###Update active (current) element of the menu items.###
+      url = "/#{decodeURIComponent url}" if url[0] != "/"
+      $("#common-menu>li").removeClass("active")
+      a = $("#common-menu a[href='#{url}']")
+      if a.length
+        a.parent().addClass("active")
+
+    updateBreadcrumbs: (breadcrumbs, lateUpdate = false) ->
+      ###
+      Send signal to header view class instance for request to update
+      breadcrumbs list.
+
+      :param lateUpdate: default false. Useful when we want to update
+                         breadcrumbs _after_ the signal about changing
+                         url have been sent.
+      ###
+      @publishEvent "!breadcrumbs:update", breadcrumbs
+      @updateActiveItem() if lateUpdate

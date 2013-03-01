@@ -5,6 +5,11 @@
         <a class="brand" href="/">BnW</a>
         <li><a href="/">Главная</a></li>
         <li><a href="/top">Топ</a></li>
+        <% for [link, icon, title] in @breadcrumbs: %>
+        <li>
+        <a href="<%= link %>"><i class="icon-<%= icon %>"></i> <%= title %></a>
+        </li>
+        <% end %>
       </ul>
       <% unless WebSocket?: %>
       <ul class="nav">
@@ -17,7 +22,7 @@
       <ul class="nav pull-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            @<%= @getUser() %>
+            <i class="icon-user"></i> <%= @getUser() %>
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">

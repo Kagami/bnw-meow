@@ -2,7 +2,8 @@ define [
   "chaplin"
   "models/posts"
   "views/posts"
-], (Chaplin, Posts, PostsView) ->
+  "views/header"
+], (Chaplin, Posts, PostsView, HeaderView) ->
   "use strict"
 
   class PostsController extends Chaplin.Controller
@@ -22,13 +23,19 @@ define [
         query.user = params.user
         query.tag = params.tag if params.tag?
         params.title = "@#{params.user}"
+        breadcrumbs = [["/u/#{params.user}", "user", params.user]]
       else if params.club?
         query.club = params.club
         params.title = "!#{params.club}"
+        breadcrumbs = [["/c/#{params.club}", "group", params.club]]
       else if params.tag?
         query.tag = params.tag
         params.title = "*#{params.tag}"
+        breadcrumbs = [["/t/#{params.tag}", "tag", params.tag]]
+      else
+        breadcrumbs = []
 
       @collection = new Posts [], id: params.id, query: query
       @view = new PostsView collection: @collection, pageble: params.pageble
       @adjustTitle params.title
+      HeaderView::updateBreadcrumbs breadcrumbs
