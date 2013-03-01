@@ -4,9 +4,11 @@ define [
   "chaplin"
   "views/base/view"
   "views/dialog_new_post"
+  "views/base/refresh_date"
   "lib/utils"
   "templates/header"
-], ($, Tinycon, Chaplin, View, DialogNewPostView, utils, template) ->
+], ($, Tinycon, Chaplin, View, DialogNewPostView, RefreshDateView, utils,
+    template) ->
   "use strict"
 
   class HeaderView extends View
@@ -35,6 +37,9 @@ define [
       @subscribeEvent "!breadcrumbs:update", (breadcrumbs) ->
         @templateData.breadcrumbs = breadcrumbs
         @render()
+
+      # Update date in all posts/comments on the page
+      setInterval RefreshDateView::tick, 60000
 
       dialog = new DialogNewPostView()
       @subview "dialog", dialog

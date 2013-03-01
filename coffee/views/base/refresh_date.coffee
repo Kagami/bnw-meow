@@ -6,20 +6,20 @@ define [
 
   class RefreshDateView extends View
 
-    afterInitialize: ->
-      super
-      @intervalId = setInterval @refreshDate, 60000
-
-    dispose: ->
-      clearInterval @intervalId
-      super
+    initialize: (options) ->
+      super options
+      @subscribeEvent "!view:refreshDate:tick", @refreshDate
 
     afterRender: ->
       super
       @refreshDate()
 
-    refreshDate: =>
+    refreshDate: ->
       abbr = @$(".post-date")
       if abbr.length
-        date = @model.getAttributes().date
-        abbr.text(utils.formatDate date)
+        abbr.text(utils.formatDate @model.get "date")
+
+    tick: ->
+      # XXX: Fat arrow won't help here because `tick` called
+      # outside from the setInterval.
+      View::publishEvent "!view:refreshDate:tick"
