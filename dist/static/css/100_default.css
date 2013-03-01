@@ -125,6 +125,14 @@ div.selected {
     padding: 8px;
 }
 
+div.avatar {
+    /* XXX: We need to explicitly specify avatar container width
+     * because while loading img has the width of its alt text.
+     * That a crap.
+     */
+    width: 58px;
+}
+
 img.avatar {
     width: 48px;
 }
