@@ -33,8 +33,7 @@ define [
     moveCommentForm: (e, id = undefined) ->
       return unless utils.isLogged()
       e.preventDefault()
-      form = $("#comment-form").css("margin-left", "30px")
-      @firstDiv.after(form)
+      @firstDiv.after($("#comment-form"))
       id ?= @model.getAttributes().commentId
       $("#comment-form-reply-to").val(id)
       $("#comment-form-text").focus()

@@ -1,0 +1,16 @@
+<div class="row">
+
+  <% if @pageUser?: %>
+
+    <div id="posts" class="span9"></div>
+    <div class="span3">
+      <div id="user-info" class="well"></div>
+    </div>
+
+  <% else: %>
+
+    <div id="posts"></div>
+
+  <% end %>
+
+</div>

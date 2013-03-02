@@ -3,7 +3,8 @@ define [
   "chaplin"
   "lib/websocket_handler"
   "lib/view_helpers"
-], (_, Chaplin, WebSocketHandler, viewHelpers) ->
+  "templates/preloader"
+], (_, Chaplin, WebSocketHandler, viewHelpers, preloader) ->
   "use strict"
 
   class View extends Chaplin.View
@@ -33,3 +34,10 @@ define [
 
     getTemplateFunction: ->
       @template
+
+    fetchWithPreloader: ->
+      return if @$(".preloader").length
+      @$el.append viewHelpers.renderTemplate preloader
+      d = @model.fetch()
+      d.always =>
+        @$(".preloader").remove()

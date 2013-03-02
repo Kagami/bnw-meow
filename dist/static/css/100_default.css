@@ -12,7 +12,7 @@ html {
     overflow-y: scroll;
 }
 
-a {
+button, a {
     outline: none !important;
 }
 
@@ -72,7 +72,7 @@ h6{font-size: 12px;}
 
 #main {
     /* Fix navbar offset */
-    padding-top: 51px;
+    padding-top: 61px;
 }
 
 .credit {
@@ -95,7 +95,7 @@ h6{font-size: 12px;}
 
 .label-reset, .label-reset:hover {
     background: none;
-    color: #9A9A9A;
+    color: #9A9A9A !important;
     text-shadow: none;
     border-radius: 0;
     padding: 0;
@@ -113,15 +113,13 @@ h6{font-size: 12px;}
 }
 
 div.selected {
-    border: 1px solid #D5D5D5;
+    border: 1px solid #999999;
 }
 
 /* Application-related */
 
 .post, .comment, #comment-form {
-    background-color: #F5F5F5;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 8px;
 }
 
@@ -151,7 +149,7 @@ img.avatar {
     text-decoration: none;
 }
 
-/* TODO: Should we use sass and variables for colors, 3px/8px values? */
+/* TODO: Should we use sass and variables for colors, size values? */
 .post-date, .comment-date {
     margin-left: 3px;
 }
@@ -173,6 +171,10 @@ img.avatar {
 .comment-delete-marked, .comment-delete-marked:hover {
     color: #FF0000;
     opacity: 1;
+}
+
+#comments, #comment-form {
+    margin-left: 30px;
 }
 
 #comment-form-text {
@@ -215,4 +217,34 @@ img.avatar {
 
 .comment-reply-to:hover {
     text-decoration: none;
+}
+
+#user-info {
+    /* A bit more than the post/comment/form padding */
+    padding: 10px;
+}
+
+.user-info-header, .user-info-additional > *, .user-info-actions,
+.user-info-menu, .user-info-subscriptions, .user-info-subscribers {
+    margin-bottom: 10px;
+}
+
+.user-info-show-more:hover {
+    text-decoration: none;
+}
+
+.user-info-additional {
+    display: none;
+}
+
+#user-info p {
+    margin: 0;
+}
+
+.user-info-subscriptions .label-info {
+    background-color: #3A87AD;
+}
+
+.user-info-stats span {
+    margin-right: 5px;
 }

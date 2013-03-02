@@ -103,7 +103,7 @@ define [
     scrollToAnchor: (id = window.location.hash) ->
       el = $(id)
       if el.length
-        # 41px — compensate for navbar
         $(".selected").removeClass("selected")
         el.addClass("selected")
+        # 41px — compensate for navbar
         $("html, body").scrollTop(el.offset().top - 41)

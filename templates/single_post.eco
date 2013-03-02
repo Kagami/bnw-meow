@@ -6,12 +6,10 @@
 
   <div id="single-post"></div>
 
-  <hr />
-
   <div id="comments"></div>
 
   <% if @isLogged(): %>
-    <form id="comment-form" class="form-inline">
+    <form id="comment-form" class="form-inline well">
       <textarea id="comment-form-text" class="input-block-level" rows="5"></textarea>
       <button id="comment-form-submit" type="button" class="btn btn-primary">
         <i></i> Комментировать

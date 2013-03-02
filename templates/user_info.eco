@@ -1,0 +1,84 @@
+<div class="user-info-header media">
+  <div class="avatar pull-left">
+    <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @getBnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
+  </div>
+
+  <div class="user-info-name media-body">
+    <p>
+      <%= @user %>
+      <% if @itsMe: %><span class="muted">(это вы)</span><% end %>
+    </p>
+    <% if @vcard.fullname?: %>
+      <p><em><%= @vcard.fullname %></em></p>
+    <% end %>
+    <% if @vcard.url? or @formattedAbout?: %>
+      <a class="user-info-show-more" href="#" title="Показать дополнительную информацию">Ещё…</a>
+    <% end %>
+  </div>
+</div>
+
+<div class="user-info-additional">
+  <div>
+    <% if @vcard.url?: %>
+      <p><strong>Сайт</strong></p>
+      <p><em><%= @vcard.url %></em></p>
+    <% end %>
+  </div>
+  <div>
+    <% if @formattedAbout?: %>
+      <p><strong>О себе</strong></p>
+      <%- @formattedAbout %>
+    <% end %>
+  </div>
+</div>
+
+<hr />
+
+<% if @isLogged and not @itsMe: %>
+  <div class="user-info-actions">
+    <button type="button" class="user-info-subscribe btn btn-info btn-small<% if @subscribed: %> active<% end %>" title="<%= if @subscribed then 'Отписаться' else 'Подписаться' %>">
+      <i class="icon-heart"></i>
+    </button>
+    <button type="button" class="user-info-blacklist btn btn-info btn-small" title="Добавить в чёрный список">
+      <i class="icon-ban-circle"></i>
+    </button>
+  </div>
+<% end %>
+
+<ul class="user-info-menu nav nav-list">
+  <li><a href="#">Всё</a></li>
+  <li class="active"><a href="#">Блог</a></li>
+  <li><a href="#">Рекомендации</a></li>
+</ul>
+
+<hr />
+
+<div class="user-info-subscriptions">
+  <p><strong>Читает (<%= @subscriptions_all.length %>)</strong></p>
+  <% for user in @subscriptions_all: %>
+    <a class="label" href="/u/<%= user %>">@<%= user %></a>
+  <% end %>
+</div>
+
+<div class="user-info-subscribers">
+  <p><strong>Подписчики (<%= @subscribers_all.length %>)</strong></p>
+  <% for user in @subscribers_all: %>
+    <a class="label" href="/u/<%= user %>">@<%= user %></a>
+  <% end %>
+</div>
+
+<hr />
+
+<div class="user-info-stats muted">
+  <strong>
+    <span title="Написал постов">
+      <i class="icon-comment-alt"></i> <%= @messages_count %>
+    </span>
+    <span title="Написал комментариев">
+      <i class="icon-comments-alt"></i> <%= @comments_count %>
+    </span>
+    <span title="Зарегистрировался дней назад">
+      <i class="icon-calendar"></i> <%= @registeredDaysAgo %>
+    </span>
+  </strong>
+</div>

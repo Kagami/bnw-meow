@@ -7,6 +7,13 @@ define [
 
   class Model extends Chaplin.Model
 
+    fetch: ->
+      # XXX: Actually all should work through standart Backbone
+      # methods but BnW's API is crap so we do a lot of horrible
+      # boilerplate.
+      @apiCall().done (data) =>
+        @set data
+
     apiCall: (func = @id, data = undefined) ->
       deferred = $.Deferred()
       promise = deferred.promise()
