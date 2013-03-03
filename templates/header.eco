@@ -3,7 +3,7 @@
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <ul class="common-menu nav">
+      <ul id="common-menu" class="nav">
         <a class="brand" href="/">BnW</a>
         <li><a href="/">Главная</a></li>
         <li><a href="/top">Топ</a></li>

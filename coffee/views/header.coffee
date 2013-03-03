@@ -96,9 +96,10 @@ define [
 
     updateActiveItem: (url = window.location.pathname) ->
       ###Update active (current) element of the menu items.###
+      # Note that we can't use header's own properties here
       url = "/#{decodeURIComponent url}" if url[0] != "/"
-      @$(".common-menu>li").removeClass("active")
-      a = @$(".common-menu a[href='#{url}']")
+      $("#common-menu>li").removeClass("active")
+      a = $("#common-menu a[href='#{url}']")
       if a.length
         a.parent().addClass("active")
 
