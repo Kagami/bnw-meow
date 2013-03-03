@@ -1,7 +1,9 @@
+<a class="to-the-top" title="Наверх" href="#">↑</a>
+
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <ul id="common-menu" class="nav">
+      <ul class="common-menu nav">
         <a class="brand" href="/">BnW</a>
         <li><a href="/">Главная</a></li>
         <li><a href="/top">Топ</a></li>
@@ -14,7 +16,7 @@
       <% unless WebSocket?: %>
       <ul class="nav">
         <li title="Ваш браузер не поддерживает вебсокеты! Возможности сайта будут ограничены.">
-          <a id="warning" href="#"><i class="icon-warning-sign"></i> WS</a>
+          <a class="warning" href="#"><i class="icon-warning-sign"></i> WS</a>
         </li>
       </ul>
       <% end %>
@@ -27,9 +29,9 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="/u/<%= @getUser() %>">Блог</a></li>
-            <li><a id="show-new-post" href="#">Новый пост</a></li>
+            <li><a class="show-new-post" href="#">Новый пост</a></li>
             <li class="divider"></li>
-            <li><a id="logout" href="#">Выход</a></li>
+            <li><a class="logout" href="#">Выход</a></li>
           </ul>
         </li>
       </ul>

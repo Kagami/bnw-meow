@@ -250,3 +250,23 @@ img.avatar {
 .user-info-stats span {
     margin-right: 5px;
 }
+
+/* To the top  button */
+
+.to-the-top {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 41px;
+    bottom: 0;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #45688E;
+}
+
+.to-the-top:hover {
+    background: rgba(234, 244, 255, 1);
+    border-right: 1px solid #DDDDDD;
+    text-decoration: none;
+}

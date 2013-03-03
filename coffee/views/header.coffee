@@ -17,10 +17,11 @@ define [
     template: template
     autoRender: true
     events:
-      "click #common-menu a": "navigate"
-      "click #show-new-post": "showNewPost"
-      "click #logout": "logout"
-      "click #warning": "ignore"
+      "click .common-menu a": "navigate"
+      "click .show-new-post": "showNewPost"
+      "click .logout": "logout"
+      "click .warning": "ignore"
+      "click .to-the-top": "toTheTop"
     templateData:
       breadcrumbs: []
 
@@ -43,6 +44,12 @@ define [
 
       dialog = new DialogNewPostView()
       @subview "dialog", dialog
+
+      $(window).scroll =>
+        if $(window).scrollTop() > 600
+          @$(".to-the-top").show()
+        else
+          @$(".to-the-top").hide()
 
     # Reload controller even if url was not changed
     navigate: (e) ->
@@ -90,8 +97,8 @@ define [
     updateActiveItem: (url = window.location.pathname) ->
       ###Update active (current) element of the menu items.###
       url = "/#{decodeURIComponent url}" if url[0] != "/"
-      $("#common-menu>li").removeClass("active")
-      a = $("#common-menu a[href='#{url}']")
+      @$(".common-menu>li").removeClass("active")
+      a = @$(".common-menu a[href='#{url}']")
       if a.length
         a.parent().addClass("active")
 
@@ -106,3 +113,7 @@ define [
       ###
       @publishEvent "!breadcrumbs:update", breadcrumbs
       @updateActiveItem() if lateUpdate
+
+    toTheTop: (e) ->
+      e.preventDefault()
+      $("html, body").animate(scrollTop: 0, "fast")
