@@ -32,8 +32,6 @@
   </div>
 </div>
 
-<hr />
-
 <% if @isLogged and not @itsMe: %>
   <div class="user-info-actions">
     <button type="button" class="user-info-subscribe btn btn-info btn-small<% if @subscribed: %> active<% end %>" title="<%= if @subscribed then 'Отписаться' else 'Подписаться' %>">

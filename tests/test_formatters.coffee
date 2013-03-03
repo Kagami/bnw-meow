@@ -56,6 +56,31 @@ describe "Formatters", ->
       f("[test](javascript:test)").should.equal('<p>javascript:test</p>\n')
       f("[test][id]\n\n[id]: javascript:test\n\n[test2](javascript:nyak)").should.equal('<p>javascript:test</p>\n<p>javascript:nyak</p>\n')
 
+    it "should not highlight users inside code", ->
+      f("`test nyak @user nya`").should.equal('<p><code>test nyak @user nya</code></p>\n')
+      input = """
+      Nyak nyan `inline @user code`
+      ```
+      many lines code
+      ```
+      Another simple line @nyan
+      ```
+      multiline @user2 `inline @user3 inside code`
+      ```
+      end
+      """
+      output = """
+      <p>Nyak nyan <code>inline @user code</code></p>
+      <pre><code>many lines code</code></pre>
+      <p>Another simple line <a href="/u/nyan">@nyan</a></p>
+      <pre><code>multiline @user2 `inline @user3 inside code`</code></pre>
+      <p>end</p>
+
+      """
+      f(input).should.equal(output)
+
+    it "should not highlight messages inside code", ->
+      f("`test msg: #0XYNTA`").should.equal('<p><code>test msg: #0XYNTA</code></p>\n')
 
   describe "MoinMoin", ->
     f = (text) ->

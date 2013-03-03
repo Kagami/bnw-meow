@@ -72,11 +72,39 @@ define [
       ]
 
     markdown: (raw) ->
-      # Apply some additional BnW formatters.
-      raw = raw.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
-      raw = raw.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
-      # Use marked render and hope it do well
-      marked raw,
+      ###Markdown with some additional BnW-specific rules.###
+
+      format = (text) =>
+        ###Apply BnW additional formatters.###
+        text = text.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
+        text.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
+
+      # Walk through raw input text and apply bnw formatters only
+      # for non-code blocks.
+      result = []
+      while raw.length
+        # Work with non-code
+        i = raw.indexOf "`"
+        if i == -1
+          result.push format raw
+          break
+        result.push format raw[...i]
+        raw = raw[i..]
+
+        # Work with code blocks
+        # Multi-line or inline code
+        searchFor = if raw[...3] == "```" then "```" else "`"
+        i = raw.indexOf searchFor, searchFor.length
+        if i == -1
+          result.push raw
+          break
+        end = i + searchFor.length
+        result.push raw[...end]
+        raw = raw[end..]
+      stage2 = result.join ""
+
+      # At last apply marked renderer and hope it do well
+      marked stage2,
         pedantic: false,
         gfm: true,
         sanitize: true,  # Escaping! Don't touch.
