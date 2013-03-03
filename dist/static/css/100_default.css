@@ -270,3 +270,7 @@ img.avatar {
     border-right: 1px solid #DDDDDD;
     text-decoration: none;
 }
+
+.not-found {
+    text-align: center;
+}

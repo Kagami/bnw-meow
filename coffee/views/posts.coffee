@@ -9,8 +9,9 @@ define [
   "lib/utils"
   "templates/posts"
   "templates/preloader"
+  "templates/not_found"
 ], ($, _, Post, CollectionView, PostView, UserInfoView, DialogDeleteView,
-    utils, template, preloader) ->
+    utils, template, preloader, notFound) ->
   "use strict"
 
   class PostsView extends CollectionView
@@ -64,6 +65,9 @@ define [
       d = @collection.fetch()
       d.always =>
         @$list.children(".preloader").remove()
+      d.done (data) =>
+        if not data.messages.length and not @collection.length
+          @$list.append utils.renderTemplate notFound
 
     afterRender: ->
       super
