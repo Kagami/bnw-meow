@@ -12,7 +12,7 @@
       <p><em><%= @vcard.fullname %></em></p>
     <% end %>
     <% if @vcard.url? or @formattedAbout?: %>
-      <a class="user-info-show-more" href="#" title="Показать дополнительную информацию">Ещё…</a>
+      <a class="user-info-show-more muted" href="#" title="Показать/скрыть дополнительную информацию">Ещё…</a>
     <% end %>
   </div>
 </div>

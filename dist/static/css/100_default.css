@@ -219,9 +219,15 @@ img.avatar {
     text-decoration: none;
 }
 
+/* User info */
+
 #user-info {
     /* A bit more than the post/comment/form padding */
     padding: 10px;
+}
+
+#user-info p {
+    margin: 0;
 }
 
 .user-info-header, .user-info-additional > *, .user-info-actions,
@@ -235,10 +241,6 @@ img.avatar {
 
 .user-info-additional {
     display: none;
-}
-
-#user-info p {
-    margin: 0;
 }
 
 .user-info-subscriptions .label-info {
