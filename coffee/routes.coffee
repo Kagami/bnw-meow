@@ -11,8 +11,15 @@ define [
     match "", "posts#show", params: title: "Главная"
     match "c/:club", "posts#show"
     match "t/:tag", "posts#show"
-    match "u/:user", "posts#show"
+
+    match "u/:user", "posts#show", params:
+      show: "messages"
+    match "u/:user/all", "posts#show", params:
+      show: "all"
+    match "u/:user/recommendations", "posts#show", params:
+      show: "recommendations"
     match "u/:user/t/:tag", "posts#show"
+
     match "top", "posts#show", params:
       id: "today", title: "Топ 20 постов за сегодня", pageble: false
     match "p/:post", "single_post#show"

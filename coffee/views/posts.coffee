@@ -39,6 +39,7 @@ define [
       dialog = new DialogDeleteView()
       @subview "dialog", dialog
 
+      @show = options.show
       @pageUser = options.pageUser
       @templateData = pageUser: @pageUser
       # We should manually call render because we don't know about
@@ -47,7 +48,7 @@ define [
       if @pageUser?
         # FIXME: Horrible and confused name choice for different
         # purposes: 'postUser', 'pageUser', 'user', 'getUser'.
-        userInfo = new UserInfoView user: @pageUser
+        userInfo = new UserInfoView user: @pageUser, show: @show
         @subview "user-info", userInfo
 
       @fetch(true)?.done =>

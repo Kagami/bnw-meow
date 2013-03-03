@@ -44,9 +44,9 @@
 <% end %>
 
 <ul class="user-info-menu nav nav-list">
-  <li><a href="#">Всё</a></li>
-  <li class="active"><a href="#">Блог</a></li>
-  <li><a href="#">Рекомендации</a></li>
+  <li class="all"><a href="/u/<%= @user %>/all">Всё</a></li>
+  <li class="messages"><a href="/u/<%= @user %>">Блог</a></li>
+  <li class="recommendations"><a href="/u/<%= @user %>/recommendations">Рекомендации</a></li>
 </ul>
 
 <hr />

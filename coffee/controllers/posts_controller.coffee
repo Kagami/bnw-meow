@@ -21,6 +21,7 @@ define [
       query = use_bl: 1
       if params.user?
         query.user = params.user
+        query.show = params.show
         query.tag = params.tag if params.tag?
         params.title = "@#{params.user}"
         breadcrumbs = [["/u/#{params.user}", "user", params.user]]
@@ -43,5 +44,6 @@ define [
         collection: @collection
         pageble: params.pageble
         pageUser: params.user
+        show: params.show
       @adjustTitle params.title
       HeaderView::updateBreadcrumbs breadcrumbs

@@ -18,19 +18,28 @@ define [
     _wsTries: 0
 
     isWsAvailable: ->
+      return false unless WebSocket?
       path = window.location.pathname
       cut = path[...3]
-      _.all [
-        WebSocket?
-        _.any [
-          cut == "/"  # main
+      _.any [
+        # Main
+        cut == "/"
+
+        # User page
+        _.all [
+          cut == "/u/"
           # TODO: Allow websockets on urls like /u/user/t/tag
           # It will require some additional work like determine
           # does the added post tags meet the criteria of the
           # current tag, fixing getBnwWsUrl and so on.
-          cut == "/u/" and path.indexOf("/t/") == -1  # user page
-          cut == "/p/"  # post page
+          path.indexOf("/t/") == -1
+          # TODO: Allow websockets on /all and /recommendations
+          # subpages.
+          @show == "messages"
         ]
+
+        # Post page
+        cut == "/p/"
       ]
 
     getBnwWsUrl: ->

@@ -15,17 +15,17 @@ define [
       "click .user-info-show-more": "showMore"
       "click .user-info-subscribe": "subscribe"
       "click .user-info-blacklist": "blacklist"
-      "click .user-info-menu a": "ignore"
 
     initialize: (options) ->
       super options
       @model = new UserInfo {}, user: options.user
+      @show = options.show
       @fetchWithPreloader()?.done =>
         @render()
 
-    ignore: (e) ->
-      # XXX: Not implemented yet.
-      e.preventDefault()
+    afterRender: ->
+      super
+      @$(".#{@show}").addClass("active")
 
     subscribe: ->
       return unless utils.isLogged()
