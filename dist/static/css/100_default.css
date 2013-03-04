@@ -41,7 +41,6 @@ blockquote {
 }
 
 /* Fix headers sizes */
-
 h1{font-size: 22px;}
 h2{font-size: 20px;}
 h3{font-size: 18px;}
@@ -95,7 +94,7 @@ h6{font-size: 12px;}
 
 .label-reset, .label-reset:hover {
     background: none;
-    color: #9A9A9A !important;
+    color: #999999;
     text-shadow: none;
     border-radius: 0;
     padding: 0;
@@ -103,7 +102,7 @@ h6{font-size: 12px;}
 
 #notifications {
     position: fixed;
-    top: 51px;
+    top: 61px;
     right: 5px;
     z-index: 2000;
 }
@@ -125,7 +124,7 @@ div.selected {
 div.avatar {
     /* XXX: We need to explicitly specify avatar container width
      * because while loading img has the width of its alt text.
-     * That a crap.
+     * What a crap.
      */
     width: 58px;
 }
@@ -141,7 +140,7 @@ img.avatar {
 .post-footer, .post-footer a, .post-footer a:hover,
 .comment-footer, .comment-footer a, .comment-footer a:hover,
 .post-footer2 {
-    color: #9A9A9A;
+    color: #999999;
 }
 
 .post-info a {
@@ -149,15 +148,7 @@ img.avatar {
 }
 
 /* TODO: Should we use sass and variables for colors, size values? */
-.post-date, .comment-date {
-    margin-left: 3px;
-}
-
-.post-id {
-    margin-right: 3px;
-}
-
-.post-comments-info {
+.post-user, .comment-user, .post-id, .post-comments-info {
     margin-right: 3px;
 }
 
@@ -176,14 +167,13 @@ img.avatar {
     margin-left: 30px;
 }
 
-/* XXX: Limit maximal nesting level to 10. Looks like not the perfect
- * solution but it works.
- * Source:
+/* XXX: Stop to shift comments with more that 10 level nesting.
+ * Looks like not the perfect solution but it works. Source:
  * http://planken.org/2009/01/28/limiting-indentations-threaded-comments-drupal
  */
 .comment-wrapper > .comment-wrapper > .comment-wrapper > .comment-wrapper >
 .comment-wrapper > .comment-wrapper > .comment-wrapper > .comment-wrapper >
-.comment-wrapper > .comment-wrapper {
+.comment-wrapper > .comment-wrapper > .comment-wrapper {
     margin-left: 0;
 }
 
@@ -206,10 +196,10 @@ img.avatar {
 }
 
 .help {
-    color: #9A9A9A;
+    color: #999999;
 }
 
-.help, .help:hover {
+.help:hover {
     text-decoration: none;
 }
 

@@ -15,12 +15,15 @@ define [
       "click .post-comments-info": "subscribe"
       "click .post-recommendations-info": "recommend"
       "click .post-delete": "toggleMark"
+    templateData: ->
+      singlePost: @singlePost
+      pageUser: @pageUser
 
     initialize: (options) ->
       super options
       @dialog = options.dialog
       @singlePost = options?.singlePost
-      @templateData = pageUser: options.pageUser
+      @pageUser = options.pageUser
       # Subscribe to websocket events
       @subscribeEvent "!ws:new_message:#{@model.get 'id'}", @onAdd
       @subscribeEvent "!ws:del_message:#{@model.get 'id'}", @onDel
@@ -33,9 +36,6 @@ define [
       @firstDiv = @$el.children(0)
       @$("pre code").each (i, e) ->
         hljs.highlightBlock e
-
-    templateData: ->
-      singlePost: @singlePost
 
     subscribe: (e) ->
       e.preventDefault()
