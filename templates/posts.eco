@@ -4,7 +4,7 @@
 
     <div id="posts" class="span9"></div>
     <div class="span3">
-      <div id="user-info" class="well"></div>
+      <div id="user-info" class="well well-small"></div>
     </div>
 
   <% else: %>

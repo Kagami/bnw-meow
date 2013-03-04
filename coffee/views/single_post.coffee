@@ -54,7 +54,7 @@ define [
 
         breadcrumbs = [
           ["/u/#{@model.get 'user'}", "user", @model.get "user"]
-          ["/p/#{@model.get 'id'}", "comments-alt", @model.get "id"]
+          ["/p/#{@model.get 'id'}", "comment-alt", @model.get "id"]
         ]
         HeaderView::updateBreadcrumbs breadcrumbs, true
 

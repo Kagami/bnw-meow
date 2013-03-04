@@ -120,7 +120,6 @@ div.selected {
 
 .post, .comment, #comment-form {
     margin-bottom: 20px;
-    padding: 8px;
 }
 
 div.avatar {
@@ -232,30 +231,25 @@ img.avatar {
 
 /* User info */
 
-#user-info {
-    /* A bit more than the post/comment/form padding */
-    padding: 10px;
-}
-
 #user-info p {
     margin: 0;
 }
 
-.user-info-header, .user-info-additional > *, .user-info-actions,
-.user-info-menu, .user-info-subscriptions, .user-info-subscribers {
+#user-info > *, .user-info-additional > * {
     margin-bottom: 10px;
 }
 
-.user-info-show-more:hover {
+.user-info-toggle {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.user-info-show-more:hover, .user-info-toggle:hover {
     text-decoration: none;
 }
 
-.user-info-additional {
-    display: none;
-}
-
-.user-info-subscriptions .label-info {
-    background-color: #3A87AD;
+.user-info-stats {
+    margin-bottom: 0 !important;
 }
 
 .user-info-stats span {

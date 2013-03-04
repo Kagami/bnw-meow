@@ -11,17 +11,17 @@
     <% if @vcard.fullname?: %>
       <p><em><%= @vcard.fullname %></em></p>
     <% end %>
-    <% if @vcard.url? or @formattedAbout?: %>
+    <% if @formattedUrl? or @formattedAbout?: %>
       <a class="user-info-show-more muted" href="#" title="Показать/скрыть дополнительную информацию">Ещё…</a>
     <% end %>
   </div>
 </div>
 
-<div class="user-info-additional">
+<div class="user-info-additional hide">
   <div>
-    <% if @vcard.url?: %>
+    <% if @formattedUrl?: %>
       <p><strong>Сайт</strong></p>
-      <p><em><%= @vcard.url %></em></p>
+      <%- @formattedUrl %>
     <% end %>
   </div>
   <div>
@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<% if @isLogged and not @itsMe: %>
+<% if @isLogged() and not @itsMe: %>
   <div class="user-info-actions">
     <button type="button" class="user-info-subscribe btn btn-info btn-small<% if @subscribed: %> active<% end %>" title="<%= if @subscribed then 'Отписаться' else 'Подписаться' %>">
       <i class="icon-heart"></i>
@@ -52,17 +52,30 @@
 <hr />
 
 <div class="user-info-subscriptions">
-  <p><strong>Читает (<%= @subscriptions_all.length %>)</strong></p>
-  <% for user in @subscriptions_all: %>
-    <a class="label" href="/u/<%= user %>">@<%= user %></a>
-  <% end %>
+  <p><span class="user-info-toggle" title="Показать/скрыть">Читает (<%= @subscriptions_all.length %>)</span></p>
+  <div class="hide">
+    <% for user in @subscriptions_all: %>
+      <a class="label<% if user == @getUser(): %> label-info<% end %>" href="/u/<%= user %>">@<%= user %></a>
+    <% end %>
+  </div>
+</div>
+
+<div class="user-info-friends">
+  <p><span class="user-info-toggle" title="Показать/скрыть">Друзья (<%= @friends.length %>)</span></p>
+  <div class="hide">
+    <% for user in @friends: %>
+      <a class="label" href="/u/<%= user %>">@<%= user %></a>
+    <% end %>
+  </div>
 </div>
 
 <div class="user-info-subscribers">
-  <p><strong>Подписчики (<%= @subscribers_all.length %>)</strong></p>
-  <% for user in @subscribers_all: %>
-    <a class="label" href="/u/<%= user %>">@<%= user %></a>
-  <% end %>
+  <p><span class="user-info-toggle" title="Показать/скрыть">Подписчики (<%= @subscribers_all.length %>)</span></p>
+  <div class="hide">
+    <% for user in @subscribers_all: %>
+      <a class="label" href="/u/<%= user %>">@<%= user %></a>
+    <% end %>
+  </div>
 </div>
 
 <hr />
@@ -75,8 +88,9 @@
     <span title="Написал комментариев">
       <i class="icon-comments-alt"></i> <%= @comments_count %>
     </span>
-    <span title="Зарегистрировался дней назад">
-      <i class="icon-calendar"></i> <%= @registeredDaysAgo %>
+    <span>
+      <i class="icon-calendar" title="Зарегистрировался дней назад"></i>
+      <abbr title="<%= @formattedRegdate %>"><%= @registeredDaysAgo %></a>
     </span>
   </strong>
 </div>
