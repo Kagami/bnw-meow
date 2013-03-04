@@ -1,9 +1,10 @@
 define [
   "jquery"
+  "highlight"
   "views/base/refresh_date"
   "lib/utils"
   "templates/comment"
-], ($, RefreshDateView, utils, template) ->
+], ($, hljs, RefreshDateView, utils, template) ->
   "use strict"
 
   class CommentView extends RefreshDateView
@@ -24,12 +25,14 @@ define [
 
     afterRender: ->
       super
-      # Listen events only on first div (because of nesting)
       @firstDiv = @$el.children(0)
       # At first we must undelegate current events on current $el
       @undelegateEvents()
+      # Listen events only on first div (because of nesting)
       @$el = @firstDiv
       @delegateEvents()
+      @$("pre code").each (i, e) ->
+        hljs.highlightBlock e
 
     toggleMark: (e) ->
       e.preventDefault()
