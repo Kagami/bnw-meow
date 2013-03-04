@@ -24,7 +24,7 @@ define [
         id = attributes.commentId
         replyto = attributes.replyCommentId
         if replyto?
-          target = $("##{replyto}")
+          target = $("##{replyto}").parent()
           if target.length
             source = $("##{id}").parent()
-            target.after(source)
+            target.append(source)
