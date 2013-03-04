@@ -173,8 +173,19 @@ img.avatar {
     opacity: 1;
 }
 
-#comments, #comment-form {
+.comment-wrapper, #comment-form {
     margin-left: 30px;
+}
+
+/* XXX: Limit maximal nesting level to 10. Looks like not the perfect
+ * solution but it works.
+ * Source:
+ * http://planken.org/2009/01/28/limiting-indentations-threaded-comments-drupal
+ */
+.comment-wrapper > .comment-wrapper > .comment-wrapper > .comment-wrapper >
+.comment-wrapper > .comment-wrapper > .comment-wrapper > .comment-wrapper >
+.comment-wrapper > .comment-wrapper {
+    margin-left: 0;
 }
 
 #comment-form-text {

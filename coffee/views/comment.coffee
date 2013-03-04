@@ -9,6 +9,7 @@ define [
   class CommentView extends RefreshDateView
 
     template: template
+    className: "comment-wrapper"
     events:
       "click .comment-delete": "toggleMark"
       "click .comment-id": "moveCommentForm"
@@ -23,7 +24,12 @@ define [
 
     afterRender: ->
       super
+      # Listen events only on first div (because of nesting)
       @firstDiv = @$el.children(0)
+      # At first we must undelegate current events on current $el
+      @undelegateEvents()
+      @$el = @firstDiv
+      @delegateEvents()
 
     toggleMark: (e) ->
       e.preventDefault()

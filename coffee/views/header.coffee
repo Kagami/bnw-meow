@@ -17,7 +17,7 @@ define [
     template: template
     autoRender: true
     events:
-      "click .common-menu a": "navigate"
+      "click #common-menu a": "navigate"
       "click .show-new-post": "showNewPost"
       "click .logout": "logout"
       "click .warning": "ignore"

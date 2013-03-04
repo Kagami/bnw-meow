@@ -95,4 +95,5 @@ define [
 
     onNewComment: (commentData) ->
       comment = new Comment commentData, postUser: @model.get "user"
-      @model.replies.add comment
+      index = $("#comments").children().length
+      @model.replies.add comment, {index}
