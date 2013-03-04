@@ -37,7 +37,7 @@ define [
         @render fetched: true
 
         text = @model.get "text"
-        Chaplin.mediator.publish "!adjustTitle", utils.truncate text
+        @publishEvent "!adjustTitle", utils.truncate text
 
         dialog = new DialogDeleteView singlePost: true
         @subview "dialog", dialog

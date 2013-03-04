@@ -15,7 +15,7 @@ define [
       @refreshDate()
 
     refreshDate: ->
-      abbr = @$(".post-date")
+      abbr = @$(".post-date, .comment-date")
       if abbr.length
         abbr.text(utils.formatDate @model.get "date")
 
