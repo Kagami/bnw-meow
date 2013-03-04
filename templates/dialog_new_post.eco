@@ -2,7 +2,7 @@
   <div class="modal-header">
     <a href="#" class="close" data-dismiss="modal" aria-hidden="true">&times;</a>
     <h3 style="display: inline;">Новый пост</h3>
-    <a class="help" href="http://hive.blasux.ru/u/Stiletto/BnW#formatting" title="Справка по синтаксису"><i class="icon-question-sign"></i></a>
+    <a class="help" href="http://hive.blasux.ru/u/Stiletto/BnW/Форматирование" title="Справка по синтаксису"><i class="icon-question-sign"></i></a>
   </div>
   <div class="modal-body">
     <form id="post-form" class="form-inline">
