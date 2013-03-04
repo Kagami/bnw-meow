@@ -42,15 +42,15 @@ define [
 
       @show = options.show
       @pageUser = options.pageUser
-      #@templateData = pageUser: @pageUser
+      @templateData = pageUser: @pageUser
       # We should manually call render because we don't know about
       # page's user before initialize.
       @render()
-      #if @pageUser?
-      #  # FIXME: Horrible and confused name choice for different
-      #  # purposes: 'postUser', 'pageUser', 'user', 'getUser'.
-      #  userInfo = new UserInfoView user: @pageUser, show: @show
-      #  @subview "user-info", userInfo
+      if @pageUser?
+        # FIXME: Horrible and confused name choice for different
+        # purposes: 'postUser', 'pageUser', 'user', 'getUser'.
+        userInfo = new UserInfoView user: @pageUser, show: @show
+        @subview "user-info", userInfo
 
       @fetch(true)?.done =>
         @subscribeEvent "!ws:new_message", @onNewPost
