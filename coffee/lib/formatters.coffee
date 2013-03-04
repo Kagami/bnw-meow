@@ -25,6 +25,7 @@ define [
                        "magnet", "mailto", "xmpp"]
         return @output link.href
     # Always generate links
+    # Note that marked's escape function is slightly differ
     "<a href=\"#{formatters.escape2 link.href}\"" +
     (if link.title then "title=\"#{formatters.escape2 link.title}\"" else "") +
     ">" + @output(cap[1]) +
@@ -74,10 +75,19 @@ define [
     markdown: (raw) ->
       ###Markdown with some additional BnW-specific rules.###
 
+      # Fix blockquote at the first line of reply comment
+      # TODO: Does it proper API behaviour? bnw_core/post.py:
+      # 'text': ('@' + old_comment['user'] + ' ' if comment_id else '') + text
+      FIX_BLOCKQUOTE =
+        [/^(@[-0-9A-Za-z_]+ )>/g
+        , (_m, user) -> "#{user}\n>"
+        ]
+
       format = (text) =>
         ###Apply BnW additional formatters.###
+        text = text.replace FIX_BLOCKQUOTE[0], FIX_BLOCKQUOTE[1]
         text = text.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
-        text.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
+        text = text.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
 
       # Walk through raw input text and apply bnw formatters only
       # for non-code blocks.
