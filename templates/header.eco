@@ -1,4 +1,4 @@
-<a class="to-the-top" title="Наверх" href="#">↑</a>
+<a class="to-the-top" title="Наверх"><i class="icon-chevron-up"></i></a>
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">

@@ -254,16 +254,18 @@ img.avatar {
     left: 0;
     top: 41px;
     bottom: 0;
-    padding: 10px 20px;
+    padding: 10px 15px;
     font-size: 20px;
     font-weight: bold;
-    color: #45688E;
+    color: #4D7285;
+    opacity: 0.3;
+    cursor: pointer;
 }
 
 .to-the-top:hover {
-    background: rgba(234, 244, 255, 1);
-    border-right: 1px solid #DDDDDD;
+    background: #F0F0F0;
     text-decoration: none;
+    opacity: 0.9;
 }
 
 .not-found {

@@ -115,6 +115,5 @@ define [
       @publishEvent "!breadcrumbs:update", breadcrumbs
       @updateActiveItem() if lateUpdate
 
-    toTheTop: (e) ->
-      e.preventDefault()
+    toTheTop: ->
       $("html, body").animate(scrollTop: 0, "fast")
