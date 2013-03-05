@@ -1060,7 +1060,7 @@ hljs.LANGUAGES['asciidoc'] = function(hljs) {
       },
       // admonition
       {
-        className: 'label',
+        className: 'label_',
         begin: '^(NOTE|TIP|IMPORTANT|WARNING|CAUTION):\\s+',
         relevance: 10
       },
@@ -2999,7 +2999,7 @@ hljs.LANGUAGES['vhdl'] = function(hljs) {
         'abs access after alias all and architecture array assert attribute begin block ' +
         'body buffer bus case component configuration constant context cover disconnect ' +
         'downto default else elsif end entity exit fairness file for force function generate ' +
-        'generic group guarded if impure in inertial inout is label library linkage literal ' +
+        'generic group guarded if impure in inertial inout is label_ library linkage literal ' +
         'loop map mod nand new next nor not null of on open or others out package port ' +
         'postponed procedure process property protected pure range record register reject ' +
         'release rem report restrict restrict_guarantee return rol ror select sequence ' +
@@ -4032,7 +4032,7 @@ hljs.LANGUAGES['avrasm'] = function(hljs) {
         begin: '\'', end: '[^\\\\]\'',
         illegal: '[^\\\\][^\']'
       },
-      {className: 'label',  begin: '^[A-Za-z0-9_.$]+:'},
+      {className: 'label_',  begin: '^[A-Za-z0-9_.$]+:'},
       {className: 'preprocessor', begin: '#', end: '$'},
       {  // директивы «.include» «.macro» и т.д.
         className: 'preprocessor',
@@ -5150,7 +5150,7 @@ hljs.LANGUAGES['vbscript'] = function(hljs) {
 }(hljs);
 hljs.LANGUAGES['delphi'] = function(hljs) {
   var DELPHI_KEYWORDS = 'and safecall cdecl then string exports library not pascal set ' +
-    'virtual file in array label packed end. index while const raise for to implementation ' +
+    'virtual file in array label_ packed end. index while const raise for to implementation ' +
     'with except overload destructor downto finally program exit unit inherited override if ' +
     'type until function do begin repeat goto nil far initialization object else var uses ' +
     'external resourcestring interface end finalization class asm mod case on shr shl of ' +
@@ -5158,7 +5158,7 @@ hljs.LANGUAGES['delphi'] = function(hljs) {
     'procedure';
   var DELPHI_CLASS_KEYWORDS = 'safecall stdcall pascal stored const implementation ' +
     'finalization except to finally program inherited override then exports string read not ' +
-    'mod shr try div shl set library message packed index for near overload label downto exit ' +
+    'mod shr try div shl set library message packed index for near overload label_ downto exit ' +
     'public goto interface asm on of constructor or private array unit raise destructor var ' +
     'type until function else external with case default record while protected property ' +
     'procedure published and cdecl do threadvar file in if end virtual write far out begin ' +

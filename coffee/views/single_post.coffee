@@ -47,6 +47,7 @@ define [
           el: "#single-post"
           singlePost: true
           dialog: dialog
+        post.render()
         @subview "post", post
 
         comments = new CommentsView collection: @model.replies, dialog: dialog

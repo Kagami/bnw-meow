@@ -10,7 +10,6 @@ define [
   class PostView extends RefreshDateView
 
     template: template
-    autoRender: true
     events:
       "click .post-comments-info": "subscribe"
       "click .post-recommendations-info": "recommend"

@@ -4,10 +4,10 @@ config =
   baseUrl: "/static/js/"
   paths:
     jquery: "vendor/jquery"
+    cookie: "vendor/jquery.cookie"
     underscore: "vendor/underscore"
     backbone: "vendor/backbone"
     chaplin: "vendor/chaplin"
-    cookie: "vendor/jquery.cookie"
     moment: "vendor/moment"
     moment_ru: "vendor/moment_ru"
     bootstrap: "vendor/bootstrap"
