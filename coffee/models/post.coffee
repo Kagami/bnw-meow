@@ -11,6 +11,8 @@ define [
     destroy: ->
       @apiCall "delete", message: @get "id"
 
+    SHORT_POST_LENGTH: 500
+
     getAttributes: ->
       # Because we could render template before the date has been
       # fetched.
@@ -29,9 +31,20 @@ define [
 
       canDelete = utils.getUser() == @get "user"
 
-      formattedText = formatters.format @get("text"), @get("format")
+      text = @get "text"
+      # Skip truncate for single post
+      if this instanceof Post
+        # XXX: Of course it is much better to shrink post based on
+        # it's rendered size but jquery.dotdotdot is so horrible slow.
+        # (About 38ms for single middle-sized div. What the fuck?)
+        if text.length > @SHORT_POST_LENGTH
+          text = text[...@SHORT_POST_LENGTH]
+          text += " […](/p/#{@get 'id'} \"Читать дальше\")"
+      formattedText = formatters.format text, @get("format")
 
-      _({recommendationsTitle,
-         recommended,
-         canDelete,
-         formattedText}).extend @attributes
+      _({
+          recommendationsTitle
+          recommended
+          canDelete
+          formattedText
+        }).extend @attributes
