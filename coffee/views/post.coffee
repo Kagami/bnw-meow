@@ -68,8 +68,16 @@ define [
 
     onAdd: ->
       @firstDiv.addClass("post-added")
-      @firstDiv.mouseover =>
-        @firstDiv.removeClass("post-added").off("mouseover")
+      goOut = =>
+        setTimeout =>
+          @firstDiv.removeClass("post-added")
+        , 3000
+      setAppear = =>
+        @firstDiv.appear(goOut, one: true, accY: -100)
+      if document.hasFocus()
+        setAppear()
+      else
+        $(window).one("focus", setAppear)
 
     onDel: ->
       # Just delete post div from the DOM. It still be stored

@@ -49,8 +49,16 @@ define [
 
     onAdd: ->
       @firstDiv.addClass("comment-added")
-      @firstDiv.mouseover =>
-        @firstDiv.removeClass("comment-added").off("mouseover")
+      goOut = =>
+        setTimeout =>
+          @firstDiv.removeClass("comment-added")
+        , 3000
+      setAppear = =>
+        @firstDiv.appear(goOut, one: true, accY: -50)
+      if document.hasFocus()
+        setAppear()
+      else
+        $(window).one("focus", setAppear)
 
     onDel: ->
       # Just delete comment div from the DOM. It still be stored

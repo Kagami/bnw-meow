@@ -5,7 +5,7 @@ VERSION = ""
 requirejs.config
   baseUrl: "/static/js/"
   urlArgs: "v=#{VERSION}"
-  deps: ["bootstrap", "cookie"]
+  deps: ["bootstrap", "cookie", "appear"]
 
 require [
   "meow_application"

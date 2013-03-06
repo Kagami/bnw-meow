@@ -5,6 +5,7 @@ config =
   paths:
     jquery: "vendor/jquery"
     cookie: "vendor/jquery.cookie"
+    appear: "vendor/jquery.appear"
     underscore: "vendor/underscore"
     backbone: "vendor/backbone"
     chaplin: "vendor/chaplin"
@@ -15,6 +16,8 @@ config =
     highlight: "vendor/highlight"
     marked: "vendor/marked"
   shim:
+    appear:
+      deps: ["jquery"]
     underscore:
       exports: "_"
     backbone:
@@ -24,7 +27,7 @@ config =
       deps: ["jquery"]
     tinycon:
       exports: "Tinycon"
-  deps: ["bootstrap", "cookie"]
+  deps: ["bootstrap", "cookie", "appear"]
   urlArgs: "v=" + (new Date()).getTime()
 
 if exports?
