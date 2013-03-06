@@ -135,6 +135,7 @@ img.avatar {
 
 .post-body, .comment-body {
     margin: 10px 0;
+    min-height: 10px;
 }
 
 .post-footer, .post-footer a, .post-footer a:hover,

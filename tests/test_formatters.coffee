@@ -88,6 +88,25 @@ describe "Formatters", ->
       f(">nyan\nThat should be actually 'nyak'!").should.equal('<blockquote>\n<p>nyan</p>\n</blockquote>\n<p>That should be actually &#39;nyak&#39;!</p>\n')
       f(">test").should.equal('<blockquote>\n<p>test</p>\n</blockquote>\n')
       f("Start:\n>quote").should.equal('<p>Start:</p>\n<blockquote>\n<p>quote</p>\n</blockquote>\n')
+      input = """
+      > Use the > character in front of a line, *just like in email*.
+      > Use it if you're quoting a person, a song or whatever.
+
+      > You can use *italic* or lists inside them also.
+      And just like with other paragraphs,
+      all of these lines are still
+      part of the blockquote, even without the > character in front.
+      """
+      output = """
+<blockquote>
+<p>Use the &gt; character in front of a line, <em>just like in email</em>.<br>Use it if you&#39;re quoting a person, a song or whatever.</p>
+<p>You can use <em>italic</em> or lists inside them also.</p>
+</blockquote>
+<p>And just like with other paragraphs,<br>all of these lines are still<br>part of the blockquote, even without the &gt; character in front.</p>
+
+"""
+      f(input).should.equal(output)
+      f(">quote1\n>quote2\ntext").should.equal('<blockquote>\n<p>quote1<br>quote2</p>\n</blockquote>\n<p>text</p>\n')
 
 
   describe "MoinMoin", ->

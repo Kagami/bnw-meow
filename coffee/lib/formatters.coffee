@@ -86,11 +86,10 @@ define [
 
       # Do the wakabic blockquotes
       WAKABAMARK_BLOCKQUOTE =
-        [/(^|[^\n](\n))(>.+?)((\n)[^\n]|$)/g
-        , (_m, start, nl, quote, end, nl2) ->
-          nl = "" unless nl?
-          nl2 = "" unless nl2?
-          "#{start}#{nl}#{quote}#{nl2}#{end}"
+        [/(^|\n)(>.+)(?=\n(.))/g
+        , (_m, start, quote, ch) ->
+          nl = if ch == ">" then "" else "\n"
+          "#{start}#{quote}#{nl}"
         ]
 
       format = (text) =>
