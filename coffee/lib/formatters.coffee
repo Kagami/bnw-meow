@@ -76,6 +76,9 @@ define [
     markdown: (raw, reply = false) ->
       ###Markdown with some additional BnW-specific rules.###
 
+      FIX_LINE_ENDINGS =
+        [/\r/g, ""]
+
       # Fix formatting at the first line of reply comment by deleting
       # reply nickname.
       # Actually API shouldn't do any actions with user text
@@ -94,6 +97,7 @@ define [
 
       format = (text) =>
         ###Apply BnW additional formatters.###
+        text = text.replace FIX_LINE_ENDINGS[0], FIX_LINE_ENDINGS[1]
         text = text.replace FIX_REPLY_START[0], FIX_REPLY_START[1] if reply
         text = text.replace WAKABAMARK_BLOCKQUOTE[0], WAKABAMARK_BLOCKQUOTE[1]
         text = text.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
