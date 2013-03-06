@@ -84,9 +84,19 @@ define [
       FIX_REPLY_START =
         [/^(@[-0-9A-Za-z_]+ )/g, ""]
 
+      # Do the wakabic blockquotes
+      WAKABAMARK_BLOCKQUOTE =
+        [/(^|[^\n](\n))(>.+?)((\n)[^\n]|$)/g
+        , (_m, start, nl, quote, end, nl2) ->
+          nl = "" unless nl?
+          nl2 = "" unless nl2?
+          "#{start}#{nl}#{quote}#{nl2}#{end}"
+        ]
+
       format = (text) =>
         ###Apply BnW additional formatters.###
         text = text.replace FIX_REPLY_START[0], FIX_REPLY_START[1] if reply
+        text = text.replace WAKABAMARK_BLOCKQUOTE[0], WAKABAMARK_BLOCKQUOTE[1]
         text = text.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
         text = text.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
 

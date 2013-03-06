@@ -14,6 +14,7 @@ formatters = requirejs "lib/formatters"
 
 describe "Formatters", ->
 
+
   describe "escape2", ->
     it "should not escape simple strings", ->
       formatters.escape2("kkk").should.equal("kkk")
@@ -23,6 +24,7 @@ describe "Formatters", ->
                 .should.equal("&lt;tag1&gt;&lt;abcd&gt;&lt;/tag1&gt;")
       formatters.escape2("<http://test'\"&>")
                 .should.equal("&lt;http://test&#39;&quot;&amp;&gt;")
+
 
   describe "Markdown", ->
     f = (text) ->
@@ -81,6 +83,12 @@ describe "Formatters", ->
 
     it "should not highlight messages inside code", ->
       f("`test msg: #0XYNTA`").should.equal('<p><code>test msg: #0XYNTA</code></p>\n')
+
+    it "should do wakabic blockquotes", ->
+      f(">nyan\nThat should be actually 'nyak'!").should.equal('<blockquote>\n<p>nyan</p>\n</blockquote>\n<p>That should be actually &#39;nyak&#39;!</p>\n')
+      f(">test").should.equal('<blockquote>\n<p>test</p>\n</blockquote>\n')
+      f("Start:\n>quote").should.equal('<p>Start:</p>\n<blockquote>\n<p>quote</p>\n</blockquote>\n')
+
 
   describe "MoinMoin", ->
     f = (text) ->
