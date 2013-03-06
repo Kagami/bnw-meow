@@ -19,7 +19,8 @@ define [
       commentId = @get("id").split("/")[1]
       replyCommentId = @get("replyto")?.split("/")[1]
       canDelete = utils.getUser() in [@get("user"), @postUser]
-      formattedText = formatters.format @get("text"), @get("format")
+      formattedText = formatters.format \
+        @get("text"), @get("format"), @get("replyto")?
       _({commentId,
          replyCommentId,
          canDelete,

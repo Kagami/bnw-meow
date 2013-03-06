@@ -44,7 +44,7 @@ define [
       html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
           .replace(/"/g, "&quot;").replace(/'/g, "&#39;")
 
-    format: (raw, format = "markdown") ->
+    format: (raw, format = "markdown", reply = false) ->
       ###Format text using available formatters.
 
       :param format: default: "markdown". Specify text formatter.
@@ -54,7 +54,8 @@ define [
       Return formatter string which should be inserted in DOM without
       any escaping.
       ###
-      (if format == "moinmoin" then @moinmoin else @markdown).call this, raw
+      f = if format == "moinmoin" then @moinmoin else @markdown
+      f.call this, raw, reply
 
     USER_LINK_FORMATTER:
       [/(^|\s)@([-0-9A-Za-z_]+)/g
@@ -72,20 +73,20 @@ define [
         "#{space}[##{link}](/p/#{link.replace '/', '#'})"
       ]
 
-    markdown: (raw) ->
+    markdown: (raw, reply = false) ->
       ###Markdown with some additional BnW-specific rules.###
 
-      # Fix blockquote at the first line of reply comment
-      # TODO: Does it proper API behaviour? bnw_core/post.py:
-      # 'text': ('@' + old_comment['user'] + ' ' if comment_id else '') + text
-      FIX_BLOCKQUOTE =
-        [/^(@[-0-9A-Za-z_]+ )>/g
-        , (_m, user) -> "#{user}\n>"
-        ]
+      # Fix formatting at the first line of reply comment by deleting
+      # reply nickname.
+      # Actually API shouldn't do any actions with user text
+      # (applying reply nickname is template work undoubtedly)
+      # but fuck that legacy.
+      FIX_REPLY_START =
+        [/^(@[-0-9A-Za-z_]+ )/g, ""]
 
       format = (text) =>
         ###Apply BnW additional formatters.###
-        text = text.replace FIX_BLOCKQUOTE[0], FIX_BLOCKQUOTE[1]
+        text = text.replace FIX_REPLY_START[0], FIX_REPLY_START[1] if reply
         text = text.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
         text = text.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
 
