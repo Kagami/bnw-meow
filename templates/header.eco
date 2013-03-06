@@ -20,8 +20,8 @@
         </li>
       </ul>
       <% end %>
-      <% if @isLogged(): %>
       <ul class="nav pull-right">
+      <% if @isLogged(): %>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-user"></i> <%= @getUser() %>
@@ -34,8 +34,10 @@
             <li><a class="logout" href="#">Выход</a></li>
           </ul>
         </li>
-      </ul>
+      <% else: %>
+        <li><a class="show-login-dialog" href="#">Войти</a></li>
       <% end %>
+      </ul>
     </div>
   </div>
 </div>

@@ -12,7 +12,6 @@ define [
 
     container: "body"
     template: template
-    autoRender: true
     events:
       "click .delete-selected": "deleteSelected"
 

@@ -11,7 +11,6 @@ define [
 
     container: "body"
     template: template
-    autoRender: true
     events:
       "click #post-form-submit": "post"
       "keypress #post-form-text": "keypress"

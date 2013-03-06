@@ -6,6 +6,8 @@ define [
   class DialogView extends View
     ###Base dialog class.###
 
+    autoRender: true
+
     afterRender: ->
       super
       @modal = @$el.children(":first")

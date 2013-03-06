@@ -102,7 +102,7 @@ h6{font-size: 12px;}
 
 #notifications {
     position: fixed;
-    top: 61px;
+    top: 51px;
     right: 5px;
     z-index: 2000;
 }
@@ -192,8 +192,8 @@ img.avatar {
     margin-left: -35%;
 }
 
-#post-form {
-    margin: 0px;
+#post-form, #login-form {
+    margin: 0;
 }
 
 .help {

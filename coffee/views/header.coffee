@@ -4,11 +4,12 @@ define [
   "chaplin"
   "views/base/view"
   "views/dialog_new_post"
+  "views/dialog_login"
   "views/base/refresh_date"
   "lib/utils"
   "templates/header"
-], ($, Tinycon, Chaplin, View, DialogNewPostView, RefreshDateView, utils,
-    template) ->
+], ($, Tinycon, Chaplin, View, DialogNewPostView, DialogLoginView,
+    RefreshDateView, utils, template) ->
   "use strict"
 
   class HeaderView extends View
@@ -22,6 +23,7 @@ define [
       "click .logout": "logout"
       "click .warning": "ignore"
       "click .to-the-top": "toTheTop"
+      "click .show-login-dialog": "showLoginDialog"
     templateData:
       breadcrumbs: []
 
@@ -42,14 +44,21 @@ define [
       # Update date in all posts/comments on the page
       setInterval RefreshDateView::tick, 60000
 
-      dialog = new DialogNewPostView()
-      @subview "dialog", dialog
+      newPostView = new DialogNewPostView()
+      @subview "dialog-new-post", newPostView
+
+      loginView = new DialogLoginView()
+      @subview "dialog-login", loginView
 
       $(window).scroll =>
         if $(window).scrollTop() > 600
           @$(".to-the-top").show()
         else
           @$(".to-the-top").hide()
+
+    afterRender: ->
+      super
+      @$(".dropdown-toggle").dropdown()
 
     # Reload controller even if url was not changed
     navigate: (e) ->
@@ -61,17 +70,13 @@ define [
     showNewPost: (e) ->
       e.preventDefault()
       return unless utils.isLogged()
-      @subview("dialog").show()
+      @subview("dialog-new-post").show()
 
     logout: (e) ->
       e.preventDefault()
       utils.clearAuth()
       @render()
       utils.gotoUrl "/"
-
-    afterRender: ->
-      super
-      @$(".dropdown-toggle").dropdown()
 
     ignore: (e) ->
       e.preventDefault()
@@ -117,3 +122,8 @@ define [
 
     toTheTop: ->
       $("html, body").animate(scrollTop: 0, "fast")
+
+    showLoginDialog: (e) ->
+      e.preventDefault()
+      return if utils.isLogged()
+      @subview("dialog-login").show()

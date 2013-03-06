@@ -1,0 +1,47 @@
+<div class="modal hide fade" data-backdrop="static" data-keyboard="false">
+  <form id="login-form" class="form-horizontal">
+    <div class="modal-header">
+      <h3>Вход</h3>
+    </div>
+    <div class="modal-body">
+
+      <ul id="login-form-tabs" class="nav nav-tabs">
+        <li><a href="#by-pass" data-toggle="tab">По паролю</a></li>
+        <li><a href="#by-key" data-toggle="tab">По ключу</a></li>
+      </ul>
+
+      <div class="tab-content">
+
+        <div class="tab-pane" id="by-pass">
+          <div class="control-group">
+            <label class="control-label" for="login-form-login">Логин</label>
+            <div class="controls">
+              <input type="text" id="login-form-login" />
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="login-form-password">Пароль</label>
+            <div class="controls">
+              <input type="password" id="login-form-password" />
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="by-key">
+          <div class="control-group">
+            <label class="control-label" for="login-form-loginkey">Ключ</label>
+            <div class="controls">
+              <input type="text" id="login-form-loginkey" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button id="login-form-submit" type="submit" class="btn btn-success"><i></i> Войти</button>
+      <button id="login-form-cancel" type="button" class="btn" data-dismiss="modal" aria-hidden="true">Отмена</button>
+    </div>
+  </form>
+</div>
