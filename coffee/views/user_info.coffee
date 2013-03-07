@@ -19,6 +19,7 @@ define [
 
     initialize: (options) ->
       super options
+      # FIXME: Seems like this model will not be disposed
       @model = new UserInfo {}, user: options.user
       @show = options.show
       @fetchWithPreloader()?.done =>
