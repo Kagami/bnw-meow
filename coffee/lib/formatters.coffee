@@ -89,11 +89,7 @@ define [
 
       # Do the wakabic blockquotes
       WAKABAMARK_BLOCKQUOTE =
-        [/(^|\n)(>.+)(?=\n(.))/g
-        , (_m, start, quote, ch) ->
-          nl = if ch == ">" then "" else "\n"
-          "#{start}#{quote}#{nl}"
-        ]
+        [/(^|\n)(>.+)(?=\n[^>])/g, "$1$2\n"]
 
       format = (text) =>
         ###Apply BnW additional formatters.###
