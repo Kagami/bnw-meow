@@ -1,0 +1,9 @@
+<h3>Поиск</h3>
+<form class="search-form2">
+  <div class="input-append input-block-level">
+    <input type="text" class="search-form2-query span6" />
+    <button type="submit" class="btn">Найти</button>
+  </div>
+</form>
+
+<div id="search"></div>

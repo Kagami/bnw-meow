@@ -41,37 +41,37 @@ blockquote {
 }
 
 /* Fix headers sizes */
-h1{font-size: 22px;}
-h2{font-size: 20px;}
-h3{font-size: 18px;}
-h4{font-size: 16px;}
-h5{font-size: 14px;}
-h6{font-size: 12px;}
+.media-body h1{font-size: 22px;}
+.media-body h2{font-size: 20px;}
+.media-body h3{font-size: 18px;}
+.media-body h4{font-size: 16px;}
+.media-body h5{font-size: 14px;}
+.media-body h6{font-size: 12px;}
 
 #wrap {
     min-height: 100%;
     height: auto !important;
     height: 100%;
     /* Negative indent footer by it's height and margin */
-    margin: 0 auto -131px;
+    margin: 0 auto -171px;
 }
 
 #footer {
     background-color: #F5F5F5;
     border-top: 1px solid #E5E5E5;
-    margin-top: 70px;
+    margin-top: 110px;
     height: 60px;
     text-align: right;
 }
 
 #push {
     /* Footer's height + margin */
-    height: 131px;
+    height: 171px;
 }
 
 #main {
     /* Fix navbar offset */
-    padding-top: 61px;
+    padding-top: 41px;
 }
 
 .credit {
@@ -118,7 +118,7 @@ div.selected {
 /* Application-related */
 
 .post, .comment, #comment-form {
-    margin-bottom: 20px;
+    margin: 20px 0 0 0;
 }
 
 div.avatar {
@@ -222,6 +222,10 @@ img.avatar {
 
 /* User info */
 
+#user-info {
+    margin: 20px 0 0 0;
+}
+
 #user-info p {
     margin: 0;
 }
@@ -269,6 +273,33 @@ img.avatar {
     opacity: 0.9;
 }
 
+/* Misc */
+
 .not-found {
     text-align: center;
+}
+
+.warning {
+    cursor: pointer;
+}
+
+/* Search */
+
+.search-form {
+    margin-right: 10px;
+}
+
+.search-form .search-query {
+    padding-left: 29px;
+}
+
+.icon-search-fix {
+    position: absolute;
+    top: 7px;
+    left: 11px;
+    color: #999999;
+}
+
+.search-form-query:focus + .icon-search-fix {
+    color: #333333;
 }

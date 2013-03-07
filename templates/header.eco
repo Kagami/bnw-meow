@@ -16,12 +16,17 @@
       <% unless WebSocket?: %>
       <ul class="nav">
         <li title="Ваш браузер не поддерживает вебсокеты! Возможности сайта будут ограничены.">
-          <a class="warning" href="#"><i class="icon-warning-sign"></i> WS</a>
+          <a class="warning"><i class="icon-warning-sign"></i> WS</a>
         </li>
       </ul>
       <% end %>
       <ul class="nav pull-right">
       <% if @isLogged(): %>
+        <form class="search-form navbar-search">
+          <input type="text" class="search-form-query search-query input-medium" placeholder="Поиск" />
+          <i class="icon-search-fix icon-search"></i>
+        </form>
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-user"></i> <%= @getUser() %>

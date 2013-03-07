@@ -21,9 +21,9 @@ define [
       "click #common-menu a": "navigate"
       "click .show-new-post": "showNewPost"
       "click .logout": "logout"
-      "click .warning": "ignore"
       "click .to-the-top": "toTheTop"
       "click .show-login-dialog": "showLoginDialog"
+      "submit .search-form": "search"
     templateData:
       breadcrumbs: []
 
@@ -51,7 +51,7 @@ define [
       @subview "dialog-login", loginView
 
       $(window).scroll =>
-        if $(window).scrollTop() > 600
+        if $(window).scrollTop() > 300
           @$(".to-the-top").show()
         else
           @$(".to-the-top").hide()
@@ -77,11 +77,6 @@ define [
       utils.clearAuth()
       @render()
       utils.gotoUrl "/"
-
-    ignore: (e) ->
-      e.preventDefault()
-
-    # Favicon actions
 
     incCounter: ->
       @eventsCounter++
@@ -127,3 +122,10 @@ define [
       e.preventDefault()
       return if utils.isLogged()
       @subview("dialog-login").show()
+
+    search: (e) ->
+      e.preventDefault()
+      # XXX: Currently search available only for logged users
+      return unless utils.isLogged()
+      query = encodeURIComponent @$(".search-form-query").val()
+      utils.gotoUrl "/search/#{query}"

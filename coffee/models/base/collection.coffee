@@ -18,7 +18,9 @@ define [
     _hasPages: true
 
     hasPages: ->
-      ###Do we reach the last page?###
+      ###Do we reach the last page?
+      May be overloaded in descendants.
+      ###
       @_hasPages
 
     incPage: ->
