@@ -16,7 +16,7 @@ define [
     match "search/:query", "search#show"
     match "login", "login#login"
     match "top", "posts#show", params:
-      id: "today", title: "Топ 20 постов за сегодня", pageble: false
+      id: "today", title: "Топ 20 постов за сегодня", scrollable: false
 
     match "u/:user", "posts#show", params:
       show: "messages"

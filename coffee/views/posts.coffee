@@ -1,28 +1,20 @@
 define [
-  "jquery"
-  "underscore"
   "models/post"
-  "views/base/collection_view"
+  "views/base/scrollable"
   "views/post"
   "views/user_info"
   "views/dialog_delete"
-  "lib/utils"
   "templates/posts"
-  "templates/preloader"
-  "templates/not_found"
-], ($, _, Post, CollectionView, PostView, UserInfoView, DialogDeleteView,
-    utils, template, preloader, notFound) ->
+], (Post, ScrollableView, PostView, UserInfoView, DialogDeleteView, template) ->
   "use strict"
 
-  class PostsView extends CollectionView
+  class PostsView extends ScrollableView
 
     container: "#main"
     template: template
     listSelector: "#posts"
     itemView: PostView
     autoRender: false
-
-    SCROLL_THRESHOLD: 300
 
     getView: (model) ->
       new @itemView
@@ -32,10 +24,8 @@ define [
 
     initialize: (options) ->
       super options
-      if options?.pageble?
-        @pageble = options.pageble
-      else
-        @pageble = true
+      if options?.scrollable?
+        @scrollable = options.scrollable
 
       dialog = new DialogDeleteView()
       @subview "dialog", dialog
@@ -52,35 +42,9 @@ define [
         userInfo = new UserInfoView user: @pageUser, show: @show
         @subview "user-info", userInfo
 
-      @fetch(true)?.done =>
+      @fetch()?.done =>
         @subscribeEvent "!ws:new_message", @onNewPost
         @initWebSocket()
-
-    fetch: (first = false) ->
-      return if @$list.children(".preloader").length
-      unless first
-        if @collection.hasPages() then @collection.incPage() else return
-
-      @$list.append utils.renderTemplate preloader
-      d = @collection.fetch()
-      d.always =>
-        @$list.children(".preloader").remove()
-      d.done (data) =>
-        if not data.messages.length and not @collection.length
-          @$list.append utils.renderTemplate notFound
-
-    afterRender: ->
-      super
-      $(window).scroll @onScroll if @pageble
-
-    dispose: ->
-      $(window).off "scroll", @onScroll
-      super
-
-    onScroll: =>
-      position = $(window).scrollTop() + $(window).height()
-      height = $(document).height()
-      @fetch() if height - position < @SCROLL_THRESHOLD
 
     onNewPost: (postData) ->
       post = new Post postData

@@ -11,9 +11,13 @@ define [
 
     fetch: ->
       @apiCall().done (data) =>
-        @reset data.search_result[1]
+        if data.results.length
+          @add data.results
+        else
+          @_hasPages = false
 
     search: (query) ->
+      @reset()
       # API request URI looks like /api/search/?query=<search_query>
       # We have the similar collection's options parameter so
       # it's a bit confusing.

@@ -42,7 +42,7 @@ define [
       @collection = new Posts [], id: params.id, query: query
       @view = new PostsView
         collection: @collection
-        pageble: params.pageble
+        scrollable: params.scrollable
         pageUser: params.user
         show: params.show
       @adjustTitle params.title
