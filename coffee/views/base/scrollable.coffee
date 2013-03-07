@@ -42,6 +42,7 @@ define [
       d.always =>
         @$list.children(".preloader").remove()
       d.done (data) =>
-        @collection.incPage()
-        if not @collection.hasPages() and not @collection.length
+        if @collection.isEmptyData(data) and not @collection.length
           @$list.append utils.renderTemplate notFound
+        else
+          @collection.incPage()

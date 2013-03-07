@@ -29,6 +29,7 @@ define [
       super
       d = @model.fetch()
       d.fail =>
+        # TODO: Refactor using View#fetchWithPreloader
         @$(".preloader").remove()
       d.done =>
         @subscribeEvent "!ws:new_comment", @onNewComment

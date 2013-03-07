@@ -11,15 +11,17 @@ define [
 
     fetch: ->
       @apiCall().done (data) =>
-        if data.results.length
-          @add data.results
-        else
+        @add data.results
+        if data.results.length < @PAGE_SIZE
           @_hasPages = false
 
-    search: (query) ->
+    setQuery: (query) ->
       @reset()
+      @resetPages()
       # API request URI looks like /api/search/?query=<search_query>
       # We have the similar collection's options parameter so
       # it's a bit confusing.
       @query = {query}
-      @fetch()
+
+    isEmptyData: (data) ->
+      not data.results.length

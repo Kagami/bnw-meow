@@ -9,9 +9,13 @@ define [
     constructor: (models, options) ->
       super models, options
       @id = options.id if options?.id?
-      @query = options.query if options?.query?
+      @query = if options?.query? then options.query else {}
 
     apiCall: Model::apiCall
+
+    #: Normal page size (number of elements). It could be smaller
+    #: (on last page) but not bigger.
+    PAGE_SIZE: 20
 
     #: Set this var to false when you've reached
     #: the last page.
@@ -28,3 +32,10 @@ define [
         @query.page++
       else
         @query.page = 1
+
+    resetPages: ->
+      @_hasPages = true
+      delete @query.page
+
+    isEmptyData: (data) ->
+      throw new Error "Collection#isEmptyData must be overridden"

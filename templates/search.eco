@@ -2,7 +2,7 @@
 <form class="search-form2">
   <div class="input-append input-block-level">
     <input type="text" class="search-form2-query span6" />
-    <button type="submit" class="btn">Найти</button>
+    <button type="submit" class="search-form2-submit btn">Найти</button>
   </div>
 </form>
 

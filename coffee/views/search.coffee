@@ -1,12 +1,13 @@
 define [
-  "views/base/collection_view"
+  "jquery"
+  "views/base/scrollable"
   "views/search_item"
   "lib/utils"
   "templates/search"
-], (CollectionView, SearchItemView, utils, template) ->
+], ($, ScrollableView, SearchItemView, utils, template) ->
   "use strict"
 
-  class SearchView extends CollectionView
+  class SearchView extends ScrollableView
 
     container: "#main"
     template: template
@@ -27,7 +28,14 @@ define [
 
     search: (e = undefined) ->
       e.preventDefault() if e?
-      query = @$(".search-form2-query").val()
+      input = @$(".search-form2-query").prop("disabled", true).blur()
+      query = input.val()
+      submit = @$(".search-form2-submit").prop("disabled", true)
+      $("#search").empty()
+
       @publishEvent "!router:changeURL", "/search/#{encodeURIComponent query}"
       @publishEvent "!adjustTitle", "Поиск #{utils.truncate query}"
-      @collection.search query
+      @collection.setQuery query
+      @fetch().always ->
+        input.prop("disabled", false)
+        submit.prop("disabled", false)

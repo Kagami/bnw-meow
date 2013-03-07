@@ -11,7 +11,9 @@ define [
 
     fetch: ->
       @apiCall().done (data) =>
-        if data.messages.length
-          @add data.messages.reverse()
-        else
+        @add data.messages.reverse()
+        if data.messages.length < @PAGE_SIZE
           @_hasPages = false
+
+    isEmptyData: (data) ->
+      not data.messages.length
