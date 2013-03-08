@@ -82,7 +82,7 @@ define [
       @removeCookie "user"
 
 
-    pluralForm: (n, [p1, p2, p5]) ->
+    pluralForm: (n, [p1, p2, p5], withNumber = false) ->
       _pluralForm = ->
         if 10 < n < 15
           return p5
@@ -94,7 +94,10 @@ define [
         else
           p5
 
-      "#{n} #{_pluralForm()}"
+      if withNumber
+        "#{n} #{_pluralForm()}"
+      else
+        _pluralForm()
 
     now: ->
       ###Return current formatted time.###

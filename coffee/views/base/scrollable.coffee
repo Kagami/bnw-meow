@@ -7,8 +7,7 @@ define [
   "views/base/collection_view"
   "lib/utils"
   "templates/preloader"
-  "templates/not_found"
-], ($, CollectionView, utils, preloader, notFound) ->
+], ($, CollectionView, utils, preloader) ->
   "use strict"
 
   class ScrollableView extends CollectionView
@@ -42,7 +41,7 @@ define [
       d.always =>
         @$list.children(".preloader").remove()
       d.done (data) =>
-        if @collection.isEmptyData(data) and not @collection.length
-          @$list.append utils.renderTemplate notFound
+        if @collection.isEmptyPage(data) and not @collection.length
+          @$list.append utils.renderTemplate @notFoundTemplate
         else
           @collection.incPage()

@@ -15,8 +15,7 @@ define [
 
     #: Normal page size (number of elements). It could be smaller
     #: (on last page) but not bigger.
-    PAGE_SIZE: 20
-
+    pageSize: 20
     #: Set this var to false when you've reached
     #: the last page.
     _hasPages: true
@@ -37,5 +36,5 @@ define [
       @_hasPages = true
       delete @query.page
 
-    isEmptyData: (data) ->
-      throw new Error "Collection#isEmptyData must be overridden"
+    isEmptyPage: (data) ->
+      throw new Error "Collection#isEmptyPage must be overridden"

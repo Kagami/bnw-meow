@@ -64,7 +64,7 @@ define [
         forDelete = if singlePostMarked
           "пост"
         else
-          utils.pluralForm @selected.length, @pluralForms
+          utils.pluralForm @selected.length, @pluralForms, true
         @$(".for-delete").text(forDelete)
         @show() unless @isVisible()
       else

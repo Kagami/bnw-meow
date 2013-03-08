@@ -276,7 +276,8 @@ img.avatar {
 
 /* Misc */
 
-.not-found {
+.no-posts {
+    margin: 20px 0 0 0;
     text-align: center;
 }
 
@@ -303,4 +304,8 @@ img.avatar {
 
 .search-form-query:focus + .icon-search-fix {
     color: #333333;
+}
+
+.estimated {
+    font-weight: bold;
 }

@@ -5,7 +5,9 @@ define [
   "views/user_info"
   "views/dialog_delete"
   "templates/posts"
-], (Post, ScrollableView, PostView, UserInfoView, DialogDeleteView, template) ->
+  "templates/no_posts"
+], (Post, ScrollableView, PostView, UserInfoView, DialogDeleteView, template,
+    notFound) ->
   "use strict"
 
   class PostsView extends ScrollableView
@@ -15,6 +17,7 @@ define [
     listSelector: "#posts"
     itemView: PostView
     autoRender: false
+    notFoundTemplate: notFound
 
     getView: (model) ->
       new @itemView

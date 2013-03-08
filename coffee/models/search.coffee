@@ -12,7 +12,7 @@ define [
     fetch: ->
       @apiCall().done (data) =>
         @add data.results
-        if data.results.length < @PAGE_SIZE
+        if data.results.length < @pageSize
           @_hasPages = false
 
     setQuery: (query) ->
@@ -23,5 +23,5 @@ define [
       # it's a bit confusing.
       @query = {query}
 
-    isEmptyData: (data) ->
+    isEmptyPage: (data) ->
       not data.results.length
