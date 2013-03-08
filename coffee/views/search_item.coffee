@@ -1,17 +1,16 @@
 define [
+  "jquery"
+  "highlight"
   "views/base/refresh_date"
-  "templates/post"
-  "templates/comment"
-], (RefreshDateView, postTemplate, commentTemplate) ->
+  "templates/search_item"
+], ($, hljs, RefreshDateView, template) ->
   "use strict"
 
   class SearchItemView extends RefreshDateView
 
-    templateData:
-      search: true
+    template: template
 
-    getTemplateFunction: ->
-      if @model.get("type") is "message"
-        postTemplate
-      else
-        commentTemplate
+    afterRender: ->
+      super
+      @$("pre code").each (i, e) ->
+        hljs.highlightBlock e

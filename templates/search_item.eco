@@ -1,0 +1,42 @@
+<div class="<%= @klass %> well well-small">
+  <div class="media">
+    <div class="avatar pull-left">
+      <a href="/u/<%= @user %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @getBnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
+    </div>
+    <div class="media-body">
+
+      <div class="<%= @klass %>-header">
+        <a class="<%= @klass %>-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
+        <abbr class="<%= @klass %>-date label label-reset" title="<%= @formatDateLong @date %>"><%= @formatDate @date %></abbr>
+        <span class="search-item-percent" title="Релевантность">(<%= @percent %>%)</span>
+      </div>
+
+      <div class="<%= @klass %>-body">
+        <%- @formattedText %>
+      </div>
+
+      <div class="<%= @klass %>-footer">
+        <div class="post-tags">
+          <% if @tags.length: %>
+            <i class="icon-tags"></i>
+            <% i = 1 %>
+            <%for tag in @tags: %>
+              <a class="post-tag" href="/t/<%= encodeURIComponent tag %>"><%= tag %></a><% if i < @tags.length: %>,<% end %>
+              <% i++ %>
+            <% end %>
+          <% end %>
+          <% if @clubs.length: %>
+            <i class="icon-group"></i>
+            <% i = 1 %>
+            <%for club in @clubs: %>
+              <a class="post-club" href="/c/<%= encodeURIComponent club %>"><%= club %></a><% if i < @clubs.length: %>,<% end %>
+              <% i++ %>
+            <% end %>
+          <% end %>
+        </div>
+        <a class="<%= @klass %>-id label label-reset" href="/p/<%= @id2 %>">#<%= @id %></a>
+      </div>
+
+    </div>
+  </div>
+</div>

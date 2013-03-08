@@ -81,7 +81,7 @@ define [
       @removeCookie "login"
       @removeCookie "user"
 
-    # Misc utils
+    # Misc
 
     pluralForm: (n, [p1, p2, p5], withNumber = false) ->
       _pluralForm = ->
@@ -117,3 +117,15 @@ define [
 
     decode: (text) ->
       decodeURIComponent(text).replace /\+/g, " "
+
+    SHORT_POST_LENGTH: 500
+    truncatePost: (text, format, id) ->
+      if format isnt "moinmoin"
+        # XXX: Of course it is much better to shrink post based on
+        # it's rendered size but jquery.dotdotdot is so horrible slow.
+        # (About 38ms for single middle-sized div. What the fuck?)
+        if text.length > @SHORT_POST_LENGTH
+          text = text[...@SHORT_POST_LENGTH]
+          id = id.replace "/", "#"
+          text += " […](/p/#{id} \"Читать дальше\")"
+      text

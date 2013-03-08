@@ -141,7 +141,7 @@ img.avatar {
 
 .post-footer, .post-footer a, .post-footer a:hover,
 .comment-footer, .comment-footer a, .comment-footer a:hover,
-.post-footer2 {
+.post-footer2, .search-item-percent {
     color: #999999;
 }
 
@@ -152,6 +152,10 @@ img.avatar {
 /* TODO: Should we use sass and variables for colors, size values? */
 .post-user, .comment-user, .post-id, .post-comments-info {
     margin-right: 3px;
+}
+
+.search-item-percent {
+    margin-left: 3px;
 }
 
 .post-delete:hover, .comment-delete:hover {
