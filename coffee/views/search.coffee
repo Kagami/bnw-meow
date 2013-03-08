@@ -35,7 +35,7 @@ define [
       submit = @$(".search-form2-submit").prop("disabled", true)
       $("#search").empty()
 
-      @publishEvent "!router:changeURL", "/search/#{encodeURIComponent query}"
+      @publishEvent "!router:changeURL", "/search/#{utils.encode query}"
       @publishEvent "!adjustTitle", "Поиск #{utils.truncate query}"
       @collection.setQuery query
       d = @fetch()

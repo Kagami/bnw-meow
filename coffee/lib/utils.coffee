@@ -81,6 +81,7 @@ define [
       @removeCookie "login"
       @removeCookie "user"
 
+    # Misc utils
 
     pluralForm: (n, [p1, p2, p5], withNumber = false) ->
       _pluralForm = ->
@@ -110,3 +111,9 @@ define [
         el.addClass("selected")
         # 41px — compensate for navbar
         $("html, body").scrollTop(el.offset().top - 41)
+
+    encode: (text) ->
+      encodeURIComponent(text).replace /%20/g, "+"
+
+    decode: (text) ->
+      decodeURIComponent(text).replace /\+/g, " "

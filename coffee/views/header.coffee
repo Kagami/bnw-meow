@@ -127,5 +127,5 @@ define [
       e.preventDefault()
       # XXX: Currently search available only for logged users
       return unless utils.isLogged()
-      query = encodeURIComponent @$(".search-form-query").val()
+      query = utils.encode @$(".search-form-query").val()
       utils.gotoUrl "/search/#{query}"
