@@ -122,6 +122,10 @@ div.selected {
     margin: 20px 0 0 0;
 }
 
+#single-post .post {
+    background-color: #FCFCFC;
+}
+
 div.avatar {
     /* XXX: We need to explicitly specify avatar container width
      * because while loading img has the width of its alt text.
