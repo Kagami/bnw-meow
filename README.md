@@ -1,6 +1,6 @@
 # bnw-meow
 
-Kawaii single-page web interface for https://bnw.im/ built on top of the great Chaplin framework.
+Kawaii single-page web interface from bnw.im built on top of the great Chaplin framework.
 
 ## See it in action
 
