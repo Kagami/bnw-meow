@@ -55,7 +55,16 @@ define [
       any escaping.
       ###
       f = if format == "moinmoin" then @moinmoin else @markdown
-      f.call this, raw, reply
+      raw = raw.replace @FIX_REPLY_START[0], @FIX_REPLY_START[1] if reply
+      f.call this, raw
+
+    # Fix formatting at the first line of reply comment by deleting
+    # reply nickname.
+    # Actually API shouldn't do any actions with user text
+    # (applying reply nickname is template work undoubtedly)
+    # but fuck that legacy.
+    FIX_REPLY_START:
+      [/^[^ ]+ /, ""]
 
     USER_LINK_FORMATTER:
       [/(^|\s)@([-0-9A-Za-z_]+)/g
@@ -73,31 +82,22 @@ define [
         "#{space}[##{link}](/p/#{link.replace '/', '#'})"
       ]
 
-    markdown: (raw, reply = false) ->
+    markdown: (raw) ->
       ###Markdown with some additional BnW-specific rules.###
 
       FIX_LINE_ENDINGS =
         [/\r/g, ""]
 
-      # Fix formatting at the first line of reply comment by deleting
-      # reply nickname.
-      # Actually API shouldn't do any actions with user text
-      # (applying reply nickname is template work undoubtedly)
-      # but fuck that legacy.
-      FIX_REPLY_START =
-        [/^(@[-0-9A-Za-z_]+ )/g, ""]
-
       # Do the wakabic blockquotes
       WAKABAMARK_BLOCKQUOTE =
         [/(^|\n)(>.+)(?=\n[^>])/g, "$1$2\n"]
 
-      format = (text) =>
-        ###Apply BnW additional formatters.###
-        text = text.replace FIX_LINE_ENDINGS[0], FIX_LINE_ENDINGS[1]
-        text = text.replace FIX_REPLY_START[0], FIX_REPLY_START[1] if reply
-        text = text.replace WAKABAMARK_BLOCKQUOTE[0], WAKABAMARK_BLOCKQUOTE[1]
-        text = text.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
-        text = text.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
+      format = (rawb) =>
+        ###Apply BnW additional formatters to the block of raw text.###
+        rawb = rawb.replace FIX_LINE_ENDINGS[0], FIX_LINE_ENDINGS[1]
+        rawb = rawb.replace WAKABAMARK_BLOCKQUOTE[0], WAKABAMARK_BLOCKQUOTE[1]
+        rawb = rawb.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
+        rawb = rawb.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
 
       # Walk through raw input text and apply bnw formatters only
       # for non-code blocks.
