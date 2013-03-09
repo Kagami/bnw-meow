@@ -11,6 +11,8 @@
       </button>
     </div>
   </div>
+  &nbsp;
+  <a class="help" href="http://xapian.org/docs/queryparser.html" title="Справка по синтаксису"><i class="icon-question-sign"></i></a>
 
   <div class="search-form-additional hide">
     <div class="control-group">
