@@ -28,7 +28,6 @@ define [
 
     submit: (e) ->
       e.preventDefault()
-      return if $("#login-form-submit").prop("disabled")
       submit = $("#login-form-submit").prop("disabled", true)
       cancel = $("#login-form-cancel").prop("disabled", true)
       i = submit.children("i").toggleClass("icon-refresh icon-spin")
