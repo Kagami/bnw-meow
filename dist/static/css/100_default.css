@@ -122,8 +122,9 @@ div.selected {
     margin: 20px 0 0 0;
 }
 
-#single-post .post {
-    background-color: #FCFCFC;
+.comment {
+    /* Do comment background a bit lighter. */
+    background-color: #FAFAFA;
 }
 
 div.avatar {
