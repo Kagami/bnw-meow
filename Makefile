@@ -54,6 +54,7 @@ pre-deb:
 	cp dist/favicon.ico "$(INDEX_R)"
 
 minify:
+	# TODO: Minify css files as well
 	cat $(STATIC)/css/*.css > "$(STATIC_R)/css/default.css"
 	./minify.js
 	sed "s/^VERSION =.*/VERSION = '$(VERSION)';/" \

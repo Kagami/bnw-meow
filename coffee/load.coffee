@@ -15,6 +15,7 @@ config =
     tinycon: "vendor/tinycon"
     highlight: "vendor/highlight"
     marked: "vendor/marked"
+    pikaday: "vendor/pikaday"
   shim:
     appear:
       deps: ["jquery"]
@@ -27,6 +28,8 @@ config =
       deps: ["jquery"]
     tinycon:
       exports: "Tinycon"
+    pikaday:
+      exports: "Pikaday"
   deps: ["bootstrap", "cookie", "appear"]
   urlArgs: "v=" + (new Date()).getTime()
 

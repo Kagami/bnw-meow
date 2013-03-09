@@ -8,7 +8,7 @@
       <div class="<%= @klass %>-header">
         <a class="<%= @klass %>-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
         <abbr class="<%= @klass %>-date label label-reset" title="<%= @formatDateLong @date %>"><%= @formatDate @date %></abbr>
-        <span class="search-item-percent" title="Релевантность">(<%= @percent %>%)</span>
+        <span class="search-item-percent pull-right" title="Релевантность"><%= @percent %>%</span>
       </div>
 
       <div class="<%= @klass %>-body">

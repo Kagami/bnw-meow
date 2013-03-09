@@ -10,6 +10,7 @@
   <#else>
     <link rel="stylesheet" type="text/css" href="/static/css/010_bootstrap.css?v=<#VERSION>" />
     <link rel="stylesheet" type="text/css" href="/static/css/020_font-awesome.css?v=<#VERSION>" />
+    <link rel="stylesheet" type="text/css" href="/static/css/030_pikaday.css?v=<#VERSION>" />
     <link rel="stylesheet" type="text/css" href="/static/css/090_highlight-github.css?v=<#VERSION>" />
     <link rel="stylesheet" type="text/css" href="/static/css/100_default.css?v=<#VERSION>" />
   <#endif>

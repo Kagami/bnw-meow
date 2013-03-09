@@ -1,10 +1,66 @@
 <h3>Поиск</h3>
 
-<form class="search-form2">
-  <div class="input-append input-block-level">
-    <input type="text" class="search-form2-query span6" />
-    <button type="submit" class="search-form2-submit btn">Найти</button>
+<form class="search-form2 form-horizontal">
+
+  <div class="input-append">
+    <input type="text" id="search-form2-query" class="span6" />
+    <div class="btn-group">
+      <button type="submit" class="search-form2-submit btn">Найти</button>
+      <button type="button" class="search-form2-toggle-additional btn dropdown-toggle" title="Показать/скрыть дополнительные параметры">
+        <span class="caret"></span>
+      </button>
+    </div>
   </div>
+
+  <div class="search-form-additional hide">
+    <div class="control-group">
+      <label class="control-label">Искать</label>
+      <div class="controls">
+        <label class="radio">
+          <input type="radio" name="type" value="all" checked /> всё
+        </label>
+        <label class="radio">
+          <input type="radio" name="type" value="m" /> только посты
+        </label>
+        <label class="radio">
+          <input type="radio" name="type" value="c" /> только комментарии
+        </label>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="search-form2-user">Автор</label>
+      <div class="controls">
+        <input type="text" id="search-form2-user" title="Имя автора, например: user" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="search-form2-tags">Теги</label>
+      <div class="controls">
+        <input type="text" id="search-form2-tags" title="Список тегов через пробел, например: water sea sun" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="search-form2-clubs">Клубы</label>
+      <div class="controls">
+        <input type="text" id="search-form2-clubs" title="Список клубов через пробел, например: bnw @" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="search-form2-date-from">Период</label>
+      <div class="controls">
+        <input type="text" id="search-form2-date-from" class="input-small" title="С какого числа, в формате DD/MM/YYYY" />
+        ÷
+        <input type="text" id="search-form2-date-to" class="input-small" title="По какое число, в формате DD/MM/YYYY" />
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" class="search-form2-submit btn btn-primary">Найти</button>
+        <button type="reset" class="btn">Очистить</button>
+      </div>
+    </div>
+  </div>
+
 </form>
 
 <div id="search"></div>

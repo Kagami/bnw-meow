@@ -10,10 +10,13 @@ define [
     model: SearchItem
 
     fetch: ->
-      @apiCall().done (data) =>
+      d = @apiCall()
+      d.done (data) =>
         @add data.results
         if data.results.length < @pageSize
           @_hasPages = false
+      d.fail =>
+        @_hasPages = false
 
     setQuery: (query) ->
       @reset()

@@ -12,7 +12,7 @@ html {
     overflow-y: scroll;
 }
 
-button, a {
+button, input, a {
     outline: none !important;
 }
 
@@ -295,8 +295,11 @@ img.avatar {
     margin-right: 10px;
 }
 
-.search-form .search-query {
-    padding-left: 29px;
+.search-form-query {
+    /* XXX: That's pretty terrible how much we should use 'important'
+     * flag.
+     */
+    padding-left: 29px !important;
 }
 
 .icon-search-fix {
@@ -307,9 +310,17 @@ img.avatar {
 }
 
 .search-form-query:focus + .icon-search-fix {
-    color: #333333;
+    color: #555555;
 }
 
 .estimated {
     font-weight: bold;
+}
+
+.btn-group .search-form2-submit {
+    border-radius: 0 !important;
+}
+
+.search-form-additional {
+    margin: 20px 0;
 }
