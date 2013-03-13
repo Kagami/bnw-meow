@@ -21,12 +21,12 @@
       </ul>
       <% end %>
       <ul class="nav pull-right">
-      <% if @isLogged(): %>
         <form class="search-form navbar-search">
           <input type="text" class="search-form-query search-query input-medium" placeholder="Поиск" />
           <i class="icon-search-fix icon-search"></i>
         </form>
 
+      <% if @isLogged(): %>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-user"></i> <%= @getUser() %>
