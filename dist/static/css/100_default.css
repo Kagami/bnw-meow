@@ -329,3 +329,8 @@ img.avatar {
 .search-form-additional {
     margin: 20px 0;
 }
+
+/* Violet links*/
+.comment-body a:visited, .post-body a:visited {
+    color: #490A3D;
+}
