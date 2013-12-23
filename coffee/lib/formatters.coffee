@@ -82,6 +82,12 @@ define [
         "#{space}[##{link}](/p/#{link.replace '/', '#'})"
       ]
 
+    IMG_PREVIEW_FORMATTER:
+      [/<a href="(.+\.(jpg|jpeg|gif|png))">([^<]+)<\/a>/g
+      , (_m, link, ext, alt) ->
+        "<div class=\"preview\"<a href=\"#{link}\"><img src=\"http://fuck.blasux.ru/thumb?img=#{encodeURIComponent link}\" alt=\"#{alt}\"></a>"
+      ]
+
     markdown: (raw) ->
       ###Markdown with some additional BnW-specific rules.###
 
@@ -124,7 +130,7 @@ define [
       stage2 = result.join ""
 
       # At last apply marked renderer and hope it do well
-      marked stage2,
+      html = marked stage2,
         pedantic: false,
         gfm: true,
         sanitize: true,  # Escaping! Don't touch.
@@ -132,6 +138,9 @@ define [
         breaks: true,
         smartLists: false,
         langPrefix: 'language-'
+
+      # Image's previews
+      html.replace @IMG_PREVIEW_FORMATTER[0], @IMG_PREVIEW_FORMATTER[1]
 
     moinmoin: (raw) ->
       ###
@@ -180,6 +189,7 @@ define [
         ]
         @USER_LINK_FORMATTER
         @POST_LINK_FORMATTER
+        @IMG_PREVIEW_FORMATTER
         # Fix newlines
         [/\n/g, -> "<br />"]
       ]
