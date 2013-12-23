@@ -1,7 +1,4 @@
 <div class="user-info-header media">
-  <div class="avatar pull-left">
-    <a href="<%= @getBnwUrl "/u/#{@user}/avatar" %>"><img class="avatar img-polaroid" alt="avatar" src="<%= @getBnwUrl "/u/#{@user}/avatar/thumb" %>" /></a>
-  </div>
 
   <div class="user-info-name media-body">
     <p>
