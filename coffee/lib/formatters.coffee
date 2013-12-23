@@ -85,7 +85,7 @@ define [
     IMG_PREVIEW_FORMATTER:
       [/<a href="(.+\.(jpg|jpeg|gif|png))">([^<]+)<\/a>/g
       , (_m, link, ext, alt) ->
-        "<div class=\"preview\"<a href=\"#{link}\"><img src=\"http://fuck.blasux.ru/thumb?img=#{encodeURIComponent link}\" alt=\"#{alt}\"></a></div>"
+        "<div class=\"preview\"><a href=\"#{link}\"><img src=\"http://fuck.blasux.ru/thumb?img=#{encodeURIComponent link}\" alt=\"#{alt}\"></a></div>"
       ]
 
     markdown: (raw) ->
