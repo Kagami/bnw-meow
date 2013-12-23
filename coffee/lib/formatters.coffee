@@ -82,6 +82,14 @@ define [
         "#{space}[##{link}](/p/#{link.replace '/', '#'})"
       ]
 
+    IMG_PREVIEW_FORMATTER:
+      [/<a href="(.+\.(jpg|jpeg|gif|png))">([^<]+)<\/a>/g
+      , (_m, link, ext, alt) ->
+        "<a href=\"##{link}\"><img src=\"http://fuck.blasux.ru/thumb?img=#{encodeURIComponent link}\" alt=\"##{alt}\"></a>"
+      , (_m, link, ext, alt) ->
+        "![##{alt}](http://fuck.blasux.ru/thumb?img=#{encodeURIComponent link})"
+      ]
+
     markdown: (raw) ->
       ###Markdown with some additional BnW-specific rules.###
 
@@ -98,6 +106,7 @@ define [
         rawb = rawb.replace WAKABAMARK_BLOCKQUOTE[0], WAKABAMARK_BLOCKQUOTE[1]
         rawb = rawb.replace @USER_LINK_FORMATTER[0], @USER_LINK_FORMATTER[2]
         rawb = rawb.replace @POST_LINK_FORMATTER[0], @POST_LINK_FORMATTER[2]
+        rawb = rawb.replace @IMG_PREVIEW_FORMATTER[0], @IMG_PREVIEW_FORMATTER[2]
 
       # Walk through raw input text and apply bnw formatters only
       # for non-code blocks.
@@ -180,6 +189,7 @@ define [
         ]
         @USER_LINK_FORMATTER
         @POST_LINK_FORMATTER
+        @IMG_PREVIEW_FORMATTER
         # Fix newlines
         [/\n/g, -> "<br />"]
       ]
