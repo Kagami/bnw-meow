@@ -334,3 +334,16 @@ img.avatar {
 .comment-body a:visited, .post-body a:visited {
     color: #490A3D;
 }
+
+/* Gif preview indicator */
+.preview-gif a:before {
+    margin: 2px;
+    padding: 2px;
+    content: 'GIF';
+    color: #fff;
+    background: #FA1C7C;
+    opacity: 0.5;
+    position: absolute;
+    font-size: 11px;
+    line-height: 100%;
+}
