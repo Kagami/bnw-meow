@@ -18,7 +18,8 @@ define [
       params.tag = decodeURIComponent params.tag if params.tag?
       params.club = decodeURIComponent params.club if params.club?
 
-      query = use_bl: 1
+      # Bnw API returns Error 500 if feed request contains use_bl key
+      query = if params.id is "feed" then {} else use_bl: 1
       if params.user?
         query.user = params.user
         query.show = params.show

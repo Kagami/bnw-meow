@@ -7,6 +7,9 @@
         <a class="brand" href="/">BnW</a>
         <li><a href="/">Главная</a></li>
         <li><a href="/top">Топ</a></li>
+        <% if @isLogged(): %>
+        <li><a href="/feed">Подписки</a></li>
+        <% end %>
         <% for [link, icon, title] in @breadcrumbs: %>
         <li>
         <a href="<%= link %>"><i class="icon-<%= icon %>"></i> <%= title %></a>
