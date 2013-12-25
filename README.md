@@ -1,6 +1,6 @@
 # bnw-meow
 
-Kawaii single-page web interface from bnw.im built on top of the great Chaplin framework.
+Kawaii single-page web interface for [bnw.im](https://bnw.im) built on top of great Chaplin framework.
 
 ## See it in action
 
@@ -12,7 +12,7 @@ Send the following message to the bot:
 ```
 set baseurl http://meow.bnw.im
 ```
-Now all links what you get from bot will have correct prefix.
+Now all links that you get from bot will have correct prefix.
 
 ## Build
 
