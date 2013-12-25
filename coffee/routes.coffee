@@ -18,7 +18,7 @@ define [
     match "top", "posts#show", params:
       id: "today", title: "Топ 20 постов за сегодня", scrollable: false
     match "feed", "posts#show", params:
-      id: "feed", title: "Подписки", scrollable: false
+      id: "feed", title: "Подписки"
 
     match "u/:user", "posts#show", params:
       show: "messages"
