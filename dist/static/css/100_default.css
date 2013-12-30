@@ -129,8 +129,7 @@ div.selected {
 /* Application-related */
 
 .post, .comment, #comment-form {
-    margin: 20px auto 0 auto;
-    max-width: 1000px;
+    margin: 20px 0 0 0;
 }
 
 .comment {
