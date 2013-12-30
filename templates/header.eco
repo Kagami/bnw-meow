@@ -28,8 +28,8 @@
       <% end %>
       <ul class="nav pull-right">
         <form class="search-form navbar-search">
-          <input type="text" class="search-form-query search-query input-medium" placeholder="Поиск" />
           <i class="icon-search-fix icon-search"></i>
+          <input type="text" class="search-form-query search-query input-medium" placeholder="Поиск" />
         </form>
 
       <% if @isLogged(): %>
