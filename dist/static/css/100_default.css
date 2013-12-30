@@ -57,6 +57,9 @@ blockquote {
 }
 
 #footer {
+    position: absolute;
+    left: 0;
+    right: 0;
     background-color: #F5F5F5;
     border-top: 1px solid #E5E5E5;
     margin-top: 110px;
@@ -64,14 +67,21 @@ blockquote {
     text-align: right;
 }
 
+#footer .container {
+    padding: 0 15px;
+}
+
 #push {
     /* Footer's height + margin */
     height: 171px;
 }
 
-#main {
-    /* Fix navbar offset */
-    padding-top: 41px;
+/* Offset fix conflicting with bootstrap-responsive */
+@media (min-width: 980px) {
+    #main {
+        /* Fix navbar offset */
+        padding-top: 41px;
+    }    
 }
 
 .credit {
@@ -175,7 +185,19 @@ img.avatar {
 }
 
 .comment-wrapper, #comment-form {
-    margin-left: 30px;
+    margin-left: 7px;
+}
+
+@media (min-width:500px) {
+    .comment-wrapper, #comment-form {
+        margin-left: 15px;
+    }
+}
+
+@media (min-width:650px) {
+    .comment-wrapper, #comment-form {
+        margin-left: 30px;
+    }
 }
 
 /* XXX: Stop to shift comments with more that 10 level nesting.
@@ -265,9 +287,8 @@ img.avatar {
 .to-the-top {
     display: none;
     position: fixed;
+    top: 0;
     left: 0;
-    top: 41px;
-    bottom: 0;
     padding: 10px 15px;
     font-size: 20px;
     font-weight: bold;
@@ -280,6 +301,13 @@ img.avatar {
     background: #F0F0F0;
     text-decoration: none;
     opacity: 0.9;
+}
+
+@media (min-width: 980px) {
+    .to-the-top {
+        top: 41px;
+        bottom: 0;
+    }
 }
 
 /* Misc */
@@ -307,9 +335,8 @@ img.avatar {
 }
 
 .icon-search-fix {
+    margin: 6px 0 0 11px;
     position: absolute;
-    top: 7px;
-    left: 11px;
     color: #999999;
 }
 
@@ -345,4 +372,15 @@ img.avatar {
     position: absolute;
     font-size: 11px;
     line-height: 100%;
+}
+
+/* Hide brand on small screens */
+.navbar .brand {
+    display: none;
+}
+
+@media (min-width: 656px) {
+    .navbar .brand {
+        display: inline;
+    }
 }
