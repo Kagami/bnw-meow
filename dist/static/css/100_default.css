@@ -349,3 +349,14 @@ img.avatar {
     font-size: 11px;
     line-height: 100%;
 }
+
+/* Hide brand on small screens */
+.navbar .brand {
+    display: none;
+}
+
+@media (min-width: 656px) {
+    .navbar .brand {
+        display: inline;
+    }
+}
