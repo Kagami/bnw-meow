@@ -69,9 +69,12 @@ blockquote {
     height: 171px;
 }
 
-#main {
-    /* Fix navbar offset */
-    padding-top: 41px;
+/* Offset fix conflicting with bootstrap-responsive */
+@media (min-width: 980px) {
+    #main {
+        /* Fix navbar offset */
+        padding-top: 41px;
+    }    
 }
 
 .credit {
