@@ -57,11 +57,18 @@ blockquote {
 }
 
 #footer {
+    position: absolute;
+    left: 0;
+    right: 0;
     background-color: #F5F5F5;
     border-top: 1px solid #E5E5E5;
     margin-top: 110px;
     height: 60px;
     text-align: right;
+}
+
+#footer .container {
+    padding: 0 15px;
 }
 
 #push {
