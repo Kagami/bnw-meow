@@ -280,9 +280,8 @@ img.avatar {
 .to-the-top {
     display: none;
     position: fixed;
+    top: 0;
     left: 0;
-    top: 41px;
-    bottom: 0;
     padding: 10px 15px;
     font-size: 20px;
     font-weight: bold;
@@ -295,6 +294,13 @@ img.avatar {
     background: #F0F0F0;
     text-decoration: none;
     opacity: 0.9;
+}
+
+@media (min-width: 980px) {
+    .to-the-top {
+        top: 41px;
+        bottom: 0;
+    }
 }
 
 /* Misc */
