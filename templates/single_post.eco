@@ -9,7 +9,7 @@
   <div id="comments"></div>
 
   <% if @isLogged(): %>
-    <form id="comment-form" class="form-inline well well-small">
+    <form id="comment-form" class="form-inline well well-small clearfix">
       <textarea id="comment-form-text" class="input-block-level" rows="5"></textarea>
       <button id="comment-form-submit" type="button" class="btn btn-primary">
         <i></i> Комментировать
