@@ -381,6 +381,7 @@ img.avatar {
 
 @media (min-width: 656px) {
     .navbar .brand {
+        margin-left: 0;
         padding: 0 22px;
         width: 32px;
         height: 32px;
