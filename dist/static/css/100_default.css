@@ -385,7 +385,7 @@ img.avatar {
         width: 32px;
         height: 32px;
         display: inline-block;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gEIBw4OYEDArAAAATNJREFUWMNj/P//P8NAAiaGAQaMu2rsYI5gZ2BgYHBtPvh9ZIUAsWlgd639ZmS+a/NBX1Lkh24IwHzmKl7khiL+sm8Xio9xyBMKicETAuhxiA5cxYt8oD5jIKAOFgJb8KqDhsyAhwALhsvi1vswMDAwMKgKwUIGlw+xiiMBH6hPIbzb7yD6FgVuGVRpgAWnDNTFMB9ghATMZ4jcgl0eas6gzQUsxCpE9zGp8kMnBGCp1LX5oA9VbEDkpi2DOwRgJROhEpFSgF43DJ4QIORzsssBXLXr4K0LYKkfRwmGy2cYJSaafpi56Llh8LYHXKy2opQDjCq/UPI1oTrk/x02FOE9x7y3DMr2AEabEFdI7DnmTZLBLlZb8fp88LeKcZULrs0H3aDyu4gRJ9RPGDo9o2HbNwQA2tKg+95IbDQAAAAASUVORK5CYII=) no-repeat 22px 2px;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA00lEQVRYw2P4//8/w0BihgF3wK4aOyYo5gThkecAYhUCHbcZGZMqP3QdADdw8oafyBjDQhzyQ8cB6AZiseA/CAPZeDGSOvzmDVoH/L/19j8YQwG6wbgcgkseDqDmDiEH4HAIhsGE5NHMG7oOIBsMOQcgKaAqILkcoLsDMKKCRg4gWBcMmAMIRQHZ2ZBaaYBuDsCTfbAajMsheAq0Qe4AGP637fN/ZEx0wQRVh66f5DRAdwcQcgihhgg6JmTx4HUAoSYaUO4nCBMrTqhxOngdMGJ6xwBIwijB3nx/hgAAAABJRU5ErkJggg==) no-repeat 22px 2px;
         vertical-align: middle;
     }
 }
