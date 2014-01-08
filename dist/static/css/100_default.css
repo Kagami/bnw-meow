@@ -386,7 +386,7 @@ img.avatar {
         width: 32px;
         height: 32px;
         display: inline-block;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAG1BMVEX///+6fD7/k7D///+6fD7+tvP/k7D/2u3////4EMvuAAAABHRSTlMAs/n5dZQ2nwAAAG9JREFUKM+tzmsNwCAMBOBaOAtYmIVawAIWzkJlr2Vkj6zdr124BL7wEvkrwNES0BqiBcAz1DNilgJNh4vXWICLWpQ1rFQAO4MU5A6SQRxZz153PMFIjf1KWg7ofX6NvSOFEJ1Z6zcIgG0OSAHf2QG8MWIFxC3KkQAAAABJRU5ErkJggg==) no-repeat 22px 2px;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAFVBMVEX///+6fD66fD7+tvP/k7D/2u3///8gd+zcAAAAAnRSTlMAsyT7Lw4AAABtSURBVCjPrc7bDcUwCANQVvAKrMAKrOAV2H+EC2nU3qrQr1qxlBzlJfJVgKMjwB3VAZBxzXjNWmCop2SDA6RoVDnDzgSIM2hB/kE6qCP72euOOwSptV/J6AFm62s0QwslurLXTxAAsQZkgPf8AG20SMlgzFqWAAAAAElFTkSuQmCC) no-repeat 22px 2px;
         vertical-align: middle;
     }
 }
