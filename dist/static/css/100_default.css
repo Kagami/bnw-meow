@@ -381,6 +381,11 @@ img.avatar {
 
 @media (min-width: 656px) {
     .navbar .brand {
-        display: inline;
+        padding: 0 22px;
+        width: 32px;
+        height: 32px;
+        display: inline-block;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA00lEQVRYw2P4//8/w0BihgF3wK4aOyYo5gThkecAYhUCHbcZGZMqP3QdADdw8oafyBjDQhzyQ8cB6AZiseA/CAPZeDGSOvzmDVoH/L/19j8YQwG6wbgcgkseDqDmDiEH4HAIhsGE5NHMG7oOIBsMOQcgKaAqILkcoLsDMKKCRg4gWBcMmAMIRQHZ2ZBaaYBuDsCTfbAajMsheAq0Qe4AGP637fN/ZEx0wQRVh66f5DRAdwcQcgihhgg6JmTx4HUAoSYaUO4nCBMrTqhxOngdMGJ6xwBIwijB3nx/hgAAAABJRU5ErkJggg==) no-repeat 22px 2px;
+        vertical-align: middle;
     }
 }
