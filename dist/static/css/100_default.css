@@ -386,7 +386,7 @@ img.avatar {
         width: 32px;
         height: 32px;
         display: inline-block;
-        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA00lEQVRYw2P4//8/w0BihgF3wK4aOyYo5gThkecAYhUCHbcZGZMqP3QdADdw8oafyBjDQhzyQ8cB6AZiseA/CAPZeDGSOvzmDVoH/L/19j8YQwG6wbgcgkseDqDmDiEH4HAIhsGE5NHMG7oOIBsMOQcgKaAqILkcoLsDMKKCRg4gWBcMmAMIRQHZ2ZBaaYBuDsCTfbAajMsheAq0Qe4AGP637fN/ZEx0wQRVh66f5DRAdwcQcgihhgg6JmTx4HUAoSYaUO4nCBMrTqhxOngdMGJ6xwBIwijB3nx/hgAAAABJRU5ErkJggg==) no-repeat 22px 2px;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAG1BMVEX///+6fD7/k7D///+6fD7+tvP/k7D/2u3////4EMvuAAAABHRSTlMAs/n5dZQ2nwAAAG9JREFUKM+tzmsNwCAMBOBaOAtYmIVawAIWzkJlr2Vkj6zdr124BL7wEvkrwNES0BqiBcAz1DNilgJNh4vXWICLWpQ1rFQAO4MU5A6SQRxZz153PMFIjf1KWg7ofX6NvSOFEJ1Z6zcIgG0OSAHf2QG8MWIFxC3KkQAAAABJRU5ErkJggg==) no-repeat 22px 2px;
         vertical-align: middle;
     }
 }
