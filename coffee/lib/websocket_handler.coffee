@@ -24,10 +24,12 @@ define [
       _.any [
         # Main
         cut == "/"
+
         # Top
         path == "/top"
         # Feed
         path == "/feed"
+        
         # User page
         _.all [
           cut == "/u/"
