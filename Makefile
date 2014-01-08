@@ -41,7 +41,7 @@ eco:
 		./eco.js "$$file" "$$dest";\
 	done'
 
-watch: all
+watch w: all
 	./watch.sh
 
 pre-deb:
@@ -65,12 +65,12 @@ release: pre-deb index-release coffee eco minify
 deb: release
 	fakeroot dpkg -b deb_dist/ bnw-meow.deb
 
-clean:
+clean c:
 	rm -rf deb_dist/ *.deb
 	# Clean all compiled js files
 	find $(STATIC)/js/ -mindepth 1 -maxdepth 1 ! -path '*/vendor' \
 		-exec rm -r '{}' \;
 
-test:
+test t:
 	mocha tests/ --compilers coffee:coffee-script -r should -R $(REPORTER) \
 		--ignore-leaks
