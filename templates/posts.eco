@@ -1,16 +1,14 @@
-<div class="row">
+<% if @pageUser?: %>
 
-  <% if @pageUser?: %>
-
+  <div class="row">
     <div id="posts" class="span9"></div>
     <div class="span3">
       <div id="user-info" class="well well-small"></div>
     </div>
+  </div>
 
-  <% else: %>
+<% else: %>
 
-    <div id="posts"></div>
+  <div id="posts"></div>
 
-  <% end %>
-
-</div>
+<% end %>
