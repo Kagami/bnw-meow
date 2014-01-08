@@ -50,7 +50,7 @@ pre-deb:
 	find deb_dist/ -name '.*.swp' -delete
 	mkdir -p "$(STATIC_R)/css/" "$(STATIC_R)/js/"
 	cp -r "$(STATIC)/font/" "$(STATIC_R)"
-	cp dist/favicon.ico "$(INDEX_R)"
+	cp dist/favicon.png "$(INDEX_R)"
 
 minify:
 	# TODO: Minify css files as well
