@@ -335,8 +335,9 @@ img.avatar {
 }
 
 .icon-search-fix {
-    margin: 6px 0 0 11px;
     position: absolute;
+    top: 7px;
+    left: 11px;
     color: #999999;
 }
 
