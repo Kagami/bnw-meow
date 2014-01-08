@@ -49,7 +49,6 @@ pre-deb:
 	cp -r deb/ deb_dist/
 	find deb_dist/ -name '.*.swp' -delete
 	mkdir -p "$(STATIC_R)/css/" "$(STATIC_R)/js/"
-	cp -r "$(STATIC)/img/" "$(STATIC_R)"
 	cp -r "$(STATIC)/font/" "$(STATIC_R)"
 	cp dist/favicon.ico "$(INDEX_R)"
 
