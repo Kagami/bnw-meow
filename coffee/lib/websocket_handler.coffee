@@ -24,7 +24,10 @@ define [
       _.any [
         # Main
         cut == "/"
-
+        # Top
+        path == "/top"
+        # Feed
+        path == "/feed"
         # User page
         _.all [
           cut == "/u/"
@@ -44,7 +47,11 @@ define [
 
     getBnwWsUrl: ->
       path = window.location.pathname
-      path = "" if path == "/"
+      path = "" if _.contains [
+          "/"
+          "/top"
+          "/feed"
+        ], path
       "#{config.BNW_WS_PROTOCOL}://#{config.BNW_WS_HOST}#{path}/ws?v=2"
 
     initWebSocket: ->
