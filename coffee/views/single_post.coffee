@@ -89,6 +89,7 @@ define [
 
     resetCommentForm: ->
       $("#comments").after($("#comment-form"))
+      $("#comment-form-text").val("")
       $("#comment-form-reply-to").val("")
 
     moveCommentForm: (e) ->
