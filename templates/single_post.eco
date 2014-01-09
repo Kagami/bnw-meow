@@ -16,7 +16,7 @@
       </button>
       <a class="help" href="http://hive.blasux.ru/u/Stiletto/BnW/Форматирование" title="Справка по синтаксису"><i class="icon-question-sign"></i></a>
       <button id="comment-form-reset" type="button" class="btn pull-right" title="Сбросить id цитируемого комментария">Сбросить</button>
-      <input id="comment-form-reply-to" class="pull-right" maxlength="3" type="text" title="id цитируемого комментария" />
+      <input id="comment-form-reply-to" class="pull-right" maxlength="3" type="hidden" title="id цитируемого комментария" />
       </div>
     </form>
   <% end %>
