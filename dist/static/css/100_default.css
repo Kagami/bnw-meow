@@ -390,3 +390,9 @@ img.avatar {
         vertical-align: middle;
     }
 }
+
+/* Anonymous checkbox position fix */
+
+#comment-form .checkbox {
+    padding: 5px 10px 0 0;
+}
