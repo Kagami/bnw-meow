@@ -23,15 +23,12 @@ define [
       @initLayout()
       @initMediator()
 
-      # XXX: For some strange reason routing without delay
-      # doesn't always work correctly in Firefox.
-      $ =>
-        # Application-specific scaffold
-        @initControllers()
-        # Register all routes and start routing
-        @initRouter routes
-        # Freeze the application instance to prevent further changes
-        Object.freeze? this
+      # Application-specific scaffold
+      @initControllers()
+      # Register all routes and start routing
+      @initRouter routes
+      # Freeze the application instance to prevent further changes
+      Object.freeze? this
 
     initSettings: ->
       moment.lang("ru")
