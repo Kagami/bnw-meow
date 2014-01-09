@@ -69,7 +69,7 @@ define [
       replyTo = $("#comment-form-reply-to")
       messageId = @model.get "id"
       messageId += "/" + replyTo.val() if replyTo.val().length
-      anonymous = $("#comment-form-anonymous").prop("checked") || '';
+      anonymous = $("#comment-form-anonymous").prop("checked") or ""
       submit = $("#comment-form-submit").prop("disabled", true)
       i = submit.children("i").toggleClass("icon-refresh icon-spin")
       clear = $("#comment-form-clear").prop("disabled", true)
