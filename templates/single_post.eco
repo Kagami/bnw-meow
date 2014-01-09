@@ -15,8 +15,11 @@
         <i></i> Комментировать
       </button>
       <a class="help" href="http://hive.blasux.ru/u/Stiletto/BnW/Форматирование" title="Справка по синтаксису"><i class="icon-question-sign"></i></a>
-      <button id="comment-form-reset" type="button" class="btn pull-right" title="Сбросить id цитируемого комментария">Сбросить</button>
-      <input id="comment-form-reply-to" class="pull-right" maxlength="3" type="text" title="id цитируемого комментария" />
+      <button id="comment-form-reset" type="button" class="btn pull-right" title="Сбросить id цитируемого комментария">Отмена</button>
+      <input id="comment-form-reply-to" class="pull-right" maxlength="3" type="hidden" title="id цитируемого комментария" />
+      <label class="checkbox pull-right">
+        <input type="checkbox" id="comment-form-anonymous" /> Анонимно
+      </label>
       </div>
     </form>
   <% end %>
