@@ -1,6 +1,6 @@
 # bnw-meow
 
-Kawaii single-page web interface for [bnw.im](https://bnw.im) built on top of great Chaplin framework.
+Kawaii single-page web interface for bnw.im built on top of great Chaplin framework.
 
 ## See it in action
 
@@ -16,16 +16,14 @@ Now all links that you get from bot will have correct prefix.
 
 ## Build
 
-You will need node, npm and gpp ([Generic Preprocessor](http://files.nothingisreal.com/software/gpp/gpp.html)) installed.
-Just run:
+You will need node, npm and gpp ([Generic Preprocessor](http://files.nothingisreal.com/software/gpp/gpp.html)) installed. Just run:
 ```
 % sudo npm install -g coffee-script
 % npm install eco requirejs
 % make config
 % make release
 ```
-It will compile and minify all static to the `deb_dist/srv/bnw-meow/` dir.  
-If you use Debian-based distro you could also use the following commands:
+It will build release version of static in the `deb_dist/srv/bnw-meow/` directory and minify it. If you have Debian-based distro you could also use the following commands:
 
 * Install build deps:
 ```
@@ -41,14 +39,13 @@ See [Makefile](https://github.com/Kagami/bnw-meow/blob/master/Makefile) for the 
 
 ## Web server configuration
 
-bnw-meow uses HTML5's [pushState](http://diveintohtml5.info/history.html) techology so you will need some rewrite rules.  
-See [bnw-meow.cfg](https://github.com/Kagami/bnw-meow/blob/master/deb/etc/nginx/sites-available/bnw-meow.cfg) for the nginx example.
+bnw-meow uses [HTML5 history API](http://diveintohtml5.info/history.html) so you will need some rewrite rules. See [bnw-meow.cfg](https://github.com/Kagami/bnw-meow/blob/master/deb/etc/nginx/sites-available/bnw-meow.cfg) for nginx example.
 
 ## License
 
 bnw-meow - kawaii single-page web interface for bnw.im
 
-Written in 2013 by Kagami Hiiragi <kagami@genshiken.org>
+Written in 2013-2014 by Kagami Hiiragi <kagami@genshiken.org>
 
 To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 
