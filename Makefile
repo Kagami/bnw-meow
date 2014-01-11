@@ -1,5 +1,16 @@
+# Node CLI utilities.
 BRUNCH = node_modules/.bin/brunch
 BOWER = node_modules/.bin/bower
+
+# Deb-related settings.
+NAME=bnw-meow
+REVISION?=1
+VERSION=$(shell ./version.coffee)-$(REVISION)
+ARCH=all
+BUILD_DIR=build
+HTML_DIR=$(BUILD_DIR)/srv/$(NAME)
+DEB_DIR=deb_dist
+DEB_PATH=$(DEB_DIR)/$(NAME)_$(VERSION)_$(ARCH).deb
 
 all: build
 
@@ -24,33 +35,23 @@ build: clean
 watch w: clean
 	$(BRUNCH) watch --server
 
+deb: clean
+	mkdir -p "$(HTML_DIR)" "$(DEB_DIR)"
+	cp -r deb/* "$(BUILD_DIR)"
+	sed -i "s/^Version:.*/Version: $(VERSION)/" "$(BUILD_DIR)/DEBIAN/control"
+	$(BRUNCH) build --production
+	./index.coffee
+	cp -r public/* "$(HTML_DIR)"
+	fakeroot dpkg -b "$(BUILD_DIR)" "$(DEB_PATH)"
+
 clean c:
-	rm -rf public
+	rm -rf public "$(BUILD_DIR)" "$(DEB_DIR)"
 
-###
-# OLD
-###
-
-# INDEX_R = deb_dist/srv/bnw-meow
-# STATIC_R = "$(INDEX_R)/static"
 # REPORTER ?= spec
-
 # # Deps required only for testing. All deps in 'install-deps' target
 # # required as well.
 # install-test-deps:
 # 	sudo npm install -g mocha should
-
-# pre-deb:
-# 	rm -rf deb_dist/ *.deb
-# 	cp -r deb/ deb_dist/
-# 	find deb_dist/ -name '.*.swp' -delete
-# 	mkdir -p "$(STATIC_R)/css/" "$(STATIC_R)/js/"
-# 	cp -r "$(STATIC)/font/" "$(STATIC_R)"
-# 	cp dist/favicon.png "$(INDEX_R)"
-
-# deb: release
-# 	fakeroot dpkg -b deb_dist/ bnw-meow.deb
-
 # test t:
 # 	mocha tests/ --compilers coffee:coffee-script -r should -R $(REPORTER) \
 # 		--ignore-leaks
