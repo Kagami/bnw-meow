@@ -1,75 +1,61 @@
-STATIC = dist/static
-INDEX_R = deb_dist/srv/bnw-meow
-STATIC_R = "$(INDEX_R)/static"
-VERSION = $(shell git rev-parse --short HEAD)
-REPORTER ?= spec
-.PHONY: coffee
+# Node CLI utilities.
+BRUNCH=node_modules/.bin/brunch
+BOWER=node_modules/.bin/bower
+MOCHA=node_modules/.bin/mocha
 
-all: index coffee eco
+# Deb-related settings.
+NAME=bnw-meow
+REVISION?=1
+VERSION=$(shell ./version.coffee)-$(REVISION)
+ARCH=all
+BUILD_DIR=build
+HTML_DIR=$(BUILD_DIR)/srv/$(NAME)
+DEB_DIR=deb_dist
+DEB_PATH=$(DEB_DIR)/$(NAME)_$(VERSION)_$(ARCH).deb
 
-# Install basic deps what you will need for building (or developing)
+# Other settings.
+REPORTER?=spec
+
+all: build
+
+# Install binary dependencies that you will need for building on
+# Debian-based distro.
+install-debian-deps:
+	sudo apt-get install nodejs fakeroot
+
+# Install node and bower dependencies.
+# Don't forget to install binary deps.
+# (In case of Debian use: `make install-debian-deps')
 install-deps:
-	sudo apt-get install npm gpp fakeroot
-	# Also needed for watch script:
-	# sudo apt-get install inotify-tools
-	sudo npm install -g coffee-script
-	npm install eco requirejs
-
-# Deps required only for testing. All deps in 'install-deps' target
-# required as well.
-install-test-deps:
-	sudo npm install -g mocha should
+	npm install
+	$(BOWER) install
 
 config:
-	cp coffee/config.coffee.example coffee/config.coffee
+	cp app/scripts/config.coffee.example app/scripts/config.coffee
 
-index:
-	gpp -H -DVERSION=dev -o dist/index.html templates/index.gpp
+build: clean
+	$(BRUNCH) build
 
-index-release:
-	gpp -H -DVERSION="$(VERSION)" -DRELEASE -o "$(INDEX_R)/index.html" \
-		templates/index.gpp
+watch w: clean
+	$(BRUNCH) watch --server
 
-coffee:
-	coffee -o "$(STATIC)/js/" -bc coffee/
+deb: build test clean
+	mkdir -p "$(HTML_DIR)" "$(DEB_DIR)"
+	cp -r deb/* "$(BUILD_DIR)"
+	sed -i "s/^Version:.*/Version: $(VERSION)/" "$(BUILD_DIR)/DEBIAN/control"
+	$(BRUNCH) build --production
+	./index.coffee
+	cp -r public/* "$(HTML_DIR)"
+	fakeroot dpkg -b "$(BUILD_DIR)" "$(DEB_PATH)"
 
-eco:
-	-mkdir "$(STATIC)/js/templates/"
-	bash -c 'ls templates/*.eco | while read file; do\
-		tmp="`basename "$$file"`";\
-		dest="$(STATIC)/js/templates/$${tmp/\.eco/.js}";\
-		./eco.js "$$file" "$$dest";\
-	done'
+test:
+	NODE_PATH=app/scripts:vendor $(MOCHA) tests/ \
+		--compilers=coffee:coffee-script \
+		--require=should \
+		--reporter=$(REPORTER)
 
-watch w: all
-	./watch.sh
-
-pre-deb:
-	rm -rf deb_dist/ *.deb
-	cp -r deb/ deb_dist/
-	find deb_dist/ -name '.*.swp' -delete
-	mkdir -p "$(STATIC_R)/css/" "$(STATIC_R)/js/"
-	cp -r "$(STATIC)/font/" "$(STATIC_R)"
-	cp dist/favicon.png "$(INDEX_R)"
-
-minify:
-	# TODO: Minify css files as well
-	cat $(STATIC)/css/*.css > "$(STATIC_R)/css/default.css"
-	./minify.js
-	sed "s/^VERSION =.*/VERSION = '$(VERSION)';/" \
-		"$(STATIC)/js/load_release.js" >> "$(STATIC_R)/js/meow.js"
-
-release: pre-deb index-release coffee eco minify
-
-deb: release
-	fakeroot dpkg -b deb_dist/ bnw-meow.deb
+t: REPORTER=nyan
+t: test
 
 clean c:
-	rm -rf deb_dist/ *.deb
-	# Clean all compiled js files
-	find $(STATIC)/js/ -mindepth 1 -maxdepth 1 ! -path '*/vendor' \
-		-exec rm -r '{}' \;
-
-test t:
-	mocha tests/ --compilers coffee:coffee-script -r should -R $(REPORTER) \
-		--ignore-leaks
+	rm -rf public "$(BUILD_DIR)" "$(DEB_DIR)"

@@ -1,9 +1,8 @@
-/coffee/config.coffee
-
-/dist/index.html
-/dist/static/js/*
-!/dist/static/js/vendor
-/deb_dist/
-/*.deb
-
 /node_modules/
+/bower_components/
+/public/
+
+/build/
+/deb_dist/
+
+/app/scripts/config.coffee

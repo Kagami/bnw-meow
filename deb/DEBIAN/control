@@ -1,6 +1,8 @@
 Package: bnw-meow
-Version: 0.2.2
+Version:
 Architecture: all
 Maintainer: Kagami Hiiragi <kagami@genshiken.org>
+Section: web
 Priority: optional
+Homepage: http://meow.bnw.im/
 Description: Kawaii single-page web interface for bnw.im

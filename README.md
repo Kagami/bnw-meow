@@ -1,4 +1,4 @@
-# bnw-meow
+# bnw-meow ![meow](http://meow.bnw.im/static/favicon-big.png)
 
 Kawaii single-page web interface for bnw.im built on top of great Chaplin framework.
 
@@ -14,32 +14,59 @@ set baseurl http://meow.bnw.im
 ```
 Now all links that you get from bot will have correct prefix.
 
-## Build
+## Manual build
 
-You will need node, npm and gpp ([Generic Preprocessor](http://files.nothingisreal.com/software/gpp/gpp.html)) installed. Just run:
-```
-% sudo npm install -g coffee-script
-% npm install eco requirejs
-% make config
-% make release
-```
-It will build release version of static in the `deb_dist/srv/bnw-meow/` directory and minify it. If you have Debian-based distro you could also use the following commands:
+You could easily build and host you own version of bnw-meow. bnw-meow uses Brunch for build automation so you will need nodejs and npm installed.
 
-* Install build deps:
-```
-% make install-deps
-```
-
-* Create deb package:
-```
-% make deb
+**Preparing steps:**
+```bash
+# Install required binary dependencies in case of Debian.
+% make install-debian-deps  # Or: sudo apt-get install nodejs fakeroot
+# Install node and bower dependencies.
+% make install-deps         # Or: npm install && ./node_modules/.bin/bower install
+# Initialize default application config.
+# You could edit it then manually if you want.
+% make config               # Or: cp app/scripts/config.coffee.example app/scripts/config.coffee
 ```
 
-See [Makefile](https://github.com/Kagami/bnw-meow/blob/master/Makefile) for the more details.
+* **Build development version:**
+  ```bash
+  % make  # Or: ./node_modules/.bin/brunch build
+  ```
+
+  It will build development version of static in the `public/` directory.
+
+* **Build product version:**
+  ```bash
+  % ./node_modules/.bin/brunch build --production
+  ```
+
+  It will build product version of static in the `public/` directory.
+
+* **Build deb package:**
+  ```bash
+  % make deb
+  ```
+
+  It will build debian package in the `deb_dist/` directory.
 
 ## Web server configuration
 
 bnw-meow uses [HTML5 history API](http://diveintohtml5.info/history.html) so you will need some rewrite rules. See [bnw-meow.cfg](https://github.com/Kagami/bnw-meow/blob/master/deb/etc/nginx/sites-available/bnw-meow.cfg) for nginx example.
+
+## Development
+
+**Watch:**
+```bash
+% make watch  # Or: ./node_modules/.bin/brunch watch
+```
+
+It will start development web server on <http://localhost:4000/> and auto-recompile changed files.
+
+**Test:**
+```bash
+% make test
+```
 
 ## License
 

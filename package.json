@@ -1,0 +1,38 @@
+{
+  "name": "bnw-meow",
+  "version": "0.2.2",
+  "description": "Kawaii single-page web interface for bnw.im",
+  "homepage": "http://meow.bnw.im/",
+  "author": "Kagami Hiiragi",
+  "license": "CC0",
+  "dependencies": {},
+  "devDependencies": {
+    "brunch": "~1.7.13",
+    "bower": "~1.2.8",
+    "coffee-script": "~1.6.3",
+    "javascript-brunch": "~1.7.1",
+    "coffee-script-brunch": "~1.7.3",
+    "less-brunch": "1.5.2",
+    "eco-brunch": "~1.7.1",
+    "uglify-js-brunch": "~1.7.6",
+    "clean-css-brunch": "~1.7.1",
+    "auto-reload-brunch": "~1.7.1",
+    "mocha": "~1.17.0",
+    "should": "~2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kagami/bnw-meow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kagami/bnw-meow/issues"
+  },
+  "keywords": [
+    "web",
+    "app",
+    "single-page",
+    "bnw",
+    "im",
+    "xmpp"
+  ]
+}
