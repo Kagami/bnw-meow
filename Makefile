@@ -8,12 +8,14 @@ NAME=bnw-meow
 REVISION?=1
 VERSION=$(shell ./version.coffee)-$(REVISION)
 ARCH=all
-BUILD_DIR=build
-HTML_DIR=$(BUILD_DIR)/srv/$(NAME)
+DEB_BUILD_DIR=build
+HTML_DIR=$(DEB_BUILD_DIR)/srv/$(NAME)
 DEB_DIR=deb_dist
 DEB_PATH=$(DEB_DIR)/$(NAME)_$(VERSION)_$(ARCH).deb
 
 # Other settings.
+BUILD_DIR=public
+TESTS_DIR=tests
 REPORTER?=spec
 
 all: build
@@ -39,17 +41,19 @@ build: clean
 watch w: clean
 	$(BRUNCH) watch --server
 
-deb: build test clean
+deb: mrproper test
 	mkdir -p "$(HTML_DIR)" "$(DEB_DIR)"
-	cp -r deb/* "$(BUILD_DIR)"
-	sed -i "s/^Version:.*/Version: $(VERSION)/" "$(BUILD_DIR)/DEBIAN/control"
+	cp -r deb/* "$(DEB_BUILD_DIR)"
+	sed -i \
+		"s/^Version:.*/Version: $(VERSION)/" \
+		"$(DEB_BUILD_DIR)/DEBIAN/control"
 	$(BRUNCH) build --production
 	./index.coffee
-	cp -r public/* "$(HTML_DIR)"
-	fakeroot dpkg -b "$(BUILD_DIR)" "$(DEB_PATH)"
+	cp -r $(BUILD_DIR)/* "$(HTML_DIR)"
+	fakeroot dpkg -b "$(DEB_BUILD_DIR)" "$(DEB_PATH)"
 
 test:
-	NODE_PATH=app/scripts:vendor $(MOCHA) tests/ \
+	NODE_PATH=app/scripts:vendor $(MOCHA) "$(TESTS_DIR)" \
 		--compilers=coffee:coffee-script \
 		--require=should \
 		--reporter=$(REPORTER)
@@ -58,4 +62,7 @@ t: REPORTER=nyan
 t: test
 
 clean c:
-	rm -rf public "$(BUILD_DIR)" "$(DEB_DIR)"
+	rm -rf "$(BUILD_DIR)"
+
+mrproper: clean
+	rm -rf "$(DEB_BUILD_DIR)" "$(DEB_DIR)"
