@@ -1710,7 +1710,7 @@ hljs.LANGUAGES['asciidoc'] = function(hljs) {
       },
       // admonition
       {
-        className: 'label',
+        className: 'label_',
         begin: '^(NOTE|TIP|IMPORTANT|WARNING|CAUTION):\\s+',
         relevance: 10
       },
@@ -2517,7 +2517,7 @@ hljs.LANGUAGES['avrasm'] = function(hljs) {
         begin: '\'', end: '[^\\\\]\'',
         illegal: '[^\\\\][^\']'
       },
-      {className: 'label',  begin: '^[A-Za-z0-9_.$]+:'},
+      {className: 'label_',  begin: '^[A-Za-z0-9_.$]+:'},
       {className: 'preprocessor', begin: '#', end: '$'},
       {  // директивы «.include» «.macro» и т.д.
         className: 'preprocessor',
@@ -3645,7 +3645,7 @@ hljs.LANGUAGES['mel'] = function(hljs) {
       'colorSliderGrp columnLayout commandEcho commandLine commandPort compactHairSystem ' +
       'componentEditor compositingInterop computePolysetVolume condition cone confirmDialog ' +
       'connectAttr connectControl connectDynamic connectJoint connectionInfo constrain ' +
-      'constrainValue constructionHistory container containsMultibyte contextInfo control ' +
+      'constrainValue constructionHistory container_ containsMultibyte contextInfo control ' +
       'convertFromOldLayers convertIffToPsd convertLightmap convertSolidTx convertTessellation ' +
       'convertUnit copyArray copyFlexor copyKey copySkinWeights cos cpButton cpCache ' +
       'cpClothSet cpCollision cpConstraint cpConvClothToMesh cpForces cpGetSolverAttr cpPanel ' +
@@ -3981,7 +3981,7 @@ hljs.LANGUAGES['actionscript'] = function(hljs) {
 }(hljs);
 hljs.LANGUAGES['delphi'] = function(hljs) {
   var DELPHI_KEYWORDS = 'and safecall cdecl then string exports library not pascal set ' +
-    'virtual file in array label packed end. index while const raise for to implementation ' +
+    'virtual file in array label_ packed end. index while const raise for to implementation ' +
     'with except overload destructor downto finally program exit unit inherited override if ' +
     'type until function do begin repeat goto nil far initialization object else var uses ' +
     'external resourcestring interface end finalization class asm mod case on shr shl of ' +
@@ -3989,7 +3989,7 @@ hljs.LANGUAGES['delphi'] = function(hljs) {
     'procedure';
   var DELPHI_CLASS_KEYWORDS = 'safecall stdcall pascal stored const implementation ' +
     'finalization except to finally program inherited override then exports string read not ' +
-    'mod shr try div shl set library message packed index for near overload label downto exit ' +
+    'mod shr try div shl set library message packed index for near overload label_ downto exit ' +
     'public goto interface asm on of constructor or private array unit raise destructor var ' +
     'type until function else external with case default record while protected property ' +
     'procedure published and cdecl do threadvar file in if end virtual write far out begin ' +
@@ -4857,7 +4857,7 @@ hljs.LANGUAGES['vhdl'] = function(hljs) {
         'abs access after alias all and architecture array assert attribute begin block ' +
         'body buffer bus case component configuration constant context cover disconnect ' +
         'downto default else elsif end entity exit fairness file for force function generate ' +
-        'generic group guarded if impure in inertial inout is label library linkage literal ' +
+        'generic group guarded if impure in inertial inout is label_ library linkage literal ' +
         'loop map mod nand new next nor not null of on open or others out package port ' +
         'postponed procedure process property protected pure range record register reject ' +
         'release rem report restrict restrict_guarantee return rol ror select sequence ' +
@@ -5257,7 +5257,7 @@ hljs.LANGUAGES['haskell'] = function(hljs) {
     relevance: 0
   };
   var CONTAINER = {
-    className: 'container',
+    className: 'container_',
     begin: '\\(', end: '\\)',
     illegal: '"',
     contains: [
@@ -5266,7 +5266,7 @@ hljs.LANGUAGES['haskell'] = function(hljs) {
     ]
   };
   var CONTAINER2 = {
-    className: 'container',
+    className: 'container_',
     begin: '{', end: '}',
     contains: CONTAINER.contains
   }
@@ -5342,7 +5342,7 @@ hljs.LANGUAGES['axapta'] = function(hljs) {
       'break new catch byte super case short default double public try this switch ' +
       'continue reverse firstfast firstonly forupdate nofetch sum avg minof maxof count ' +
       'order group by asc desc index hint like dispaly edit client server ttsbegin ' +
-      'ttscommit str real date container anytype common div mod',
+      'ttscommit str real date container_ anytype common div mod',
     contains: [
       hljs.C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE,
