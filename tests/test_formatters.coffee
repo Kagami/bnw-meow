@@ -1,20 +1,6 @@
-requirejs = require "requirejs"
-
-requirejs.config
-  baseUrl: "#{__dirname}/../dist/static/js/"
-  paths:
-    underscore: "vendor/underscore"
-    marked: "vendor/marked"
-  shim:
-    underscore:
-      exports: "_"
-  nodeRequire: require
-
-formatters = requirejs "lib/formatters"
+formatters = require "lib/formatters"
 
 describe "Formatters", ->
-
-
   describe "escape2", ->
     it "should not escape simple strings", ->
       formatters.escape2("kkk").should.equal("kkk")
@@ -46,10 +32,13 @@ describe "Formatters", ->
       f("Look at this nyashka:\n\n@nyashka\n\nNyak").should.equal('<p>Look at this nyashka:</p>\n<p><a href="/u/nyashka">@nyashka</a></p>\n<p>Nyak</p>\n')
       f("How about this:\n@super-&bad-nyashka\nNyak").should.equal('<p>How about this:<br><a href="/u/super-">@super-</a>&amp;bad-nyashka<br>Nyak</p>\n')
 
-    it "should parse images as links", ->
-      f("img: ![test](http://example.com/1.jpg)").should.equal('<p>img: <a href="http://example.com/1.jpg">test</a></p>\n')
+    it "should parse images without extensions as links", ->
       f("img: ![]()").should.equal('<p>img: <a href=""></a></p>\n')
-      f("img: ![Test][id]\n[id]: http://example.com/1.gif").should.equal('<p>img: <a href="http://example.com/1.gif">Test</a></p>\n')
+      f("img: ![](http://example.com/image_link)").should.equal('<p>img: <a href="http://example.com/image_link"></a></p>\n')
+
+    it "should insert images previews", ->
+      f("img: ![test](http://example.com/1.jpg)").should.equal('<p>img: <div class="preview"><a href="http://example.com/1.jpg"><img src="http://fuck.blasux.ru/thumb?img=http%3A%2F%2Fexample.com%2F1.jpg" alt="test"></a></div></p>\n')
+      f("img: ![Test][id]\n[id]: http://example.com/1.gif").should.equal('<p>img: <div class="preview preview-gif"><a href="http://example.com/1.gif"><img src="http://fuck.blasux.ru/thumb?img=http%3A%2F%2Fexample.com%2F1.gif" alt="Test"></a></div></p>\n')
 
     it "should allow whitelisted protocols", ->
       f("[nyan](xmpp:jid@jabber.org)").should.equal('<p><a href="xmpp:jid@jabber.org">nyan</a></p>\n')

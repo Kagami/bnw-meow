@@ -1,6 +1,7 @@
 # Node CLI utilities.
-BRUNCH = node_modules/.bin/brunch
-BOWER = node_modules/.bin/bower
+BRUNCH=node_modules/.bin/brunch
+BOWER=node_modules/.bin/bower
+MOCHA=node_modules/.bin/mocha
 
 # Deb-related settings.
 NAME=bnw-meow
@@ -11,6 +12,9 @@ BUILD_DIR=build
 HTML_DIR=$(BUILD_DIR)/srv/$(NAME)
 DEB_DIR=deb_dist
 DEB_PATH=$(DEB_DIR)/$(NAME)_$(VERSION)_$(ARCH).deb
+
+# Other settings.
+REPORTER?=spec
 
 all: build
 
@@ -35,7 +39,7 @@ build: clean
 watch w: clean
 	$(BRUNCH) watch --server
 
-deb: clean
+deb: build test clean
 	mkdir -p "$(HTML_DIR)" "$(DEB_DIR)"
 	cp -r deb/* "$(BUILD_DIR)"
 	sed -i "s/^Version:.*/Version: $(VERSION)/" "$(BUILD_DIR)/DEBIAN/control"
@@ -44,14 +48,14 @@ deb: clean
 	cp -r public/* "$(HTML_DIR)"
 	fakeroot dpkg -b "$(BUILD_DIR)" "$(DEB_PATH)"
 
+test:
+	NODE_PATH=app/scripts:vendor $(MOCHA) tests/ \
+		--compilers=coffee:coffee-script \
+		--require=should \
+		--reporter=$(REPORTER)
+
+t: REPORTER=nyan
+t: test
+
 clean c:
 	rm -rf public "$(BUILD_DIR)" "$(DEB_DIR)"
-
-# REPORTER ?= spec
-# # Deps required only for testing. All deps in 'install-deps' target
-# # required as well.
-# install-test-deps:
-# 	sudo npm install -g mocha should
-# test t:
-# 	mocha tests/ --compilers coffee:coffee-script -r should -R $(REPORTER) \
-# 		--ignore-leaks

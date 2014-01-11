@@ -40,6 +40,8 @@ module.exports =
         url = url[...60] + "....." + url[-20..]
     url
 
+  escape2: escape2
+
   format: (raw, format = "markdown", reply = false) ->
     ###Format text using available formatters.
 
@@ -81,7 +83,7 @@ module.exports =
   IMG_PREVIEW_FORMATTER:
     [/<a href="(.+\.(jpg|jpeg|gif|png))">([^<]+)<\/a>/g
     , (_m, link, ext, alt) ->
-      "<div class=\"preview #{if ext == 'gif' then 'preview-gif' else ''}\"><a href=\"#{link}\"><img src=\"http://fuck.blasux.ru/thumb?img=#{encodeURIComponent link}\" alt=\"#{alt}\"></a></div>"
+      "<div class=\"preview#{if ext == 'gif' then ' preview-gif' else ''}\"><a href=\"#{link}\"><img src=\"http://fuck.blasux.ru/thumb?img=#{encodeURIComponent link}\" alt=\"#{alt}\"></a></div>"
     ]
 
   markdown: (raw) ->
@@ -191,7 +193,7 @@ module.exports =
     ]
 
     # Very-very important line, don't ever try to touch it
-    text = escape2 raw
+    text = @escape2 raw
 
     # Format block of text with formatters
     format = (block) ->
