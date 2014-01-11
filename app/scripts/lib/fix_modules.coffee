@@ -1,10 +1,16 @@
 # Provide ability to load some vendor libraries via CommonJS require.
 window.require.define
   moment: (require, exports, module) ->
-    module.exports = moment
+    module.exports = window.moment
+
   tinycon: (require, exports, module) ->
-    module.exports = Tinycon
+    module.exports = window.Tinycon
+
   marked: (require, exports, module) ->
-    module.exports = marked
+    module.exports = window.marked
+
   highlight: (require, exports, module) ->
-    module.exports = hljs
+    module.exports = window.hljs
+
+  pikaday: (require, exports, module) ->
+    module.exports = window.Pikaday
