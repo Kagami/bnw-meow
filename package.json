@@ -5,7 +5,8 @@
   "homepage": "http://meow.bnw.im/",
   "author": "Kagami Hiiragi",
   "license": "CC0",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "brunch": "~1.7.13",
     "bower": "~1.2.8",
     "coffee-script": "~1.6.3",
@@ -14,9 +15,8 @@
     "less-brunch": "1.5.2",
     "eco-brunch": "~1.7.1",
     "uglify-js-brunch": "~1.7.6",
-    "clean-css-brunch": "~1.7.1"
-  },
-  "devDependencies": {
+    "clean-css-brunch": "~1.7.1",
+    "auto-reload-brunch": "~1.7.1",
     "mocha": "~1.17.0",
     "should": "~2.1.1"
   },
