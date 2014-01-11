@@ -69,7 +69,10 @@ module.exports = class SinglePostView extends View
     i = submit.children("i").toggleClass("icon-refresh icon-spin")
     clear = $("#comment-form-clear").prop("disabled", true)
 
-    d = utils.post "comment", message: messageId, text: textarea.val(), anonymous: anonymous
+    d = utils.post "comment",
+      message: messageId
+      text: textarea.val()
+      anonymous: anonymous
     d.always ->
       submit.prop("disabled", false)
       i.toggleClass("icon-refresh icon-spin")
