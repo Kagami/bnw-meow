@@ -1,16 +1,12 @@
-define [
-  "jquery"
-  "highlight"
-  "views/base/refresh_date"
-  "templates/search_item"
-], ($, hljs, RefreshDateView, template) ->
-  "use strict"
+$ = require "jquery"
+hljs = require "highlight"
+RefreshDateView = require "views/base/refresh_date"
+template = require "templates/search_item"
 
-  class SearchItemView extends RefreshDateView
+module.exports = class SearchItemView extends RefreshDateView
+  template: template
 
-    template: template
-
-    afterRender: ->
-      super
-      @$("pre code").each (i, e) ->
-        hljs.highlightBlock e
+  afterRender: ->
+    super
+    @$("pre code").each (i, e) ->
+      hljs.highlightBlock e

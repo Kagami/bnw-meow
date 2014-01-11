@@ -1,9 +1,5 @@
-define [
-  "models/base/collection"
-  "models/comment"
-], (Collection, Comment)  ->
-  "use strict"
+Collection = require "models/base/collection"
+Comment = require "models/comment"
 
-  class Comments extends Collection
-
-    model: Comment
+module.exports = class Comments extends Collection
+  model: Comment

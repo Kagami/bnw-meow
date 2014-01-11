@@ -1,10 +1,6 @@
-define [
-  "chaplin"
-  "views/header"
-], (Chaplin, HeaderView) ->
-  "use strict"
+Chaplin = require "chaplin"
+HeaderView = require "views/header"
 
-  class HeaderController extends Chaplin.Controller
-
-    initialize: ->
-      @view = new HeaderView()
+module.exports = class HeaderController extends Chaplin.Controller
+  initialize: ->
+    @view = new HeaderView()

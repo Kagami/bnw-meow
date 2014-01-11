@@ -1,40 +1,33 @@
-define [
-  "underscore"
-  "chaplin"
-  "views/base/view"
-  "lib/websocket_handler"
-  "lib/view_helpers"
-], (_, Chaplin, View, WebSocketHandler, viewHelpers) ->
-  "use strict"
+_ = require "underscore"
+Chaplin = require "chaplin"
+View = require "views/base/view"
+WebSocketHandler = require "lib/websocket_handler"
+viewHelpers = require "lib/view_helpers"
 
-  # We need to copypaste some helpers from View class because
-  # otherwise it will use wrong 'super'.
+module.exports = class CollectionView extends Chaplin.CollectionView
+  _(@prototype).extend WebSocketHandler
 
-  class CollectionView extends Chaplin.CollectionView
+  animationDuration: 300
 
-    _(@prototype).extend WebSocketHandler
+  # Could be overloaded in subclasses
+  templateData: {}
+  # Used for rendering with params
+  _templateData2: {}
 
-    animationDuration: 300
+  dispose: ->
+    @closeWebSocket()
+    super
 
-    # Could be overloaded in subclasses
-    templateData: {}
-    # Used for rendering with params
-    _templateData2: {}
+  render: (params = {}) ->
+    @_templateData2 = params
+    super
 
-    dispose: ->
-      @closeWebSocket()
-      super
+  getTemplateData: ->
+    data = super
+    templateData = if typeof @templateData is "function"
+      @templateData()
+    else
+      @templateData
+    _(data).extend viewHelpers, templateData, @_templateData2
 
-    render: (params = {}) ->
-      @_templateData2 = params
-      super
-
-    getTemplateData: ->
-      data = super
-      templateData = if typeof @templateData is "function"
-        @templateData()
-      else
-        @templateData
-      _(data).extend viewHelpers, templateData, @_templateData2
-
-    getTemplateFunction: View::getTemplateFunction
+  getTemplateFunction: View::getTemplateFunction

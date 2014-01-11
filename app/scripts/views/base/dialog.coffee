@@ -1,22 +1,19 @@
-define [
-  "views/base/view"
-], (View) ->
-  "use strict"
+View = require "views/base/view"
 
-  class DialogView extends View
-    ###Base dialog class.###
+module.exports = class DialogView extends View
+  ###Base dialog class.###
 
-    autoRender: true
+  autoRender: true
 
-    afterRender: ->
-      super
-      @modal = @$el.children(":first")
+  afterRender: ->
+    super
+    @modal = @$el.children(":first")
 
-    isVisible: ->
-      @modal.is(":visible")
+  isVisible: ->
+    @modal.is(":visible")
 
-    show: ->
-      @modal.modal "show"
+  show: ->
+    @modal.modal "show"
 
-    hide: ->
-      @modal.modal "hide"
+  hide: ->
+    @modal.modal "hide"

@@ -1,19 +1,15 @@
-define [
-  "models/base/collection"
-  "models/post"
-], (Collection, Post)  ->
-  "use strict"
+Collection = require "models/base/collection"
+Post = require "models/post"
 
-  class Posts extends Collection
+module.exports = class Posts extends Collection
+  id: "show"
+  model: Post
 
-    id: "show"
-    model: Post
+  fetch: ->
+    @apiCall().done (data) =>
+      @add data.messages.reverse()
+      if data.messages.length < @pageSize
+        @_hasPages = false
 
-    fetch: ->
-      @apiCall().done (data) =>
-        @add data.messages.reverse()
-        if data.messages.length < @pageSize
-          @_hasPages = false
-
-    isEmptyPage: (data) ->
-      not data.messages.length
+  isEmptyPage: (data) ->
+    not data.messages.length

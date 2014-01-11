@@ -1,3 +1,13 @@
+commonJsWrapper = (path, data) ->
+  module = path.replace /^app(\/scripts)?\//, ""
+  module = module.replace /(.*)\.\w+$/, "$1"
+  prefix:
+    """
+    require.register("#{module}", function(exports, require, module) {
+    "use strict";\n\n
+    """
+  suffix: "});\n\n"
+
 exports.config =
   files:
     javascripts:
@@ -5,6 +15,7 @@ exports.config =
         "static/meow.js"
       order:
         before: [
+          # Required by Backbone and others.
           "vendor/underscore.js"
         ]
     stylesheets:
@@ -14,8 +25,15 @@ exports.config =
       joinTo:
         "static/meow.js"
 
+  modules:
+    wrapper: (path, data) ->
+      if path.match /^app\//
+        commonJsWrapper path, data
+      else
+        data
+
   conventions:
-    # To prevent coping bootstrap assets into public/css and public/js
+    # To prevent coping bootstrap assets into public/css and public/js.
     assets: /^app\/assets\//
 
   server:

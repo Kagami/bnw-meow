@@ -1,30 +1,26 @@
-define [
-  "views/base/collection_view"
-  "views/comment"
-], (CollectionView, CommentView) ->
-  "use strict"
+CollectionView = require "views/base/collection_view"
+CommentView = require "views/comment"
 
-  class CommentsView extends CollectionView
+module.exports = class CommentsView extends CollectionView
+  el: "#comments"
+  itemView: CommentView
 
-    el: "#comments"
-    itemView: CommentView
+  getView: (model) ->
+    new @itemView model: model, dialog: @dialog
 
-    getView: (model) ->
-      new @itemView model: model, dialog: @dialog
+  initialize: (options) ->
+    super options
+    @dialog = options.dialog
 
-    initialize: (options) ->
-      super options
-      @dialog = options.dialog
-
-    afterRender: ->
-      super
-      # Treeify comments
-      @collection.forEach (comment) ->
-        attributes = comment.getAttributes()
-        id = attributes.commentId
-        replyto = attributes.replyCommentId
-        if replyto?
-          target = $("##{replyto}").parent()
-          if target.length
-            source = $("##{id}").parent()
-            target.append(source)
+  afterRender: ->
+    super
+    # Treeify comments
+    @collection.forEach (comment) ->
+      attributes = comment.getAttributes()
+      id = attributes.commentId
+      replyto = attributes.replyCommentId
+      if replyto?
+        target = $("##{replyto}").parent()
+        if target.length
+          source = $("##{id}").parent()
+          target.append(source)

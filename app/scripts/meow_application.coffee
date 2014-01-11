@@ -1,52 +1,52 @@
-define [
-  "jquery"
-  "underscore"
-  "moment"
-  "moment_ru"
-  "chaplin"
-  "controllers/header_controller"
-  "routes"
-], ($, _, moment, moment_ru, Chaplin, HeaderController, routes) ->
-  "use strict"
+$ = require "jquery"
+_ = require "underscore"
+moment = require "moment"
+Chaplin = require "chaplin"
+HeaderController = require "controllers/header_controller"
+routes = require "routes"
 
-  class MeowApplication extends Chaplin.Application
+class MeowApplication extends Chaplin.Application
+  title: "BnW"
 
-    title: "BnW"
+  initialize: ->
+    super
 
-    initialize: ->
-      super
+    @initSettings()
 
-      @initSettings()
+    # Initialize core components
+    @initDispatcher()
+    @initLayout()
+    @initMediator()
 
-      # Initialize core components
-      @initDispatcher()
-      @initLayout()
-      @initMediator()
+    # Application-specific scaffold
+    @initControllers()
+    # Register all routes and start routing
+    @initRouter routes
+    # Freeze the application instance to prevent further changes
+    Object.freeze? this
 
-      # Application-specific scaffold
-      @initControllers()
-      # Register all routes and start routing
-      @initRouter routes
-      # Freeze the application instance to prevent further changes
-      Object.freeze? this
+  initSettings: ->
+    moment.lang("ru")
 
-    initSettings: ->
-      moment.lang("ru")
+  # Override standard layout initializer
+  initLayout: ->
+    @layout = new Chaplin.Layout
+      title: @title
+      titleTemplate: _.template("<%= title %> — <%= subtitle %>")
 
-    # Override standard layout initializer
-    initLayout: ->
-      @layout = new Chaplin.Layout
-        title: @title
-        titleTemplate: _.template("<%= title %> — <%= subtitle %>")
+  # Instantiate common controllers
+  initControllers: ->
+    new HeaderController()
 
-    # Instantiate common controllers
-    initControllers: ->
-      new HeaderController()
+  # Create additional mediator properties
+  initMediator: ->
+    # Create a user property
+    Chaplin.mediator.user = null
+    # Add additional application-specific properties and methods
+    # Seal the mediator
+    Chaplin.mediator.seal()
 
-    # Create additional mediator properties
-    initMediator: ->
-      # Create a user property
-      Chaplin.mediator.user = null
-      # Add additional application-specific properties and methods
-      # Seal the mediator
-      Chaplin.mediator.seal()
+# Starting point.
+$ ->
+  app = new MeowApplication()
+  app.initialize()

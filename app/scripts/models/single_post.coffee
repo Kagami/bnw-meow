@@ -1,24 +1,20 @@
-define [
-  "models/base/model"
-  "models/comments"
-  "models/post"
-], (Model, Comments, Post) ->
-  "use strict"
+Model = require "models/base/model"
+Comments = require "models/comments"
+Post = require "models/post"
 
-  class SinglePost extends Model
+module.exports = class SinglePost extends Model
+  id: "show"
 
-    id: "show"
+  constructor: (attributes, options) ->
+    super attributes, options
+    @query = message: options.post, replies: 1, use_bl: 1
+    @replies = new Comments()
 
-    constructor: (attributes, options) ->
-      super attributes, options
-      @query = message: options.post, replies: 1, use_bl: 1
-      @replies = new Comments()
+  fetch: ->
+    @apiCall().done (data) =>
+      @set data.message
+      @replies.reset data.replies, postUser: @get "user"
 
-    fetch: ->
-      @apiCall().done (data) =>
-        @set data.message
-        @replies.reset data.replies, postUser: @get "user"
+  destroy: Post::destroy
 
-    destroy: Post::destroy
-
-    getAttributes: Post::getAttributes
+  getAttributes: Post::getAttributes
