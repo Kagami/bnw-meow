@@ -5,16 +5,7 @@
   <title>BnW</title>
   <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAIVBMVEX///+6fD66fD66fD7/k7D/////k7C6fD7/2u3////+tvO8X5wNAAAABnRSTlMAAgmz+fmvaUt+AAAAAWJLR0QAiAUdSAAAAGZJREFUCNdjYIABITiLgdmA2QDMMHE2cQbxjc3Ky5ONDRiYO8vSy9JnABkd0yunV3aAGDOBAMSwBDEmA/VBGEBdliA1QBHmGe0zZ1Z0AhlWK2bO7FoMVGO8vLy8yhhsdLCpsQHCagBLyiHgcjlRjgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxNC0wMS0wOFQyMDozNDozMiswNDowMGU8UJMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTQtMDEtMDhUMjA6MzQ6MjUrMDQ6MDAdbNY/AAAAAElFTkSuQmCC" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
-<#ifdef RELEASE>
-  <link rel="stylesheet" type="text/css" href="/static/css/default.css?v=<#VERSION>" />
-<#else>
-  <link rel="stylesheet" type="text/css" href="/static/css/010_bootstrap.css?v=<#VERSION>" />
-  <link rel="stylesheet" type="text/css" href="/static/css/011_bootstrap-responsive.css?v=<#VERSION>" />
-  <link rel="stylesheet" type="text/css" href="/static/css/020_font-awesome.css?v=<#VERSION>" />
-  <link rel="stylesheet" type="text/css" href="/static/css/030_pikaday.css?v=<#VERSION>" />
-  <link rel="stylesheet" type="text/css" href="/static/css/090_highlight-github.css?v=<#VERSION>" />
-  <link rel="stylesheet" type="text/css" href="/static/css/100_default.css?v=<#VERSION>" />
-<#endif>
+  <link rel="stylesheet" type="text/css" href="/static/meow.css" />
 </head>
 <body>
 
@@ -36,11 +27,6 @@
     </div>
   </div>
 
-<#ifdef RELEASE>
-  <script src="/static/js/meow.js?v=<#VERSION>"></script>
-<#else>
-  <script src="/static/js/vendor/require.js?v=<#VERSION>"></script>
-  <script src="/static/js/load.js?v=<#VERSION>"></script>
-<#endif>
+  <script src="/static/meow.js"></script>
 </body>
 </html>

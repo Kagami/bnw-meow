@@ -1,0 +1,16 @@
+{
+  "name": "bnw-meow",
+  "dependencies": {
+    "jquery": "1.8.3",
+    "bootstrap": "2.2.2",
+    "font-awesome": "3.0.2"
+  },
+  "overrides": {
+    "jquery": {
+      "main": "jquery.js"
+    },
+    "font-awesome": {
+      "main": []
+    }
+  }
+}
