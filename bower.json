@@ -3,7 +3,8 @@
   "dependencies": {
     "jquery": "1.8.3",
     "bootstrap": "2.2.2",
-    "font-awesome": "3.0.2"
+    "font-awesome": "3.0.2",
+    "moment": "2.0.0"
   },
   "overrides": {
     "jquery": {
@@ -11,6 +12,12 @@
     },
     "font-awesome": {
       "main": []
+    },
+    "moment": {
+      "main": [
+        "moment.js",
+        "min/lang/ru.js"
+      ]
     }
   }
 }
