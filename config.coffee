@@ -13,11 +13,6 @@ exports.config =
     javascripts:
       joinTo:
         "static/meow.js"
-      order:
-        before: [
-          # Required by Backbone and others.
-          "vendor/underscore.js"
-        ]
     stylesheets:
       joinTo:
         "static/meow.css"

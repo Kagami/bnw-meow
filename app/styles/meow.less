@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////
 // BOOTSTRAP
 //////////////////////////////////////////////////
-// CSS Reset
-@import "bower_components/bootstrap/less/reset.less";
 // Core variables and mixins
 @import "bower_components/bootstrap/less/variables.less"; // Modify this for custom colors, font-sizes, etc
 @import "bower_components/bootstrap/less/mixins.less";
+// CSS Reset
+@import "bower_components/bootstrap/less/reset.less";
 // Grid system and page structure
 @import "bower_components/bootstrap/less/scaffolding.less";
 @import "bower_components/bootstrap/less/grid.less";
@@ -45,8 +45,6 @@
 // @import "bower_components/bootstrap/less/hero-unit.less";
 // Utility classes
 @import "bower_components/bootstrap/less/utilities.less"; // Has to be last to override when necessary
-// IE10 Metro responsive
-@-ms-viewport { width: device-width; }
 // Responsive utils
 @import "bower_components/bootstrap/less/responsive-utilities.less";
 // Large desktops
@@ -67,6 +65,6 @@
 //////////////////////////////////////////////////
 // OTHER
 //////////////////////////////////////////////////
-@import "_pikaday";
-@import "_highlight-github";
+@import (less) "bower_components/pikaday/css/pikaday.css";
+@import (less) "bower_components/highlightjs/styles/github.css";
 @import "themes/_bootstrap";

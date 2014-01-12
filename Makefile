@@ -53,7 +53,7 @@ deb: test mrproper
 	fakeroot dpkg -b "$(DEB_BUILD_DIR)" "$(DEB_PATH)"
 
 test:
-	NODE_PATH=app/scripts:vendor $(MOCHA) "$(TESTS_DIR)" \
+	NODE_PATH=app/scripts:bower_components $(MOCHA) "$(TESTS_DIR)" \
 		--compilers=coffee:coffee-script \
 		--require=should \
 		--reporter=$(REPORTER)
