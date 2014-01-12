@@ -1,16 +1,10 @@
-$ = require "jquery"
 _ = require "underscore"
+moment = require "moment"
 config = require "config"
 
 module.exports =
   getBnwUrl: (path) ->
     "#{config.BNW_API_PROTOCOL}://#{config.BNW_API_HOST}#{path}"
-
-  isLogged: ->
-    $.cookie("login")?
-
-  getUser: ->
-    $.cookie "user"
 
   renderTemplate: (templateFunc, params = {}) =>
     templateFunc _(params).extend(this)
@@ -26,3 +20,33 @@ module.exports =
       text[...maxlength].concat "…"
     else
       text
+
+  # Get and set login info via local storage bakend.
+
+  LOGIN_KEY_NAME: "bnw-meow_login-key"
+  USER_KEY_NAME: "bnw-meow_user"
+
+  getLoginKey: ->
+    localStorage.getItem @LOGIN_KEY_NAME
+
+  setLoginKey: (loginKey) ->
+    localStorage.setItem @LOGIN_KEY_NAME, loginKey
+
+  clearLoginKey: ->
+    localStorage.removeItem @LOGIN_KEY_NAME
+
+  isLogged: ->
+    @getLoginKey()?
+
+  getUser: ->
+    localStorage.getItem @USER_KEY_NAME
+
+  setUser: (user) ->
+    localStorage.setItem @USER_KEY_NAME, user
+
+  clearUser: ->
+    localStorage.removeItem @USER_KEY_NAME
+
+  clearAuth: ->
+    @clearLoginKey()
+    @clearUser()

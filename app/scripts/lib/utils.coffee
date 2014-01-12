@@ -50,34 +50,10 @@ module.exports = _(utils).extend viewHelpers,
   post: (func, data = {}, verbose = false) ->
     @apiCall func, data, "POST", {verbose}
 
+  # Misc
+
   gotoUrl: (url, force = true) ->
     Chaplin.mediator.publish "!router:route", url, forceStartup: force
-
-  # Get and set login info via cookies bakend.
-  # Note that we reread login key and user login info from cookies
-  # on the each action requires auth. It _could_ be inefficient but
-  # I don't think so.
-
-  setCookie: (key, value) ->
-    $.cookie key, value, expires: 365, path: "/"
-
-  removeCookie: (key) ->
-    $.removeCookie key, path: "/"
-
-  getLoginKey: ->
-    $.cookie "login"
-
-  setLoginKey: (loginKey) ->
-    @setCookie "login", loginKey
-
-  setUser: (user) ->
-    @setCookie "user", user
-
-  clearAuth: ->
-    @removeCookie "login"
-    @removeCookie "user"
-
-  # Misc
 
   pluralForm: (n, [p1, p2, p5], withNumber = false) ->
     _pluralForm = ->
