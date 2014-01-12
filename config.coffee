@@ -15,7 +15,7 @@ exports.config =
         "static/meow.js"
     stylesheets:
       joinTo:
-        "static/meow.css"
+        "static/meow-bootstrap.css": /^app\/styles\/meow-bootstrap\.less$/
     templates:
       joinTo:
         "static/meow.js"
