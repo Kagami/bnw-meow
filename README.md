@@ -29,28 +29,30 @@ You could easily build and host you own version of bnw-meow. bnw-meow uses Brunc
 % make config               # Or: cp app/scripts/config.coffee.example app/scripts/config.coffee
 ```
 
-* **Build development version:**
+**Build types:**
+
+* **Development version:**
   ```bash
   % make  # Or: ./node_modules/.bin/brunch build
   ```
 
   It will build development version of static in the `public/` directory.
 
-* **Build product version:**
+* **Product version:**
   ```bash
-  % ./node_modules/.bin/brunch build --production
+  % make release
   ```
 
-  It will build product version of static in the `public/` directory.
+  It will build product version of the static in the `build/srv/bnw-meow/` directory.
 
-* **Build deb package:**
+* **Debian package:**
   ```bash
   % make deb
   ```
 
-  It will build debian package in the `deb_dist/` directory.
+  It will build debian package with the product static in the `deb_dist/` directory.
 
-## Web server configuration
+### Web server configuration
 
 bnw-meow uses [HTML5 history API](http://diveintohtml5.info/history.html) so you will need some rewrite rules. See [bnw-meow.cfg](https://github.com/Kagami/bnw-meow/blob/master/deb/etc/nginx/sites-available/bnw-meow.cfg) for nginx example.
 

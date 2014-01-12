@@ -41,7 +41,7 @@ build: clean
 watch w: clean
 	$(BRUNCH) watch --server
 
-deb: test mrproper
+release: test mrproper
 	mkdir -p "$(HTML_DIR)" "$(DEB_DIR)"
 	cp -r deb/* "$(DEB_BUILD_DIR)"
 	sed -i \
@@ -50,6 +50,8 @@ deb: test mrproper
 	$(BRUNCH) build --production
 	./index.coffee
 	cp -r $(BUILD_DIR)/* "$(HTML_DIR)"
+
+deb: release
 	fakeroot dpkg -b "$(DEB_BUILD_DIR)" "$(DEB_PATH)"
 
 test:
