@@ -13,6 +13,7 @@ module.exports = class PostsView extends ScrollableView
   itemView: PostView
   autoRender: false
   notFoundTemplate: notFound
+  enableNewPostWs: true
 
   getView: (model) ->
     new @itemView
@@ -24,6 +25,8 @@ module.exports = class PostsView extends ScrollableView
     super options
     if options?.scrollable?
       @scrollable = options.scrollable
+    if options?.enableNewPostWs?
+      @enableNewPostWs = options.enableNewPostWs
 
     dialog = new DialogDeleteView()
     @subview "dialog", dialog
@@ -41,7 +44,8 @@ module.exports = class PostsView extends ScrollableView
       @subview "user-info", userInfo
 
     @fetch()?.done =>
-      @subscribeEvent "!ws:new_message", @onNewPost
+      if @enableNewPostWs
+        @subscribeEvent "!ws:new_message", @onNewPost
       @initWebSocket()
 
   onNewPost: (postData) ->

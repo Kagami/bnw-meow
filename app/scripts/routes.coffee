@@ -6,9 +6,10 @@ module.exports = (match) ->
   match "search/:query", "search#show"
   match "login", "login#login"
   match "top", "posts#show", params:
-    id: "today", title: "Топ 20 постов за сегодня", scrollable: false
+    id: "today", title: "Топ 20 постов за сегодня",
+    scrollable: false, enableNewPostWs: false
   match "feed", "posts#show", params:
-    id: "feed", title: "Подписки"
+    id: "feed", title: "Подписки", enableNewPostWs: false
 
   match "u/:user", "posts#show", params:
     show: "messages"

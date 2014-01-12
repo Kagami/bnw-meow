@@ -42,5 +42,6 @@ module.exports = class PostsController extends Chaplin.Controller
       scrollable: params.scrollable
       pageUser: params.user
       show: params.show
+      enableNewPostWs: params.enableNewPostWs
     @adjustTitle params.title
     HeaderView::updateBreadcrumbs breadcrumbs
