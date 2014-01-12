@@ -58,7 +58,7 @@ bnw-meow uses [HTML5 history API](http://diveintohtml5.info/history.html) so you
 
 **Watch:**
 ```bash
-% make watch  # Or: ./node_modules/.bin/brunch watch
+% make watch  # Or: ./node_modules/.bin/brunch watch --server
 ```
 
 It will start development web server on <http://localhost:4000/> and auto-recompile changed files.
