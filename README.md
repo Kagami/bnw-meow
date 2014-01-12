@@ -1,12 +1,12 @@
 # bnw-meow ![meow](http://meow.bnw.im/static/favicon-big.png)
 
-Kawaii single-page web interface for [bnw.im](https://github.com/stiletto/bnw) built on top of great Chaplin framework.
+Kawaii single-page web interface for [BnW](https://github.com/stiletto/bnw) built on top of great Chaplin framework.
 
 ## See it in action
 
 http://meow.bnw.im/
 
-## Use with BnW
+## Use with bnw.im
 
 Send the following message to the bot:
 ```
