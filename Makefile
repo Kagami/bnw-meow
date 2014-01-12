@@ -41,7 +41,7 @@ build: clean
 watch w: clean
 	$(BRUNCH) watch --server
 
-deb: mrproper test
+deb: test mrproper
 	mkdir -p "$(HTML_DIR)" "$(DEB_DIR)"
 	cp -r deb/* "$(DEB_BUILD_DIR)"
 	sed -i \
