@@ -36,7 +36,7 @@ You could easily build and host you own version of bnw-meow. bnw-meow uses Brunc
   % make  # Or: ./node_modules/.bin/brunch build
   ```
 
-  It will build development version of static in the `public/` directory.
+  It will build development version of the static in the `public/` directory.
 
 * **Product version:**
   ```bash
@@ -52,7 +52,7 @@ You could easily build and host you own version of bnw-meow. bnw-meow uses Brunc
 
   It will build debian package with the product static in the `deb_dist/` directory.
 
-### Web server configuration
+**Web server configuration:**
 
 bnw-meow uses [HTML5 history API](http://diveintohtml5.info/history.html) so you will need some rewrite rules. See [bnw-meow.cfg](https://github.com/Kagami/bnw-meow/blob/master/deb/etc/nginx/sites-available/bnw-meow.cfg) for nginx example.
 
