@@ -27,6 +27,11 @@ exports.config =
       else
         data
 
+  plugins:
+    uglify:
+      output:
+        comments: /copyright|license|\(c\)/i
+
   conventions:
     # To prevent coping bootstrap assets into public/css and public/js.
     assets: /^app\/assets\//
