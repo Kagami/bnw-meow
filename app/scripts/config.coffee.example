@@ -1,15 +1,12 @@
-define ->
-  "use strict"
+module.exports =
+  # Path to the BnW-compatible API host.
+  BNW_API_HOST: "bnw.im"
 
-  config =
-    # Path to the BnW-compatible API host.
-    BNW_API_HOST: "bnw.im"
+  # API protocol. "http" or "https". "https" is strongly recommended.
+  BNW_API_PROTOCOL: "https"
 
-    # API protocol. "http" or "https". "https" is strongly recommended.
-    BNW_API_PROTOCOL: "https"
+  # Path to the BnW-compatible websocket server.
+  BNW_WS_HOST: "bnw.im"
 
-    # Path to the BnW-compatible websocket server.
-    BNW_WS_HOST: "bnw.im"
-
-    # Websocket protocol. "ws" or "wss". "wss" is strongly recommended.
-    BNW_WS_PROTOCOL: "wss"
+  # Websocket protocol. "ws" or "wss". "wss" is strongly recommended.
+  BNW_WS_PROTOCOL: "wss"
