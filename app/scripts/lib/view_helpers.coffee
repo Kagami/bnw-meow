@@ -6,6 +6,9 @@ module.exports =
   getBnwUrl: (path) ->
     "#{config.BNW_API_PROTOCOL}://#{config.BNW_API_HOST}#{path}"
 
+  getAvatarUrl: (username) ->
+    _.template(config.IDENTICON_URL, {username})
+
   renderTemplate: (templateFunc, params = {}) =>
     templateFunc _(params).extend(this)
 
