@@ -1,4 +1,4 @@
-# bnw-meow ![meow](http://meow.bnw.im/static/favicon-big.png)
+# bnw-meow ![meow](https://meow.bnw.im/static/favicon-big.png)
 
 Kawaii single-page web interface for [BnW](https://github.com/stiletto/bnw) built on top of great Chaplin framework.
 
@@ -10,7 +10,7 @@ https://meow.bnw.im/
 
 Send the following message to the bot:
 ```
-set baseurl http://meow.bnw.im
+set baseurl https://meow.bnw.im
 ```
 Now all links that you get from bot will have correct prefix.
 
