@@ -9,6 +9,10 @@ module.exports =
   getAvatarUrl: (username) ->
     _.template(config.IDENTICON_URL, {username})
 
+  getThumbUrl: (imageUrl) ->
+    imageUrl = encodeURIComponent imageUrl
+    _.template(config.THUMBIFY_URL, {imageUrl})
+
   renderTemplate: (templateFunc, params = {}) =>
     templateFunc _(params).extend(this)
 

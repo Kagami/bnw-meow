@@ -13,3 +13,6 @@ module.exports =
 
   # Identicon service URL template used for avatars.
   IDENTICON_URL: "https://sigil.cupcake.io/<%= username %>?w=96"
+
+  # Thumbify image service URL template.
+  THUMBIFY_URL: "https://uglyhx.appspot.com/thumb?img=<%= imageUrl %>"
