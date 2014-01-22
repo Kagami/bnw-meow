@@ -10,7 +10,7 @@
     "backbone": "0.9.10",
     "chaplin": "0.6.0",
     "marked": "0.2.8",
-    "tinycon": "0.5",
+    "tinycon": "0.6.1",
     "pikaday": "1.0.0",
     "highlightjs": "7.5.0"
   },
