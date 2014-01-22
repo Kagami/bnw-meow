@@ -26,7 +26,7 @@ You could easily build and host you own version of bnw-meow. bnw-meow uses Brunc
 % npm install && bower install
 % cp app/scripts/config.coffee.example app/scripts/config.coffee
 % brunch build     # Build development version in public/
-% brunch watch -s  # Auto-recompile changed files and run server at http://localhost:4000/
+% brunch watch -s  # Auto-recompile changed files, run server at http://localhost:4000/
 % brunch build -P  # Build minified version in public/
 ```
 
