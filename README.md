@@ -4,7 +4,7 @@ Kawaii single-page web interface for [BnW](https://github.com/stiletto/bnw) buil
 
 ## See it in action
 
-http://meow.bnw.im/
+https://meow.bnw.im/
 
 ## Use with bnw.im
 
