@@ -8,7 +8,7 @@ preferred.
 
 _ = require "underscore"
 marked = require "marked"
-utils = require "lib/utils"
+viewHelpers = require "lib/view_helpers"
 
 escape2 = (html) ->
   # We need our NIH function because underscore do some crappy
@@ -84,7 +84,7 @@ module.exports =
   IMG_PREVIEW_FORMATTER:
     [/<a href="([^"]+\.(jpg|jpeg|gif|png))">([^<]+)<\/a>/g
     , (_m, link, ext, alt) ->
-      "<span class=\"preview#{if ext == 'gif' then ' preview-gif' else ''}\"><a href=\"#{link}\"><img src=\"#{utils.getThumbUrl(link)}\" alt=\"#{alt}\"></a></span>"
+      "<span class=\"preview#{if ext == 'gif' then ' preview-gif' else ''}\"><a href=\"#{link}\"><img src=\"#{viewHelpers.getThumbUrl(link)}\" alt=\"#{alt}\"></a></span>"
     ]
 
   markdown: (raw) ->
