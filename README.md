@@ -86,7 +86,7 @@ bnw-meow uses [HTML5 history API](http://diveintohtml5.info/history.html) so you
 
 ## License
 
-bnw-meow - kawaii single-page web interface for bnw.im
+bnw-meow - kawaii single-page web interface for BnW
 
 Written in 2013-2014 by Kagami Hiiragi <kagami@genshiken.org>
 
