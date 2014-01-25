@@ -7,7 +7,8 @@ module.exports =
     "#{config.BNW_API_PROTOCOL}://#{config.BNW_API_HOST}#{path}"
 
   getAvatarUrl: (username) ->
-    _.template(config.IDENTICON_URL, {username})
+    "#{config.BNW_API_PROTOCOL}://#{config.BNW_API_HOST}"+
+    "/u/#{username}/avatar/thumb"
 
   getThumbUrl: (imageUrl) ->
     imageUrl = encodeURIComponent imageUrl
