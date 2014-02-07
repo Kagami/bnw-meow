@@ -26,7 +26,9 @@ module.exports = _(utils).extend viewHelpers,
         deferred.resolve data
       # Must be 4xx HTTP code actually, but @stiletto fucked it up.
       else
-        @showAlert data.desc
+        text = data.desc
+        autoHide = text not in ["No such message", "User not found."]
+        @showAlert text, "error", autoHide
         deferred.reject data
     jqxhr.fail (err) =>
       text = "Ошибка AJAX: #{err.status} #{err.statusText}"
