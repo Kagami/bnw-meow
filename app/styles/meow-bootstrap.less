@@ -440,6 +440,11 @@ img.avatar {
 .search-form .search-form-query {
     padding-left: 29px !important;
     line-height: 140%;
+    width: 50px;
+    .transition(width 0.2s ease 0s);
+    &:focus {
+        width: 150px;
+    }
 }
 
 .icon-search-fix {
