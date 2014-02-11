@@ -35,7 +35,7 @@
       <% if @isLogged(): %>
         <li><a href="/u/<%= @getUser() %>"><i class="icon-user"></i> <%= @getUser() %></a></li>
         <li><a href="#" class="show-new-post"><i class="icon-pencil"></i></a></li>
-        <li><a href="#" class="logout"><i class="icon-off"></i></a></li>
+        <li><a href="#" class="logout"><i class="icon-signout"></i></a></li>
       <% else: %>
         <li><a class="show-login-dialog" href="#">Войти</a></li>
       <% end %>
