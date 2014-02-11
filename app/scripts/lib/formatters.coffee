@@ -87,6 +87,12 @@ module.exports =
       "<span class=\"preview#{if ext == 'gif' then ' preview-gif' else ''}\"><a href=\"#{link}\"><img src=\"#{viewHelpers.getThumbUrl(link)}\" alt=\"#{alt}\"></a></span>"
     ]
 
+  YT_PREVIEW_FORMATTER:
+    [/<a href="https?:\/\/(|www\.)youtu(be.com\/watch\?v=|\.be\/)([A-z0-9_\-]{11})([^"]*)">([^<]+)<\/a>/g
+    , ->
+      "<span class=\"preview youtube\"><a href=\"#{arguments[5]}\"><img src=\"http://img.youtube.com/vi/#{arguments[3]}/0.jpg\"></a></span>"
+    ]
+
   markdown: (raw) ->
     ###Markdown with some additional BnW-specific rules.###
 
@@ -141,6 +147,9 @@ module.exports =
     # Image's previews
     html.replace @IMG_PREVIEW_FORMATTER[0], @IMG_PREVIEW_FORMATTER[1]
 
+    # Youtube previews
+    html.replace @YT_PREVIEW_FORMATTER[0], @YT_PREVIEW_FORMATTER[1]
+
   moinmoin: (raw) ->
     ###
     Simple moinmoin-like text format.
@@ -189,6 +198,7 @@ module.exports =
       @USER_LINK_FORMATTER
       @POST_LINK_FORMATTER
       @IMG_PREVIEW_FORMATTER
+      @YT_PREVIEW_FORMATTER
       # Fix newlines
       [/\n/g, -> "<br />"]
     ]
