@@ -8,7 +8,6 @@
           <span class="icon-align-justify"></span>
         </a>
         <a class="brand" href="/"></a>
-        <li><a href="/">Главная</a></li>
         <li><a href="/top">Топ</a></li>
         <% if @isLogged(): %>
         <li><a href="/feed">Подписки</a></li>
