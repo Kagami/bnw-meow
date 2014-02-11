@@ -53,7 +53,6 @@ module.exports = class HeaderView extends View
 
   afterRender: ->
     super
-    @$(".dropdown-toggle").dropdown()
 
   # Reload controller even if url was not changed
   navigate: (e) ->
