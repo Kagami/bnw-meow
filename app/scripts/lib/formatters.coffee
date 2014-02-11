@@ -90,7 +90,7 @@ module.exports =
   YT_PREVIEW_FORMATTER:
     [/<a href="https?:\/\/(|www\.)youtu(be.com\/watch\?v=|\.be\/)([A-z0-9_\-]{11})([^"]*)">([^<]+)<\/a>/g
     , ->
-      "<span class=\"preview youtube\"><a href=\"#{arguments[5]}\"><img src=\"http://img.youtube.com/vi/#{arguments[3]}/0.jpg\"></a></span>"
+      "<span class=\"preview youtube\"><a href=\"#{arguments[5]}\"><img src=\"https://img.youtube.com/vi/#{arguments[3]}/0.jpg\"></a></span>"
     ]
 
   markdown: (raw) ->
