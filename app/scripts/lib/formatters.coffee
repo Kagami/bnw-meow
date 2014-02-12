@@ -88,7 +88,7 @@ module.exports =
     ]
 
   YT_PREVIEW_FORMATTER:
-    [/<a href="https?:\/\/(?:|www\.)youtu(?:be.com\/watch\?v=|\.be\/)([-\w]{11})([^"]*)">(?:[^<]+)<\/a>/g
+    [/<a href="https?:\/\/(?:|www\.)youtu(?:be.com\/watch\?v=|\.be\/)([-\w]{11})(?:[^"]*)">([^<]+)<\/a>/g
     , (_m, id, link) ->
       "<span class=\"preview youtube\"><a href=\"#{link}\"><img src=\"https://img.youtube.com/vi/#{id}/0.jpg\"></a></span>"
     ]
