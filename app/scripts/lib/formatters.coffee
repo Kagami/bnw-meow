@@ -146,7 +146,7 @@ module.exports =
       langPrefix: 'language-'
 
     # Image's previews
-    html.replace @IMG_PREVIEW_FORMATTER[0], @IMG_PREVIEW_FORMATTER[1]
+    html = html.replace @IMG_PREVIEW_FORMATTER[0], @IMG_PREVIEW_FORMATTER[1]
 
     # Youtube previews
     html.replace @YT_PREVIEW_FORMATTER[0], @YT_PREVIEW_FORMATTER[1]
