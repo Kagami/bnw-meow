@@ -5,12 +5,12 @@
     <div class="container">
       <ul id="common-menu" class="nav">
         <a class="brand" href="/"></a>
-        <li><a href="/top">Топ</a></li>
+        <li><a href="/top"><i class="icon-trophy visible-phone"></i><span class="hidden-phone">Топ</span></a></li>
         <% if @isLogged(): %>
-        <li><a href="/feed">Подписки</a></li>
+        <li><a href="/feed"><i class="icon-rss visible-phone"></i><span class="hidden-phone">Подписки</span></a></li>
         <% end %>
         <% for [link, icon, title] in @breadcrumbs: %>
-        <li>
+        <li class="hidden-phone">
         <a href="<%= link %>"><i class="icon-<%= icon %>"></i> <%= title %></a>
         </li>
         <% end %>
@@ -23,13 +23,13 @@
       </ul>
       <% end %>
       <ul class="nav pull-right">
-        <form class="search-form navbar-search">
+        <form class="search-form navbar-search hidden-phone">
           <input type="text" class="search-form-query search-query input-medium" placeholder="Поиск" />
           <i class="icon-search-fix icon-search"></i>
         </form>
 
       <% if @isLogged(): %>
-        <li><a href="/u/<%= @getUser() %>" title="Блог"><i class="icon-user"></i> <%= @getUser() %></a></li>
+        <li><a href="/u/<%= @getUser() %>" title="Блог"><i class="icon-user"></i><span class="hidden-phone"><%= @getUser() %></span></a></li>
         <li><a href="#" class="show-new-post" title="Новый пост"><i class="icon-pencil"></i></a></li>
         <li><a href="#" class="logout" title="Выйти"><i class="icon-signout"></i></a></li>
       <% else: %>

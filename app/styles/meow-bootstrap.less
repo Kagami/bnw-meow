@@ -190,6 +190,28 @@ blockquote {
     }
 }
 
+/* Navbar padding fix */
+@media (max-width: 979px) {
+    .navbar-fixed-top .navbar-inner {
+        padding: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    /* Navbar icons visible-phone fix */
+    .visible-phone {
+        display: inline-block !important;
+    }
+
+    /* Less padding on phones */
+    .navbar .nav > .active > a {
+        padding: 10px;
+    }
+    .navbar .nav {
+        margin: 0;
+    }
+}
+
 .credit {
     /* Center text inside the footer */
     margin-top: 20px;
