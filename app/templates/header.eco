@@ -1,12 +1,9 @@
 <a class="to-the-top" title="Наверх"><i class="icon-chevron-up"></i></a>
 
 <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner nav-collapse collapse">
+  <div class="navbar-inner">
     <div class="container">
       <ul id="common-menu" class="nav">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-align-justify"></span>
-        </a>
         <a class="brand" href="/"></a>
         <li><a href="/top">Топ</a></li>
         <% if @isLogged(): %>
