@@ -8,7 +8,6 @@ module.exports = class UserInfoView extends View
   el: "#user-info"
   template: template
   events:
-    "click .user-info-show-more": "showMore"
     "click .user-info-toggle": "toggleInfo"
     "click .user-info-subscribe": "subscribe"
     "click .user-info-blacklist": "blacklist"
@@ -54,10 +53,6 @@ module.exports = class UserInfoView extends View
     # FIXME: Determine whether logged user has already
     # blacklisted this user.
     utils.post "blacklist", {user: @model.get "user"}, true
-
-  showMore: (e) ->
-    e.preventDefault()
-    @$(".user-info-additional").toggle()
 
   toggleInfo: (e) ->
     e.preventDefault()

@@ -11,13 +11,10 @@
     <% if @vcard.fullname?: %>
       <p><em><%= @vcard.fullname %></em></p>
     <% end %>
-    <% if @formattedUrl? or @formattedAbout?: %>
-      <a class="user-info-show-more muted" href="#" title="Показать/скрыть дополнительную информацию">Ещё…</a>
-    <% end %>
   </div>
 </div>
 
-<div class="user-info-additional hide">
+<div class="user-info-additional">
   <div>
     <% if @formattedUrl?: %>
       <p><strong>Сайт</strong></p>
