@@ -12,4 +12,4 @@ module.exports =
   BNW_WS_PROTOCOL: "wss"
 
   # Thumbify image service URL template.
-  THUMBIFY_URL: "https://uglyhx.appspot.com/thumb?img=<%= imageUrl %>"
+  THUMBIFY_URL: "https://bnw-thumb.r.worldssl.net/thumb?img=<%= imageUrl %>"
