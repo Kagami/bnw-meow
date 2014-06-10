@@ -106,10 +106,10 @@ describe "Formatters", ->
       f("Test <html><body><&\"'></body></html>").should.equal("Test &lt;html&gt;&lt;body&gt;&lt;&amp;&quot;&#39;&gt;&lt;/body&gt;&lt;/html&gt;")
 
     describe "Italic", ->
-      it "should f simple italic", ->
+      it "should parse simple italic", ->
         f("//Nyan nyan//").should.equal("<i>Nyan nyan</i>")
 
-      it "should f italic on multiple lines", ->
+      it "should parse italic on multiple lines", ->
         input = """
         Test desu!
         //Nyan nyan// nyan
@@ -118,7 +118,7 @@ describe "Formatters", ->
         output = "Test desu!<br /><i>Nyan nyan</i> nyan<br /> &lt;- look at this!<br />No at this: <i>desuu</i>"
         f(input).should.equal(output)
 
-      it "should f multiline italic", ->
+      it "should parse multiline italic", ->
         input = """
         //line 1 text
         line2 text
@@ -129,15 +129,15 @@ describe "Formatters", ->
         f(input).should.equal(output)
 
     describe "Bold", ->
-      it "should f simple bold", ->
+      it "should parse simple bold", ->
         f("**Nya nya**").should.equal("<b>Nya nya</b>")
 
-      it "should f bold on multiple lines", ->
+      it "should parse bold on multiple lines", ->
         input = "Test\n**bold bold** test\n"
         output = "Test<br /><b>bold bold</b> test<br />"
         f(input).should.equal(output)
 
-      it "should f multiline bold", ->
+      it "should parse multiline bold", ->
         input = """Test
         **Аниме в Ультра HD на японском ТВ “к 2014 году”
         Аниме в разрешении 3840×2160 “2160p” UHDTV должно быть доступно к лету 2014 года, так как японское правительство настаивает на развертывании вещания в формате 4K UHDTV на два года раньше чем это запланировано в попытке спасти телевизионную индустрию от краха.** [[http://www.animetank.ru/anime-v-ultra-hd-na-yaponskom-tv-k-2014-godu/ |❤❤❤]]
