@@ -1,4 +1,6 @@
-# bnw-meow ![meow](https://meow.bnw.im/static/favicon-big.png) [![Build Status](https://travis-ci.org/Kagami/bnw-meow.svg?branch=master)](https://travis-ci.org/Kagami/bnw-meow)
+# bnw-meow ![meow](https://meow.bnw.im/static/favicon-big.png)
+
+[![Build Status](https://travis-ci.org/Kagami/bnw-meow.svg?branch=master)](https://travis-ci.org/Kagami/bnw-meow)
 
 Kawaii single-page web interface for [BnW](https://github.com/stiletto/bnw) built on top of great Chaplin framework.
 
