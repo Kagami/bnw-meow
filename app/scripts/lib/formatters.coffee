@@ -91,7 +91,7 @@ module.exports =
     [/<a href="(https?:\/\/(?:|www\.)youtu(?:be.com\/watch\?v=|\.be\/)([-\w]{11})[^"]*)">([^<]+)<\/a>/g
     , (_m, link, id, alt) ->
       alt = _.escape alt
-      "<span class=\"preview youtube\"><a href=\"#{link}\"><img src=\"https://img.youtube.com/vi/#{id}/0.jpg\" alt=\"#{alt}\" title=\"#{alt}\"></a></span>"
+      "<span class=\"preview youtube\"><a href=\"#{link}\"><img src=\"https://img.youtube.com/vi/#{id}/mqdefault.jpg\" alt=\"#{alt}\" title=\"#{alt}\"></a></span>"
     ]
 
   markdown: (raw) ->
