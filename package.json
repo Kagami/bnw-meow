@@ -20,6 +20,9 @@
     "mocha": "~1.17.0",
     "should": "~2.1.1"
   },
+  "scripts": {
+    "test": "make test"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Kagami/bnw-meow.git"
