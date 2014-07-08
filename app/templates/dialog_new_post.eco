@@ -5,9 +5,19 @@
     <a class="help" href="http://hive.blasux.ru/u/Stiletto/BnW/Форматирование" title="Справка по синтаксису"><i class="icon-question-sign"></i></a>
   </div>
   <div class="modal-body">
-    <form id="post-form" class="form-inline">
-      <textarea id="post-form-text" class="input-block-level" rows="9"></textarea>
-    </form>
+    <ul id="post-form-tabs" class="nav nav-tabs">
+      <li><a href="#post-form-edit" data-toggle="tab">Редактирование</a></li>
+      <li><a href="#post-form-preview" data-toggle="tab">Предпросмотр</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane" id="post-form-edit">
+        <form id="post-form" class="form-inline">
+          <textarea id="post-form-text" class="input-block-level" rows="9"></textarea>
+        </form>
+      </div>
+      <div class="tab-pane" id="post-form-preview"></div>
+    </div>
   </div>
   <div class="modal-footer">
     <button id="post-form-submit" type="button" class="btn btn-success"><i></i> Отправить</button>
