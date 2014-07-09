@@ -3,6 +3,7 @@ _ = require "underscore"
 DialogView = require "views/base/dialog"
 utils = require "lib/utils"
 template = require "templates/dialog_new_post"
+formatters = require "lib/formatters"
 
 module.exports = class DialogNewPostView extends DialogView
   container: "body"
@@ -13,7 +14,15 @@ module.exports = class DialogNewPostView extends DialogView
 
   afterRender: ->
     super
+    @$("[data-toggle='tab']").on "show shown", (e) ->
+      e.stopPropagation()
+
+    @$('#post-form-tabs [href="#post-form-preview"]').on 'show', (e) ->
+      formattedText = formatters.format $('#post-form-text').val(), 'markdown'
+      $('#post-form-preview').html(formattedText)
+
     @modal.on "shown", =>
+      $('#post-form-tabs [href="#post-form-edit"]').tab('show')
       $("#post-form-text").focus()
 
   post: ->
