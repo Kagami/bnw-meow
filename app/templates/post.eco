@@ -13,6 +13,10 @@
         <a class="post-user label label-info" href="/u/<%= @user %>">@<%= @user %></a>
         <abbr class="post-date label label-reset" title="<%= @formatDateLong @date %>"></abbr>
       </div>
+      
+      <!-- Replies -->
+      <div class="post-replies replies">
+      </div>      
 
       <!-- Body -->
       <div class="post-body">

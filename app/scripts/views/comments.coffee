@@ -1,5 +1,6 @@
 CollectionView = require "views/base/collection_view"
 CommentView = require "views/comment"
+utils = require "lib/utils"
 
 module.exports = class CommentsView extends CollectionView
   el: "#comments"
@@ -24,3 +25,4 @@ module.exports = class CommentsView extends CollectionView
         if target.length
           source = $("##{id}").parent()
           target.append(source)
+      utils.addReplyLink(id,replyto)

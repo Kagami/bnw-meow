@@ -58,3 +58,80 @@ module.exports =
   clearAuth: ->
     @clearLoginKey()
     @clearUser()
+
+  addReplyLink: (id,replyto) ->
+    replyto ?= "single-post"
+    replyLink = '<a class="comment-reply-to label label-reset" href="#' + id + '">&gt;&gt;' + id + '</a> '
+    $("##{replyto} .replies").append(replyLink)
+
+  removeReplyLink: (id,replyto) ->
+    replyto ?= "single-post"
+    $("##{replyto} .replies").find('a').each (i,item) ->
+      if item.href.match(/[0-9A-Z]*$/)[0] == id
+        $(item).remove()
+
+  bindLinkOnHover: ->
+    # let's create popup comments as divs with unique ids, copy linked post content to it, 
+    # append id to chain on mouseenter, take id from chain on mouseleave
+    # and let's delegate all applying handler job to jquery
+
+    chainIndex = 0
+    hoverHandler = (e) ->
+      if e.type == 'mouseenter'
+        commentId = e.target.href.match(/#[0-9A-Z]*$/)[0]
+        xPadding = 40 + 10
+        yPadding = 20 + 10
+
+        # coordinates of popup
+        xPos = e.clientX + window.scrollX - xPadding
+        yPos = e.clientY + window.scrollY - yPadding
+
+        windowWidth = $(window).width()
+        commentWidth = $(commentId).width()
+
+        # fit comment to window (push from right border)
+        xPos = Math.min(xPos + commentWidth + xPadding, windowWidth) - commentWidth - xPadding
+
+        comment = $(commentId).html()
+
+        # we need unique ids to handle chain obviously
+        hoverId = 'bnw-chan-comment-' + chainIndex
+        chainIndex = chainIndex + 1
+
+        popupClass = "comment-wrapper comment well well-small bnw-chan-comment"
+        popupHtml = '<div id="' + hoverId + '" class="' + popupClass + '" style="position: absolute;">' + comment + '</div>'
+        $('body').append(popupHtml)
+        $('#' + hoverId).css('left',xPos).css('top',yPos).css('width',commentWidth)
+
+    # jquery will apply handler on all current and future elements
+    $('body').on('hover','a.comment-reply-to',hoverHandler)
+
+
+  bindCommentOnHover: ->
+    chain = []
+    focused = null
+    waitForFocus = ->
+      if focused == null
+        $('#' + chain[i]).remove() for item,i in chain
+        chain = []
+    hoverHandler = (e) ->
+      id = $(this).attr('id')
+      if e.type == 'mouseenter'
+        focused = id;
+        index = chain.indexOf(id)
+        if index>-1 
+          # we jumped from popup to previous popup (hovered popup id are in chain)
+          i = chain.length
+          $('#' + chain[i]).remove() while --i > index
+          chain = chain.slice(0,index+1)
+        else 
+          # we jupmed to new popup
+          chain.push(id)
+      else if e.type == 'mouseleave'
+        # when mouse hovers over link, new post are shown, then mouseleave triggered, then mouseenter triggered almost immedeately
+        # if mouseenter are not triggered, it means we left all chain of posts and all chain should be destroyed
+        focused = null
+        setTimeout(waitForFocus,10)
+
+    # jquery will apply handler on all current and future elements
+    $('body').on('hover','div.bnw-chan-comment',hoverHandler)
