@@ -55,6 +55,8 @@ module.exports = class CommentView extends RefreshDateView
       setAppear()
     else
       $(window).one("focus", setAppear)
+    attributes = @model.getAttributes()
+    utils.addReplyLink(attributes.commentId,attributes.replyCommentId)
 
   onDel: ->
     # Just delete comment div from the DOM. It still be stored
@@ -63,6 +65,8 @@ module.exports = class CommentView extends RefreshDateView
     hide = =>
       @firstDiv.fadeOut("slow", => @dispose())
     setTimeout hide, 3000
+    attributes = @model.getAttributes()
+    utils.removeReplyLink(attributes.commentId,attributes.replyCommentId)
 
   selectComment: (e) ->
     e.preventDefault()

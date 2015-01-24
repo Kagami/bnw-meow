@@ -4,6 +4,7 @@ moment = require "moment"
 Chaplin = require "chaplin"
 HeaderController = require "controllers/header_controller"
 routes = require "routes"
+utils = require "lib/utils"
 
 class MeowApplication extends Chaplin.Application
   title: "BnW"
@@ -22,6 +23,10 @@ class MeowApplication extends Chaplin.Application
     @initControllers()
     # Register all routes and start routing
     @initRouter routes
+
+    utils.bindLinkOnHover()
+    utils.bindCommentOnHover()
+
     # Freeze the application instance to prevent further changes
     Object.freeze? this
 
