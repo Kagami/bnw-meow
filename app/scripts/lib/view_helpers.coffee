@@ -70,68 +70,97 @@ module.exports =
       if item.href.match(/[0-9A-Z]*$/)[0] == id
         $(item).remove()
 
-  bindLinkOnHover: ->
+  bindHoverEvents: ->
     # let's create popup comments as divs with unique ids, copy linked post content to it, 
-    # append id to chain on mouseenter, take id from chain on mouseleave
+    # append id to chain on mouseenter, take id from chain on mouseleave and remove div
     # and let's delegate all applying handler job to jquery
+    # (actually we put id to chain on create rather then mouseenter, because there could be no mouseenter, 
+    # and we still need to remove div when we're done)
 
+    chain = []
     chainIndex = 0
-    hoverHandler = (e) ->
-      if e.type == 'mouseenter'
-        commentId = e.target.href.match(/#[0-9A-Z]*$/)[0]
-        xPadding = 40 + 10
-        yPadding = 20 + 10
+    linkParent = null
+    focusedComment = false
+    focusedLink = false
 
-        # coordinates of popup
-        xPos = e.clientX + window.scrollX - xPadding
-        yPos = e.clientY + window.scrollY - yPadding
+    removeAllChain = ->
+      $('#' + chain.pop()).remove() while chain.length
+
+    removeLastInChain = ->
+      $('#' + chain.pop()).remove() if chain.length
+
+    waitForHoverOnCommentOrLink = ->
+      if not focusedComment and not focusedLink
+        removeAllChain()
+      if focusedComment and not focusedLink and chain.length and chain[chain.length-1] != focusedComment
+        removeLastInChain()
+        linkParent = null
+
+    waitForHoverOnComment = ->
+      if not focusedComment
+        removeAllChain()
+
+    linkHoverHandler = (e) ->
+      if e.type == 'mouseenter'
+
+        if linkParent == e.target.parentElement
+          removeLastInChain()
+
+        linkParent = e.target.parentElement
+
+        commentId = e.target.href.match(/#[0-9A-Z]*$/)[0]
+        xPadding = 40 + 15
+        yPadding = 20 - 10
+
+        # coordinates of popup (css properties)
+        left = e.clientX + window.scrollX - xPadding
+        top = e.clientY + window.scrollY - yPadding
 
         windowWidth = $(window).width()
-        commentWidth = $(commentId).width()
-
+        width = $(commentId).width()
+        
         # fit comment to window (push from right border)
-        xPos = Math.min(xPos + commentWidth + xPadding, windowWidth) - commentWidth - xPadding
+        left = Math.min(left + width + xPadding, windowWidth) - width - xPadding
 
-        comment = $(commentId).html()
+        if $(commentId).length
+          html = $(commentId).html()
+        else
+          html = "Комментарий от пользователя находящегося в чёрном списке"
+        
+        # unique id
+        id = 'bnw-chan-comment-' + chainIndex++
+        chain.push id
+        $('<div/>',{
+          id,html,'class': 'comment-wrapper comment well well-small bnw-chan-comment'
+        }).appendTo('body').css({left,top,width,position:'absolute'})
 
-        # we need unique ids to handle chain obviously
-        hoverId = 'bnw-chan-comment-' + chainIndex
-        chainIndex = chainIndex + 1
+        focusedLink = true    
 
-        popupClass = "comment-wrapper comment well well-small bnw-chan-comment"
-        popupHtml = '<div id="' + hoverId + '" class="' + popupClass + '" style="position: absolute;">' + comment + '</div>'
-        $('body').append(popupHtml)
-        $('#' + hoverId).css('left',xPos).css('top',yPos).css('width',commentWidth)
+      else if e.type == 'mouseleave'
+
+        focusedLink = false
+        setTimeout waitForHoverOnCommentOrLink, 1000
 
     # jquery will apply handler on all current and future elements
-    $('body').on('hover','a.comment-reply-to',hoverHandler)
+    $('body').on('hover','a.comment-reply-to',linkHoverHandler)
 
-
-  bindCommentOnHover: ->
-    chain = []
-    focused = null
-    waitForFocus = ->
-      if focused == null
-        $('#' + chain[i]).remove() for item,i in chain
-        chain = []
-    hoverHandler = (e) ->
-      id = $(this).attr('id')
+    commentHoverHandler = (e) ->      
       if e.type == 'mouseenter'
-        focused = id;
-        index = chain.indexOf(id)
+        id = e.currentTarget.id
+        focusedComment = id
+        linkParent = null
+        index = chain.indexOf id
         if index>-1 
           # we jumped from popup to previous popup (hovered popup id are in chain)
-          i = chain.length
-          $('#' + chain[i]).remove() while --i > index
-          chain = chain.slice(0,index+1)
+          $('#' + chain.pop()).remove() while chain.length > index + 1
         else 
           # we jupmed to new popup
-          chain.push(id)
+          chain.push id
       else if e.type == 'mouseleave'
-        # when mouse hovers over link, new post are shown, then mouseleave triggered, then mouseenter triggered almost immedeately
-        # if mouseenter are not triggered, it means we left all chain of posts and all chain should be destroyed
-        focused = null
-        setTimeout(waitForFocus,10)
+        # when mouse goes from popup post to another popup post mouseleave triggered, then mouseenter triggered almost immedeately
+        # if mouseenter are not triggered it means we left all chain of posts and all chain should be destroyed
+        focusedComment = false
+        setTimeout waitForHoverOnComment, 10
 
     # jquery will apply handler on all current and future elements
-    $('body').on('hover','div.bnw-chan-comment',hoverHandler)
+    $('body').on('hover','div.bnw-chan-comment',commentHoverHandler)

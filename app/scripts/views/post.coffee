@@ -83,6 +83,13 @@ module.exports = class PostView extends RefreshDateView
       @firstDiv.fadeOut("slow", => @dispose())
     setTimeout hide, 3000
 
+  updReplyLinks: ->
+    @model.replies.models.forEach (comment) ->
+      attributes = comment.getAttributes()
+      id = attributes.commentId
+      replyto = attributes.replyCommentId
+      utils.addReplyLink(id,replyto) if not replyto
+
   updComments: (data) ->
     @$(".post-comments-count").text(data.num)
 
@@ -92,6 +99,7 @@ module.exports = class PostView extends RefreshDateView
       # It's ok to rerender full post since .post-footer2 must be
       # completely rerendered.
       @render()
+      @updReplyLinks()
       return
 
     # Actually we could rerender on any small websocket event but
