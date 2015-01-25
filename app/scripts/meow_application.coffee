@@ -24,8 +24,7 @@ class MeowApplication extends Chaplin.Application
     # Register all routes and start routing
     @initRouter routes
 
-    utils.bindLinkOnHover()
-    utils.bindCommentOnHover()
+    utils.bindHoverEvents()
 
     # Freeze the application instance to prevent further changes
     Object.freeze? this
