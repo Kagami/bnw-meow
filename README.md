@@ -90,7 +90,7 @@ bnw-meow uses [HTML5 history API](http://diveintohtml5.info/history.html) so you
 
 bnw-meow - kawaii single-page web interface for BnW
 
-Written in 2013-2014 by Kagami Hiiragi <kagami@genshiken.org>
+Written in 2013-2015 by Kagami Hiiragi <kagami@genshiken.org> and bnw-meow contributors
 
 To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 

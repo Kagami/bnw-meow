@@ -11,7 +11,6 @@ module.exports =
     "/u/#{username}/avatar/thumb"
 
   getThumbUrl: (imageUrl) ->
-    imageUrl = encodeURIComponent imageUrl
     _.template(config.THUMBIFY_URL, {imageUrl})
 
   renderTemplate: (templateFunc, params = {}) =>
