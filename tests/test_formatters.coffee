@@ -37,15 +37,15 @@ describe "Formatters", ->
       f("img: ![](http://example.com/image_link)").should.equal('<p>img: <a href="http://example.com/image_link"></a></p>\n')
 
     it "should insert images previews", ->
-      f("img: ![test](http://example.com/1.jpg)").should.equal('<p>img: <span class="preview"><a href="http://example.com/1.jpg"><img src="https://bnw-thumb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/1.jpg" alt="test"></a></span></p>\n')
-      f("img: ![Test][id]\n[id]: http://example.com/1.gif").should.equal('<p>img: <span class="preview preview-gif"><a href="http://example.com/1.gif"><img src="https://bnw-thumb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/1.gif" alt="Test"></a></span></p>\n')
+      f("img: ![test](http://example.com/1.jpg)").should.equal('<p>img: <span class="preview"><a href="http://example.com/1.jpg"><img src="https://bnw-thmb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/1.jpg" alt="test"></a></span></p>\n')
+      f("img: ![Test][id]\n[id]: http://example.com/1.gif").should.equal('<p>img: <span class="preview preview-gif"><a href="http://example.com/1.gif"><img src="https://bnw-thmb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/1.gif" alt="Test"></a></span></p>\n')
 
     it "should escape image url", ->
-      f('img: ![test](http://example.com/<"test">.jpg)').should.equal('<p>img: <span class="preview"><a href="http://example.com/&lt;&quot;test&quot;&gt;.jpg"><img src="https://bnw-thumb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/&lt;&quot;test&quot;&gt;.jpg" alt="test"></a></span></p>\n')
-      f("img: ![test](http://example.com/test&'&.png)").should.equal('<p>img: <span class="preview"><a href="http://example.com/test&amp;&#39;&amp;.png"><img src="https://bnw-thumb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/test&amp;&#39;&amp;.png" alt="test"></a></span></p>\n')
+      f('img: ![test](http://example.com/<"test">.jpg)').should.equal('<p>img: <span class="preview"><a href="http://example.com/&lt;&quot;test&quot;&gt;.jpg"><img src="https://bnw-thmb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/&lt;&quot;test&quot;&gt;.jpg" alt="test"></a></span></p>\n')
+      f("img: ![test](http://example.com/test&'&.png)").should.equal('<p>img: <span class="preview"><a href="http://example.com/test&amp;&#39;&amp;.png"><img src="https://bnw-thmb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/test&amp;&#39;&amp;.png" alt="test"></a></span></p>\n')
 
     it "should escape image/youtube link alt text", ->
-      f('img: ![" onclick="javascript:xss" attr="](http://example.com/1.jpg)').should.equal('<p>img: <span class="preview"><a href="http://example.com/1.jpg"><img src="https://bnw-thumb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/1.jpg" alt="&quot; onclick=&quot;javascript:xss&quot; attr=&quot;"></a></span></p>\n')
+      f('img: ![" onclick="javascript:xss" attr="](http://example.com/1.jpg)').should.equal('<p>img: <span class="preview"><a href="http://example.com/1.jpg"><img src="https://bnw-thmb.r.worldssl.net/unsafe/fit-in/256x256/http://example.com/1.jpg" alt="&quot; onclick=&quot;javascript:xss&quot; attr=&quot;"></a></span></p>\n')
       f('img: ![" onclick="javascript:xss" attr="](https://www.youtube.com/watch?v=IMF1HRiBC7Q)').should.equal('<p>img: <span class="preview youtube"><a href="https://www.youtube.com/watch?v=IMF1HRiBC7Q"><img src="https://img.youtube.com/vi/IMF1HRiBC7Q/mqdefault.jpg" alt="&quot; onclick=&quot;javascript:xss&quot; attr=&quot;" title="&quot; onclick=&quot;javascript:xss&quot; attr=&quot;"></a></span></p>\n')
 
     it "should allow whitelisted protocols", ->
