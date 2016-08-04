@@ -19,7 +19,29 @@ module.exports = class DialogNewPostView extends DialogView
 
     @$('#post-form-tabs [href="#post-form-preview"]').on 'show', (e) ->
       formattedText = formatters.format $('#post-form-text').val(), 'markdown'
-      $('#post-form-preview').html(formattedText)
+
+      htmlI = (c) ->
+        ' <i class="' + c + '"></i>'
+
+      htmlA = (h,t,c) ->
+        ' <a class="' + c + '" href="' + h + '">' + t + '</a>'
+
+      splitTrimFilter = (t,s) ->
+        ( e.trim() for e in t.split s ).filter (e) ->
+          return e.length > 0
+
+      tags = splitTrimFilter $('#post-form-tags').val(), ','
+      clubs = splitTrimFilter $('#post-form-clubs').val(), ','
+
+      tagsHtml = ''
+      if tags.length > 0
+        tagsHtml = htmlI('icon-tags') + ( htmlA '/t/' + e, e, 'post-tag' for e in tags ).join(', ')
+
+      clubsHtml = ''
+      if clubs.length > 0
+        clubsHtml = htmlI('icon-group') + ( htmlA '/c/' + e, e, 'post-club' for e in clubs ).join(', ')
+
+      $('#post-form-preview').html('<div class="post-body">' + formattedText + '</div><div class="post-footer">' + tagsHtml + clubsHtml + '</div>')
 
     @modal.on "shown", =>
       $('#post-form-tabs [href="#post-form-edit"]').tab('show')
@@ -29,7 +51,20 @@ module.exports = class DialogNewPostView extends DialogView
     return unless utils.isLogged()
 
     textarea = $("#post-form-text")
-    [tags, clubs, text] = @parsePost textarea.val()
+    inputTags = $("#post-form-tags")
+    inputClubs = $("#post-form-clubs")
+
+    splitTrimFilter = (t,s) ->
+      ( e.trim() for e in t.split s ).filter (e) ->
+        return e.length > 0
+
+    tags = splitTrimFilter inputTags.val(), ','
+    clubs = splitTrimFilter inputClubs.val(), ','
+    text = textarea.val()
+
+    clubs = if clubs.length then clubs.join "," else undefined
+    tags = if tags.length then tags.join "," else undefined
+
     submit = $("#post-form-submit").prop("disabled", true)
     cancel = $("#post-form-cancel").prop("disabled", true)
     i = submit.children("i").toggleClass("icon-refresh icon-spin")
@@ -41,32 +76,10 @@ module.exports = class DialogNewPostView extends DialogView
       i.toggleClass("icon-refresh icon-spin")
     d.done (data) =>
       textarea.val("")
+      inputTags.val("")
+      inputClubs.val("")
       @hide()
       utils.gotoUrl "/p/#{data.id}"
-
-  parsePost: (text) ->
-    ###Obtain possible tags, clubs and remaining text from post.
-    Return array of tags, clubs and text. Reference:
-    <https://github.com/stiletto/bnw/blob/master/bnw_xmpp/handlers.py>
-    ###
-    # XXX: Yeap, that's too silly to parse like that. But it works.
-    matches = text.match ///
-      ^
-      (?:([\*!]\S+)\s+)?  # Tag/club 1-5
-      (?:([\*!]\S+)\s+)?
-      (?:([\*!]\S+)\s+)?
-      (?:([\*!]\S+)\s+)?
-      (?:([\*!]\S+)\s)?
-      ([^]*)              # Post text
-      $
-    ///
-    text = _(matches).last()
-    matches = matches[1...-1]  # Without all match and text
-    tags = (tag[1..] for tag in matches when tag? and tag[0] == "*")
-    tags = if tags.length then tags.join "," else undefined
-    clubs = (club[1..] for club in matches when club? and club[0] == "!")
-    clubs = if clubs.length then clubs.join "," else undefined
-    [tags, clubs, text]
 
   keypress: (e) ->
     if e.ctrlKey and (e.keyCode == 13 or e.keyCode == 10)

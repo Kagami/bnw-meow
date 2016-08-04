@@ -13,7 +13,9 @@
     <div class="tab-content">
       <div class="tab-pane" id="post-form-edit">
         <form id="post-form" class="form-inline">
-          <textarea id="post-form-text" class="input-block-level" rows="9"></textarea>
+          <input type="text" id="post-form-tags" class="input-block-level" placeholder="Теги"/>
+          <input type="text" id="post-form-clubs" class="input-block-level" placeholder="Клубы"/>
+          <textarea id="post-form-text" class="input-block-level" rows="9" placeholder="Пост"></textarea>
         </form>
       </div>
       <div class="tab-pane" id="post-form-preview"></div>
