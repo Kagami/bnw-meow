@@ -21,10 +21,27 @@ module.exports = class DialogNewPostView extends DialogView
       formattedText = formatters.format $('#post-form-text').val(), 'markdown'
 
       htmlI = (c) ->
-        ' <i class="' + c + '"></i>'
+        v = $('<i/>').addClass(c)
+        v[0]
 
       htmlA = (h,t,c) ->
-        ' <a class="' + c + '" href="' + h + '">' + t + '</a>'
+        v = $('<a/>').addClass(c).attr('href',h).text(t)
+        v[0]
+
+      htmlDiv = (c,h) ->
+        v = $('<div/>').addClass(c).html(h)
+        v[0]
+
+      textNode = (t) ->
+        document.createTextNode t
+
+      insertCommas = ( a ) ->
+        return a if a.length < 1
+        result = [ a[0] ]
+        for v in a[1..]
+          result.push textNode ', '
+          result.push v
+        result
 
       splitTrimFilter = (t,s) ->
         ( e.trim() for e in t.split s ).filter (e) ->
@@ -33,15 +50,30 @@ module.exports = class DialogNewPostView extends DialogView
       tags = splitTrimFilter $('#post-form-tags').val(), ','
       clubs = splitTrimFilter $('#post-form-clubs').val(), ','
 
-      tagsHtml = ''
+      tagsNodes = []
       if tags.length > 0
-        tagsHtml = htmlI('icon-tags') + ( htmlA '/t/' + e, e, 'post-tag' for e in tags ).join(', ')
+        tagsNodes = ( htmlA '/t/' + e, e, 'post-tag' for e in tags )
+        tagsNodes = insertCommas tagsNodes
+        tagsNodes.unshift htmlI('icon-tags'), textNode ' '
 
-      clubsHtml = ''
+      clubsNodes = []
       if clubs.length > 0
-        clubsHtml = htmlI('icon-group') + ( htmlA '/c/' + e, e, 'post-club' for e in clubs ).join(', ')
+        clubsNodes = ( htmlA '/c/' + e, e, 'post-club' for e in clubs )
+        clubsNodes = insertCommas clubsNodes
+        clubsNodes.unshift htmlI('icon-group'), textNode ' '
+        if tags.length > 0
+          clubsNodes.unshift textNode ' '
 
-      $('#post-form-preview').html('<div class="post-body">' + formattedText + '</div><div class="post-footer">' + tagsHtml + clubsHtml + '</div>')
+      postBody = htmlDiv "post-body", formattedText
+
+      footer = htmlDiv "post-footer", ''
+      footer.appendChild e for e in tagsNodes
+      footer.appendChild e for e in clubsNodes
+
+      preview = $('#post-form-preview')
+      preview.html ''
+      preview.append postBody
+      preview.append footer
 
     @modal.on "shown", =>
       $('#post-form-tabs [href="#post-form-edit"]').tab('show')
