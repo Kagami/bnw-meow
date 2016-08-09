@@ -52,6 +52,7 @@ release: test mrproper
 	cp -r $(BUILD_DIR)/* "$(HTML_DIR)"
 
 deb: release
+	chmod -R u=rwX,g=rX,o=rX "$(DEB_BUILD_DIR)"
 	fakeroot dpkg -b "$(DEB_BUILD_DIR)" "$(DEB_PATH)"
 
 test:
