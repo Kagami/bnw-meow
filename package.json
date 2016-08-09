@@ -4,7 +4,7 @@
   "description": "Kawaii single-page web interface for BnW",
   "homepage": "https://meow.bnw.im/",
   "author": "Kagami Hiiragi",
-  "license": "CC0",
+  "license": "CC0-1.0",
   "dependencies": {},
   "devDependencies": {
     "brunch": "~1.7.13",
