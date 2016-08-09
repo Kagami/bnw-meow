@@ -64,8 +64,6 @@ test:
 t: REPORTER=nyan
 t: test
 
-test-ci: config test
-
 clean c:
 	rm -rf "$(BUILD_DIR)"
 

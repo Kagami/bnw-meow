@@ -21,7 +21,7 @@
     "should": "~2.1.1"
   },
   "scripts": {
-    "test": "make test-ci"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
