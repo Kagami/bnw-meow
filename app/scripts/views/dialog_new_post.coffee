@@ -1,6 +1,7 @@
 $ = require "jquery"
 _ = require "underscore"
 DialogView = require "views/base/dialog"
+ViewHelpers = require "lib/view_helpers"
 utils = require "lib/utils"
 template = require "templates/dialog_new_post"
 formatters = require "lib/formatters"
@@ -101,7 +102,9 @@ module.exports = class DialogNewPostView extends DialogView
     cancel = $("#post-form-cancel").prop("disabled", true)
     i = submit.children("i").toggleClass("icon-refresh icon-spin")
 
-    d = utils.post "post", {tags, clubs, text}
+    anonymous = ViewHelpers.getAnonymousModeStatus()
+
+    d = utils.post "post", {tags, clubs, text, anonymous}
     d.always ->
       submit.prop("disabled", false)
       cancel.prop("disabled", false)

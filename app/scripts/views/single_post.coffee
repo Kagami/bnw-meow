@@ -8,6 +8,7 @@ CommentView = require "views/comment"
 DialogDeleteView = require "views/dialog_delete"
 HeaderView = require "views/header"
 utils = require "lib/utils"
+ViewHelpers = require "lib/view_helpers"
 template = require "templates/single_post"
 
 module.exports = class SinglePostView extends View
@@ -64,7 +65,7 @@ module.exports = class SinglePostView extends View
     replyTo = $("#comment-form-reply-to")
     messageId = @model.get "id"
     messageId += "/" + replyTo.val() if replyTo.val().length
-    anonymous = $("#comment-form-anonymous").prop("checked") or ""
+    anonymous = $("#comment-form-anonymous").prop("checked") or ViewHelpers.getAnonymousModeStatus()
     submit = $("#comment-form-submit").prop("disabled", true)
     i = submit.children("i").toggleClass("icon-refresh icon-spin")
     clear = $("#comment-form-clear").prop("disabled", true)

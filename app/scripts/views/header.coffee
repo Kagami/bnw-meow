@@ -5,6 +5,7 @@ View = require "views/base/view"
 DialogNewPostView = require "views/dialog_new_post"
 DialogLoginView = require "views/dialog_login"
 RefreshDateView = require "views/base/refresh_date"
+ViewHelpers = require "lib/view_helpers"
 utils = require "lib/utils"
 template = require "templates/header"
 
@@ -16,6 +17,7 @@ module.exports = class HeaderView extends View
     "click #common-menu a": "navigate"
     "click .show-new-post": "showNewPost"
     "click .logout": "logout"
+    "click .anonymous-mode": "anonymousMode"
     "click .to-the-top": "toTheTop"
     "click .show-login-dialog": "showLoginDialog"
     "submit .search-form": "search"
@@ -38,6 +40,9 @@ module.exports = class HeaderView extends View
 
     # Update date in all posts/comments on the page
     setInterval RefreshDateView::tick, 60000
+
+    # Check anonymous status every 500ms and indicate it with icon
+    setInterval @RefreshAnonymousStatus, 500
 
     newPostView = new DialogNewPostView()
     @subview "dialog-new-post", newPostView
@@ -116,6 +121,19 @@ module.exports = class HeaderView extends View
     e.preventDefault()
     return if utils.isLogged()
     @subview("dialog-login").show()
+
+  anonymousMode: (e) ->
+    e.preventDefault()
+    ViewHelpers.toggleAnonymousStatus()
+
+  RefreshAnonymousStatus: ->
+    anonymous = ViewHelpers.getAnonymousModeStatus()
+    icon = @$(".icon-eye-close")
+
+    if anonymous
+      icon.addClass "active"
+    else
+      icon.removeClass "active"
 
   search: (e) ->
     e.preventDefault()
