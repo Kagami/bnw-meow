@@ -133,7 +133,7 @@ module.exports = class HeaderView extends View
   SetRefreshAnonymousStatusInterval: ->
     if ViewHelpers.isLogged() and not @RefreshAnonymousStatusInterval
       @RefreshAnonymousStatusInterval =
-        setInterval @RefreshAnonymousStatus, 3000
+        setInterval @RefreshAnonymousStatus, 5000
 
   UnsetRefreshAnonymousStatusInteval: ->
     clearInterval @RefreshAnonymousStatusInterval
