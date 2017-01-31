@@ -136,7 +136,7 @@ module.exports =
         if $(commentId).length
           html = $(commentId).html()
         else
-          html = "Комментарий от пользователя находящегося в чёрном списке"
+          html = "Комментарий удалён или в чёрном списке"
 
         # unique id
         id = 'bnw-chan-comment-' + chainIndex++
