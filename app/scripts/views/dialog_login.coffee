@@ -55,8 +55,5 @@ module.exports = class DialogNewPostView extends DialogView
     d.done =>
       @hide()
       @publishEvent "!view:header:render"
-      if utils.isLogged()
-        @publishEvent "!login:login"
-      else
-        @publishEvent "!login:logout"
+      @publishEvent "!login:login"
       utils.gotoUrl "/"
