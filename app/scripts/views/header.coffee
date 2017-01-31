@@ -28,15 +28,12 @@ module.exports = class HeaderView extends View
     super
     #: How many events wait for the user attention
     @eventsCounter = 0
-    @RefreshAnonymousStatusInterval = null
     @subscribeEvent "!ws:new_message", @incCounter
     @subscribeEvent "!ws:new_comment", @incCounter
     $(window).focus => @resetCounter()
 
     @subscribeEvent "!view:header:render", @render
     @subscribeEvent "!router:changeURL", @updateActiveItem
-    @subscribeEvent "!login:login", @SetRefreshAnonymousStatusInterval
-    @subscribeEvent "!login:logout", @UnsetRefreshAnonymousStatusInteval
     @subscribeEvent "!breadcrumbs:update", (breadcrumbs) ->
       @templateData.breadcrumbs = breadcrumbs
       @render()
@@ -44,7 +41,7 @@ module.exports = class HeaderView extends View
     # Update date in all posts/comments on the page
     setInterval RefreshDateView::tick, 60000
 
-    @SetRefreshAnonymousStatusInterval()
+    $(window).on "storage", @RefreshAnonymousStatus
 
     newPostView = new DialogNewPostView()
     @subview "dialog-new-post", newPostView
@@ -60,6 +57,7 @@ module.exports = class HeaderView extends View
 
   afterRender: ->
     super
+    @RefreshAnonymousStatus()
 
   # Reload controller even if url was not changed
   navigate: (e) ->
@@ -77,7 +75,6 @@ module.exports = class HeaderView extends View
     e.preventDefault()
     utils.clearAuth()
     @render()
-    @publishEvent "!login:logout"
     utils.gotoUrl "/"
 
   incCounter: ->
@@ -128,21 +125,11 @@ module.exports = class HeaderView extends View
   anonymousMode: (e) ->
     e.preventDefault()
     ViewHelpers.toggleAnonymousStatus()
-    @RefreshAnonymousStatus()
-
-  SetRefreshAnonymousStatusInterval: ->
-    if ViewHelpers.isLogged() and not @RefreshAnonymousStatusInterval
-      @RefreshAnonymousStatusInterval =
-        setInterval @RefreshAnonymousStatus, 5000
-
-  UnsetRefreshAnonymousStatusInteval: ->
-    clearInterval @RefreshAnonymousStatusInterval
-    @RefreshAnonymousStatusInterval = null
 
   RefreshAnonymousStatus: =>
+    return unless utils.isLogged()
     anonymous = ViewHelpers.getAnonymousModeStatus()
     icon = @$(".anonymous-mode .icon-eye-close")
-
     if anonymous
       icon.addClass "active"
     else

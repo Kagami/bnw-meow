@@ -55,5 +55,4 @@ module.exports = class DialogNewPostView extends DialogView
     d.done =>
       @hide()
       @publishEvent "!view:header:render"
-      @publishEvent "!login:login"
       utils.gotoUrl "/"
