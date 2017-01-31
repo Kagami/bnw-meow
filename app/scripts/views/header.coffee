@@ -128,16 +128,17 @@ module.exports = class HeaderView extends View
   anonymousMode: (e) ->
     e.preventDefault()
     ViewHelpers.toggleAnonymousStatus()
+    @RefreshAnonymousStatus()
 
   SetRefreshAnonymousStatusInterval: ->
-    # Check anonymous status every 500ms and indicate it with icon
     if ViewHelpers.isLogged() and not @RefreshAnonymousStatusInterval
-      @RefreshAnonymousStatusInterval = setInterval @RefreshAnonymousStatus, 500
+      @RefreshAnonymousStatusInterval =
+        setInterval @RefreshAnonymousStatus, 3000
 
   UnsetRefreshAnonymousStatusInteval: ->
     clearInterval @RefreshAnonymousStatusInterval
 
-  RefreshAnonymousStatus: ->
+  RefreshAnonymousStatus: =>
     anonymous = ViewHelpers.getAnonymousModeStatus()
     icon = @$(".anonymous-mode .icon-eye-close")
 
