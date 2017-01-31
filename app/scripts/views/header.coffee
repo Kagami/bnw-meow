@@ -125,6 +125,7 @@ module.exports = class HeaderView extends View
   anonymousMode: (e) ->
     e.preventDefault()
     ViewHelpers.toggleAnonymousStatus()
+    @RefreshAnonymousStatus()
 
   RefreshAnonymousStatus: =>
     return unless utils.isLogged()
