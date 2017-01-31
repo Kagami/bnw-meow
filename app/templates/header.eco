@@ -30,6 +30,7 @@
 
       <% if @isLogged(): %>
         <li><a href="/u/<%= @getUser() %>" title="Блог"><i class="icon-user"></i><span class="hidden-phone"><%= @getUser() %></span></a></li>
+        <li><a href="#" class="anonymous-mode" title="Анонимный режим"><i class="icon-eye-close"></i></a></li>
         <li><a href="#" class="show-new-post" title="Новый пост"><i class="icon-pencil"></i></a></li>
         <li><a href="#" class="logout" title="Выйти"><i class="icon-signout"></i></a></li>
       <% else: %>

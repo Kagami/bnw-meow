@@ -5,6 +5,7 @@ View = require "views/base/view"
 DialogNewPostView = require "views/dialog_new_post"
 DialogLoginView = require "views/dialog_login"
 RefreshDateView = require "views/base/refresh_date"
+ViewHelpers = require "lib/view_helpers"
 utils = require "lib/utils"
 template = require "templates/header"
 
@@ -16,6 +17,7 @@ module.exports = class HeaderView extends View
     "click #common-menu a": "navigate"
     "click .show-new-post": "showNewPost"
     "click .logout": "logout"
+    "click .anonymous-mode": "anonymousMode"
     "click .to-the-top": "toTheTop"
     "click .show-login-dialog": "showLoginDialog"
     "submit .search-form": "search"
@@ -26,18 +28,23 @@ module.exports = class HeaderView extends View
     super
     #: How many events wait for the user attention
     @eventsCounter = 0
+    @RefreshAnonymousStatusInterval = null
     @subscribeEvent "!ws:new_message", @incCounter
     @subscribeEvent "!ws:new_comment", @incCounter
     $(window).focus => @resetCounter()
 
     @subscribeEvent "!view:header:render", @render
     @subscribeEvent "!router:changeURL", @updateActiveItem
+    @subscribeEvent "!login:login", @SetRefreshAnonymousStatusInterval
+    @subscribeEvent "!login:logout", @UnsetRefreshAnonymousStatusInteval
     @subscribeEvent "!breadcrumbs:update", (breadcrumbs) ->
       @templateData.breadcrumbs = breadcrumbs
       @render()
 
     # Update date in all posts/comments on the page
     setInterval RefreshDateView::tick, 60000
+
+    @SetRefreshAnonymousStatusInterval()
 
     newPostView = new DialogNewPostView()
     @subview "dialog-new-post", newPostView
@@ -70,6 +77,7 @@ module.exports = class HeaderView extends View
     e.preventDefault()
     utils.clearAuth()
     @render()
+    @publishEvent "!login:logout"
     utils.gotoUrl "/"
 
   incCounter: ->
@@ -116,6 +124,27 @@ module.exports = class HeaderView extends View
     e.preventDefault()
     return if utils.isLogged()
     @subview("dialog-login").show()
+
+  anonymousMode: (e) ->
+    e.preventDefault()
+    ViewHelpers.toggleAnonymousStatus()
+
+  SetRefreshAnonymousStatusInterval: ->
+    # Check anonymous status every 500ms and indicate it with icon
+    if ViewHelpers.isLogged() and not @RefreshAnonymousStatusInterval
+      @RefreshAnonymousStatusInterval = setInterval @RefreshAnonymousStatus, 500
+
+  UnsetRefreshAnonymousStatusInteval: ->
+    clearInterval @RefreshAnonymousStatusInterval
+
+  RefreshAnonymousStatus: ->
+    anonymous = ViewHelpers.getAnonymousModeStatus()
+    icon = @$(".anonymous-mode .icon-eye-close")
+
+    if anonymous
+      icon.addClass "active"
+    else
+      icon.removeClass "active"
 
   search: (e) ->
     e.preventDefault()

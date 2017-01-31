@@ -32,6 +32,7 @@ module.exports =
 
   LOGIN_KEY_NAME: "bnw-meow_login-key"
   USER_KEY_NAME: "bnw-meow_user"
+  ANONYMOUS_MODE_STATUS: "bnw-meow_anonymous-mode"
 
   getLoginKey: ->
     localStorage.getItem @LOGIN_KEY_NAME
@@ -58,6 +59,17 @@ module.exports =
     @clearLoginKey()
     @clearUser()
 
+  getAnonymousModeStatus: ->
+    localStorage.getItem @ANONYMOUS_MODE_STATUS
+
+  toggleAnonymousStatus: ->
+    currentStatus = @getAnonymousModeStatus()
+
+    if currentStatus
+      localStorage.removeItem @ANONYMOUS_MODE_STATUS
+    else
+      localStorage.setItem @ANONYMOUS_MODE_STATUS, true
+
   addReplyLink: (id,replyto) ->
     replyto ?= "single-post"
     replyLink = '<a class="comment-reply-to label label-reset" href="#' + id + '">&gt;&gt;' + id + '</a> '
@@ -70,10 +82,10 @@ module.exports =
         $(item).remove()
 
   bindHoverEvents: ->
-    # let's create popup comments as divs with unique ids, copy linked post content to it, 
+    # let's create popup comments as divs with unique ids, copy linked post content to it,
     # append id to chain on mouseenter, take id from chain on mouseleave and remove div
     # and let's delegate all applying handler job to jquery
-    # (actually we put id to chain on create rather then mouseenter, because there could be no mouseenter, 
+    # (actually we put id to chain on create rather then mouseenter, because there could be no mouseenter,
     # and we still need to remove div when we're done)
 
     chain = []
@@ -117,7 +129,7 @@ module.exports =
 
         windowWidth = $(window).width()
         width = $(commentId).width()
-        
+
         # fit comment to window (push from right border)
         left = Math.min(left + width + xPadding, windowWidth) - width - xPadding
 
@@ -125,7 +137,7 @@ module.exports =
           html = $(commentId).html()
         else
           html = "Комментарий от пользователя находящегося в чёрном списке"
-        
+
         # unique id
         id = 'bnw-chan-comment-' + chainIndex++
         chain.push id
@@ -133,7 +145,7 @@ module.exports =
           id,html,'class': 'comment-wrapper comment well well-small bnw-chan-comment'
         }).appendTo('body').css({left,top,width,position:'absolute'})
 
-        focusedLink = true    
+        focusedLink = true
 
       else if e.type == 'mouseleave'
 
@@ -143,16 +155,16 @@ module.exports =
     # jquery will apply handler on all current and future elements
     $('body').on('hover','a.comment-reply-to',linkHoverHandler)
 
-    commentHoverHandler = (e) ->      
+    commentHoverHandler = (e) ->
       if e.type == 'mouseenter'
         id = e.currentTarget.id
         focusedComment = id
         linkParent = null
         index = chain.indexOf id
-        if index>-1 
+        if index>-1
           # we jumped from popup to previous popup (hovered popup id are in chain)
           $('#' + chain.pop()).remove() while chain.length > index + 1
-        else 
+        else
           # we jupmed to new popup
           chain.push id
       else if e.type == 'mouseleave'
