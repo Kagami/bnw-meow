@@ -77,6 +77,7 @@ module.exports = class HeaderView extends View
     e.preventDefault()
     utils.clearAuth()
     @render()
+    @publishEvent "!login:logout"
     utils.gotoUrl "/"
 
   incCounter: ->
