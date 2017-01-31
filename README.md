@@ -90,12 +90,8 @@ bnw-meow uses [HTML5 history API](http://diveintohtml5.info/history.html) so you
 
 bnw-meow - kawaii single-page web interface for BnW
 
-Written in 2013-2015 by Kagami Hiiragi <kagami@genshiken.org> and bnw-meow contributors
+Written in 2013-2017 by Kagami Hiiragi <kagami@genshiken.org> and bnw-meow contributors
 
 To the extent possible under law, the author(s) have dedicated all copyright and related and neighboring rights to this software to the public domain worldwide. This software is distributed without any warranty.
 
 You should have received a copy of the CC0 Public Domain Dedication along with this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
-
----
-
-**NOTE:** This license applied only to the bnw-meow code itself (this repository). You may not redistribute entire bnw-meow build under the CC0. Instead see the comments inside the generated files (`/static/*.css`, `/static/*.js`). Basically it's all MIT and BSD, so you will need to keep this comments in order to legally redistribute it.

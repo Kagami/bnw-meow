@@ -30,7 +30,9 @@ exports.config =
   plugins:
     uglify:
       output:
-        comments: /copyright|license|\(c\)/i
+        comments: false
+    cleancss:
+      keepSpecialComments: 0
 
   conventions:
     # To prevent coping bootstrap assets into public/css and public/js.
