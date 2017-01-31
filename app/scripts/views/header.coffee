@@ -137,6 +137,7 @@ module.exports = class HeaderView extends View
 
   UnsetRefreshAnonymousStatusInteval: ->
     clearInterval @RefreshAnonymousStatusInterval
+    @RefreshAnonymousStatusInterval = null
 
   RefreshAnonymousStatus: =>
     anonymous = ViewHelpers.getAnonymousModeStatus()
