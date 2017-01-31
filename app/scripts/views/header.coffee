@@ -28,12 +28,15 @@ module.exports = class HeaderView extends View
     super
     #: How many events wait for the user attention
     @eventsCounter = 0
+    @RefreshAnonymousStatusInterval = null
     @subscribeEvent "!ws:new_message", @incCounter
     @subscribeEvent "!ws:new_comment", @incCounter
     $(window).focus => @resetCounter()
 
     @subscribeEvent "!view:header:render", @render
     @subscribeEvent "!router:changeURL", @updateActiveItem
+    @subscribeEvent "!login:login", @SetRefreshAnonymousStatusInterval
+    @subscribeEvent "!login:logout", @UnsetRefreshAnonymousStatusInteval
     @subscribeEvent "!breadcrumbs:update", (breadcrumbs) ->
       @templateData.breadcrumbs = breadcrumbs
       @render()
@@ -41,8 +44,7 @@ module.exports = class HeaderView extends View
     # Update date in all posts/comments on the page
     setInterval RefreshDateView::tick, 60000
 
-    # Check anonymous status every 500ms and indicate it with icon
-    setInterval @RefreshAnonymousStatus, 500
+    @SetRefreshAnonymousStatusInterval()
 
     newPostView = new DialogNewPostView()
     @subview "dialog-new-post", newPostView
@@ -126,9 +128,17 @@ module.exports = class HeaderView extends View
     e.preventDefault()
     ViewHelpers.toggleAnonymousStatus()
 
+  SetRefreshAnonymousStatusInterval: ->
+    # Check anonymous status every 500ms and indicate it with icon
+    if ViewHelpers.isLogged() and not @RefreshAnonymousStatusInterval
+      @RefreshAnonymousStatusInterval = setInterval @RefreshAnonymousStatus, 500
+
+  UnsetRefreshAnonymousStatusInteval: ->
+    clearInterval @RefreshAnonymousStatusInterval
+
   RefreshAnonymousStatus: ->
     anonymous = ViewHelpers.getAnonymousModeStatus()
-    icon = @$(".icon-eye-close")
+    icon = @$(".anonymous-mode .icon-eye-close")
 
     if anonymous
       icon.addClass "active"
