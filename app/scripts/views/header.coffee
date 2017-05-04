@@ -18,6 +18,7 @@ module.exports = class HeaderView extends View
     "click .show-new-post": "showNewPost"
     "click .logout": "logout"
     "click .anonymous-mode": "anonymousMode"
+    "click .night-mode": "nightMode"
     "click .to-the-top": "toTheTop"
     "click .show-login-dialog": "showLoginDialog"
     "submit .search-form": "search"
@@ -42,6 +43,9 @@ module.exports = class HeaderView extends View
     setInterval RefreshDateView::tick, 60000
 
     $(window).on "storage", @RefreshAnonymousStatus
+
+    if localStorage.dark
+      $("body").addClass("dark")
 
     newPostView = new DialogNewPostView()
     @subview "dialog-new-post", newPostView
@@ -126,6 +130,15 @@ module.exports = class HeaderView extends View
     e.preventDefault()
     ViewHelpers.toggleAnonymousStatus()
     @RefreshAnonymousStatus()
+
+  nightMode: (e) ->
+    e.preventDefault()
+    if localStorage.dark
+      delete localStorage.dark
+      $("body").removeClass("dark")
+    else
+      localStorage.dark = 1
+      $("body").addClass("dark")
 
   RefreshAnonymousStatus: =>
     return unless utils.isLogged()

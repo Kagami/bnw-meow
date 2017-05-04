@@ -562,3 +562,90 @@ img.avatar {
 .icon-eye-close.active {
   color: #2D6987;
 }
+
+body.dark {
+  background: #222;
+  color: #fff;
+
+  .well {
+    background: #111;
+    border-color: #000;
+  }
+
+  .btn {
+    background: #000;
+    text-shadow: none;
+    border-color: #fff;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &.btn-primary {
+      background: #1c1c60;
+    }
+
+    &.btn-success {
+      background: #235923;
+    }
+
+    &.btn-danger {
+      background: #842a2a;
+    }
+  }
+
+  .close {
+    color: #fff;
+  }
+
+  .navbar-inner {
+    background: #111;
+    border-color: #000;
+
+    li.active > a {
+      background: #000;
+
+      &:hover {
+        background: #222;
+      }
+    }
+
+    li a, li .active > a {
+      color: #fff;
+      text-shadow: none;
+
+      &:hover {
+        color: #ccc;
+      }
+    }
+  }
+
+  .img-polaroid {
+    background: #000;
+  }
+
+  #footer {
+    background: #111;
+    border-color: #000;
+  }
+
+  input[type=text], input[type=password], textarea {
+    background: #000;
+    border-color: #666;
+    color: #fff;
+  }
+
+  .modal, .modal-footer, .modal-header {
+    background: #111;
+    border-color: #000 !important;
+  }
+
+  .nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+    background: #111;
+  }
+
+  .nav-tabs > li > a:hover {
+    background: #000;
+  }
+}
