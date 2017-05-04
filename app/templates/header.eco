@@ -27,7 +27,7 @@
           <input type="text" class="search-form-query search-query input-medium" placeholder="Поиск" />
           <i class="icon-search-fix icon-search"></i>
         </form>
-
+        <li><a href="#" class="night-mode"><i class="icon-adjust"></i></a></li>
       <% if @isLogged(): %>
         <li><a href="/u/<%= @getUser() %>" title="Блог"><i class="icon-user"></i><span class="hidden-phone"><%= @getUser() %></span></a></li>
         <li><a href="#" class="anonymous-mode" title="Анонимный режим"><i class="icon-eye-close"></i></a></li>
